@@ -11,7 +11,7 @@ public class openWordsServiceTest {
     
     @Test
     void testOpenFile() {
-        String fileName = new String("test.txt");
+        String fileName = new String("src/test/resources/words/test_words.txt");
         ArrayList<String> wordsList = openWordsService.openFile(fileName);
         ArrayList<String> list = new ArrayList<String>();
         list.add("Afrique");

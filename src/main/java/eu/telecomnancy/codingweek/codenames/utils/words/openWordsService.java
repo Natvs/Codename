@@ -19,10 +19,13 @@ public class openWordsService {
             }
         } catch (FileNotFoundException e){
             System.err.println("Fichier introuvable\n"+e.getMessage());
+            System.exit(1);
         } catch (IOException e){
             System.err.println("Erreur d'entrée/sortie\n"+e.getMessage());
+            System.exit(2);
         } catch (SecurityException e){
             System.err.println("Erreur de sécurité\n");
+            System.exit(3);
         }
         return lines;
 
