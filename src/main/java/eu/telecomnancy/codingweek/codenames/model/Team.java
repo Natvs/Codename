@@ -6,7 +6,7 @@ import java.util.List;
 public class Team {
     
     private Color color;
-    private List<Player> playersList = new ArrayList<>();
+    private List<Player> playersList;
     private Session session;
 
     public Team(Color color, List<Player> playersList, Session session) {

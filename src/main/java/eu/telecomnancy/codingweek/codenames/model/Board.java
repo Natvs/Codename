@@ -1,7 +1,5 @@
 package eu.telecomnancy.codingweek.codenames.model;
 
-import java.util.Arrays;
-
 public class Board {
     
     private int width;
