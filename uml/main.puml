@@ -29,10 +29,10 @@ class Player {
     +Player(String name)
 }
 abstract class Team {
-    -Color color
+    -CardColor color
     -List<Player> players
     -Session session
-    +Team(Color color, List<Player> players, Session session)
+    +Team(CardColor color, List<Player> players, Session session)
     +getColor()
     +getPlayers()
 }
@@ -47,7 +47,7 @@ class SpyTeam extends Team {
 }
 
 class ColorTeam {
-    -Color color
+    -CardColor color
     -Session session
     -List<Clue> clues
     +ColorTeam(Color color, Session session)
@@ -68,15 +68,23 @@ class Clue {
 
 class Card {
 	-String name
-	-Color color
+	-CardColor color
 	-Boolean revealed
 	+Card(String name, Color color)
 	+getName()
 	+getColor()
 	+getRevealed()
+	+getState(Card card, Color color)
 	+show()
 	+hide()
 	+equals(Card card)
+}
+
+enum CardColor {
+    Blue,
+    Red,
+    Forbidden,
+    Neutral
 }
 
 enum CardState {
@@ -93,7 +101,6 @@ class Board {
 	+getWidth()
 	+getHeight()
 	+getCard(int x, int y)
-    +getState(Card card, Color color)
 }
 CardState --> Board
 Card --o Board
