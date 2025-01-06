@@ -13,8 +13,7 @@ package codenames.model.game {
         -ColorTeam redTeam
         -ColorTeam blueTeam
         -Board board
-        -List<Clue> clues
-        +Game(GameConfig config)
+        +Session(GameConfig config)
         +getBlueTeam()
         +getRedTeam()
         +setBlueTurn()
@@ -43,7 +42,6 @@ package codenames.model.game {
 
 package codenames.model.team {
     abstract class Team {
-        -CardColor color
         -List<Player> players
         -Session session
         +Team(CardColor color, List<Player> players, Session session)
@@ -66,9 +64,13 @@ package codenames.model.colorteam {
         -CardColor color
         -Session session
         -List<Clue> clues
+        -SpyTeam spyTeam
+        -AgentTeam agentTeam
         +ColorTeam(Color color, Session session)
         +getColor()
         +getClues()
+        +getSpyTeam()
+        +getAgentTeam()
         +setSpyTurn()
         +setAgentTurn()
         +endTurn()
