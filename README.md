@@ -10,7 +10,7 @@
 - [x] 06/01: Implémentation de la fenètre "Acceuil" :
         - Ajouter un bouton "Nouvelle Partie"
         - Ajouter un bouton "Quitter"
-- [ ] 06/01: Implémentation de la fenètre "Menu Configuration" :
+- [x] 06/01: Implémentation de la fenètre "Menu Configuration" :
         - Ajouter un bouton statique "Joueur" (Pour fixer le nombre de joueur)
         - Ajouter un bouton statique "Grille" (pour fixer la taille de la grille)
         - Ajouter un bouton statique "Thématique" (pour choisir un thème de mot)
