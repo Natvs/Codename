@@ -7,7 +7,7 @@
 - [ ] 06/01: Implémenter la liste des tâche à venir pour chacun des membres du groupe
 
 ### Luca Mandrelli :
-- [ ] 06/01: Implémentation de la fenètre "Acceuil" :
+- [x] 06/01: Implémentation de la fenètre "Acceuil" :
         - Ajouter un bouton "Nouvelle Partie"
         - Ajouter un bouton "Quitter"
 - [ ] 06/01: Implémentation de la fenètre "Menu Configuration" :
