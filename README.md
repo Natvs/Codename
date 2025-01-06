@@ -7,10 +7,10 @@
 - [ ] 06/01: Implémenter la liste des tâche à venir pour chacun des membres du groupe
 
 ### Luca Mandrelli :
-- [ ] 06/01: Implémentation de la fenètre "Acceuil" :
+- [x] 06/01: Implémentation de la fenètre "Acceuil" :
         - Ajouter un bouton "Nouvelle Partie"
         - Ajouter un bouton "Quitter"
-- [ ] 06/01: Implémentation de la fenètre "Menu Configuration" :
+- [x] 06/01: Implémentation de la fenètre "Menu Configuration" :
         - Ajouter un bouton statique "Joueur" (Pour fixer le nombre de joueur)
         - Ajouter un bouton statique "Grille" (pour fixer la taille de la grille)
         - Ajouter un bouton statique "Thématique" (pour choisir un thème de mot)
@@ -18,7 +18,7 @@
 - [ ] 06/01: Implémentation de la fenètre "Transition" :
         - Afficher l'Equipe (Bleu ou Rouge) et le Groupe (Espion ou Maitre-Espion)
         - Ajouter un bouton "Jouer"
-- [ ] 06/01: Implémentation de la fenètre "Partie (Maitre-Espion)" :
+- [ En cours ] 06/01: Implémentation de la fenètre "Partie (Maitre-Espion)" :
         - Implémenter l'affichage de la grille
         - Afficher les cartes couleur déjà positionnée sur la grille
         - Ajouter un bouton "Sauvegarder et Quitter"
@@ -26,7 +26,7 @@
         - Implémenter l'affichage de la carte clée dans la grille
         - Ajouter un bouton "Mot"
         - Ajouter un bouton "Nombre"
-- [ ] 06/01: Implémentation de la fenètre "Partie (Espion)" :
+- [ En cours ] 06/01: Implémentation de la fenètre "Partie (Espion)" :
         - Implémenter l'affichage de la grille
         - Afficher les cartes couleur déjà positionnée sur la grille
         - Ajouter un bouton "Sauvegarder et Quitter"

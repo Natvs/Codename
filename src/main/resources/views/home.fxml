@@ -21,9 +21,9 @@
     <children>
         <Label fx:id="Title" text="P-CoDenames" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.halignment="CENTER" />
 
-        <Button text="Nouvelle partie" GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.halignment="CENTER" />
+        <Button fx:id="newGameButton" text="Nouvelle partie" GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.halignment="CENTER" onAction="#onNewGame" />
 
-        <Button text="Rejoindre une partie" GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.halignment="CENTER" />
+        <Button fx:id="quitButton" text="Quitter" GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.halignment="CENTER" onAction="#onQuit" />
     </children>
 
 </GridPane>
