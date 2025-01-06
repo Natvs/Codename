@@ -1,4 +1,4 @@
-package album.controleur;
+package eu.telecomnancy.codingweek.codenames.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

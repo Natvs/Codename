@@ -1,4 +1,4 @@
-package album;
+package eu.telecomnancy.codingweek.codenames;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
