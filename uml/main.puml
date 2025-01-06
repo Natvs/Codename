@@ -1,16 +1,24 @@
 @startuml
 
+class GameConfig {
+    -List<Player> blueAgents
+    -List<Player> blueSpies
+    -List<Player> redAgents
+    -List<Player> redSpies
+    -int width
+    -int height
+}
+Session --> GameConfig
 class Session {
     -ColorTeam redTeam
     -ColorTeam blueTeam
     -Board board
     -List<Clue> clues
-    +Game()
+    +Game(GameConfig config)
     +getBlueTeam()
     +getRedTeam()
     +setBlueTurn()
     +setRedTurn()
-    +addClue(Clue clue)
 }
 ColorTeam --> Session
 Clue --> Session
@@ -21,37 +29,34 @@ class Player {
     +Player(String name)
 }
 abstract class Team {
+    -CardColor color
     -List<Player> players
-    +Team(Players players)
+    -Session session
+    +Team(CardColor color, List<Player> players, Session session)
+    +getColor()
     +getPlayers()
 }
 Player --o Team
 class AgentTeam extends Team {
-    -List<Clue> clues;
-    +AgentTeam(Players players)
+    +AgentTeam(List<Player> players, Session session)
     +addClue(Clue newClue)
-    +getClues()
 }
 class SpyTeam extends Team {
-    -List<Card> guessedCards
-    +SpyTeam(Players players)
-    +getGuessedCards()
-    +clearGuessedCards()
-    +addGuessedCard(Card card)
-    +guess()
+    +SpyTeam(List<Player> players, Session session)
+    +guess(Card card)
 }
 
 class ColorTeam {
-    -Color color
-    -AgentTeam agentTeam
-    -SpyTeam spyTeam
-    +ColorTeam(Color color, List<Player> agents, List<Player> spies)
+    -CardColor color
+    -Session session
+    -List<Clue> clues
+    +ColorTeam(Color color, Session session)
     +getColor()
-    +getAgentTeam()
-    +getSpyTeam()
+    +getClues()
     +setSpyTurn()
     +setAgentTurn()
     +endTurn()
+    +addClue(Clue clue)
 }
 SpyTeam --> ColorTeam
 AgentTeam --> ColorTeam
@@ -63,15 +68,23 @@ class Clue {
 
 class Card {
 	-String name
-	-Color color
+	-CardColor color
 	-Boolean revealed
 	+Card(String name, Color color)
 	+getName()
 	+getColor()
 	+getRevealed()
+	+getState(Card card, Color color)
 	+show()
 	+hide()
 	+equals(Card card)
+}
+
+enum CardColor {
+    Blue,
+    Red,
+    Forbidden,
+    Neutral
 }
 
 enum CardState {
@@ -80,7 +93,6 @@ enum CardState {
     Neutral,
     Forbidden
 }
-
 class Board {
 	-int width
 	-int height
@@ -89,7 +101,6 @@ class Board {
 	+getWidth()
 	+getHeight()
 	+getCard(int x, int y)
-    +getState(int x, int y, Color color) : CardType
 }
 CardState --> Board
 Card --o Board
