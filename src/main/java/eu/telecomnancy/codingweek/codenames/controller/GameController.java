@@ -1,0 +1,69 @@
+package eu.telecomnancy.codingweek.codenames.controller;
+
+import javafx.scene.control.Label;
+import java.util.ArrayList;
+import java.util.List;
+
+import eu.telecomnancy.codingweek.codenames.utils.GenerateCardUtil;
+import javafx.fxml.FXML;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.Priority;
+
+public class GameController {
+    //FIXME: these should be loaded from GameConf
+    private List<String> tempWords = new ArrayList<>();
+    private int tempRows = 5;
+    private int tempCols = 5;
+
+    @FXML
+    private GridPane gameGrid;
+
+    @FXML
+    private Label currentTeam;
+
+    public GameController() {
+        tempWords.add("Patate");
+        tempWords.add("Froide");
+        tempWords.add("Entropie");
+        tempWords.add("Pomme");
+        tempWords.add("Poire");
+        tempWords.add("Voiture");
+        tempWords.add("Moto");
+        tempWords.add("Bateau");
+        tempWords.add("Avion");
+        tempWords.add("Chaude");
+        tempWords.add("Train");
+        tempWords.add("Bus");
+        tempWords.add("Vélo");
+        tempWords.add("Appareil");
+        tempWords.add("Téléphone");
+        tempWords.add("Ordinateur");
+        tempWords.add("Tablette");
+        tempWords.add("Télévision");
+        tempWords.add("Radio");
+        tempWords.add("Livre");
+        tempWords.add("Magazine");
+        tempWords.add("Marmite");
+        tempWords.add("Arbre");
+        tempWords.add("Plante");
+        tempWords.add("Fleur");
+        tempWords.add("Herbe");
+    }
+
+    @FXML
+    private void initialize() {
+        for (int i = 0; i < tempRows; i++) {
+            ColumnConstraints colConstraints = new ColumnConstraints();
+            colConstraints.setHgrow(Priority.ALWAYS);
+            gameGrid.getColumnConstraints().add(colConstraints);
+            for (int j = 0; j < tempCols; j++) {
+                gameGrid.add(GenerateCardUtil.generateCard(tempWords.get(i*5+j)), i, j);
+            }
+            RowConstraints rowConstraints = new RowConstraints();
+            rowConstraints.setVgrow(Priority.ALWAYS);
+            gameGrid.getRowConstraints().add(rowConstraints);
+        }
+    }
+}

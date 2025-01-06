@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane
+    xmlns="http://javafx.com/javafx"
+    xmlns:fx="http://javafx.com/fxml"
+    fx:controller="eu.telecomnancy.codingweek.codenames.controller.NewConfigController"
+    stylesheets="@../style/newConfig.css">
+
+    <rowConstraints>
+        <RowConstraints vgrow="ALWAYS" />
+        <RowConstraints vgrow="ALWAYS" />
+        <RowConstraints vgrow="ALWAYS" />
+        <RowConstraints vgrow="ALWAYS" />
+        <RowConstraints vgrow="ALWAYS"/>
+    </rowConstraints>
+    
+    <columnConstraints>
+        <ColumnConstraints hgrow="ALWAYS" />
+        <ColumnConstraints hgrow="ALWAYS"/>
+    </columnConstraints>
+
+    <children>
+        <Label text="Nombre de joueurs : " GridPane.rowIndex="0" 
+        GridPane.columnIndex="0" GridPane.halignment="CENTER" />
+        <Spinner fx:id="nbPlayers" GridPane.rowIndex="0"
+        GridPane.columnIndex="1" GridPane.halignment="CENTER"
+        min="2" max="8" initialValue="4" amountToStepBy="1" />
+
+        <Label text="Taille de la grille : " GridPane.rowIndex="1"
+        GridPane.columnIndex="0" GridPane.halignment="CENTER" />
+        <HBox GridPane.rowIndex="1" GridPane.columnIndex="1" GridPane.halignment="CENTER" >
+            <Spinner fx:id="nbRows" min="2" max="10" amountToStepBy="1" initialValue="5" />
+            <Label text="x" />
+            <Spinner fx:id="nbCols" min="2" max="10" amountToStepBy="1" initialValue="5" />
+        </HBox>
+
+        <Label text="Thématique : " GridPane.rowIndex="2"
+        GridPane.columnIndex="0" GridPane.halignment="CENTER" />
+        <ComboBox fx:id="thematicSelection" GridPane.rowIndex="2"
+        GridPane.columnIndex="1" GridPane.halignment="CENTER"
+        onAction="#onThematicSelection" />
+
+        <Button text="C'est parti !" GridPane.rowIndex="3"
+        GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.halignment="CENTER"
+        onAction="#onStart" fx:id="startButton" />
+
+        <Button text="Retour" GridPane.rowIndex="4"
+        GridPane.columnIndex="0" GridPane.halignment="LEFT"
+        onAction="#onBack" />
+    </children>
+
+</GridPane>
