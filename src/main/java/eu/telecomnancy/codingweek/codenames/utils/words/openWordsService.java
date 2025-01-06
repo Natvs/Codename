@@ -10,14 +10,13 @@ public class openWordsService {
     
 
     public static ArrayList<String> openFile(String fileName){
+        ArrayList<String> lines = new ArrayList<String>();
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))){
             System.out.println("s'éxecute");
-            ArrayList<String> lines = new ArrayList<String>();
             String line;
             while ((line = reader.readLine()) != null){
                 lines.add(line);
             }
-            return lines;
         } catch (FileNotFoundException e){
             System.err.println("Fichier introuvable\n"+e.getMessage());
         } catch (IOException e){
@@ -25,6 +24,7 @@ public class openWordsService {
         } catch (SecurityException e){
             System.err.println("Erreur de sécurité\n");
         }
+        return lines;
 
     }
 }

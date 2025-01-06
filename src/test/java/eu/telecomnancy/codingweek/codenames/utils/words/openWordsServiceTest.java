@@ -1,9 +1,10 @@
 package eu.telecomnancy.codingweek.codenames.utils.words;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;;
 
-import org.junit.jupiter.api.Tag;
+import java.util.ArrayList;
+
+//import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 public class openWordsServiceTest {
@@ -11,7 +12,23 @@ public class openWordsServiceTest {
     @Test
     void testOpenFile() {
         String fileName = new String("test.txt");
-        openWordsService instance = openWordsService.getInstance(fileName);
-        assertNotEquals(null, instance);
+        ArrayList<String> wordsList = openWordsService.openFile(fileName);
+        ArrayList<String> list = new ArrayList<String>();
+        list.add("Afrique");
+        list.add("Aiguille");
+        list.add("Aile");
+        list.add("Air");
+        list.add("Alien");
+        list.add("Allemagne");
+        list.add("Alpes");
+        list.add("Amour");
+        list.add("Ampoule");
+        list.add("Amérique");
+        for (String elt:wordsList){
+            assertEquals(true, list.contains(elt));
+        }
+        for (String elt:list){
+            assertEquals(true, wordsList.contains(elt));
+        }
     }
 }
