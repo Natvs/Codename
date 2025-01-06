@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane
+    xmlns="http://javafx.com/javafx"
+    xmlns:fx="http://javafx.com/fxml"
+    fx:controller="eu.telecomnancy.codingweek.codenames.controller.GameController"
+    stylesheets="@../style/game.css">
+
+    <rowConstraints>
+        <RowConstraints percentHeight="5" />
+        <RowConstraints vgrow="ALWAYS" />
+    </rowConstraints>
+    
+    <columnConstraints>
+        <ColumnConstraints hgrow="ALWAYS" />
+    </columnConstraints>
+
+    <children>
+        <Label fx:id="currentTeam" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.halignment="CENTER" />
+        <GridPane fx:id="gameGrid" GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.halignment="CENTER" />
+    </children>
+</GridPane>
