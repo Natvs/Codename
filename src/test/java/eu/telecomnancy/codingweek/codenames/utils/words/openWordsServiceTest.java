@@ -5,12 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeAll;
-//import org.junit.jupiter.api.Tag;
+import eu.telecomnancy.codingweek.codenames.model.Color;
 import org.junit.jupiter.api.Test;
+
 
 public class openWordsServiceTest {
     private static ArrayList<String> wordsList; 
-
+    private static ArrayList<Words> choosenWords;
+    
     @BeforeAll
     static void configTest() {
         String fileName = new String("src/test/resources/words/test_words.txt");
@@ -41,9 +43,8 @@ public class openWordsServiceTest {
     @Test
     void testWordsGeneration() {
         int size = 5;
-        ArrayList<Words> choosenWords = openWordsService.setRandomWords(wordsList, size);
+        choosenWords = openWordsService.setRandomWords(wordsList, size);
         assertEquals(size, choosenWords.size());
-        displayWords(choosenWords);
         size = 15;
         choosenWords = openWordsService.setRandomWords(wordsList, size);
         assertEquals(null, choosenWords);
@@ -52,8 +53,38 @@ public class openWordsServiceTest {
     public void displayWords(ArrayList<Words> list) {
         ArrayList<String> listStr = new ArrayList<String>(list.size());
         for(Words word:list){
-            listStr.add(word.getName());
+            listStr.add(word.getName()+":"+word.getColor() );
         }
         System.out.println(listStr);
+    }
+
+    @Test
+    void testConfigWords() {
+        int size = 5;
+        choosenWords = openWordsService.setRandomWords(wordsList, size);
+        openWordsService.configWords(choosenWords);
+        displayWords(choosenWords);
+        int[] listValues = giveTypeList(choosenWords);
+        assertEquals(Math.max(1,size/25), listValues[0]);
+        assertEquals(Math.max(1,size*8/25), Math.min(listValues[1],listValues[2]));
+        assertEquals(Math.max(1,size*8/25)+1, Math.max(listValues[1],listValues[2]));
+        assertEquals(size - listValues[0] - listValues[1] - listValues[2], listValues[3]);
+    }
+    public int[] giveTypeList(ArrayList<Words> words) {
+        int[] listValues = new int[4];
+        for (Words word:words){
+            if (word.getColor() == Color.BLACK){
+                listValues[0] += 1;
+            } else if (word.getColor() == Color.RED){
+                listValues[1] += 1;
+            } else if (word.getColor() == Color.BLUE) {
+                listValues[2] += 1;
+            } else {
+                assertEquals(Color.WHITE, word.getColor());
+                listValues[3] += 1;
+            }
+
+        }
+        return listValues;
     }
 }
