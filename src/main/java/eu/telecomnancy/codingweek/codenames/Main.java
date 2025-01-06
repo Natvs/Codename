@@ -13,16 +13,16 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        URL fxmlURL = getClass().getResource("/test.fxml");
+        URL fxmlURL = getClass().getResource("/views/root.fxml");
         if (fxmlURL == null) {
-            System.err.println("Could not find test.fxml");
+            System.err.println("Could not find root.fxml");
             System.exit(1);
         }
         Parent root = FXMLLoader.load(fxmlURL);
 
-        Scene scene = new Scene(root, 800, 600);
+        Scene scene = new Scene(root, 900, 760);
         primaryStage.setScene(scene);
-        primaryStage.setTitle("JavaFX Bootstrap Project using FXML");
+        primaryStage.setTitle("Codenames for Coding Week");
         primaryStage.show();
     }
 
