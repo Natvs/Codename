@@ -18,14 +18,14 @@
 - [ ] 06/01: Implémentation de la fenètre "Transition" :
         - Afficher l'Equipe (Bleu ou Rouge) et le Groupe (Espion ou Maitre-Espion)
         - Ajouter un bouton "Jouer"
-- [ ] 06/01: Implémentation de la fenètre "Partie (Espion)" :
+- [En cours] 06/01: Implémentation de la fenètre "Partie (Espion)" :
         - Implémenter l'affichage de la grille
         - Ajouter un bouton "Quitter"
         - Ajouter un bouton "Passe" (pour terminer le tour et transissionner)
         - Afficher le mot indice du Maitre-Espion 
         - Afficher le nombre de mot à deviner par le Maitre-Espion 
         - Ajouter un bouton "Selectionner"
-- [ ] 06/01: Implémentation de la fenètre "Partie (Maitre-Espion)" :
+- [En cours] 06/01: Implémentation de la fenètre "Partie (Maitre-Espion)" :
         - Implémenter l'affichage de la grille
         - Ajouter un bouton "Quitter"
         - Ajouter un bouton "Passe" (pour terminer le tour et transissionner)
