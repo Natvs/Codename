@@ -1,4 +1,6 @@
-package eu.telecomnancy.codingweek.codenames.model;
+package eu.telecomnancy.codingweek.codenames.model.card;
+
+import eu.telecomnancy.codingweek.codenames.model.color.Color;
 
 public class Card {
     

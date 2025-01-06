@@ -1,4 +1,4 @@
-package eu.telecomnancy.codingweek.codenames.model;
+package eu.telecomnancy.codingweek.codenames.model.player;
 
 public class Player {
     
