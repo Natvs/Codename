@@ -1,0 +1,97 @@
+@startuml
+
+class Session {
+    -ColorTeam redTeam
+    -ColorTeam blueTeam
+    -Board board
+    -List<Clue> clues
+    +Game()
+    +getBlueTeam()
+    +getRedTeam()
+    +setBlueTurn()
+    +setRedTurn()
+    +addClue(Clue clue)
+}
+ColorTeam --> Session
+Clue --> Session
+Board --> Session
+
+class Player {
+    -String name
+    +Player(String name)
+}
+abstract class Team {
+    -List<Player> players
+    +Team(Players players)
+    +getPlayers()
+}
+Player --o Team
+class AgentTeam extends Team {
+    -List<Clue> clues;
+    +AgentTeam(Players players)
+    +addClue(Clue newClue)
+    +getClues()
+}
+class SpyTeam extends Team {
+    -List<Card> guessedCards
+    +SpyTeam(Players players)
+    +getGuessedCards()
+    +clearGuessedCards()
+    +addGuessedCard(Card card)
+    +guess()
+}
+
+class ColorTeam {
+    -Color color
+    -AgentTeam agentTeam
+    -SpyTeam spyTeam
+    +ColorTeam(Color color, List<Player> agents, List<Player> spies)
+    +getColor()
+    +getAgentTeam()
+    +getSpyTeam()
+    +setSpyTurn()
+    +setAgentTurn()
+    +endTurn()
+}
+SpyTeam --> ColorTeam
+AgentTeam --> ColorTeam
+
+class Clue {
+    -int word;
+    -int count;
+}
+
+class Card {
+	-String name
+	-Color color
+	-Boolean revealed
+	+Card(String name, Color color)
+	+getName()
+	+getColor()
+	+getRevealed()
+	+show()
+	+hide()
+	+equals(Card card)
+}
+
+enum CardState {
+    Good,
+    Enemy,
+    Neutral,
+    Forbidden
+}
+
+class Board {
+	-int width
+	-int height
+	-Card[][] cards
+	+Board(int width, int height, Card[][] cards)
+	+getWidth()
+	+getHeight()
+	+getCard(int x, int y)
+    +getState(int x, int y, Color color) : CardType
+}
+CardState --> Board
+Card --o Board
+
+@enduml
