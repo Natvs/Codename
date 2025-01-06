@@ -6,7 +6,7 @@ import java.util.List;
 public class AgentTeam extends Team {
 
     public AgentTeam(List<Player> playersList, Session session) {
-        super(playersList, session);
+        super(null, playersList, session);
     }
 
     public void addClue(Clue clue) {
