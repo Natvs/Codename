@@ -25,15 +25,16 @@
     <children>
         <Label text="Nombre de joueurs : " GridPane.rowIndex="0" 
         GridPane.columnIndex="0" GridPane.halignment="CENTER" />
-        <ComboBox fx:id="nbPlayers" GridPane.rowIndex="0"
-        GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+        <Spinner fx:id="nbPlayers" GridPane.rowIndex="0"
+        GridPane.columnIndex="1" GridPane.halignment="CENTER"
+        min="2" max="8" initialValue="4" amountToStepBy="1" />
 
         <Label text="Taille de la grille : " GridPane.rowIndex="1"
         GridPane.columnIndex="0" GridPane.halignment="CENTER" />
         <HBox GridPane.rowIndex="1" GridPane.columnIndex="1" GridPane.halignment="CENTER" >
-            <ComboBox fx:id="nbRows" />
+            <Spinner fx:id="nbRows" min="2" max="10" amountToStepBy="1" initialValue="5" />
             <Label text="x" />
-            <ComboBox fx:id="nbCols" />
+            <Spinner fx:id="nbCols" min="2" max="10" amountToStepBy="1" initialValue="5" />
         </HBox>
 
         <Label text="Thématique : " GridPane.rowIndex="2"
