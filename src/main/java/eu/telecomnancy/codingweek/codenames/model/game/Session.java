@@ -22,18 +22,11 @@ public class Session {
     }
 
     private Session() {
-        GameConfig config = new GameConfig();
-        this.config = config;
+        this.config = new GameConfig();
+        this.redTeam = new ColoredTeam(Color.RED, config.redAgentsList, config.redSpiesList);
+        this.blueTeam = new ColoredTeam(Color.BLUE, config.blueAgentsList, config.blueSpiesList);
+        this.board = new Board(config.length, config.width);
 
-        AgentTeam redAgentTeam = new AgentTeam(config.redAgentTeam);
-        SpyTeam redSpyTeam = new SpyTeam(config.redSpyTeam);
-        this.redTeam = new ColoredTeam(Color.RED, redAgentTeam, redSpyTeam);
-
-        AgentTeam blueAgentTeam = new AgentTeam(config.blueAgentTeam);
-        SpyTeam blueSpyTeam = new SpyTeam(config.blueSpyTeam);
-        this.blueTeam = new ColoredTeam(Color.BLUE, blueAgentTeam, blueSpyTeam);
-
-        this.board = new Board(config.width, config.height);
     }
 
     public ColoredTeam getRedTeam() {

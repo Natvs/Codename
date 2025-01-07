@@ -1,7 +1,5 @@
 package eu.telecomnancy.codingweek.codenames.controller;
 
-import eu.telecomnancy.codingweek.codenames.model.game.GameConfig;
-import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;

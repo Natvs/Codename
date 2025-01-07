@@ -18,7 +18,7 @@ public class Board {
         return this.length;
     }
 
-    public int getWiidth() {
+    public int getWidth() {
         return this.width;
     }
 

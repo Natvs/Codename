@@ -1,11 +1,8 @@
 package eu.telecomnancy.codingweek.codenames.controller;
 
-import eu.telecomnancy.codingweek.codenames.model.game.GameConfig;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
-import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 
-import java.io.ObjectInputFilter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,8 +58,8 @@ public class GameController {
     }
 
     public void setConfig(Session session) {
-        this.tempRows = session.getBoard().getWidth();
-        this.tempCols = session.getBoard().getHeight();
+        this.tempRows = session.getBoard().getLength();
+        this.tempCols = session.getBoard().getWidth();
     }
 
     @FXML
