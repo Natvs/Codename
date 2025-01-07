@@ -41,12 +41,12 @@ public class GameController {
         });
 
         var session = Session.getInstance();
+        var cards = openCardsService.initGridCards(session.getBoard().getHeigth(), session.getBoard().getWidth());
         for (int i = 0; i < session.getBoard().getWidth(); i++) {
             ColumnConstraints colConstraints = new ColumnConstraints();
             colConstraints.setHgrow(Priority.ALWAYS);
             gameGrid.getColumnConstraints().add(colConstraints);
-            var cards = openCardsService.initGridCards(session.getBoard().getLength(), session.getBoard().getWidth());
-            for (int j = 0; j < session.getBoard().getLength(); j++) {
+            for (int j = 0; j < session.getBoard().getHeigth(); j++) {
                 var card = GenerateCardUtil.generateCard(cards[i][j]);
                 gameGrid.add(card, i, j);
             }

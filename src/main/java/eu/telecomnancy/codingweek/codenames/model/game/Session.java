@@ -25,7 +25,7 @@ public class Session {
         this.config = new GameConfig();
         this.redTeam = new ColoredTeam(Color.RED, config.redAgentsList, config.redSpiesList);
         this.blueTeam = new ColoredTeam(Color.BLUE, config.blueAgentsList, config.blueSpiesList);
-        this.board = new Board(config.length, config.width);
+        this.board = new Board(config.heigth, config.width);
 
     }
 
