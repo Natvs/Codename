@@ -4,30 +4,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 import eu.telecomnancy.codingweek.codenames.model.color.Color;
-import eu.telecomnancy.codingweek.codenames.model.game.Session;
+import eu.telecomnancy.codingweek.codenames.model.clue.Clue;
 import eu.telecomnancy.codingweek.codenames.model.team.AgentTeam;
-import eu.telecomnancy.codingweek.codenames.model.team.Clue;
 import eu.telecomnancy.codingweek.codenames.model.team.SpyTeam;
 
 public class ColoredTeam {
     
     private Color color;
-    private Session session;
-    private List<Clue> cluesList = new ArrayList<>();
+    private List<Clue> cluesList;
     private AgentTeam agentTeam;
     private SpyTeam spyTeam;
 
-    public ColoredTeam(Color color, Session session) {
-        this.color = color;
-        this.session = session;
+    public ColoredTeam(Color color, AgentTeam agentTeam, SpyTeam spyTeam) {
+        if ((color == Color.BLACK) || (color == Color.WHITE)) {
+            this.color = Color.NULL;
+        } else {
+            this.color = color;
+        }
+        this.cluesList = new ArrayList<>();
+        this.agentTeam = agentTeam;
+        this.spyTeam = spyTeam;
     }
 
     public Color getColor() {
         return this.color;
-    }
-
-    public Session getSession() {
-        return this.session;
     }
 
     public List<Clue> getCluesList() {
