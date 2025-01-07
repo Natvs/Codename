@@ -1,28 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
 
-<GridPane fx:id="homeView" stylesheets="@../style/home.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.codingweek.codenames.controller.HomeController">
+
+<GridPane fx:id="homeView" stylesheets="@../style/home.css" xmlns="http://javafx.com/javafx/23.0.1"
+    xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="eu.telecomnancy.codingweek.codenames.controller.HomeController">
     <rowConstraints>
-    <RowConstraints vgrow="ALWAYS" />
-    <RowConstraints vgrow="ALWAYS" />
-    <RowConstraints vgrow="ALWAYS" />
+        <RowConstraints percentHeight="20" />
+        <RowConstraints percentHeight="45" />
+        <RowConstraints percentHeight="15" />
+        <RowConstraints percentHeight="15" />
+        <RowConstraints percentHeight="10" />
     </rowConstraints>
 
     <columnConstraints>
-    <ColumnConstraints hgrow="ALWAYS" />
+        <ColumnConstraints hgrow="ALWAYS" />
     </columnConstraints>
 
     <children>
-        <Label fx:id="Title" text="P-CoDenames" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
+        <Label fx:id="Title" text="Codenames" GridPane.columnIndex="0"
+            GridPane.halignment="CENTER" GridPane.rowIndex="0" />
+        
+        <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true"
+             GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+            <image>
+                <Image url="@../images/logo.jpg" />
+            </image>
+        </ImageView>
 
-        <Button fx:id="newGameButton" onAction="#onNewGame" text="Nouvelle partie" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+        <Button fx:id="newGameButton" onAction="#onNewGame" text="Nouvelle partie"
+            GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
 
-        <Button fx:id="quitButton" onAction="#onQuit" text="Quitter" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+        <Button fx:id="quitButton" onAction="#onQuit" text="Quitter" GridPane.columnIndex="0"
+            GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+
+        <Label fx:id="Subtitle" text="by AnthropicPotato - APt" GridPane.halignment="CENTER"
+            GridPane.rowIndex="4" />
     </children>
 
 </GridPane>
