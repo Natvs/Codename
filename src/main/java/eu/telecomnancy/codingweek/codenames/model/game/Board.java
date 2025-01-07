@@ -1,4 +1,6 @@
-package eu.telecomnancy.codingweek.codenames.model;
+package eu.telecomnancy.codingweek.codenames.model.game;
+
+import eu.telecomnancy.codingweek.codenames.model.card.Card;
 
 public class Board {
     
