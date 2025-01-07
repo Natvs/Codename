@@ -9,9 +9,9 @@ public class GameConfig {
     
     public int width;
     public int height;
-    public List<Player> blueAgentTeam = new ArrayList<>();
-    public List<Player> blueSpyTeam = new ArrayList<>();
-    public List<Player> redAgentTeam = new ArrayList<>();
-    public List<Player> redSpyTeam = new ArrayList<>();
+    public List<Player> blueAgentsList = new ArrayList<>();
+    public List<Player> blueSpiesList = new ArrayList<>();
+    public List<Player> redAgentsList = new ArrayList<>();
+    public List<Player> redSpiesList = new ArrayList<>();
 
 }

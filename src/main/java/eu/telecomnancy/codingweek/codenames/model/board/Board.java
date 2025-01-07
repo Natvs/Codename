@@ -1,7 +1,6 @@
-package eu.telecomnancy.codingweek.codenames.model.game;
+package eu.telecomnancy.codingweek.codenames.model.board;
 
-import eu.telecomnancy.codingweek.codenames.model.card.Card;
-import eu.telecomnancy.codingweek.codenames.model.color.Color;
+import eu.telecomnancy.codingweek.codenames.utils.openCardsService.initGridCards;
 
 public class Board {
     
@@ -12,16 +11,7 @@ public class Board {
     public Board(int width, int height) {
         this.width = width;
         this.height = height;
-    
-        // Initialisation de la Grille
-        this.grid = new Card[width][height];
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-                String name = null; // A_REVOIR
-                grid[i][j] = new Card(name, Color.WHITE);
-            }
-        }
-
+        this.grid = initGridCards(width, height);
     }
 
     public int getWidth() {
