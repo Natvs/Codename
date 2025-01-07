@@ -5,8 +5,10 @@ import javafx.scene.control.Label;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.prefs.NodeChangeEvent;
 
 import eu.telecomnancy.codingweek.codenames.utils.GenerateCardUtil;
+import eu.telecomnancy.codingweek.codenames.utils.openCardsService;
 import javafx.fxml.FXML;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
@@ -15,11 +17,6 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.Priority;
 
 public class GameController {
-    //FIXME: these should be loaded from GameConf
-    private List<String> tempWords = new ArrayList<>();
-    private int tempRows = 5;
-    private int tempCols = 5;
-
     @FXML
     private GridPane gameView;
     @FXML
@@ -28,38 +25,7 @@ public class GameController {
     private Label currentTeam;
 
     public GameController() {
-        setConfig(Session.getInstance());
-        tempWords.add("Patate");
-        tempWords.add("Froide");
-        tempWords.add("Entropie");
-        tempWords.add("Pomme");
-        tempWords.add("Poire");
-        tempWords.add("Voiture");
-        tempWords.add("Moto");
-        tempWords.add("Bateau");
-        tempWords.add("Avion");
-        tempWords.add("Chaude");
-        tempWords.add("Train");
-        tempWords.add("Bus");
-        tempWords.add("Vélo");
-        tempWords.add("Appareil");
-        tempWords.add("Téléphone");
-        tempWords.add("Ordinateur");
-        tempWords.add("Tablette");
-        tempWords.add("Télévision");
-        tempWords.add("Radio");
-        tempWords.add("Livre");
-        tempWords.add("Magazine");
-        tempWords.add("Marmite");
-        tempWords.add("Arbre");
-        tempWords.add("Plante");
-        tempWords.add("Fleur");
-        tempWords.add("Herbe");
-    }
 
-    public void setConfig(Session session) {
-        this.tempRows = session.getBoard().getLength();
-        this.tempCols = session.getBoard().getWidth();
     }
 
     @FXML
@@ -73,12 +39,15 @@ public class GameController {
                     break;
             }
         });
-        for (int i = 0; i < tempRows; i++) {
+
+        var session = Session.getInstance();
+        for (int i = 0; i < session.getBoard().getWidth(); i++) {
             ColumnConstraints colConstraints = new ColumnConstraints();
             colConstraints.setHgrow(Priority.ALWAYS);
             gameGrid.getColumnConstraints().add(colConstraints);
-            for (int j = 0; j < tempCols; j++) {
-                var card = GenerateCardUtil.generateCard(tempWords.get(i*5+j));
+            var cards = openCardsService.initGridCards(session.getBoard().getLength(), session.getBoard().getWidth());
+            for (int j = 0; j < session.getBoard().getLength(); j++) {
+                var card = GenerateCardUtil.generateCard(cards[i][j]);
                 gameGrid.add(card, i, j);
             }
             RowConstraints rowConstraints = new RowConstraints();
