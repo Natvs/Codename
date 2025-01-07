@@ -1,8 +1,16 @@
 plugins {
+    id 'java'
     id 'application'
     id 'com.adarshr.test-logger' version '4.0.0'
     id 'org.openjfx.javafxplugin' version '0.1.0'
+    id 'com.gradleup.shadow' version '8.3.5'
 }
+
+group 'eu.telecomnancy.codingweek'
+version '0.0.1'
+
+sourceCompatibility = '21'
+targetCompatibility = '21'
 
 repositories {
     mavenCentral()
@@ -11,6 +19,7 @@ repositories {
 dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:5.11.3")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.15.2")
 }
 
 test {
@@ -45,5 +54,32 @@ javafx {
 }
 
 application {
-    mainClass.set("eu.telecomnancy.codingweek.codenames.Main")
+    mainClass = "eu.telecomnancy.codingweek.codenames.Main"
 }
+
+tasks.named('shadowJar') {
+    dependencies {
+        exclude(dependency("org.openjfx:javafx.controls"))
+        exclude(dependency("org.openjfx:javafx.fxml"))
+        exclude(dependency("org.openjfx:javafx.media"))
+        exclude(dependency("org.openjfx:javafx.graphics"))
+        exclude(dependency("org.openjfx:javafx.base"))
+    }
+
+    mergeServiceFiles()
+    manifest {
+        attributes 'Main-Class': 'eu.telecomnancy.codingweek.codenames.Main'
+    }
+}
+
+tasks.named('runShadow') {
+    doFirst {
+        def javafxClasspath = configurations.runtimeClasspath.files.collect { it.absolutePath }.join(File.pathSeparator)
+
+    jvmArgs = [
+        '--module-path', javafxClasspath,
+        '--add-modules', 'javafx.controls,javafx.fxml,javafx.media'
+    ]
+}
+}
+
