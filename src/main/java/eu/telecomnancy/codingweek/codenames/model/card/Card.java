@@ -46,4 +46,8 @@ public class Card {
         }
     }
 
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
 }
