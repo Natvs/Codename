@@ -9,6 +9,8 @@ import java.util.prefs.NodeChangeEvent;
 
 import eu.telecomnancy.codingweek.codenames.utils.GenerateCardUtil;
 import eu.telecomnancy.codingweek.codenames.utils.openCardsService;
+import eu.telecomnancy.codingweek.codenames.model.board.Card;
+import eu.telecomnancy.codingweek.codenames.model.color.Color;
 import javafx.fxml.FXML;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
@@ -48,6 +50,22 @@ public class GameController {
             gameGrid.getColumnConstraints().add(colConstraints);
             for (int j = 0; j < session.getBoard().getHeigth(); j++) {
                 var card = GenerateCardUtil.generateCard(cards[i][j]);
+                switch (cards[i][j].getColor()) {
+                    case Color.RED:
+                        card.setStyle("-fx-background-color: #c80000");
+                        break;
+                    case Color.BLUE:
+                        card.setStyle("-fx-background-color: #0084ff");
+                        break;
+                    case Color.WHITE:
+                        card.setStyle("-fx-background-color: #FFFFFF");
+                        break;
+                    case Color.BLACK:
+                        card.setStyle("-fx-background-color: #000000");
+                        break;
+                    default:
+                        break;
+                }
                 gameGrid.add(card, i, j);
             }
             RowConstraints rowConstraints = new RowConstraints();
