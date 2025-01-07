@@ -98,8 +98,21 @@ public class openCardsServiceTest {
     @Test
     void testGridCreator() {
         Card[][] grid = openCardsService.initGridCards(5,3);
+        displayGrid(grid, 5, 3);
         assertEquals(true, grid[0][0] instanceof Card);
         assertEquals(true, grid[3][1] instanceof Card);
         assertEquals(true, grid[4][2] instanceof Card);
+    }
+
+    public void displayGrid(Card[][] grid,int length,int width) {
+        ArrayList<String> listStr = new ArrayList<String>(width);
+        for(int i=0;i<length;i++){
+            for (int j=0;j<width;j++){
+                listStr.add(grid[i][j].getName() + ":" + grid[i][j].getColor());
+
+            }
+            System.out.println(listStr);
+            listStr.clear();
+        }
     }
 }
