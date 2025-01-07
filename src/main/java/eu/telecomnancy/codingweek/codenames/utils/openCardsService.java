@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import eu.telecomnancy.codingweek.codenames.model.color.Color;
-import eu.telecomnancy.codingweek.codenames.model.card.Card;
+import eu.telecomnancy.codingweek.codenames.model.board.Card;
 
 public class openCardsService {
     

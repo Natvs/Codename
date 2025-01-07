@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeAll;
 import eu.telecomnancy.codingweek.codenames.model.color.Color;
-import eu.telecomnancy.codingweek.codenames.model.card.Card;
+import eu.telecomnancy.codingweek.codenames.model.board.Card;
 import org.junit.jupiter.api.Test;
 
 
@@ -97,7 +97,7 @@ public class openCardsServiceTest {
 
     @Test
     void testGridCreator() {
-        Card[][] grid = openCardsService.initListCards(5,3);
+        Card[][] grid = openCardsService.initGridCards(5,3);
         assertEquals(true, grid[0][0] instanceof Card);
         assertEquals(true, grid[3][1] instanceof Card);
         assertEquals(true, grid[4][2] instanceof Card);

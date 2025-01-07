@@ -1,6 +1,6 @@
 package eu.telecomnancy.codingweek.codenames.model.board;
 
-import eu.telecomnancy.codingweek.codenames.utils.openCardsService.initGridCards;
+import eu.telecomnancy.codingweek.codenames.utils.openCardsService;
 
 public class Board {
     
@@ -11,7 +11,7 @@ public class Board {
     public Board(int width, int height) {
         this.width = width;
         this.height = height;
-        this.grid = initGridCards(width, height);
+        this.grid = openCardsService.initGridCards(width, height);
     }
 
     public int getWidth() {
