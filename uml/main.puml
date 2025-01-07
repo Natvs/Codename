@@ -1,121 +1,144 @@
 @startuml
 
-package codenames.model.game {
-    class GameConfig {
-        -List<Player> blueAgents
-        -List<Player> blueSpies
-        -List<Player> redAgents
-        -List<Player> redSpies
-        -int width
-        -int height
-    }
-    class Session {
-        -ColorTeam redTeam
-        -ColorTeam blueTeam
-        -Board board
-        +Session(GameConfig config)
-        +getBlueTeam()
-        +getRedTeam()
-        +setBlueTurn()
-        +setRedTurn()
-    }
+package codenames.model.clue {
+
     class Clue {
-        -int word;
-        -int count;
-    }
-    class Board {
-        -int width
-        -int height
-        -Card[][] cards
-        +Board(int width, int height, Card[][] cards)
-        +getWidth()
-        +getHeight()
-        +getCard(int x, int y)
+        - int wordId
+        - int count
+        + Clue(int wordId, int count)
+        + int getWordId()
+        + int getCount()
     }
 
-    codenames.model.game.Session --> codenames.model.game.GameConfig
-    codenames.model.colorteam.ColorTeam --> codenames.model.game.Session
-    codenames.model.game.Clue --> codenames.model.game.Session
-    codenames.model.game.Board --> codenames.model.game.Session
-    codenames.model.card.Card --o codenames.model.game.Board
+}
+
+package codenames.model.color {
+
+    enum Color {
+        NULL,
+        WHITE,
+        BLACK,
+        BLUE,
+        RED
+    }
+
+}
+
+package codenames.model.game {
+
+    class GameConfig {
+        + int length
+        + int width
+        + List<Player> blueAgentsList
+        + List<Player> blueSpiesList
+        + List<Player> redAgentsList
+        + List<Player> redSpiesList
+    }
+    class Session {
+        - ColoredTeam redTeam
+        - ColoredTeam blueTeam
+        - Board board
+        + Session(GameConfig config)
+        + ColoredTeam getBlueTeam()
+        + ColoredTeam getRedTeam()
+        + Board getBoard()
+    }
+
+    GameConfig --> Session
+ 
 }
 
 package codenames.model.team {
+
     abstract class Team {
-        -List<Player> players
-        -Session session
-        +Team(CardColor color, List<Player> players, Session session)
-        +getColor()
-        +getPlayers()
+        - List<Player> playersList
+        - List<Clue> cluesList
+        + Team(List<Player> playersList, List<Clue> cluesList)
+        + List<Player> getPlayersList()
+        + List<Clue> getCluesList()
     }
-    codenames.model.player.Player --o codenames.model.team.Team
     class AgentTeam extends Team {
-        +AgentTeam(List<Player> players, Session session)
-        +addClue(Clue newClue)
+        + AgentTeam(List<Player> playersList, List<Clue> cluesList)
+        + void addClue(Clue clue)
     }
-    class SpyTeam extends codenames.model.team.Team {
-        +SpyTeam(List<Player> players, Session session)
-        +guess(Card card)
+    class SpyTeam extends Team {
+        + SpyTeam(List<Player> players, List<Clue> cluesList)
+        + guess(Card card)
     }
+
 }
 
-package codenames.model.colorteam {
-    class ColorTeam {
-        -CardColor color
-        -Session session
-        -List<Clue> clues
-        -SpyTeam spyTeam
-        -AgentTeam agentTeam
-        +ColorTeam(Color color, Session session)
-        +getColor()
-        +getClues()
-        +getSpyTeam()
-        +getAgentTeam()
-        +setSpyTurn()
-        +setAgentTurn()
-        +endTurn()
-        +addClue(Clue clue)
+package codenames.model.coloredTeam {
+
+    class ColoredTeam {
+        - Color color;
+        - List<Clue> cluesList
+        - AgentTeam agentTeam
+        - SpyTeam spyTeam
+        + ColoredTeam(Color color, List<Player> AgentsList, List<Player> SpiesList)
+        + Color getColor()
+        + List<Clue> getCluesList()
+        + AgentTeam getAgentTeam()
+        + SpyTeam getSpyTeam()
     }
-    SpyTeam --> codenames.model.colorteam.ColorTeam
-    AgentTeam --> codenames.model.colorteam.ColorTeam
+
 }
 
 package codenames.model.player {
+
     class Player {
-        -String name
-        +Player(String name)
+        - String name
+        + Player(String name)
+        + String getName()
     }
+
 }
 
 package codenames.model.card {
+
     class Card {
-        -String name
-        -CardColor color
-        -Boolean revealed
-        +Card(String name, Color color)
-        +getName()
-        +getColor()
-        +getRevealed()
-        +getState(Card card, Color color)
-        +show()
-        +hide()
-        +equals(Card card)
-    }
-    enum CardColor {
-        Blue,
-        Red,
-        Forbidden,
-        Neutral
+        - String name
+        - Color color
+        - Boolean revealed
+        + Card(String name, Color color)
+        + String getName()
+        + Color getColor()
+        + Boolean getRevealed()
+        + void show()
+        + void hide()
+        + void setColor(Color color)
+        + CardState getState(Color color)
     }
     enum CardState {
-        Good,
-        Enemy,
-        Neutral,
-        Forbidden
+        GOOD,
+        ENEMY,
+        NEUTRAL,
+        FORBIDDEN
+    }
+    class Board {
+        - int length
+        - int width
+        - Card[][] grid
+        + Board(int length, int width)
+        + int getLength()
+        + int getWidth()
+        + int getNumberCards()
+        + Card[][] getGrid()
+        + Card getCard(int i, int j)
     }
 
-    codenames.model.card.CardState --> codenames.model.card.Card
-    codenames.model.card.CardColor --> codenames.model.card.Card
+    CardState --> Card
+    Card --o Board
+
 }
+
+Player --o Team
+Color --> ColoredTeam
+Color --> Card
+Board --> Session
+AgentTeam --> ColoredTeam
+SpyTeam --> ColoredTeam
+Clue --> ColoredTeam
+Clue --> Team
 
 @enduml
