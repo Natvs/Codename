@@ -1,13 +1,12 @@
 package eu.telecomnancy.codingweek.codenames.controller;
 
+import eu.telecomnancy.codingweek.codenames.model.game.GameConfig;
+import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
-
-import java.awt.event.KeyEvent;
-import java.beans.EventHandler;
 
 public class NewConfigController {
 
@@ -17,6 +16,8 @@ public class NewConfigController {
     private Button startButton;
     @FXML
     private ComboBox<String> thematicSelection;
+
+    private GameConfig config = new GameConfig();
 
     private Boolean startEnable = false;
 
@@ -43,7 +44,8 @@ public class NewConfigController {
 
     @FXML
     private void onStart() {
-        RootController.getInstance().changeView("/views/game.fxml");
+        var session = new Session(config);
+        RootController.getInstance().setGameView("/views/game.fxml", session);
     }
 
     @FXML

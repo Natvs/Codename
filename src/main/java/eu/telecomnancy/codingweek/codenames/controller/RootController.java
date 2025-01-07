@@ -2,7 +2,9 @@ package eu.telecomnancy.codingweek.codenames.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 
+import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -46,8 +48,27 @@ public class RootController {
         }
         
         try {
-            Node center = FXMLLoader.load(fxmlURL);
-            activeView = center;
+            activeView = FXMLLoader.load(fxmlURL);
+            root.setCenter(activeView);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void setGameView(String fxml, Session session) {
+        if (root == null) {
+            throw new RuntimeException("BorderPane 'root' is null");
+        }
+
+        URL fxmlURL = getClass().getResource(fxml);
+        if (fxmlURL == null) {
+            System.err.println("Could not find " + fxml);
+            return;
+        }
+
+        try {
+            FXMLLoader loader = new FXMLLoader(fxmlURL);
+            loader.setControllerFactory(iC -> new GameController(session));
+            activeView = loader.load();
             root.setCenter(activeView);
         } catch (IOException e) {
             e.printStackTrace();

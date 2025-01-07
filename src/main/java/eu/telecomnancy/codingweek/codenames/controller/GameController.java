@@ -1,7 +1,11 @@
 package eu.telecomnancy.codingweek.codenames.controller;
 
+import eu.telecomnancy.codingweek.codenames.model.game.GameConfig;
+import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
+
+import java.io.ObjectInputFilter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +32,8 @@ public class GameController {
     @FXML
     private Label currentTeam;
 
-    public GameController() {
+    public GameController(Session session) {
+        setConfig(session);
         tempWords.add("Patate");
         tempWords.add("Froide");
         tempWords.add("Entropie");
@@ -55,6 +60,11 @@ public class GameController {
         tempWords.add("Plante");
         tempWords.add("Fleur");
         tempWords.add("Herbe");
+    }
+
+    public void setConfig(Session session) {
+        this.tempRows = session.getBoard().getWidth();
+        this.tempCols = session.getBoard().getHeight();
     }
 
     @FXML

@@ -5,8 +5,8 @@ import eu.telecomnancy.codingweek.codenames.model.color.Color;
 
 public class Board {
     
-    private int width;
-    private int height; 
+    private int width = 5;
+    private int height = 5;
     private Card[][] grid;
 
     public Board(int width, int height) {
