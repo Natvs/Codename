@@ -3,6 +3,8 @@ package eu.telecomnancy.codingweek.codenames.model.coloredTeam;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import eu.telecomnancy.codingweek.codenames.model.color.Color;
 import eu.telecomnancy.codingweek.codenames.model.clue.Clue;
 import eu.telecomnancy.codingweek.codenames.model.team.AgentTeam;
@@ -12,7 +14,7 @@ import eu.telecomnancy.codingweek.codenames.model.player.Player;
 public class ColoredTeam {
     
     private Color color;
-    private List<Clue> cluesList;
+    protected List<Clue> cluesList;
     private AgentTeam agentTeam;
     private SpyTeam spyTeam;
 
@@ -26,7 +28,12 @@ public class ColoredTeam {
         this.agentTeam = new AgentTeam(agentsTeam, cluesList);
         this.spyTeam = new SpyTeam(spiesTeam, cluesList);
     }
-
+    public ColoredTeam(@JsonProperty("color") Color color, @JsonProperty("cluesList") List<Clue> cluesList, @JsonProperty("agentTeam") AgentTeam agentTeam, @JsonProperty("spyTeam") SpyTeam spyTeam) {
+        this.color = color;
+        this.cluesList = cluesList;
+        this.agentTeam = agentTeam;
+        this.spyTeam = spyTeam;
+    }
     public Color getColor() {
         return this.color;
     }

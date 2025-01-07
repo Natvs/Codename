@@ -1,5 +1,7 @@
 package eu.telecomnancy.codingweek.codenames.model.board;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import eu.telecomnancy.codingweek.codenames.utils.openCardsService;
 
 public class Board {
@@ -13,17 +15,17 @@ public class Board {
         this.width = width;
         this.grid = openCardsService.initGridCards(length, width);
     }
-
+    public Board(@JsonProperty("length") int length,@JsonProperty("grid") Card[][] grid,@JsonProperty("width") int width){
+        this.length = length;
+        this.width = width;
+        this.grid = grid;
+    }
     public int getLength() {
         return this.length;
     }
 
-    public int getWiidth() {
+    public int getWidth() {
         return this.width;
-    }
-
-    public int getNumberCards() {
-        return this.length * this.width;
     }
 
     public Card[][] getGrid() {

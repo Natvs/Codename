@@ -20,11 +20,15 @@ public class Session {
         return instance;
     }
 
+    public static void setInstance(Session session) {
+        Session.instance = session;
+    }
+
     private Session() {
+        this.config = new GameConfig();
         this.redTeam = new ColoredTeam(Color.RED, config.redAgentsList, config.redSpiesList);
         this.blueTeam = new ColoredTeam(Color.BLUE, config.blueAgentsList, config.blueSpiesList);
         this.board = new Board(config.length, config.width);
-        this.config = new GameConfig();
     }
 
     public ColoredTeam getRedTeam() {

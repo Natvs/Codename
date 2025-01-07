@@ -1,17 +1,24 @@
 package eu.telecomnancy.codingweek.codenames.model.board;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import eu.telecomnancy.codingweek.codenames.model.color.Color;
 
 public class Card {
     
     private String name;
     private Color color;
-    private Boolean revealed;
+    private boolean revealed;
 
     public Card(String name, Color color) {
         this.name = name;
         this.color = color;
         this.revealed = false;
+    }
+    public Card(@JsonProperty("name") String name,@JsonProperty("color") Color color, @JsonProperty("revelead") boolean revealed){
+        this.name = name;
+        this.color = color;
+        this.revealed = revealed;
     }
 
     public String getName() {
