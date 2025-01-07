@@ -7,8 +7,8 @@ import eu.telecomnancy.codingweek.codenames.model.player.Player;
 
 public class GameConfig {
     
-    public int length;
-    public int width;
+    public int heigth = 5;
+    public int width = 5;
     public List<Player> blueAgentsList = new ArrayList<>();
     public List<Player> blueSpiesList = new ArrayList<>();
     public List<Player> redAgentsList = new ArrayList<>();

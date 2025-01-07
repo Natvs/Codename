@@ -13,6 +13,7 @@ public class Session {
     private Board board;
     private GameConfig config;
 
+
     static public Session getInstance() {
         if (instance == null) {
             instance = new Session();
@@ -21,10 +22,11 @@ public class Session {
     }
 
     private Session() {
+        this.config = new GameConfig();
         this.redTeam = new ColoredTeam(Color.RED, config.redAgentsList, config.redSpiesList);
         this.blueTeam = new ColoredTeam(Color.BLUE, config.blueAgentsList, config.blueSpiesList);
-        this.board = new Board(config.length, config.width);
-        this.config = new GameConfig();
+        this.board = new Board(config.heigth, config.width);
+
     }
 
     public ColoredTeam getRedTeam() {

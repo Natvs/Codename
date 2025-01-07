@@ -3,11 +3,12 @@ package eu.telecomnancy.codingweek.codenames.utils;
 import java.net.URL;
 
 import eu.telecomnancy.codingweek.codenames.controller.GameCardController;
+import eu.telecomnancy.codingweek.codenames.model.board.Card;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 
 public class GenerateCardUtil {
-    public static Node generateCard(String word) {
+    public static Node generateCard(Card card) {
         URL fxmlURL = GenerateCardUtil.class.getResource("/views/components/gameCard.fxml");
         if (fxmlURL == null) {
             System.err.println("Could not find /views/components/gameCard.fxml");
@@ -15,7 +16,7 @@ public class GenerateCardUtil {
         }
         try {
             FXMLLoader loader = new FXMLLoader(fxmlURL);
-            loader.setControllerFactory(iC -> new GameCardController(word));
+            loader.setControllerFactory(iC -> new GameCardController(card));
             return loader.load();
         } catch (Exception e) {
             e.printStackTrace();
