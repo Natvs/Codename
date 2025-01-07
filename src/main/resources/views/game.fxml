@@ -19,7 +19,7 @@
 
     <children>
         <Label fx:id="currentTeam" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-        <GridPane fx:id="gameGrid" prefHeight="30.0" prefWidth="86.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+        <GridPane fx:id="gameGrid" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
         <Button fx:id="quitButton" mnemonicParsing="false" text="Quitter le jeu" GridPane.rowIndex="2" onAction="#onQuit"/>
     </children>
 </GridPane>
