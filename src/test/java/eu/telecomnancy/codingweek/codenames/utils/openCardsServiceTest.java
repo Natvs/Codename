@@ -88,4 +88,18 @@ public class openCardsServiceTest {
         }
         return listValues;
     }
+    @Test
+    void testIndex() {
+        assertEquals(1, openCardsService.getIndex(1,0,3));
+        assertEquals(4, openCardsService.getIndex(1,1,3));
+        assertEquals(5, openCardsService.getIndex(2,1,3));
+    }
+
+    @Test
+    void testGridCreator() {
+        Card[][] grid = openCardsService.initListCards(5,3);
+        assertEquals(true, grid[0][0] instanceof Card);
+        assertEquals(true, grid[3][1] instanceof Card);
+        assertEquals(true, grid[4][2] instanceof Card);
+    }
 }

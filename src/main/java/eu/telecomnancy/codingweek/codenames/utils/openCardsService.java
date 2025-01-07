@@ -96,10 +96,25 @@ public class openCardsService {
 
     }
 
-    public static ArrayList<Card> initListCards(int size){
+    public static Card[][] convertToGrid(ArrayList<Card> list,int width,int height){
+        // Initialisation de la Grille
+        Card[][] grid = new Card[height][width];
+        for (int j = 0; j < height; j++) {
+            for (int i = 0; i < width; i++) {
+                int index = getIndex(i,j,width);
+                grid[j][i] = list.get(index);
+            }
+        }
+        return grid;
+    }
+    public static int getIndex(int i,int j,int width){
+        return j*width+i;
+    }
+    public static Card[][] initGridCards(int width,int height){
         ArrayList<String> lines = openFile("src/main/resources/words/codenames_words.txt");
-        ArrayList<Card> choosenCards = setRandomCards(lines, size);
+        ArrayList<Card> choosenCards = setRandomCards(lines, height*width);
         configCards(choosenCards);
-        return choosenCards;
+        Card[][] grid = convertToGrid(choosenCards,width,height);
+        return grid;
     }
 }
