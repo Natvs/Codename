@@ -1,16 +1,16 @@
-package eu.telecomnancy.codingweek.codenames.utils.words;
+package eu.telecomnancy.codingweek.codenames.utils;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
-import eu.telecomnancy.codingweek.codenames.model.Color;
+import eu.telecomnancy.codingweek.codenames.model.color.Color;
+import eu.telecomnancy.codingweek.codenames.model.card.Card;
 
-public class openWordsService {
+public class openCardsService {
     
 
     public static ArrayList<String> openFile(String fileName){
@@ -34,27 +34,27 @@ public class openWordsService {
 
     }
 
-    public static ArrayList<Words> setRandomWords(ArrayList<String> list,int nb_elt){
+    public static ArrayList<Card> setRandomCards(ArrayList<String> list,int nb_elt){
         int size = list.size();
         if (size<nb_elt){
             System.err.println("liste de mots trop petite pour pouvoir remplir le tableau");
             return null;
         }
-        ArrayList<Words> listWords = new ArrayList<Words>(nb_elt);
+        ArrayList<Card> listCards = new ArrayList<Card>(nb_elt);
         Random random = new Random();
-        while(listWords.size()<nb_elt){
+        while(listCards.size()<nb_elt){
             int randomInt = random.nextInt(size);
-            Words word = new Words(list.get(randomInt));
-            if (!isWordInList(word, listWords)){
-                listWords.add(word);
+            Card card = new Card(list.get(randomInt),Color.WHITE);
+            if (!isCardInList(card, listCards)){
+                listCards.add(card);
             }
         }
-        return listWords;
+        return listCards;
     }
 
-    public static boolean isWordInList(Words word,ArrayList<Words> list){
-        String name = word.getName();
-        for(Words elt:list){
+    public static boolean isCardInList(Card card,ArrayList<Card> list){
+        String name = card.getName();
+        for(Card elt:list){
             if (elt.getName()==name){
                 return true;
             }
@@ -62,7 +62,7 @@ public class openWordsService {
         return false;
     }
 
-    public static void configWords(ArrayList<Words> list){
+    public static void configCards(ArrayList<Card> list){
 
         int[] listValues = new int[3]; // noir, bleu, rouge, blanc = reste
         int size = list.size();
@@ -73,7 +73,7 @@ public class openWordsService {
         listValues[0] = Math.max(1,size/25);
         listValues[1] = Math.max(1,size*8/25) + randInt;
         listValues[2] = Math.max(1,size*8/25) + 1 - randInt;
-        for (Words elt:list){
+        for (Card elt:list){
             randInt = rand.nextInt(size);
             size -= 1;
             if (randInt<listValues[0]){
@@ -96,10 +96,10 @@ public class openWordsService {
 
     }
 
-    public static ArrayList<Words> initListWords(int size){
+    public static ArrayList<Card> initListCards(int size){
         ArrayList<String> lines = openFile("src/main/resources/words/codenames_words.txt");
-        ArrayList<Words> choosenWords = setRandomWords(lines, size);
-        configWords(choosenWords);
-        return choosenWords;
+        ArrayList<Card> choosenCards = setRandomCards(lines, size);
+        configCards(choosenCards);
+        return choosenCards;
     }
 }
