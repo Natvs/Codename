@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 
-<GridPane
-    xmlns="http://javafx.com/javafx"
-    xmlns:fx="http://javafx.com/fxml"
-    fx:controller="eu.telecomnancy.codingweek.codenames.controller.GameController"
-    stylesheets="@../style/game.css">
+<GridPane fx:id="mainPane" stylesheets="@../style/game.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.codingweek.codenames.controller.GameController">
 
     <rowConstraints>
         <RowConstraints percentHeight="5" />
@@ -19,7 +17,7 @@
     </columnConstraints>
 
     <children>
-        <Label fx:id="currentTeam" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.halignment="CENTER" />
-        <GridPane fx:id="gameGrid" GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.halignment="CENTER" />
+        <Label fx:id="currentTeam" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
+        <GridPane fx:id="gameGrid" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
     </children>
 </GridPane>

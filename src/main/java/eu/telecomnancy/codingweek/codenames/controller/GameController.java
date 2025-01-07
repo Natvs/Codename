@@ -6,6 +6,7 @@ import java.util.List;
 
 import eu.telecomnancy.codingweek.codenames.utils.GenerateCardUtil;
 import javafx.fxml.FXML;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.RowConstraints;
@@ -18,8 +19,9 @@ public class GameController {
     private int tempCols = 5;
 
     @FXML
+    private GridPane mainPane;
+    @FXML
     private GridPane gameGrid;
-
     @FXML
     private Label currentTeam;
 
@@ -54,6 +56,13 @@ public class GameController {
 
     @FXML
     private void initialize() {
+        mainPane.setOnKeyPressed((keyevent) -> {
+            switch (keyevent.getCode()) {
+                case KeyCode.Q:
+                    onQuit();
+                    break;
+            }
+        });
         for (int i = 0; i < tempRows; i++) {
             ColumnConstraints colConstraints = new ColumnConstraints();
             colConstraints.setHgrow(Priority.ALWAYS);
@@ -65,5 +74,9 @@ public class GameController {
             rowConstraints.setVgrow(Priority.ALWAYS);
             gameGrid.getRowConstraints().add(rowConstraints);
         }
+    }
+
+    private void onQuit() {
+        RootController.getInstance().changeView("/views/home.fxml");
     }
 }

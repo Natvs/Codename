@@ -15,24 +15,24 @@ public class NewConfigController {
     private GridPane mainPane;
     @FXML
     private Button startButton;
-
     @FXML
     private ComboBox<String> thematicSelection;
+
+    private Boolean startEnable = false;
 
     @FXML
     private void initialize() {
         mainPane.setOnKeyPressed((keyevent) -> {
-            System.out.println("Key pressed : " + keyevent.getCode());
             switch (keyevent.getCode()) {
                 case KeyCode.Q:
-                    RootController.getInstance().changeView("/views/home.fxml");
+                    onBack();
                     break;
                 case KeyCode.S:
-                    RootController.getInstance().changeView("/views/game.fxml");
+                    if (startEnable) { onStart(); }
                     break;
             }
         });
-        startButton.setDisable(true);
+        disableStart();
         thematicSelection.getItems().addAll("Tout", "Patate", "Entropie");
     }
 
@@ -48,7 +48,16 @@ public class NewConfigController {
 
     @FXML
     private void onThematicSelection() {
+        enableStart();
+    }
+
+    private void disableStart() {
+        startButton.setDisable(true);
+        startEnable = false;
+    }
+    private void enableStart() {
         startButton.setDisable(false);
+        startEnable = true;
     }
 
 }
