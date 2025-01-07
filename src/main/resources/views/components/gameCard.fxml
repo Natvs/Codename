@@ -4,9 +4,11 @@
 <?import javafx.scene.layout.*?>
 
 <GridPane
+        fx:id="mainPane"
     xmlns="http://javafx.com/javafx"
     xmlns:fx="http://javafx.com/fxml"
-    stylesheets="@../style/gameCard.css">
+    stylesheets="@../style/gameCard.css"
+    fx:controller="eu.telecomnancy.codingweek.codenames.controller.GameCardController">
     
     <rowConstraints>
         <RowConstraints vgrow="ALWAYS" />

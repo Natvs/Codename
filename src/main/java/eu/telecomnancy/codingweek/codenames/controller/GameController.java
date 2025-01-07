@@ -1,11 +1,15 @@
 package eu.telecomnancy.codingweek.codenames.controller;
 
+import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import java.util.ArrayList;
 import java.util.List;
 
 import eu.telecomnancy.codingweek.codenames.utils.GenerateCardUtil;
 import javafx.fxml.FXML;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.RowConstraints;
@@ -18,8 +22,9 @@ public class GameController {
     private int tempCols = 5;
 
     @FXML
+    private GridPane mainPane;
+    @FXML
     private GridPane gameGrid;
-
     @FXML
     private Label currentTeam;
 
@@ -54,16 +59,28 @@ public class GameController {
 
     @FXML
     private void initialize() {
+        mainPane.setOnKeyPressed((keyevent) ->  {
+            switch (keyevent.getCode()) {
+                case KeyCode.Q:
+                    onQuit();
+                    break;
+            }
+        });
         for (int i = 0; i < tempRows; i++) {
             ColumnConstraints colConstraints = new ColumnConstraints();
             colConstraints.setHgrow(Priority.ALWAYS);
             gameGrid.getColumnConstraints().add(colConstraints);
             for (int j = 0; j < tempCols; j++) {
-                gameGrid.add(GenerateCardUtil.generateCard(tempWords.get(i*5+j)), i, j);
+                var card = GenerateCardUtil.generateCard(tempWords.get(i*5+j));
+                gameGrid.add(card, i, j);
             }
             RowConstraints rowConstraints = new RowConstraints();
             rowConstraints.setVgrow(Priority.ALWAYS);
             gameGrid.getRowConstraints().add(rowConstraints);
         }
+    }
+
+    private void onQuit() {
+        RootController.getInstance().changeView("/views/home.fxml");
     }
 }
