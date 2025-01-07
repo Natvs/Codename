@@ -18,26 +18,30 @@
 - [ ] 06/01: Implémentation de la fenètre "Transition" :
         - Afficher l'Equipe (Bleu ou Rouge) et le Groupe (Espion ou Maitre-Espion)
         - Ajouter un bouton "Jouer"
-- [En cours] 06/01: Implémentation de la fenètre "Partie (Espion)" :
+- [ En cours ] 06/01: Implémentation de la fenètre "Partie (Maitre-Espion)" :
         - Implémenter l'affichage de la grille
-        - Ajouter un bouton "Quitter"
-        - Ajouter un bouton "Passe" (pour terminer le tour et transissionner)
-        - Afficher le mot indice du Maitre-Espion 
-        - Afficher le nombre de mot à deviner par le Maitre-Espion 
-        - Ajouter un bouton "Selectionner"
-- [En cours] 06/01: Implémentation de la fenètre "Partie (Maitre-Espion)" :
-        - Implémenter l'affichage de la grille
-        - Ajouter un bouton "Quitter"
+        - Afficher les cartes couleur déjà positionnée sur la grille
+        - Ajouter un bouton "Sauvegarder et Quitter"
         - Ajouter un bouton "Passe" (pour terminer le tour et transissionner)
         - Implémenter l'affichage de la carte clée dans la grille
         - Ajouter un bouton "Mot"
         - Ajouter un bouton "Nombre"
+- [ En cours ] 06/01: Implémentation de la fenètre "Partie (Espion)" :
+        - Implémenter l'affichage de la grille
+        - Afficher les cartes couleur déjà positionnée sur la grille
+        - Ajouter un bouton "Sauvegarder et Quitter"
+        - Ajouter un bouton "Passe" (pour terminer le tour et transissionner)
+        - Afficher le mot indice du Maitre-Espion 
+        - Afficher le nombre de mot à deviner par le Maitre-Espion 
+        - Ajouter un bouton "Selectionner"
 
 ### Lucas Simonneau :
+- [ ] 06/01: Implémentation d'une sauvegarde des données d'une partie :
+        - Implémentation de la structure de donnée ouverture et modification d'un fichier texte
 - [ ] 06/01: Implémentation de la constitution du Dictionnaire :
-        - Ouverture d'un fichier texte
+        - Créér un fichier texte : une BdD de mots issue du dictionnaire français
         - Selection d'un nombre fini de mots aléatoire
         - Asignement d'une couleur pour chaque mot
 
 ### Nathans Vernois :
-- [ ] 06/01: Implémentation du diagramme de classe :
+- [ ] 06/01: Implémentation du diagramme de classe

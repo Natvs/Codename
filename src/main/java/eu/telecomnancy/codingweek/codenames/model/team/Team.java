@@ -1,20 +1,18 @@
 package eu.telecomnancy.codingweek.codenames.model.team;
 
-import java.util.ArrayList;
 import java.util.List;
 
-
-import eu.telecomnancy.codingweek.codenames.model.player.Player;
 import eu.telecomnancy.codingweek.codenames.model.clue.Clue;
+import eu.telecomnancy.codingweek.codenames.model.player.Player;
 
 public class Team {
     
     private List<Player> playersList;
     private List<Clue> cluesList;
 
-    public Team(List<Player> playersList) {
+    public Team(List<Player> playersList, List<Clue> cluesList) {
         this.playersList = playersList;
-        this.cluesList = new ArrayList<>();
+        this.cluesList = cluesList;
     }
 
     public List<Player> getPlayersList() {

@@ -7,11 +7,11 @@ import eu.telecomnancy.codingweek.codenames.model.player.Player;
 
 public class GameConfig {
     
-    public int width = 5;
-    public int height = 5;
-    public List<Player> blueAgentTeam = new ArrayList<>();
-    public List<Player> blueSpyTeam = new ArrayList<>();
-    public List<Player> redAgentTeam = new ArrayList<>();
-    public List<Player> redSpyTeam = new ArrayList<>();
+    public int length;
+    public int width;
+    public List<Player> blueAgentsList = new ArrayList<>();
+    public List<Player> blueSpiesList = new ArrayList<>();
+    public List<Player> redAgentsList = new ArrayList<>();
+    public List<Player> redSpiesList = new ArrayList<>();
 
 }

@@ -11,7 +11,7 @@ import javafx.scene.layout.GridPane;
 public class NewConfigController {
 
     @FXML
-    private GridPane mainPane;
+    private GridPane newConfigView;
     @FXML
     private Button startButton;
     @FXML
@@ -21,13 +21,15 @@ public class NewConfigController {
 
     @FXML
     private void initialize() {
-        mainPane.setOnKeyPressed((keyevent) -> {
+        newConfigView.setOnKeyPressed((keyevent) -> {
             switch (keyevent.getCode()) {
                 case KeyCode.Q:
                     onBack();
                     break;
                 case KeyCode.S:
                     if (startEnable) { onStart(); }
+                    break;
+                default:
                     break;
             }
         });

@@ -15,7 +15,7 @@ public class GenerateCardUtil {
         }
         try {
             FXMLLoader loader = new FXMLLoader(fxmlURL);
-            loader.setControllerFactory(iC -> new GameCardController(word));
+            loader.setControllerFactory(_ -> new GameCardController(word));
             return loader.load();
         } catch (Exception e) {
             e.printStackTrace();
