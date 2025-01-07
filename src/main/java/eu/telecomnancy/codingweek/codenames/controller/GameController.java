@@ -80,6 +80,7 @@ public class GameController {
         }
     }
 
+    @FXML
     private void onQuit() {
         RootController.getInstance().changeView("/views/home.fxml");
     }
