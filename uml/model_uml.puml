@@ -38,10 +38,12 @@ package codenames.model.game {
         - ColoredTeam redTeam
         - ColoredTeam blueTeam
         - Board board
+        - GameConfig config
         + Session(GameConfig config)
         + ColoredTeam getBlueTeam()
         + ColoredTeam getRedTeam()
         + Board getBoard()
+        + GameConfig getConfig()
     }
 
     GameConfig --> Session
