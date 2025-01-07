@@ -17,8 +17,6 @@ public class NewConfigController {
     @FXML
     private ComboBox<String> thematicSelection;
 
-    private GameConfig config = new GameConfig();
-
     private Boolean startEnable = false;
 
     @FXML
@@ -44,8 +42,7 @@ public class NewConfigController {
 
     @FXML
     private void onStart() {
-        var session = new Session(config);
-        RootController.getInstance().setGameView("/views/game.fxml", session);
+        RootController.getInstance().changeView("/views/game.fxml");
     }
 
     @FXML

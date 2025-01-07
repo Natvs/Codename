@@ -32,8 +32,8 @@ public class GameController {
     @FXML
     private Label currentTeam;
 
-    public GameController(Session session) {
-        setConfig(session);
+    public GameController() {
+        setConfig(Session.getInstance());
         tempWords.add("Patate");
         tempWords.add("Froide");
         tempWords.add("Entropie");
