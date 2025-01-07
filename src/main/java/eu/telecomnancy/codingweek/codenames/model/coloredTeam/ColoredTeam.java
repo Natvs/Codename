@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import eu.telecomnancy.codingweek.codenames.model.color.Color;
+import eu.telecomnancy.codingweek.codenames.model.clue.Clue;
 import eu.telecomnancy.codingweek.codenames.model.team.AgentTeam;
-import eu.telecomnancy.codingweek.codenames.model.team.Clue;
 import eu.telecomnancy.codingweek.codenames.model.team.SpyTeam;
+import eu.telecomnancy.codingweek.codenames.model.player.Player;
 
 public class ColoredTeam {
     
@@ -15,15 +16,15 @@ public class ColoredTeam {
     private AgentTeam agentTeam;
     private SpyTeam spyTeam;
 
-    public ColoredTeam(Color color, AgentTeam agentTeam, SpyTeam spyTeam) {
+    public ColoredTeam(Color color, List<Player> agentsTeam, List<Player> spiesTeam) {
         if ((color == Color.BLACK) || (color == Color.WHITE)) {
             this.color = Color.NULL;
         } else {
             this.color = color;
         }
         this.cluesList = new ArrayList<>();
-        this.agentTeam = agentTeam;
-        this.spyTeam = spyTeam;
+        this.agentTeam = new AgentTeam(agentsTeam, cluesList);
+        this.spyTeam = new SpyTeam(spiesTeam, cluesList);
     }
 
     public Color getColor() {

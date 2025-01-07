@@ -4,26 +4,26 @@ import eu.telecomnancy.codingweek.codenames.utils.openCardsService;
 
 public class Board {
     
-    private int width;
-    private int height; 
+    private int length;
+    private int width; 
     private Card[][] grid;
 
-    public Board(int width, int height) {
+    public Board(int length, int width) {
+        this.length = length;
         this.width = width;
-        this.height = height;
-        this.grid = openCardsService.initGridCards(width, height);
+        this.grid = openCardsService.initGridCards(length, width);
     }
 
-    public int getWidth() {
+    public int getLength() {
+        return this.length;
+    }
+
+    public int getWiidth() {
         return this.width;
     }
 
-    public int getHeight() {
-        return this.height;
-    }
-
     public int getNumberCards() {
-        return this.width * this.height;
+        return this.length * this.width;
     }
 
     public Card[][] getGrid() {
