@@ -1,6 +1,5 @@
 package eu.telecomnancy.codingweek.codenames.controller;
 
-import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,8 +7,6 @@ import java.util.List;
 import eu.telecomnancy.codingweek.codenames.utils.GenerateCardUtil;
 import javafx.fxml.FXML;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.RowConstraints;
@@ -22,7 +19,7 @@ public class GameController {
     private int tempCols = 5;
 
     @FXML
-    private GridPane mainPane;
+    private GridPane gameView;
     @FXML
     private GridPane gameGrid;
     @FXML
@@ -59,10 +56,12 @@ public class GameController {
 
     @FXML
     private void initialize() {
-        mainPane.setOnKeyPressed((keyevent) ->  {
+        gameView.setOnKeyPressed((keyevent) ->  {
             switch (keyevent.getCode()) {
                 case KeyCode.Q:
                     onQuit();
+                    break;
+                default:
                     break;
             }
         });

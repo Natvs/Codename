@@ -6,13 +6,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 
-import java.awt.event.KeyEvent;
-import java.beans.EventHandler;
-
 public class NewConfigController {
 
     @FXML
-    private GridPane mainPane;
+    private GridPane newConfigView;
     @FXML
     private Button startButton;
     @FXML
@@ -22,13 +19,15 @@ public class NewConfigController {
 
     @FXML
     private void initialize() {
-        mainPane.setOnKeyPressed((keyevent) -> {
+        newConfigView.setOnKeyPressed((keyevent) -> {
             switch (keyevent.getCode()) {
                 case KeyCode.Q:
                     onBack();
                     break;
                 case KeyCode.S:
                     if (startEnable) { onStart(); }
+                    break;
+                default:
                     break;
             }
         });

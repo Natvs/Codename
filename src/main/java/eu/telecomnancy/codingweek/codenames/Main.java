@@ -21,7 +21,7 @@ public class Main extends Application {
             Media media = new Media(musicFile);
             MediaPlayer mediaPlayer = new MediaPlayer(media);
             mediaPlayer.setAutoPlay(true);
-            mediaPlayer.setCycleCount(mediaPlayer.INDEFINITE);
+            mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
             mediaPlayer.play();
         } catch (IllegalArgumentException e) {
             // Handle invalid file path or unsupported format

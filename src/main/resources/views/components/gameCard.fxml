@@ -4,10 +4,10 @@
 <?import javafx.scene.layout.*?>
 
 <GridPane
-        fx:id="mainPane"
+    fx:id="gameCard"
     xmlns="http://javafx.com/javafx"
     xmlns:fx="http://javafx.com/fxml"
-    stylesheets="@../style/gameCard.css"
+    stylesheets="@../../style/components/gameCard.css"
     fx:controller="eu.telecomnancy.codingweek.codenames.controller.GameCardController">
     
     <rowConstraints>

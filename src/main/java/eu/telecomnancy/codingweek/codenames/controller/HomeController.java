@@ -9,7 +9,7 @@ import javafx.scene.layout.GridPane;
 public class HomeController {
 
     @FXML
-    private GridPane mainPane;
+    private GridPane homeView;
 
     @FXML
     private Button newGameButton;
@@ -19,13 +19,15 @@ public class HomeController {
 
     @FXML
     public void initialize() {
-        mainPane.setOnKeyPressed((keyevent) -> {
+        homeView.setOnKeyPressed((keyevent) -> {
             switch (keyevent.getCode()) {
                 case KeyCode.Q:
                     onQuit();
                     break;
                 case KeyCode.N:
                     onNewGame();
+                    break;
+                default:
                     break;
             }
         });
