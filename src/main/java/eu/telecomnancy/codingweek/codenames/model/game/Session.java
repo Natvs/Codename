@@ -1,6 +1,9 @@
 package eu.telecomnancy.codingweek.codenames.model.game;
 
 import eu.telecomnancy.codingweek.codenames.model.coloredTeam.ColoredTeam;
+import eu.telecomnancy.codingweek.codenames.model.team.AgentTeam;
+import eu.telecomnancy.codingweek.codenames.model.team.SpyTeam;
+import eu.telecomnancy.codingweek.codenames.model.color.Color;
 
 public class Session {
     
@@ -9,7 +12,15 @@ public class Session {
     private Board board;
 
     public Session(GameConfig config) {
-        // A_REVOIR
+        AgentTeam redAgentTeam = new AgentTeam(config.redAgentTeam);
+        SpyTeam redSpyTeam = new SpyTeam(config.redSpyTeam);
+        this.redTeam = new ColoredTeam(Color.RED, redAgentTeam, redSpyTeam);
+
+        AgentTeam blueAgentTeam = new AgentTeam(config.blueAgentTeam);
+        SpyTeam blueSpyTeam = new SpyTeam(config.blueSpyTeam);
+        this.blueTeam = new ColoredTeam(Color.BLUE, blueAgentTeam, blueSpyTeam);
+
+        this.board = new Board(config.width, config.height);
     }
 
     public ColoredTeam getRedTeam() {

@@ -30,6 +30,14 @@ public class Card {
         this.revealed = true;
     }
 
+    public void hide() {
+        this.revealed = false;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
     public CardState getState(Color color) {
         if (color == this.color) {
             return CardState.GOOD;
@@ -44,10 +52,6 @@ public class Card {
                 }
             }
         }
-    }
-
-    public void setColor(Color color) {
-        this.color = color;
     }
 
 }

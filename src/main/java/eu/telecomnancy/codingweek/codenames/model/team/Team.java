@@ -1,37 +1,28 @@
 package eu.telecomnancy.codingweek.codenames.model.team;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import eu.telecomnancy.codingweek.codenames.model.color.Color;
-import eu.telecomnancy.codingweek.codenames.model.game.Session;
+
 import eu.telecomnancy.codingweek.codenames.model.player.Player;
+import eu.telecomnancy.codingweek.codenames.model.clue.Clue;
 
 public class Team {
     
-    private Color color;
     private List<Player> playersList;
-    private Session session;
+    private List<Clue> cluesList;
 
-    public Team(Color color, List<Player> playersList, Session session) {
-        if ((color == Color.BLACK) || (color == Color.WHITE)) {
-            this.color = null;
-        } else {
-            this.color = color;
-        }
+    public Team(List<Player> playersList) {
         this.playersList = playersList;
-        this.session = session;
-    }
-
-    public Color getColor() {
-        return this.color;
+        this.cluesList = new ArrayList<>();
     }
 
     public List<Player> getPlayersList() {
         return this.playersList;
     }
 
-    public Session getSession() {
-        return this.session;
+    public List<Clue> getCluesList() {
+        return this.cluesList;
     }
 
 }
