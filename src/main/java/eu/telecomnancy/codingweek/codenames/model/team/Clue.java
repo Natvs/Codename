@@ -1,4 +1,4 @@
-package eu.telecomnancy.codingweek.codenames.model.clue;
+package eu.telecomnancy.codingweek.codenames.model.team;
 
 public class Clue {
     

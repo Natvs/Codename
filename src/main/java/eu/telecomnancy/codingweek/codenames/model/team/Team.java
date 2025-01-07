@@ -5,7 +5,6 @@ import java.util.List;
 
 
 import eu.telecomnancy.codingweek.codenames.model.player.Player;
-import eu.telecomnancy.codingweek.codenames.model.clue.Clue;
 
 public class Team {
     

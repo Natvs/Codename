@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import eu.telecomnancy.codingweek.codenames.model.color.Color;
-import eu.telecomnancy.codingweek.codenames.model.clue.Clue;
 import eu.telecomnancy.codingweek.codenames.model.team.AgentTeam;
+import eu.telecomnancy.codingweek.codenames.model.team.Clue;
 import eu.telecomnancy.codingweek.codenames.model.team.SpyTeam;
 
 public class ColoredTeam {
