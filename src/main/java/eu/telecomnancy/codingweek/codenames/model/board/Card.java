@@ -1,4 +1,6 @@
-package eu.telecomnancy.codingweek.codenames.model;
+package eu.telecomnancy.codingweek.codenames.model.board;
+
+import eu.telecomnancy.codingweek.codenames.model.color.Color;
 
 public class Card {
     
@@ -26,6 +28,14 @@ public class Card {
 
     public void show() {
         this.revealed = true;
+    }
+
+    public void hide() {
+        this.revealed = false;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 
     public CardState getState(Color color) {

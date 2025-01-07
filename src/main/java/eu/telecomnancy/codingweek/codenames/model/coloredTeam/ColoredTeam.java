@@ -1,0 +1,45 @@
+package eu.telecomnancy.codingweek.codenames.model.coloredTeam;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import eu.telecomnancy.codingweek.codenames.model.color.Color;
+import eu.telecomnancy.codingweek.codenames.model.team.AgentTeam;
+import eu.telecomnancy.codingweek.codenames.model.team.Clue;
+import eu.telecomnancy.codingweek.codenames.model.team.SpyTeam;
+
+public class ColoredTeam {
+    
+    private Color color;
+    private List<Clue> cluesList;
+    private AgentTeam agentTeam;
+    private SpyTeam spyTeam;
+
+    public ColoredTeam(Color color, AgentTeam agentTeam, SpyTeam spyTeam) {
+        if ((color == Color.BLACK) || (color == Color.WHITE)) {
+            this.color = Color.NULL;
+        } else {
+            this.color = color;
+        }
+        this.cluesList = new ArrayList<>();
+        this.agentTeam = agentTeam;
+        this.spyTeam = spyTeam;
+    }
+
+    public Color getColor() {
+        return this.color;
+    }
+
+    public List<Clue> getCluesList() {
+        return this.cluesList;
+    }
+
+    public AgentTeam getAgentTeam() {
+        return this.agentTeam;
+    }
+
+    public SpyTeam getSpyTeam() {
+        return this.spyTeam;
+    }
+
+}
