@@ -16,6 +16,7 @@ public class SetClueCommand implements Command {
 
     @Override
     public void execute() {
+        session.nextRole();
         switch (session.getCurrentColor()) {
             case Color.BLUE:
                 session.getBlueTeam().addClue(clue);
