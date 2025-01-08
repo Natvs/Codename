@@ -5,6 +5,7 @@ import eu.telecomnancy.codingweek.codenames.model.color.Color;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import eu.telecomnancy.codingweek.codenames.observers.game.SessionColorObserver;
 import eu.telecomnancy.codingweek.codenames.utils.GenerateCardUtil;
+import eu.telecomnancy.codingweek.codenames.utils.GenerateFooterUtil;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -16,7 +17,7 @@ import javafx.scene.layout.RowConstraints;
 
 public class GameController {
     private Session session;
-
+    private String hint;
     @FXML
     private GridPane gameView;
     @FXML
@@ -36,6 +37,7 @@ public class GameController {
         setLabel();
         setEvents();
         setCardsBoardInit();
+        setFooter();
     }
     private void setEvents() {
         gameView.setOnKeyPressed((keyevent) ->  {
@@ -102,20 +104,35 @@ public class GameController {
         }
         currentTeam.setText(colorName + " " + role);
     }
-    @FXML
-    private void onQuit() {
+
+    private void setFooter() {
+        System.out.println(session.isAgent());
+        var gameHBox = GenerateFooterUtil.generateFooter(this,session.isAgent());
+        gameView.getChildren().remove(2);
+        gameView.add(gameHBox,0,2);
+    }
+
+    public void onQuit() {
         RootController.getInstance().changeView("/views/home.fxml");
     }
 
-    @FXML
-    private void onSubmit() {
+    public void onSubmit() {
         if (session.isAgent()){
             session.changeRole(false);
+            
         } else {
             session.setCurrentColor();
             session.changeRole(true);
         }
         setLabel();
         setCardsBoard();
+        setFooter();
+    }
+
+    public String getHint(){
+        return this.hint;
+    }
+    public void setHint(String hint) {
+        this.hint = hint;
     }
 }
