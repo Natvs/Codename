@@ -1,19 +1,19 @@
 package eu.telecomnancy.codingweek.codenames.model.game;
 
-import eu.telecomnancy.codingweek.codenames.model.coloredTeam.ColoredTeam;
 import eu.telecomnancy.codingweek.codenames.model.board.Board;
 import eu.telecomnancy.codingweek.codenames.model.board.Card;
 import eu.telecomnancy.codingweek.codenames.model.clue.Clue;
 import eu.telecomnancy.codingweek.codenames.model.color.Color;
+import eu.telecomnancy.codingweek.codenames.model.coloredTeam.ColoredTeam;
 
 public class Session {
     
     private static Session instance;
 
-    private ColoredTeam redTeam;
-    private ColoredTeam blueTeam;
-    private Board board;
-    private GameConfig config;
+    private final ColoredTeam redTeam;
+    private final ColoredTeam blueTeam;
+    private final Board board;
+    private final GameConfig config;
 
     static public Session getInstance() {
         if (instance == null) {
@@ -23,10 +23,10 @@ public class Session {
     }
 
     private Session() {
+        this.config = new GameConfig();
         this.redTeam = new ColoredTeam(Color.RED, config.redAgentsList, config.redSpiesList);
         this.blueTeam = new ColoredTeam(Color.BLUE, config.blueAgentsList, config.blueSpiesList);
         this.board = new Board(config.length, config.width);
-        this.config = new GameConfig();
     }
 
     public ColoredTeam getRedTeam() {
@@ -50,7 +50,7 @@ public class Session {
     }
 
     public void addClue(Clue clue) {
-        
+
     }
 
 }

@@ -1,0 +1,55 @@
+package eu.telecomnancy.commands;
+
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Executer {
+    
+    private ArrayDeque<Command> historic = new ArrayDeque<>();
+    private ArrayList<Command> commands = new ArrayList<>();
+
+    public ArrayDeque<Command> getHistoric() {
+        return this.historic;
+    }
+    public void clearHistoric() {
+        this.historic.clear();
+    }
+
+    public void addCommand(Command command) {
+        this.commands.add(command);
+    }
+    public void addComands(List<Command> commands) {
+        this.commands.addAll(commands);
+    }
+    public void cancelCommands() {
+        this.commands.clear();
+    }
+
+    public void executeAll() {
+        for (var command : commands) {
+            command.execute();
+            historic.push(command);
+        }
+    }
+    public void execute(int n) {
+        for (int i = 0; i < n && i < commands.size(); i++) {
+            commands.get(i).execute();
+            historic.push(commands.get(i));
+        }
+    }
+
+    public void undoAll() {
+        while (!historic.isEmpty()) {
+            var command = historic.pop();
+            command.undo();
+        }
+    }
+    public void undo(int n) {
+        while (!historic.isEmpty() && n > 0) {
+            var command = historic.pop();
+            command.undo();
+        }
+    }
+
+}
