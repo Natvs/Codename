@@ -17,6 +17,10 @@
                 - Implémentation de la structure "Board"
                 - Implémentation de la structure "GameConfig"
                 - Implémentation de la structure "Session"
+- [X] 08/01: Création du dictionnaire des mot française
+- [X] 08/01: Création de la Base de Donnée pour l'IA:
+		- Création d'un script python pour récupérer la liste des champs lexical associer à un mot sur internet
+		- Création de scripts python pour générer la liste des champs lexical associer à chaque mot du dictionnaire
 
 ### Luca Mandrelli :
 - [x] 06/01: Implémentation de la fenètre "Acceuil" :
@@ -31,19 +35,19 @@
         - Afficher l'Equipe (Bleu ou Rouge) et le Groupe (Espion ou Maitre-Espion)
         - Ajouter un bouton "Jouer"
 - [X] 06/01-08/01: Implémentation de la fenètre "Partie (Maitre-Espion)" :
-        - [X] Implémenter l'affichage de la grille
-        - [X] Afficher les cartes couleur déjà positionnée sur la grille
-        - [X] Ajouter un bouton "Sauvegarder et Quitter"
-        - [X] Ajouter un bouton "Passe" (pour terminer le tour et transissionner)
-        - [X] Implémenter l'affichage de la carte clée dans la grille pour l'espion
-- [ ] 08/01 : Changement du "Menu Configuration" : 
-        - [X] Ajout d'une gestion de la répartition de l'équipe
-        - [ ] Validation du formulaire
-        - [ ] Relié au backend
-        - [ ] Les champs textes peuvent etre ajoutés et supprimés dynamiquement
-- [ ] 08/01 : Generation d'image pour chaque mots :
-        - [X] Config de stable diffusion, premiers tests de prompts
-        - [ ] Faire tourner stable diffusion sur le mac, verifier les resultats
+        - Implémenter l'affichage de la grille
+        - Afficher les cartes couleur déjà positionnée sur la grille
+        - Ajouter un bouton "Sauvegarder et Quitter"
+        - Ajouter un bouton "Passe" (pour terminer le tour et transissionner)
+        - Implémenter l'affichage de la carte clée dans la grille pour l'espion
+- [X] 08/01 : Changement du "Menu Configuration" : 
+        - Ajout d'une gestion de la répartition de l'équipe
+        - Validation du formulaire
+        - Relié au backend
+        - Les champs textes peuvent etre ajoutés et supprimés dynamiquement
+- [X] 08/01 : Generation d'image pour chaque mots :
+        - Config de stable diffusion, premiers tests de prompts
+        - Faire tourner stable diffusion sur le mac, verifier les resultats
 
 ### Lucas Simonneau :
 - [X] 06/01: Implémentation de gestion de fichier :
@@ -54,11 +58,11 @@
         - Asignement d'une couleur pour chaque mot
         - Convertion sous forme de grille
 - [X] 07/01: Implémentation de la musique au jeu
-- [ ] 08/01: Implémentation de la fenètre "Partie" :
-        - [ ] Afficher le mot indice pour l'agent
-        - [ ] Ajouter un bouton "Mot" pour l'agent
-        - [ ] Afficher le nombre de mot à deviner par l'Agent
-        - [ ] Ajouter un bouton "Nombre" pour l'espion
+- [X] 08/01: Implémentation de la fenètre "Partie" :
+        - Afficher le mot indice pour l'agent
+        - Ajouter un bouton "Mot" pour l'agent
+        - Afficher le nombre de mot à deviner par l'Agent
+        - Ajouter un bouton "Nombre" pour l'espion
 
 ### Nathans Vernois :
 - [X] 06/01: Implémentation du diagramme de classe
@@ -66,5 +70,10 @@
         - Implémentation du racourcis "Quitter"
         - Implémentation du racourcis "Nouvelle Partie" (Acceuil)
         - Implémentation du racourcis "Démarer Partie" (Menu configuration)
-- [ ] 08/01: Implémentation de la fenètre "Partie" :
-        - [X] Pouvoir selectionner la carte pour l'espion
+- [X] 08/01: Implémentation de la fenètre "Partie" :
+        - Pouvoir selectionner la carte pour l'espion
+	- Ajout d'un observateur
+- [X] 08/01 Implémentation de la gestion des tours:
+	- Ajout dans le model
+	- Affichage du joueur actuel
+	- Gestion de la selection de la carte selon le role du joueur
