@@ -35,13 +35,23 @@ package codenames.model.game {
         + List<Player> redSpiesList
     }
     class Session {
+        - GameConfig config
         - ColoredTeam redTeam
         - ColoredTeam blueTeam
         - Board board
+        - Color currentColor
+        - Boolean agent
         + Session(GameConfig config)
         + ColoredTeam getBlueTeam()
         + ColoredTeam getRedTeam()
         + Board getBoard()
+        + GameConfig getConfig()
+        + Color getCurrentColor()
+        + void setCurrentColor(Color color)
+        + Boolean isAgent()
+        + void changeRole(Boolean agent)
+        + void guessCard(Card card)
+        + void addClue(Clue clue)
     }
 
     GameConfig --> Session
@@ -52,18 +62,14 @@ package codenames.model.team {
 
     abstract class Team {
         - List<Player> playersList
-        - List<Clue> cluesList
-        + Team(List<Player> playersList, List<Clue> cluesList)
+        + Team(List<Player> playersList)
         + List<Player> getPlayersList()
-        + List<Clue> getCluesList()
     }
     class AgentTeam extends Team {
-        + AgentTeam(List<Player> playersList, List<Clue> cluesList)
-        + void addClue(Clue clue)
+        + AgentTeam(List<Player> playersList)
     }
     class SpyTeam extends Team {
-        + SpyTeam(List<Player> players, List<Clue> cluesList)
-        + guess(Card card)
+        + SpyTeam(List<Player> playersList)
     }
 
 }
@@ -75,11 +81,16 @@ package codenames.model.coloredTeam {
         - List<Clue> cluesList
         - AgentTeam agentTeam
         - SpyTeam spyTeam
+        - int score
         + ColoredTeam(Color color, List<Player> AgentsList, List<Player> SpiesList)
         + Color getColor()
         + List<Clue> getCluesList()
         + AgentTeam getAgentTeam()
         + SpyTeam getSpyTeam()
+        + int getScore()
+        + void resetScore()
+        + void addScore(int points)
+        + void addClue(Clue clue)
     }
 
 }
@@ -105,11 +116,9 @@ package codenames.model.board {
         + Color getColor()
         + Boolean getRevealed()
         + void setName(String name)
-        + void setColor(String color)
-        + void show()
-        + void hide()
         + void setColor(Color color)
-        + CardState getState(Color color)
+        + void reveal()
+        + void hide()
     }
     enum CardState {
         GOOD,

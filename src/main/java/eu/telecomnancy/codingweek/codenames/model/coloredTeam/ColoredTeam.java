@@ -11,10 +11,10 @@ import eu.telecomnancy.codingweek.codenames.model.team.SpyTeam;
 
 public class ColoredTeam {
     
-    private Color color;
-    private List<Clue> cluesList;
-    private AgentTeam agentTeam;
-    private SpyTeam spyTeam;
+    private final Color color;
+    private final List<Clue> cluesList;
+    private final AgentTeam agentTeam;
+    private final SpyTeam spyTeam;
     private int score = 0;
 
     public ColoredTeam(Color color, List<Player> agentsTeam, List<Player> spiesTeam) {
@@ -24,8 +24,8 @@ public class ColoredTeam {
             this.color = color;
         }
         this.cluesList = new ArrayList<>();
-        this.agentTeam = new AgentTeam(agentsTeam, cluesList);
-        this.spyTeam = new SpyTeam(spiesTeam, cluesList);
+        this.agentTeam = new AgentTeam(agentsTeam);
+        this.spyTeam = new SpyTeam(spiesTeam);
     }
 
     public Color getColor() {

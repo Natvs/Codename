@@ -7,8 +7,8 @@ import eu.telecomnancy.codingweek.codenames.model.player.Player;
 
 public class AgentTeam extends Team {
 
-    public AgentTeam(List<Player> playersList, List<Clue> cluesList) {
-        super(playersList, cluesList);
+    public AgentTeam(List<Player> playersList) {
+        super(playersList);
     }
 
 }
