@@ -1,6 +1,7 @@
 package eu.telecomnancy.codingweek.codenames.controller;
 
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
+import eu.telecomnancy.codingweek.codenames.utils.GeneratePlayerField;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -8,6 +9,7 @@ import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
+import javafx.scene.Node;
 
 public class NewConfigController {
     private Session session;
@@ -110,10 +112,7 @@ public class NewConfigController {
     private void onAddBlueAgent() {
         nbBlueAgents++;
 
-        TextField agentField = new TextField();
-        agentField.setText("Blue Agent " + nbBlueAgents);
-        agentField.setId("blueAgent " + nbBlueAgents);
-        playersGrid.add(agentField, 0, nbBlueAgents+2);
+        playersGrid.add(GeneratePlayerField.generateField("Blue Agent " + nbBlueAgents, this), 0, nbBlueAgents+2);
 
         GridPane.setRowIndex(addBlueAgent, nbBlueAgents + 3);
 
@@ -126,10 +125,7 @@ public class NewConfigController {
     private void onAddBlueSpy() {
         nbBlueSpy++;
 
-        TextField spyField = new TextField();
-        spyField.setText("Blue Spy " + nbBlueSpy);
-        spyField.setId("blueSpy " + nbBlueSpy);
-        playersGrid.add(spyField, 1, nbBlueSpy+2);
+        playersGrid.add(GeneratePlayerField.generateField("Blue Spy " + nbBlueSpy, this), 1, nbBlueSpy+2);
 
         GridPane.setRowIndex(addBlueSpy, nbBlueSpy + 3);
 
@@ -142,10 +138,7 @@ public class NewConfigController {
     private void onAddRedAgent() {
         nbRedAgents++;
 
-        TextField agentField = new TextField();
-        agentField.setText("Red Agent " + nbRedAgents);
-        agentField.setId("redAgent " + nbRedAgents);
-        playersGrid.add(agentField, 2, nbRedAgents+2);
+        playersGrid.add(GeneratePlayerField.generateField("Red Agent " + nbRedAgents, this), 2, nbRedAgents+2);
 
         GridPane.setRowIndex(addRedAgent, nbRedAgents + 3);
 
@@ -158,16 +151,17 @@ public class NewConfigController {
     private void onAddRedSpy() {
         nbRedSpy++;
 
-        TextField spyField = new TextField();
-        spyField.setText("Red Spy " + nbRedSpy);
-        spyField.setId("redSpy " + nbRedSpy);
-        playersGrid.add(spyField, 3, nbRedSpy+2);
+        playersGrid.add(GeneratePlayerField.generateField("Red Spy " + nbRedSpy, this), 3, nbRedSpy+2);
 
         GridPane.setRowIndex(addRedSpy, nbRedSpy + 3);
 
         if (nbRedSpy >= 3) {
             playersGrid.getChildren().remove(addRedSpy);
         }
+    }
+    
+    public void removePlayerField(Node playerField) {
+        playersGrid.getChildren().remove(playerField);
     }
 
     @FXML
