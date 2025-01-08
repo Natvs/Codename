@@ -50,7 +50,7 @@ public class Card {
             colorObserver.handle();
         }
     }
-    public void show() {
+    public void reveal() {
         this.revealed = true;
     }
     public void hide() {
