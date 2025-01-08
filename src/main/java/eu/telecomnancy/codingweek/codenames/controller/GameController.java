@@ -54,7 +54,7 @@ public class GameController {
             for (int j = 0; j < session.getBoard().getHeigth(); j++) {
                 var card = cards[i][j];
                 var cardBox = GenerateCardUtil.generateCard(card);
-                cardBox.setOnMouseClicked((mouveEvent) -> { session.guessCard(card); });
+                cardBox.setOnMouseClicked((mouveEvent) -> { if (!card.getRevealed()) { session.guessCard(card); } });
                 gameGrid.add(cardBox, i, j);
             }
             RowConstraints rowConstraints = new RowConstraints();

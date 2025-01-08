@@ -31,10 +31,12 @@ public class Executer {
             command.execute();
             historic.push(command);
         }
+        commands.clear();
     }
     public void execute(int n) {
         for (int i = 0; i < n && i < commands.size(); i++) {
             commands.get(i).execute();
+            commands.remove(i);
             historic.push(commands.get(i));
         }
     }

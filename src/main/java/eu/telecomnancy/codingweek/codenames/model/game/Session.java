@@ -6,6 +6,9 @@ import eu.telecomnancy.codingweek.codenames.model.clue.Clue;
 import eu.telecomnancy.codingweek.codenames.model.color.Color;
 import eu.telecomnancy.codingweek.codenames.model.coloredTeam.ColoredTeam;
 import eu.telecomnancy.codingweek.codenames.observers.game.SessionColorObserver;
+import eu.telecomnancy.commands.Executer;
+import eu.telecomnancy.commands.GuessCardCommand;
+import eu.telecomnancy.commands.SetClueCommand;
 
 public class Session {
 
@@ -15,6 +18,7 @@ public class Session {
     private final Board board;
     private Color currentColor;
     private Boolean agent = true;
+    private Executer executer = new Executer();
 
     private SessionColorObserver colorObserver = null;
 
@@ -71,23 +75,16 @@ public class Session {
         this.colorObserver = observer;
     }
 
-    public void guessCard(Card card) {
-        card.reveal();
-        switch (card.getColor()) {
-            case Color.BLUE:
-                getBlueTeam().addScore(1);
-                break;
-            case Color.RED:
-                getRedTeam().addScore(1);
-                break;
-            default:
-                break;
-        }
-        if (getCurrentColor() != card.getColor()) {
-            setNextTeamColor();
-        }
+    public Executer getExecuter() {
+        return this.executer;
     }
-    private void setNextTeamColor() {
+
+    public void guessCard(Card card) {
+        getExecuter().addCommand(new GuessCardCommand(card, this));
+        getExecuter().executeAll();
+    }
+
+    public void setNextTeamColor() {
         switch (getCurrentColor()) {
             case Color.BLUE:
                 setCurrentColor(Color.RED);
@@ -99,19 +96,9 @@ public class Session {
                 throw new AssertionError();
         }
     }
-
-
     public void addClue(Clue clue) {
-        switch (getCurrentColor()) {
-            case Color.BLUE:
-                getBlueTeam().addClue(clue);
-                break;
-            case Color.RED:
-                getRedTeam().addClue(clue);
-                break;
-            default:
-                break;
-        }
+        getExecuter().addCommand(new SetClueCommand(clue, this));
+        getExecuter().executeAll();
     }
 
 

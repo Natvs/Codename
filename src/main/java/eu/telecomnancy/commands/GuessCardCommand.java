@@ -1,6 +1,7 @@
 package eu.telecomnancy.commands;
 
 import eu.telecomnancy.codingweek.codenames.model.board.Card;
+import eu.telecomnancy.codingweek.codenames.model.color.Color;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
 
 public class GuessCardCommand implements Command {
@@ -13,10 +14,25 @@ public class GuessCardCommand implements Command {
         this.card = card;
     }
 
+    @Override
     public void execute() {
-        session.guessCard(card);
+                card.reveal();
+        switch (card.getColor()) {
+            case Color.BLUE:
+                session.getBlueTeam().addScore(1);
+                break;
+            case Color.RED:
+                session.getRedTeam().addScore(1);
+                break;
+            default:
+                break;
+        }
+        if (session.getCurrentColor() != card.getColor()) {
+            session.setNextTeamColor();
+        }
     }
 
+    @Override
     public void undo() {
         
     }

@@ -1,6 +1,7 @@
 package eu.telecomnancy.commands;
 
 import eu.telecomnancy.codingweek.codenames.model.clue.Clue;
+import eu.telecomnancy.codingweek.codenames.model.color.Color;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
 
 public class SetClueCommand implements Command {
@@ -13,10 +14,21 @@ public class SetClueCommand implements Command {
         this.session = session;
     }
 
+    @Override
     public void execute() {
-        session.addClue(clue);
+        switch (session.getCurrentColor()) {
+            case Color.BLUE:
+                session.getBlueTeam().addClue(clue);
+                break;
+            case Color.RED:
+                session.getRedTeam().addClue(clue);
+                break;
+            default:
+                break;
+        }
     }
 
+    @Override
     public void undo() {
 
     }
