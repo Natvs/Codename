@@ -11,6 +11,7 @@ public class Session {
     private ColoredTeam redTeam;
     private ColoredTeam blueTeam;
     private Color currentColor;
+    private boolean agent = true;
     private Board board;
     private GameConfig config;
 
@@ -26,7 +27,12 @@ public class Session {
         this.redTeam = new ColoredTeam(Color.RED, config.redAgentsList, config.redSpiesList);
         this.blueTeam = new ColoredTeam(Color.BLUE, config.blueAgentsList, config.blueSpiesList);
         this.board = new Board(config.heigth, config.width);
-
+        if (board.getRemainingCards(Color.BLUE) > board.getRemainingCards(Color.RED)) {
+            currentColor = Color.BLUE;
+        }
+        else {
+            currentColor = Color.RED;
+        }
     }
 
     public ColoredTeam getRedTeam() {
@@ -47,6 +53,18 @@ public class Session {
 
     public Color getCurrentColor() {
         return this.currentColor;
+    }
+
+    public void setCurrentColor(Color currentColor) {
+        this.currentColor = currentColor;
+    }
+
+    public boolean isAgent() {
+        return this.agent;
+    }
+
+    public void changeRole(boolean agent) {
+        this.agent = agent;
     }
 
 }

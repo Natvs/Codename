@@ -26,9 +26,6 @@ public class openCardsService {
         } catch (IOException e){
             System.err.println("Erreur d'entrée/sortie\n"+e.getMessage());
             System.exit(2);
-        } catch (SecurityException e){
-            System.err.println("Erreur de sécurité\n");
-            System.exit(3);
         }
         return lines;
 
@@ -96,10 +93,10 @@ public class openCardsService {
 
     }
 
-    public static Card[][] convertToGrid(ArrayList<Card> list,int length,int width){
+    public static Card[][] convertToGrid(ArrayList<Card> list,int heigth,int width){
         // Initialisation de la Grille
-        Card[][] grid = new Card[length][width];
-        for (int j = 0; j < length; j++) {
+        Card[][] grid = new Card[heigth][width];
+        for (int j = 0; j < heigth; j++) {
             for (int i = 0; i < width; i++) {
                 int index = getIndex(i,j,width);
                 grid[j][i] = list.get(index);
