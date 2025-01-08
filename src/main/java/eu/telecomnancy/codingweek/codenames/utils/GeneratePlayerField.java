@@ -8,7 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 
 public class GeneratePlayerField {
-    public static Node generateField(String name, NewConfigController newConfigController, int column) {
+    public static Node generateField(String name, NewConfigController newConfigController, int playerType) {
         URL fxmlURL = GenerateCardUtil.class.getResource("/views/components/playerField.fxml");
         if (fxmlURL == null) {
             System.err.println("Could not find /views/components/playerField.fxml");
@@ -16,7 +16,7 @@ public class GeneratePlayerField {
         }
         try {
             FXMLLoader loader = new FXMLLoader(fxmlURL);
-            loader.setControllerFactory(iC -> new PlayerFieldController(name, newConfigController, column));
+            loader.setControllerFactory(iC -> new PlayerFieldController(name, newConfigController, playerType));
             return loader.load();
         } catch (Exception e) {
             e.printStackTrace();

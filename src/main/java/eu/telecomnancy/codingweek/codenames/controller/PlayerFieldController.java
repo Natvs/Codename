@@ -7,7 +7,7 @@ import javafx.scene.layout.HBox;
 public class PlayerFieldController {
     private String name;
     private NewConfigController newConfigController;
-    private int column;
+    private int playerType;
 
     @FXML
     private HBox playerField;
@@ -15,10 +15,10 @@ public class PlayerFieldController {
     @FXML
     private TextField playerName;
 
-    public PlayerFieldController(String name, NewConfigController newConfigController, int column) {
+    public PlayerFieldController(String name, NewConfigController newConfigController, int playerType) {
         this.name = name;
         this.newConfigController = newConfigController;
-        this.column = column;
+        this.playerType = playerType;
     }
 
     @FXML
@@ -33,7 +33,7 @@ public class PlayerFieldController {
 
     @FXML
     private void onRemovePlayer() {
-        newConfigController.removePlayerField(playerField, column);
+        newConfigController.removePlayerField(playerField, playerType);
     }
 }
 

@@ -26,8 +26,6 @@
                 <RowConstraints vgrow="ALWAYS" />
                 <RowConstraints vgrow="ALWAYS" />
                 <RowConstraints vgrow="ALWAYS" />
-                <RowConstraints vgrow="ALWAYS" />
-                <RowConstraints vgrow="ALWAYS" />
             </rowConstraints>
 
             <columnConstraints>
@@ -47,15 +45,55 @@
                 <Label text="Agents : " GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
                 <Label text="Espions : " GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
 
-                <TextField fx:id="blueAgent1" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-                <TextField fx:id="blueSpy1" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-                <TextField fx:id="redAgent1" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-                <TextField fx:id="redSpy1" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                <GridPane fx:id="blueAgentGrid" GridPane.columnIndex="0" GridPane.rowIndex="3">
+                    <rowConstraints>
+                        <RowConstraints vgrow="ALWAYS" />
+                        <RowConstraints vgrow="ALWAYS" />
+                    </rowConstraints>
+                    <children>
+                        <TextField fx:id="blueAgent1" />
+                        <Button fx:id="addBlueAgent" onAction="#onAddBlueAgent" 
+                        text="+" GridPane.rowIndex="1" GridPane.halignment="CENTER"/>
+                    </children>
+                </GridPane>
 
-                <Button fx:id="addBlueAgent" onAction="#onAddBlueAgent" text="+" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-                <Button fx:id="addBlueSpy" onAction="#onAddBlueSpy" text="+" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-                <Button fx:id="addRedAgent" onAction="#onAddRedAgent" text="+" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-                <Button fx:id="addRedSpy" onAction="#onAddRedSpy" text="+" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+                <GridPane fx:id="blueSpyGrid" GridPane.columnIndex="1" GridPane.rowIndex="3" >
+                    <rowConstraints>
+                        <RowConstraints vgrow="ALWAYS" />
+                        <RowConstraints vgrow="ALWAYS" />
+                        <RowConstraints vgrow="ALWAYS" />
+                    </rowConstraints>
+                    <children>
+                        <TextField fx:id="blueSpy1" />
+                        <Button fx:id="addBlueSpy" onAction="#onAddBlueSpy" text="+"
+                            GridPane.rowIndex="1" GridPane.halignment="CENTER" />
+                    </children>
+                </GridPane>
+
+                <GridPane fx:id="redAgentGrid" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                    <rowConstraints>
+                        <RowConstraints vgrow="ALWAYS" />
+                        <RowConstraints vgrow="ALWAYS" />
+                    </rowConstraints>
+                    <children>
+                        <TextField fx:id="redAgent1" />
+                        <Button fx:id="addRedAgent" onAction="#onAddRedAgent" text="+"
+                            GridPane.rowIndex="1" GridPane.halignment="CENTER" />
+                    </children>
+                </GridPane>
+
+                <GridPane fx:id="redSpyGrid" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                    <rowConstraints>
+                        <RowConstraints vgrow="ALWAYS" />
+                        <RowConstraints vgrow="ALWAYS" />
+                        <RowConstraints vgrow="ALWAYS" />
+                    </rowConstraints>
+                    <children>
+                        <TextField fx:id="redSpy1" />
+                        <Button fx:id="addRedSpy" onAction="#onAddRedSpy" text="+"
+                            GridPane.rowIndex="1" GridPane.halignment="CENTER" />
+                    </children>
+                </GridPane>
             </children>
         </GridPane>
 
