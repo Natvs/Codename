@@ -15,8 +15,8 @@ public class testSaveFile {
     @Test
     void testSave() {
         String fileName = "src/main/resources/saves/save.json";
-        setGameConfig();
-        SaveFile.saveData(fileName);
+        Session session = setGameConfig();
+        SaveFile.saveData(fileName,session);
         assertEquals(true, true);
     }
 
@@ -25,39 +25,39 @@ public class testSaveFile {
         // TODO do more tests
         String fileName = "src/main/resources/saves/save.json";
         SaveFile.erraseData(fileName);
-        setGameConfig();
-        SaveFile.saveData(fileName);
-        Session session = Session.getInstance();
+        Session session = setGameConfig();
+        SaveFile.saveData(fileName,session);
         ColoredTeam redTeam = session.getRedTeam();
         String luca = redTeam.getAgentTeam().getPlayersList().getFirst().getName();
         redTeam.getAgentTeam().getPlayersList().clear();
         redTeam.getAgentTeam().getPlayersList().add(new Player("Pierre"));
-        SaveFile.loadData(fileName);
-        assertEquals(luca,redTeam.getAgentTeam().getPlayersList().getFirst().getName());
+        session = SaveFile.loadData(fileName);
+        assertEquals(luca,session.getRedTeam().getAgentTeam().getPlayersList().getFirst().getName());
 
         GameConfig gameConfig = session.getConfig();
         String lucas = gameConfig.blueAgentsList.getFirst().getName();
         gameConfig.blueAgentsList.clear();
         gameConfig.blueAgentsList.add(new Player("Pierre"));
-        SaveFile.loadData(fileName);
-        assertEquals(lucas,gameConfig.blueAgentsList.getFirst().getName());
+        session = SaveFile.loadData(fileName);
+        assertEquals(lucas,session.getConfig().blueAgentsList.getFirst().getName());
     }
 
     @Test
     void testEraseData() {
         String fileName = "src/main/resources/saves/save.json";
-        setGameConfig();
-        SaveFile.saveData(fileName);
+        Session session = setGameConfig();
+        SaveFile.saveData(fileName,session);
         SaveFile.erraseData(fileName);
         File file = new File(fileName);
         assertEquals(false, file.exists());
     }
-    public void setGameConfig() {
-        Session session = Session.getInstance();
+    public Session setGameConfig() {
+        Session session = new Session();
         GameConfig gameConfig = session.getConfig();
         gameConfig.blueAgentsList.add(new Player("Lucas"));
         gameConfig.redAgentsList.add(new Player("Luca"));
         gameConfig.blueSpiesList.add(new Player("Nathan"));
         gameConfig.redSpiesList.add(new Player("Arthur"));
+        return session;
     }
 }

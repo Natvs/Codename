@@ -5,26 +5,13 @@ import eu.telecomnancy.codingweek.codenames.model.board.Board;
 import eu.telecomnancy.codingweek.codenames.model.color.Color;
 
 public class Session {
-    
-    private static Session instance;
 
     private ColoredTeam redTeam;
     private ColoredTeam blueTeam;
     private Board board;
     private GameConfig config;
 
-    static public Session getInstance() {
-        if (instance == null) {
-            instance = new Session();
-        }
-        return instance;
-    }
-
-    public static void setInstance(Session session) {
-        Session.instance = session;
-    }
-
-    private Session() {
+    public Session() {
         this.config = new GameConfig();
         this.redTeam = new ColoredTeam(Color.RED, config.redAgentsList, config.redSpiesList);
         this.blueTeam = new ColoredTeam(Color.BLUE, config.blueAgentsList, config.blueSpiesList);

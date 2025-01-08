@@ -11,11 +11,10 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
 
 public class SaveFile {
-    public static void saveData(String fileName){
+    public static void saveData(String fileName,Session session){
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         try {
-            Session session = Session.getInstance();
             objectMapper.writeValue(new File(fileName), session);
         } catch (IOException e){
             System.err.println("Erreur d'entrée/sortie\n"+e.getMessage());
@@ -27,10 +26,12 @@ public class SaveFile {
 
     }
 
-    public static void loadData(String fileName) {
+    public static Session loadData(String fileName) {
         ObjectMapper objectMapper = new ObjectMapper();
+        Session session = new Session();
         try {
-            Session.setInstance(objectMapper.readValue(new File(fileName), Session.class));
+            session = objectMapper.readValue(new File(fileName), Session.class);
+            saveData("src/test/resources/savefile.json", session);
         } catch (FileNotFoundException e){
             System.err.println("Fichier introuvable\n"+e.getMessage());
             System.exit(1);
@@ -41,6 +42,7 @@ public class SaveFile {
             System.err.println("Erreur de sécurité\n");
             System.exit(3);
         }
+        return session;
     }
     public static void erraseData(String fileName){
         File file = new File(fileName);
