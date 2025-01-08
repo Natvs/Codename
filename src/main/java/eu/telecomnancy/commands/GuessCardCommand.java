@@ -28,7 +28,7 @@ public class GuessCardCommand implements Command {
                 break;
         }
         if (session.getCurrentColor() != card.getColor()) {
-            session.setNextTeamColor();
+            session.setCurrentColor();
         }
     }
 

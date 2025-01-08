@@ -42,7 +42,7 @@ public class Board {
         int number = 0;
         for (int j = 0; j < heigth; j++) {
             for (int i = 0; i < width; i++) {
-                if (grid[i][j].getColor() == color) {
+                if (grid[i][j].getColor() == color && !grid[i][j].getRevealed()) {
                     number ++;
                 }
             }

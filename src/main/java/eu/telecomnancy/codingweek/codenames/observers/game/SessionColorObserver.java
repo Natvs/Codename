@@ -10,7 +10,7 @@ public class SessionColorObserver extends SessionObserver {
 
     @Override
     public void handle() {
-        controller.setTeamColor();
+        
     }
 
 }

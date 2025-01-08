@@ -1,10 +1,12 @@
 package eu.telecomnancy.codingweek.codenames.controller;
 
+import java.awt.TextField;
+
+import eu.telecomnancy.codingweek.codenames.model.board.Card;
 import eu.telecomnancy.codingweek.codenames.model.color.Color;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import eu.telecomnancy.codingweek.codenames.observers.game.SessionColorObserver;
 import eu.telecomnancy.codingweek.codenames.utils.GenerateCardUtil;
-import eu.telecomnancy.codingweek.codenames.utils.openCardsService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
@@ -22,7 +24,8 @@ public class GameController {
     private GridPane gameGrid;
     @FXML
     private Label currentTeam;
-
+    @FXML
+    private TextField word;
     public GameController(Session session) {
         this.session = session;
     }
@@ -30,8 +33,9 @@ public class GameController {
     @FXML
     private void initialize() {
         session.setColorObserver(new SessionColorObserver(this));
+        setLabel();
         setEvents();
-        setCardsBoard();
+        setCardsBoardInit();
     }
     private void setEvents() {
         gameView.setOnKeyPressed((keyevent) ->  {
@@ -44,16 +48,15 @@ public class GameController {
             }
         });
     }
-
-    private void setCardsBoard() {
-        var cards = openCardsService.initGridCards(session.getBoard().getHeigth(), session.getBoard().getWidth());
+    private void setCardsBoardInit() {
+        Card[][] grid = session.getBoard().getGrid();
         for (int i = 0; i < session.getBoard().getWidth(); i++) {
             ColumnConstraints colConstraints = new ColumnConstraints();
             colConstraints.setHgrow(Priority.ALWAYS);
             gameGrid.getColumnConstraints().add(colConstraints);
             for (int j = 0; j < session.getBoard().getHeigth(); j++) {
-                var card = cards[i][j];
-                var cardBox = GenerateCardUtil.generateCard(card);
+                var card = grid[i][j];
+                var cardBox = GenerateCardUtil.generateCard(card, session);
                 cardBox.setOnMouseClicked((mouveEvent) -> { if (!card.getRevealed()) { session.guessCard(card); } });
                 gameGrid.add(cardBox, i, j);
             }
@@ -62,22 +65,46 @@ public class GameController {
             gameGrid.getRowConstraints().add(rowConstraints);
         }
     }
-
+    private void setCardsBoard() {
+        Card[][] grid = session.getBoard().getGrid();
+        for (int i = 0; i < session.getBoard().getWidth(); i++) {
+            for (int j = 0; j < session.getBoard().getHeigth(); j++) {
+                var card = GenerateCardUtil.generateCard(grid[i][j],session);
+                gameGrid.add(card, i, j);
+            }
+            
+        }
+    }
+    private void setLabel() {
+        String role = new String();
+        String colorName = new String();
+        Color color = session.getCurrentColor();
+        if (session.isAgent()){
+            role = "agent";
+        } else {
+            role = "spy";
+        }
+        if (color == Color.BLUE){
+            colorName = "Blue";
+        } else if (color == Color.RED) {
+            colorName = "Red";
+        }
+        currentTeam.setText(colorName + " " + role);
+    }
     @FXML
     private void onQuit() {
         RootController.getInstance().changeView("/views/home.fxml");
     }
 
-    public void setTeamColor() {
-        switch (session.getCurrentColor()) {
-            case Color.BLUE:
-                gameGrid.setStyle("-fx-background-color: #0084ff");
-                break;
-            case Color.RED:
-                gameGrid.setStyle("-fx-background-color: #c80000");
-                break;
-            default:
-                break;
+    @FXML
+    private void onSubmit() {
+        if (session.isAgent()){
+            session.changeRole(false);
+        } else {
+            session.setCurrentColor();
+            session.changeRole(true);
         }
+        setLabel();
+        setCardsBoard();
     }
 }

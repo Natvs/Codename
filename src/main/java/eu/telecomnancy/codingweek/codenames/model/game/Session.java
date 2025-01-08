@@ -56,8 +56,12 @@ public class Session {
         return this.currentColor;
     }
 
-    public void setCurrentColor(Color currentColor) {
-        this.currentColor = currentColor;
+    public void setCurrentColor() {
+        if (this.currentColor == Color.RED){
+            this.currentColor = Color.BLUE;
+        } else {
+            this.currentColor = Color.RED;
+        }
         if (colorObserver != null) {
             colorObserver.handle();
         }
@@ -84,18 +88,6 @@ public class Session {
         getExecuter().executeAll();
     }
 
-    public void setNextTeamColor() {
-        switch (getCurrentColor()) {
-            case Color.BLUE:
-                setCurrentColor(Color.RED);
-                break;
-            case Color.RED:
-                setCurrentColor(Color.BLUE);
-                break;
-            default:
-                throw new AssertionError();
-        }
-    }
     public void addClue(Clue clue) {
         getExecuter().addCommand(new SetClueCommand(clue, this));
         getExecuter().executeAll();
