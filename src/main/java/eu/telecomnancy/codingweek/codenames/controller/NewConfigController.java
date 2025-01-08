@@ -33,7 +33,7 @@ public class NewConfigController {
         thematicSelection.getItems().addAll("Tout", "Patate", "Entropie");
     }
 
-    private void initializeEvents() {
+    private void initializeEvents(Session session) {
         newConfigView.setOnKeyPressed((keyevent) -> {
             switch (keyevent.getCode()) {
                 case KeyCode.Q:
