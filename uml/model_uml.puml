@@ -104,6 +104,8 @@ package codenames.model.board {
         + String getName()
         + Color getColor()
         + Boolean getRevealed()
+        + void setName(String name)
+        + void setColor(String color)
         + void show()
         + void hide()
         + void setColor(Color color)

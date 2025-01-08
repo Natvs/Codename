@@ -3,14 +3,8 @@ package eu.telecomnancy.codingweek.codenames.controller;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import javafx.scene.control.Label;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.prefs.NodeChangeEvent;
-
 import eu.telecomnancy.codingweek.codenames.utils.GenerateCardUtil;
 import eu.telecomnancy.codingweek.codenames.utils.openCardsService;
-import eu.telecomnancy.codingweek.codenames.model.board.Card;
-import eu.telecomnancy.codingweek.codenames.model.color.Color;
 import javafx.fxml.FXML;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
@@ -32,6 +26,10 @@ public class GameController {
 
     @FXML
     private void initialize() {
+        setEvents();
+        setCardsBoard();
+    }
+    private void setEvents() {
         gameView.setOnKeyPressed((keyevent) ->  {
             switch (keyevent.getCode()) {
                 case KeyCode.Q:
@@ -41,7 +39,9 @@ public class GameController {
                     break;
             }
         });
+    }
 
+    private void setCardsBoard() {
         var session = Session.getInstance();
         var cards = openCardsService.initGridCards(session.getBoard().getHeigth(), session.getBoard().getWidth());
         for (int i = 0; i < session.getBoard().getWidth(); i++) {
@@ -50,22 +50,6 @@ public class GameController {
             gameGrid.getColumnConstraints().add(colConstraints);
             for (int j = 0; j < session.getBoard().getHeigth(); j++) {
                 var card = GenerateCardUtil.generateCard(cards[i][j]);
-                switch (cards[i][j].getColor()) {
-                    case Color.RED:
-                        card.setStyle("-fx-background-color: #c80000");
-                        break;
-                    case Color.BLUE:
-                        card.setStyle("-fx-background-color: #0084ff");
-                        break;
-                    case Color.WHITE:
-                        card.setStyle("-fx-background-color: #FFFFFF");
-                        break;
-                    case Color.BLACK:
-                        card.setStyle("-fx-background-color: #000000");
-                        break;
-                    default:
-                        break;
-                }
                 gameGrid.add(card, i, j);
             }
             RowConstraints rowConstraints = new RowConstraints();
