@@ -10,10 +10,10 @@ public class Board {
     private int width; 
     private Card[][] grid;
 
-    public Board(int length, int width) {
-        this.heigth = length;
+    public Board(@JsonProperty("height") int height,@JsonProperty("width") int width) {
+        this.heigth = height;
         this.width = width;
-        this.grid = openCardsService.initGridCards(length, width);
+        this.grid = openCardsService.initGridCards(height, width);
     }
 
     public void setSize(int width, int heigth) {
@@ -27,10 +27,6 @@ public class Board {
 
     public int getWidth() {
         return this.width;
-    }
-
-    public int getNumberCards() {
-        return this.heigth * this.width;
     }
 
     public Card[][] getGrid() {

@@ -31,7 +31,6 @@ public class SaveFile {
         Session session = new Session();
         try {
             session = objectMapper.readValue(new File(fileName), Session.class);
-            saveData("src/test/resources/savefile.json", session);
         } catch (FileNotFoundException e){
             System.err.println("Fichier introuvable\n"+e.getMessage());
             System.exit(1);
