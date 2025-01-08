@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox
+    fx:id="gameCard"
+    xmlns="http://javafx.com/javafx"
+    xmlns:fx="http://javafx.com/fxml"
+    fx:controller="eu.telecomnancy.codingweek.codenames.controller.PlayerFieldController">
+
+    <TextField fx:id="playerName" HBox.hgrow="ALWAYS" HBox.halignment="CENTER" />
+    <Button fx:id="removePlayer" text="X" onAction="#onRemovePlayer" />
+
+</HBox>
