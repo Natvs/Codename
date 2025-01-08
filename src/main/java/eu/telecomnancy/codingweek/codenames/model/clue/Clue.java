@@ -18,4 +18,8 @@ public class Clue {
         return this.count;
     }
 
+    public void countDown() {
+        this.count --;
+    }
+
 }
