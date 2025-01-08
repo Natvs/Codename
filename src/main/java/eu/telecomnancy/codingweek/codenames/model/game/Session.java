@@ -73,6 +73,9 @@ public class Session {
             default:
                 break;
         }
+        if (getCurrentColor() != card.getColor()) {
+            changeRole(true);
+        }
     }
 
 
