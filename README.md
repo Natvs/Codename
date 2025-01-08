@@ -30,27 +30,20 @@
 - [ ] 06/01: Implémentation de la fenètre "Transition" :
         - Afficher l'Equipe (Bleu ou Rouge) et le Groupe (Espion ou Maitre-Espion)
         - Ajouter un bouton "Jouer"
-- [ ] 06/01-08/01: Implémentation de la fenètre "Partie (Maitre-Espion)" :
+- [X] 06/01-08/01: Implémentation de la fenètre "Partie (Maitre-Espion)" :
         - [X] Implémenter l'affichage de la grille
         - [X] Afficher les cartes couleur déjà positionnée sur la grille
         - [X] Ajouter un bouton "Sauvegarder et Quitter"
-        - [ ] Ajouter un bouton "Passe" (pour terminer le tour et transissionner)
-        - [ ] Implémenter l'affichage de la carte clée dans la grille
-        - [ ] Ajouter un bouton "Mot"
-        - [ ] Ajouter un bouton "Nombre"
-- [ ] 06/01-08/01: Implémentation de la fenètre "Partie (Espion)" :
-        - [X] Implémenter l'affichage de la grille
-        - [X] Afficher les cartes couleur déjà positionnée sur la grille
-        - [X] Ajouter un bouton "Sauvegarder et Quitter"
-        - [ ] Ajouter un bouton "Passe" (pour terminer le tour et transissionner)
-        - [ ] Afficher le mot indice du Maitre-Espion 
-        - [ ] Afficher le nombre de mot à deviner par le Maitre-Espion 
-        - [ ] Pouvoir selectionner la carte
+        - [X] Ajouter un bouton "Passe" (pour terminer le tour et transissionner)
+        - [X] Implémenter l'affichage de la carte clée dans la grille pour l'espion
 - [ ] 08/01 : Changement du "Menu Configuration" : 
         - [X] Ajout d'une gestion de la répartition de l'équipe
         - [ ] Validation du formulaire
         - [ ] Relié au backend
         - [ ] Les champs textes peuvent etre ajoutés et supprimés dynamiquement
+- [ ] 08/01 : Generation d'image pour chaque mots :
+        - [X] Config de stable diffusion, premiers tests de prompts
+        - [ ] Faire tourner stable diffusion sur le mac, verifier les resultats
 
 ### Lucas Simonneau :
 - [X] 06/01: Implémentation de gestion de fichier :
@@ -60,7 +53,12 @@
         - Selection d'un nombre fini de mots aléatoire
         - Asignement d'une couleur pour chaque mot
         - Convertion sous forme de grille
-- [X] 06/01: Implémentation de la musique au jeu
+- [X] 07/01: Implémentation de la musique au jeu
+- [ ] 08/01: Implémentation de la fenètre "Partie" :
+        - [ ] Afficher le mot indice pour l'agent
+        - [ ] Ajouter un bouton "Mot" pour l'agent
+        - [ ] Afficher le nombre de mot à deviner par l'Agent
+        - [ ] Ajouter un bouton "Nombre" pour l'espion
 
 ### Nathans Vernois :
 - [X] 06/01: Implémentation du diagramme de classe
@@ -68,3 +66,5 @@
         - Implémentation du racourcis "Quitter"
         - Implémentation du racourcis "Nouvelle Partie" (Acceuil)
         - Implémentation du racourcis "Démarer Partie" (Menu configuration)
+- [ ] 08/01: Implémentation de la fenètre "Partie" :
+        - [X] Pouvoir selectionner la carte pour l'espion
