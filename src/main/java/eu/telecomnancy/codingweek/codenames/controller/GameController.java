@@ -105,7 +105,7 @@ public class GameController {
 
     @FXML
     private void onSubmit() {
-        session.addClue(new Clue(0,1));
+        session.addClue(new Clue(0,2));
     }
 
 }

@@ -46,6 +46,14 @@ public class Session {
         return this.blueTeam;
     }
 
+    public ColoredTeam getCurrentTeam() {
+        return switch (getCurrentColor()) {
+            case Color.RED -> getRedTeam();
+            case Color.BLUE -> getBlueTeam() ;
+            default -> null;
+        };
+    }
+
     public Board getBoard() {
         return this.board;
     }
