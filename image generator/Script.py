@@ -23,9 +23,7 @@ def generate_images(prompt, negative_prompt="ugly, NSFW, scary, gross, weird, cr
         os.makedirs(output_dir)
 
     # Charger le pipeline Stable Diffusion
-    pipeline = DiffusionPipeline.from_pretrained(
-        "stabilityai/stable-diffusion-3.5-large-turbo"
-    )
+    pipeline = DiffusionPipeline.from_pretrained("stabilityai/stable-diffusion-3.5-medium")
     pipeline = pipeline.to("mps" if torch.backends.mps.is_available() else "cuda" if torch.cuda.is_available() else "cpu")
 
     # Générer plusieurs images avec prompt négatif (si fourni)
