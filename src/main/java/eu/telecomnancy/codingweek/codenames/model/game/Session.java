@@ -2,6 +2,8 @@ package eu.telecomnancy.codingweek.codenames.model.game;
 
 import eu.telecomnancy.codingweek.codenames.model.coloredTeam.ColoredTeam;
 import eu.telecomnancy.codingweek.codenames.model.board.Board;
+import eu.telecomnancy.codingweek.codenames.model.board.Card;
+import eu.telecomnancy.codingweek.codenames.model.clue.Clue;
 import eu.telecomnancy.codingweek.codenames.model.color.Color;
 
 public class Session {
@@ -41,6 +43,14 @@ public class Session {
 
     public GameConfig getConfig() {
         return this.config;
+    }
+
+    public void guessCard(Card card) {
+        
+    }
+
+    public void addClue(Clue clue) {
+        
     }
 
 }

@@ -38,20 +38,4 @@ public class Card {
         this.color = color;
     }
 
-    public CardState getState(Color color) {
-        if (color == this.color) {
-            return CardState.GOOD;
-        } else {
-            if (color == Color.BLACK) {
-                return CardState.FORBIDDEN;
-            } else {
-                if (color == Color.WHITE) {
-                    return CardState.NEUTRAL;
-                } else {
-                    return CardState.ENEMY;
-                }
-            }
-        }
-    }
-
 }
