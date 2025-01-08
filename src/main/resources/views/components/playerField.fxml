@@ -9,7 +9,7 @@
     xmlns:fx="http://javafx.com/fxml"
     fx:controller="eu.telecomnancy.codingweek.codenames.controller.PlayerFieldController">
 
-    <TextField fx:id="playerName" HBox.hgrow="ALWAYS" HBox.halignment="CENTER" />
+    <TextField fx:id="playerName" HBox.hgrow="ALWAYS"/>
     <Button fx:id="removePlayer" text="X" onAction="#onRemovePlayer" />
 
 </HBox>
