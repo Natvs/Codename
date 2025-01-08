@@ -1,4 +1,4 @@
-package eu.telecomnancy.commands;
+package eu.telecomnancy.codingweek.codenames.commands;
 
 import eu.telecomnancy.codingweek.codenames.model.board.Card;
 import eu.telecomnancy.codingweek.codenames.model.color.Color;

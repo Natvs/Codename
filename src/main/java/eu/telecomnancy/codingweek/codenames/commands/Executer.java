@@ -1,4 +1,4 @@
-package eu.telecomnancy.commands;
+package eu.telecomnancy.codingweek.codenames.commands;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;

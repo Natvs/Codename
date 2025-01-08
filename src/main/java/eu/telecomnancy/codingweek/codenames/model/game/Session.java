@@ -1,14 +1,14 @@
 package eu.telecomnancy.codingweek.codenames.model.game;
 
+import eu.telecomnancy.codingweek.codenames.commands.Executer;
+import eu.telecomnancy.codingweek.codenames.commands.GuessCardCommand;
+import eu.telecomnancy.codingweek.codenames.commands.SetClueCommand;
 import eu.telecomnancy.codingweek.codenames.model.board.Board;
 import eu.telecomnancy.codingweek.codenames.model.board.Card;
 import eu.telecomnancy.codingweek.codenames.model.clue.Clue;
 import eu.telecomnancy.codingweek.codenames.model.color.Color;
 import eu.telecomnancy.codingweek.codenames.model.coloredTeam.ColoredTeam;
 import eu.telecomnancy.codingweek.codenames.observers.game.SessionColorObserver;
-import eu.telecomnancy.commands.Executer;
-import eu.telecomnancy.commands.GuessCardCommand;
-import eu.telecomnancy.commands.SetClueCommand;
 
 public class Session {
 
