@@ -20,7 +20,7 @@
 
     <children>
 
-        <GridPane GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="0">
+        <GridPane fx:id="playersGrid" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="0">
             <rowConstraints>
                 <RowConstraints vgrow="ALWAYS" />
                 <RowConstraints vgrow="ALWAYS" />
@@ -52,13 +52,10 @@
                 <TextField fx:id="redAgent1" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
                 <TextField fx:id="redSpy1" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
 
-                <TextField fx:id="blueAgent2" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-                <TextField fx:id="blueSpy2" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-                <TextField fx:id="redAgent2" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-                <TextField fx:id="redSpy2" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-
-                <TextField fx:id="blueSpy3" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
-                <TextField fx:id="redSpy3" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+                <Button fx:id="addBlueAgent" onAction="#onAddBlueAgent" text="+" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+                <Button fx:id="addBlueSpy" onAction="#onAddBlueSpy" text="+" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+                <Button fx:id="addRedAgent" onAction="#onAddRedAgent" text="+" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+                <Button fx:id="addRedSpy" onAction="#onAddRedSpy" text="+" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
             </children>
         </GridPane>
 
