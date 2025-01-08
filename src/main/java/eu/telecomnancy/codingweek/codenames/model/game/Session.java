@@ -5,7 +5,8 @@ import eu.telecomnancy.codingweek.codenames.model.board.Card;
 import eu.telecomnancy.codingweek.codenames.model.clue.Clue;
 import eu.telecomnancy.codingweek.codenames.model.color.Color;
 import eu.telecomnancy.codingweek.codenames.model.coloredTeam.ColoredTeam;
-import eu.telecomnancy.codingweek.codenames.observers.game.SessionColorObserver;
+import eu.telecomnancy.codingweek.codenames.observers.game.ColorSetObserver;
+import eu.telecomnancy.codingweek.codenames.observers.game.RoleSetObserver;
 import eu.telecomnancy.commands.Executer;
 import eu.telecomnancy.commands.GuessCardCommand;
 import eu.telecomnancy.commands.SetClueCommand;
@@ -20,7 +21,8 @@ public class Session {
     private Boolean agent = true;
     private Executer executer = new Executer();
 
-    private SessionColorObserver colorObserver = null;
+    private RoleSetObserver roleObserver = null;
+    private ColorSetObserver colorObserver = null;
 
     public Session() {
         this.config = new GameConfig();
@@ -67,16 +69,32 @@ public class Session {
         }
     }
 
+    public void setRoleObserver(RoleSetObserver observer) {
+        this.roleObserver = observer;
+    }
+
+    public void setColorObserver(ColorSetObserver observer) {
+        this.colorObserver = observer;
+    }
+
     public boolean isAgent() {
         return this.agent;
     }
 
     public void changeRole(boolean agent) {
         this.agent = agent;
+        if (roleObserver != null) {
+            roleObserver.handle();
+        }
     }
 
-    public void setColorObserver(SessionColorObserver observer) {
-        this.colorObserver = observer;
+    public void nextRole() {
+        if (isAgent()){
+            changeRole(false);
+        } else {
+            setCurrentColor();
+            changeRole(true);
+        }
     }
 
     public Executer getExecuter() {

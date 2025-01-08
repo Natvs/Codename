@@ -16,7 +16,8 @@ public class GuessCardCommand implements Command {
 
     @Override
     public void execute() {
-                card.reveal();
+        session.nextRole();
+        card.reveal();
         switch (card.getColor()) {
             case Color.BLUE:
                 session.getBlueTeam().addScore(1);
