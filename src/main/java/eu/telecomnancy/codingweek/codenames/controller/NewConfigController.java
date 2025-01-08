@@ -126,6 +126,7 @@ public class NewConfigController {
 
         if (nbBlueAgents >= 2) {
             addBlueAgent.setVisible(false);
+            addBlueAgent.setVisible(false);
         }
     }
 
@@ -139,6 +140,7 @@ public class NewConfigController {
 
         if (nbBlueSpy >= 3) {
             addBlueSpy.setVisible(false);
+            addBlueSpy.setVisible(false);
         }
     }
 
@@ -151,6 +153,7 @@ public class NewConfigController {
         GridPane.setRowIndex(addRedAgent, nbRedAgents);
 
         if (nbRedAgents >= 2) {
+            addRedAgent.setVisible(false);
             addRedAgent.setVisible(false);
         }
     }
