@@ -51,10 +51,17 @@ public class Card {
         }
     }
     public void reveal() {
-        this.revealed = true;
+        if (!this.revealed) {
+            this.revealed = true;
+            if (revealedObserver != null) {
+                revealedObserver.handle();
+            }
+        }
     }
     public void hide() {
-        this.revealed = false;
+        if (this.revealed) {
+            this.revealed = false;
+        }
     }
 
     public void setColorObserver(CardColorObserver observer) {

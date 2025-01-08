@@ -71,7 +71,7 @@ public class Session {
                 getRedTeam().addScore(1);
                 break;
             default:
-                throw new AssertionError();
+                break;
         }
     }
 
