@@ -46,8 +46,12 @@ public class Session {
         return this.currentColor;
     }
 
-    public void setCurrentColor(Color currentColor) {
-        this.currentColor = currentColor;
+    public void setCurrentColor() {
+        if (this.currentColor == Color.RED){
+            this.currentColor = Color.BLUE;
+        } else {
+            this.currentColor = Color.RED;
+        }
     }
 
     public boolean isAgent() {

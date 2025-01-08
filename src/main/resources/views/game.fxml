@@ -15,8 +15,12 @@
     </columnConstraints>
 
     <children>
-        <Label fx:id="currentTeam" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <Label fx:id="currentTeam" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
         <GridPane fx:id="gameGrid" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-        <Button fx:id="quitButton" mnemonicParsing="false" text="Quitter le jeu" GridPane.rowIndex="2" onAction="#onQuit"/>
+        <HBox spacing="10" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" >
+            <Button fx:id="quitButton" text="Quitter le jeu" onAction="#onQuit"/>
+            <TextField fx:id="word" />
+            <Button fx:id="nextPlayer" text="Submit" /> 
+        </HBox>
     </children>
 </GridPane>
