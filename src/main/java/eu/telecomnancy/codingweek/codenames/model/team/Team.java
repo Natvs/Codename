@@ -5,7 +5,7 @@ import java.util.List;
 import eu.telecomnancy.codingweek.codenames.model.clue.Clue;
 import eu.telecomnancy.codingweek.codenames.model.player.Player;
 
-public class Team {
+public abstract class Team {
     
     private List<Player> playersList;
     private List<Clue> cluesList;

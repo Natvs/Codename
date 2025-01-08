@@ -30,22 +30,27 @@
 - [ ] 06/01: Implémentation de la fenètre "Transition" :
         - Afficher l'Equipe (Bleu ou Rouge) et le Groupe (Espion ou Maitre-Espion)
         - Ajouter un bouton "Jouer"
-- [ En cours ] 06/01: Implémentation de la fenètre "Partie (Maitre-Espion)" :
-        - Implémenter l'affichage de la grille
-        - Afficher les cartes couleur déjà positionnée sur la grille
-        - Ajouter un bouton "Sauvegarder et Quitter"
-        - Ajouter un bouton "Passe" (pour terminer le tour et transissionner)
-        - Implémenter l'affichage de la carte clée dans la grille
-        - Ajouter un bouton "Mot"
-        - Ajouter un bouton "Nombre"
-- [ En cours ] 06/01: Implémentation de la fenètre "Partie (Espion)" :
-        - Implémenter l'affichage de la grille
-        - Afficher les cartes couleur déjà positionnée sur la grille
-        - Ajouter un bouton "Sauvegarder et Quitter"
-        - Ajouter un bouton "Passe" (pour terminer le tour et transissionner)
-        - Afficher le mot indice du Maitre-Espion 
-        - Afficher le nombre de mot à deviner par le Maitre-Espion 
-        - Ajouter un bouton "Selectionner"
+- [ ] 06/01-08/01: Implémentation de la fenètre "Partie (Maitre-Espion)" :
+        - [X] Implémenter l'affichage de la grille
+        - [X] Afficher les cartes couleur déjà positionnée sur la grille
+        - [X] Ajouter un bouton "Sauvegarder et Quitter"
+        - [ ] Ajouter un bouton "Passe" (pour terminer le tour et transissionner)
+        - [ ] Implémenter l'affichage de la carte clée dans la grille
+        - [ ] Ajouter un bouton "Mot"
+        - [ ] Ajouter un bouton "Nombre"
+- [ ] 06/01-08/01: Implémentation de la fenètre "Partie (Espion)" :
+        - [X] Implémenter l'affichage de la grille
+        - [X] Afficher les cartes couleur déjà positionnée sur la grille
+        - [X] Ajouter un bouton "Sauvegarder et Quitter"
+        - [ ] Ajouter un bouton "Passe" (pour terminer le tour et transissionner)
+        - [ ] Afficher le mot indice du Maitre-Espion 
+        - [ ] Afficher le nombre de mot à deviner par le Maitre-Espion 
+        - [ ] Pouvoir selectionner la carte
+- [ ] 08/01 : Changement du "Menu Configuration" : 
+        - [X] Ajout d'une gestion de la répartition de l'équipe
+        - [ ] Validation du formulaire
+        - [ ] Relié au backend
+        - [ ] Les champs textes peuvent etre ajoutés et supprimés dynamiquement
 
 ### Lucas Simonneau :
 - [X] 06/01: Implémentation de gestion de fichier :
