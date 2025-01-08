@@ -3,11 +3,11 @@ package eu.telecomnancy.codingweek.codenames.model.coloredTeam;
 import java.util.ArrayList;
 import java.util.List;
 
-import eu.telecomnancy.codingweek.codenames.model.color.Color;
 import eu.telecomnancy.codingweek.codenames.model.clue.Clue;
+import eu.telecomnancy.codingweek.codenames.model.color.Color;
+import eu.telecomnancy.codingweek.codenames.model.player.Player;
 import eu.telecomnancy.codingweek.codenames.model.team.AgentTeam;
 import eu.telecomnancy.codingweek.codenames.model.team.SpyTeam;
-import eu.telecomnancy.codingweek.codenames.model.player.Player;
 
 public class ColoredTeam {
     
@@ -15,6 +15,7 @@ public class ColoredTeam {
     private List<Clue> cluesList;
     private AgentTeam agentTeam;
     private SpyTeam spyTeam;
+    private int score = 0;
 
     public ColoredTeam(Color color, List<Player> agentsTeam, List<Player> spiesTeam) {
         if ((color == Color.BLACK) || (color == Color.WHITE)) {
@@ -41,6 +42,22 @@ public class ColoredTeam {
 
     public SpyTeam getSpyTeam() {
         return this.spyTeam;
+    }
+
+    public int getScore() {
+        return this.score;
+    }
+
+    public void resetScore() {
+        this.score = 0;
+    }
+
+    public void addScore(int points) {
+        this.score += points;
+    }
+
+    public void addClue(Clue clue) {
+        getCluesList().add(clue);
     }
 
 }

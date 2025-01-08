@@ -11,8 +11,4 @@ public class AgentTeam extends Team {
         super(playersList, cluesList);
     }
 
-    public void addClue(Clue clue) {
-        this.getCluesList().add(clue);
-    }
-
 }
