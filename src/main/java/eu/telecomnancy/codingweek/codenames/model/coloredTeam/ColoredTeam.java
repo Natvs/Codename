@@ -5,11 +5,11 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import eu.telecomnancy.codingweek.codenames.model.color.Color;
 import eu.telecomnancy.codingweek.codenames.model.clue.Clue;
+import eu.telecomnancy.codingweek.codenames.model.color.Color;
+import eu.telecomnancy.codingweek.codenames.model.player.Player;
 import eu.telecomnancy.codingweek.codenames.model.team.AgentTeam;
 import eu.telecomnancy.codingweek.codenames.model.team.SpyTeam;
-import eu.telecomnancy.codingweek.codenames.model.player.Player;
 
 public class ColoredTeam {
     

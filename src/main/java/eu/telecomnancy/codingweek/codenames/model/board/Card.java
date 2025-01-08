@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import eu.telecomnancy.codingweek.codenames.model.color.Color;
 import eu.telecomnancy.codingweek.codenames.observers.board.CardColorObserver;
 import eu.telecomnancy.codingweek.codenames.observers.board.CardNameObserver;
+import eu.telecomnancy.codingweek.codenames.observers.board.CardRevealedObserver;
 
 public class Card {
     
@@ -14,6 +15,7 @@ public class Card {
 
     private CardColorObserver colorObserver = null;
     private CardNameObserver nameObserver = null;
+    private CardRevealedObserver revealedObserver = null;
 
     public Card(String name, Color color) {
         setName(name);
@@ -61,21 +63,8 @@ public class Card {
     public void setNameObserver(CardNameObserver observer) {
         this.nameObserver = observer;
     }
-
-
-    public CardState getState(Color color) {
-        if (color == this.color) {
-            return CardState.GOOD;
-        } 
-        else if (color == Color.BLACK) {
-            return CardState.FORBIDDEN;
-        }
-        else if (color == Color.WHITE) {
-            return CardState.NEUTRAL;
-        }
-        else {
-            return CardState.ENEMY;
-        }
+    public void setRevealedObserver(CardRevealedObserver observer) {
+        this.revealedObserver = observer;
     }
 
 }
