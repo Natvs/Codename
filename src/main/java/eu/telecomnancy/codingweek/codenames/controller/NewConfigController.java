@@ -112,12 +112,12 @@ public class NewConfigController {
     private void onAddBlueAgent() {
         nbBlueAgents++;
 
-        playersGrid.add(GeneratePlayerField.generateField("Blue Agent " + nbBlueAgents, this), 0, nbBlueAgents+2);
+        playersGrid.add(GeneratePlayerField.generateField("Blue Agent " + nbBlueAgents, this, 0), 0, nbBlueAgents+2);
 
         GridPane.setRowIndex(addBlueAgent, nbBlueAgents + 3);
 
         if (nbBlueAgents >= 2) {
-            playersGrid.getChildren().remove(addBlueAgent);
+            addBlueAgent.setVisible(false);
         }
     }
 
@@ -125,12 +125,12 @@ public class NewConfigController {
     private void onAddBlueSpy() {
         nbBlueSpy++;
 
-        playersGrid.add(GeneratePlayerField.generateField("Blue Spy " + nbBlueSpy, this), 1, nbBlueSpy+2);
+        playersGrid.add(GeneratePlayerField.generateField("Blue Spy " + nbBlueSpy, this, 1), 1, nbBlueSpy+2);
 
         GridPane.setRowIndex(addBlueSpy, nbBlueSpy + 3);
 
         if (nbBlueSpy >= 3) {
-            playersGrid.getChildren().remove(addBlueSpy);
+            addBlueSpy.setVisible(false);
         }
     }
 
@@ -138,12 +138,12 @@ public class NewConfigController {
     private void onAddRedAgent() {
         nbRedAgents++;
 
-        playersGrid.add(GeneratePlayerField.generateField("Red Agent " + nbRedAgents, this), 2, nbRedAgents+2);
+        playersGrid.add(GeneratePlayerField.generateField("Red Agent " + nbRedAgents, this, 2), 2, nbRedAgents+2);
 
         GridPane.setRowIndex(addRedAgent, nbRedAgents + 3);
 
         if (nbRedAgents >= 2) {
-            playersGrid.getChildren().remove(addRedAgent);
+            addRedAgent.setVisible(false);
         }
     }
 
@@ -151,17 +151,39 @@ public class NewConfigController {
     private void onAddRedSpy() {
         nbRedSpy++;
 
-        playersGrid.add(GeneratePlayerField.generateField("Red Spy " + nbRedSpy, this), 3, nbRedSpy+2);
+        playersGrid.add(GeneratePlayerField.generateField("Red Spy " + nbRedSpy, this, 3), 3, nbRedSpy+2);
 
         GridPane.setRowIndex(addRedSpy, nbRedSpy + 3);
 
         if (nbRedSpy >= 3) {
-            playersGrid.getChildren().remove(addRedSpy);
+            addRedSpy.setVisible(false);
         }
     }
     
-    public void removePlayerField(Node playerField) {
+    public void removePlayerField(Node playerField, int column) {
         playersGrid.getChildren().remove(playerField);
+        switch (column) {
+            case 0:
+                nbBlueAgents--;
+                addBlueAgent.setVisible(true);
+                GridPane.setRowIndex(addBlueAgent, nbBlueAgents + 3);
+                break;
+            case 1:
+                nbBlueSpy--;
+                addBlueSpy.setVisible(true);
+                break;
+            case 2:
+                nbRedAgents--;
+                addRedAgent.setVisible(true);
+                GridPane.setRowIndex(addRedAgent, nbRedAgents + 3);
+                break;
+            case 3:
+                nbRedSpy--;
+                addRedSpy.setVisible(true);
+                break;
+            default:
+                break;
+        }
     }
 
     @FXML
