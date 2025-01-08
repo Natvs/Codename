@@ -8,6 +8,7 @@ public class Session {
 
     private ColoredTeam redTeam;
     private ColoredTeam blueTeam;
+    private Color currentColor;
     private Board board;
     private GameConfig config;
 
@@ -15,7 +16,8 @@ public class Session {
         this.config = new GameConfig();
         this.redTeam = new ColoredTeam(Color.RED, config.redAgentsList, config.redSpiesList);
         this.blueTeam = new ColoredTeam(Color.BLUE, config.blueAgentsList, config.blueSpiesList);
-        this.board = new Board(config.length, config.width);
+        this.board = new Board(config.heigth, config.width);
+
     }
 
     public ColoredTeam getRedTeam() {
@@ -32,6 +34,10 @@ public class Session {
 
     public GameConfig getConfig() {
         return this.config;
+    }
+
+    public Color getCurrentColor() {
+        return this.currentColor;
     }
 
 }

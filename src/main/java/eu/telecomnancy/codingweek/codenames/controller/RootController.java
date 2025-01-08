@@ -34,7 +34,7 @@ public class RootController {
         return instance;
     }
 
-    public void changeView(String fxml) {
+    public void changeView(String fxml,Session session) {
         if (root == null) {
             throw new RuntimeException("BorderPane 'root' is null");
         }
@@ -46,8 +46,7 @@ public class RootController {
         }
         
         try {
-            Node center = FXMLLoader.load(fxmlURL);
-            activeView = center;
+            activeView = FXMLLoader.load(fxmlURL);
             root.setCenter(activeView);
         } catch (IOException e) {
             e.printStackTrace();

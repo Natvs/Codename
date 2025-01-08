@@ -1,5 +1,6 @@
 package eu.telecomnancy.codingweek.codenames.controller;
 
+import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
@@ -35,7 +36,8 @@ public class HomeController {
 
     @FXML
     private void onNewGame() {
-        RootController.getInstance().changeView("/views/newConfig.fxml");
+        Session session = new Session();
+        RootController.getInstance().changeView("/views/newConfig.fxml",session);
     }   
 
     @FXML

@@ -110,11 +110,11 @@ public class openCardsService {
     public static int getIndex(int i,int j,int width){
         return j*width+i;
     }
-    public static Card[][] initGridCards(int length,int width){
+    public static Card[][] initGridCards(int heigth,int width){
         ArrayList<String> lines = openFile("src/main/resources/words/codenames_words.txt");
-        ArrayList<Card> choosenCards = setRandomCards(lines, length*width);
+        ArrayList<Card> choosenCards = setRandomCards(lines, heigth*width);
         configCards(choosenCards);
-        Card[][] grid = convertToGrid(choosenCards,length,width);
+        Card[][] grid = convertToGrid(choosenCards,heigth,width);
         return grid;
     }
 }
