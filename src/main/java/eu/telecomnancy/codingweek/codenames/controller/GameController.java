@@ -13,6 +13,8 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.Priority;
 
 public class GameController {
+    private Session session;
+
     @FXML
     private GridPane gameView;
     @FXML
@@ -20,8 +22,8 @@ public class GameController {
     @FXML
     private Label currentTeam;
 
-    public GameController() {
-
+    public GameController(Session session) {
+        this.session = session;
     }
 
     @FXML
@@ -42,7 +44,6 @@ public class GameController {
     }
 
     private void setCardsBoard() {
-        var session = Session.getInstance();
         var cards = openCardsService.initGridCards(session.getBoard().getHeigth(), session.getBoard().getWidth());
         for (int i = 0; i < session.getBoard().getWidth(); i++) {
             ColumnConstraints colConstraints = new ColumnConstraints();
