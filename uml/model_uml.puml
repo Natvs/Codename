@@ -27,7 +27,7 @@ package codenames.model.color {
 package codenames.model.game {
 
     class GameConfig {
-        + int length
+        + int heigth
         + int width
         + List<Player> blueAgentsList
         + List<Player> blueSpiesList
@@ -94,7 +94,7 @@ package codenames.model.player {
 
 }
 
-package codenames.model.card {
+package codenames.model.board {
 
     class Card {
         - String name
@@ -104,6 +104,8 @@ package codenames.model.card {
         + String getName()
         + Color getColor()
         + Boolean getRevealed()
+        + void setName(String name)
+        + void setColor(String color)
         + void show()
         + void hide()
         + void setColor(Color color)
@@ -116,10 +118,10 @@ package codenames.model.card {
         FORBIDDEN
     }
     class Board {
-        - int length
+        - int heigth
         - int width
         - Card[][] grid
-        + Board(int length, int width)
+        + Board(int heigth, int width)
         + int getLength()
         + int getWidth()
         + int getNumberCards()
