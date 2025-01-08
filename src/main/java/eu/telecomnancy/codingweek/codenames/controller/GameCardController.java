@@ -57,7 +57,8 @@ public class GameCardController {
                     break;
             }
         } else {
-            gameCard.setStyle("-fx-background-color: #FFFFFF");
+            gameCard.setStyle("-fx-background-color:rgb(92, 88, 88)");
         }
     }
+
 }

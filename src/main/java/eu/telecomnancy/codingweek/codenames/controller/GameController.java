@@ -1,7 +1,5 @@
 package eu.telecomnancy.codingweek.codenames.controller;
 
-import java.awt.TextField;
-
 import eu.telecomnancy.codingweek.codenames.model.board.Card;
 import eu.telecomnancy.codingweek.codenames.model.color.Color;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
@@ -9,6 +7,7 @@ import eu.telecomnancy.codingweek.codenames.observers.game.SessionColorObserver;
 import eu.telecomnancy.codingweek.codenames.utils.GenerateCardUtil;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -26,6 +25,7 @@ public class GameController {
     private Label currentTeam;
     @FXML
     private TextField word;
+
     public GameController(Session session) {
         this.session = session;
     }
@@ -57,7 +57,12 @@ public class GameController {
             for (int j = 0; j < session.getBoard().getHeigth(); j++) {
                 var card = grid[i][j];
                 var cardBox = GenerateCardUtil.generateCard(card, session);
-                cardBox.setOnMouseClicked((mouveEvent) -> { if (!card.getRevealed()) { session.guessCard(card); } });
+                cardBox.setOnMouseClicked((mouveEvent) -> 
+                { 
+                    if (!card.getRevealed() && !session.isAgent()) { 
+                        session.guessCard(card); 
+                    } 
+                });
                 gameGrid.add(cardBox, i, j);
             }
             RowConstraints rowConstraints = new RowConstraints();
@@ -69,10 +74,16 @@ public class GameController {
         Card[][] grid = session.getBoard().getGrid();
         for (int i = 0; i < session.getBoard().getWidth(); i++) {
             for (int j = 0; j < session.getBoard().getHeigth(); j++) {
-                var card = GenerateCardUtil.generateCard(grid[i][j],session);
-                gameGrid.add(card, i, j);
+                var card = grid[i][j];
+                var cardBox = GenerateCardUtil.generateCard(card, session);
+                cardBox.setOnMouseClicked((mouveEvent) -> 
+                { 
+                    if (!card.getRevealed() && !session.isAgent()) { 
+                        session.guessCard(card); 
+                    } 
+                });
+                gameGrid.add(cardBox, i, j);
             }
-            
         }
     }
     private void setLabel() {
