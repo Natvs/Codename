@@ -1,6 +1,8 @@
 package eu.telecomnancy.codingweek.codenames.model.board;
 
 import eu.telecomnancy.codingweek.codenames.model.color.Color;
+import eu.telecomnancy.codingweek.codenames.observers.board.CardColorObserver;
+import eu.telecomnancy.codingweek.codenames.observers.board.CardNameObserver;
 
 public class Card {
     
@@ -8,34 +10,49 @@ public class Card {
     private Color color;
     private Boolean revealed;
 
+    private CardColorObserver colorObserver = null;
+    private CardNameObserver nameObserver = null;
+
     public Card(String name, Color color) {
-        this.name = name;
-        this.color = color;
-        this.revealed = false;
+        setName(name);
+        setColor(color);
+        hide();
     }
 
     public String getName() {
         return this.name;
     }
-
     public Color getColor() {
         return this.color;
     }
-
     public Boolean getRevealed() {
         return this.revealed;
     }
 
+    public void setName(String name) {
+        this.name = name;
+        if (nameObserver != null) {
+            nameObserver.handle();
+        }
+    }
+    public void setColor(Color color) {
+        this.color = color;
+        if (colorObserver != null) {
+            colorObserver.handle();
+        }
+    }
     public void show() {
         this.revealed = true;
     }
-
     public void hide() {
         this.revealed = false;
     }
 
-    public void setColor(Color color) {
-        this.color = color;
+    public void setColorObserver(CardColorObserver observer) {
+        this.colorObserver = observer;
+    }
+    public void setNameObserver(CardNameObserver observer) {
+        this.nameObserver = observer;
     }
 
 }

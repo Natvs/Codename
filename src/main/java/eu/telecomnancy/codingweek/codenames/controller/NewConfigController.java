@@ -1,8 +1,11 @@
 package eu.telecomnancy.codingweek.codenames.controller;
 
+import eu.telecomnancy.codingweek.codenames.model.game.Session;
+import eu.telecomnancy.codingweek.codenames.utils.openCardsService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Spinner;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 
@@ -14,11 +17,23 @@ public class NewConfigController {
     private Button startButton;
     @FXML
     private ComboBox<String> thematicSelection;
+    @FXML
+    private Spinner<Integer> nbRows;
+    @FXML
+    private Spinner<Integer> nbCols;
 
     private Boolean startEnable = false;
 
     @FXML
     private void initialize() {
+        nbRows.getValueFactory().setValue(Session.getInstance().getConfig().width);
+        nbCols.getValueFactory().setValue(Session.getInstance().getConfig().heigth);
+        initializeEvents();
+        disableStart();
+        thematicSelection.getItems().addAll("Tout", "Patate", "Entropie");
+    }
+
+    private void initializeEvents() {
         newConfigView.setOnKeyPressed((keyevent) -> {
             switch (keyevent.getCode()) {
                 case KeyCode.Q:
@@ -31,8 +46,12 @@ public class NewConfigController {
                     break;
             }
         });
-        disableStart();
-        thematicSelection.getItems().addAll("Tout", "Patate", "Entropie");
+        nbRows.valueProperty().addListener(((observable, oldValue, newValue) -> {
+            Session.getInstance().getConfig().heigth = nbRows.getValue();
+        }));
+        nbCols.valueProperty().addListener(((observable, oldValue, newValue) -> {
+            Session.getInstance().getConfig().width = nbRows.getValue();
+        }));
     }
 
     @FXML
@@ -42,6 +61,9 @@ public class NewConfigController {
 
     @FXML
     private void onStart() {
+        var session = Session.getInstance();
+        var config = session.getConfig();
+        Session.getInstance().getBoard().setSize(config.width, config.heigth);
         RootController.getInstance().changeView("/views/game.fxml");
     }
 
