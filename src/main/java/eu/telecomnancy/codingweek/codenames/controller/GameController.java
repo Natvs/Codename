@@ -3,10 +3,6 @@ package eu.telecomnancy.codingweek.codenames.controller;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import javafx.scene.control.Label;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.prefs.NodeChangeEvent;
-
 import eu.telecomnancy.codingweek.codenames.utils.GenerateCardUtil;
 import eu.telecomnancy.codingweek.codenames.utils.openCardsService;
 import javafx.fxml.FXML;
@@ -30,6 +26,10 @@ public class GameController {
 
     @FXML
     private void initialize() {
+        setEvents();
+        setCardsBoard();
+    }
+    private void setEvents() {
         gameView.setOnKeyPressed((keyevent) ->  {
             switch (keyevent.getCode()) {
                 case KeyCode.Q:
@@ -39,7 +39,9 @@ public class GameController {
                     break;
             }
         });
+    }
 
+    private void setCardsBoard() {
         var session = Session.getInstance();
         var cards = openCardsService.initGridCards(session.getBoard().getHeigth(), session.getBoard().getWidth());
         for (int i = 0; i < session.getBoard().getWidth(); i++) {
