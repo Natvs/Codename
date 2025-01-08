@@ -34,21 +34,23 @@ public class GameCardController {
     }
 
     public void setColor() {
-        switch (card.getColor()) {
-            case Color.RED:
-                gameCard.setStyle("-fx-background-color: #c80000");
-                break;
-            case Color.BLUE:
-                gameCard.setStyle("-fx-background-color: #0084ff");
-                break;
-            case Color.WHITE:
-                gameCard.setStyle("-fx-background-color: #FFFFFF");
-                break;
-            case Color.BLACK:
-                gameCard.setStyle("-fx-background-color: #000000");
-                break;
-            default:
-                break;
+        if (card.getRevealed()) {
+            switch (card.getColor()) {
+                case Color.RED:
+                    gameCard.setStyle("-fx-background-color: #c80000");
+                    break;
+                case Color.BLUE:
+                    gameCard.setStyle("-fx-background-color: #0084ff");
+                    break;
+                case Color.WHITE:
+                    gameCard.setStyle("-fx-background-color: #FFFFFF");
+                    break;
+                case Color.BLACK:
+                    gameCard.setStyle("-fx-background-color: #000000");
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
