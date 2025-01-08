@@ -1,7 +1,6 @@
 package eu.telecomnancy.codingweek.codenames.controller;
 
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
-import eu.telecomnancy.codingweek.codenames.utils.openCardsService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -10,6 +9,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 
 public class NewConfigController {
+    private Session session;
 
     @FXML
     private GridPane newConfigView;
@@ -24,16 +24,20 @@ public class NewConfigController {
 
     private Boolean startEnable = false;
 
+    public NewConfigController(Session session) {
+        this.session = session;
+    }
+
     @FXML
     private void initialize() {
-        nbRows.getValueFactory().setValue(Session.getInstance().getConfig().width);
-        nbCols.getValueFactory().setValue(Session.getInstance().getConfig().heigth);
+        nbRows.getValueFactory().setValue(session.getConfig().width);
+        nbCols.getValueFactory().setValue(session.getConfig().heigth);
         initializeEvents();
         disableStart();
         thematicSelection.getItems().addAll("Tout", "Patate", "Entropie");
     }
 
-    private void initializeEvents(Session session) {
+    private void initializeEvents() {
         newConfigView.setOnKeyPressed((keyevent) -> {
             switch (keyevent.getCode()) {
                 case KeyCode.Q:
@@ -47,10 +51,10 @@ public class NewConfigController {
             }
         });
         nbRows.valueProperty().addListener(((observable, oldValue, newValue) -> {
-            Session.getInstance().getConfig().heigth = nbRows.getValue();
+            session.getConfig().heigth = nbRows.getValue();
         }));
         nbCols.valueProperty().addListener(((observable, oldValue, newValue) -> {
-            Session.getInstance().getConfig().width = nbRows.getValue();
+            session.getConfig().width = nbRows.getValue();
         }));
     }
 
@@ -61,9 +65,8 @@ public class NewConfigController {
 
     @FXML
     private void onStart() {
-        var session = Session.getInstance();
         var config = session.getConfig();
-        Session.getInstance().getBoard().setSize(config.width, config.heigth);
+        session.getBoard().setSize(config.width, config.heigth);
         RootController.getInstance().changeView("/views/game.fxml");
     }
 

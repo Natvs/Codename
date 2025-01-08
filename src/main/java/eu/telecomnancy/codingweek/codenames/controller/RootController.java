@@ -3,6 +3,7 @@ package eu.telecomnancy.codingweek.codenames.controller;
 import java.io.IOException;
 import java.net.URL;
 
+import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -11,11 +12,13 @@ import javafx.scene.layout.BorderPane;
 public class RootController {
     private static RootController instance;
     private Node activeView;
+    private Session session;
 
     @FXML
     private BorderPane root;
 
     public RootController() {
+        session = new Session();
         instance = this;
     }
 
@@ -46,7 +49,19 @@ public class RootController {
         }
         
         try {
-            activeView = loader.load(fxmlURL);
+            FXMLLoader loader = new FXMLLoader(fxmlURL);
+            loader.setControllerFactory(iC -> {
+                if (iC == HomeController.class) {
+                    return new HomeController();
+                } else if (iC == NewConfigController.class) {
+                    return new NewConfigController(session);
+                } else if (iC == GameController.class) {
+                    return new GameController(session);
+                } else {
+                    return null;
+                }
+            });
+            activeView = loader.load();
             root.setCenter(activeView);
         } catch (IOException e) {
             e.printStackTrace();
