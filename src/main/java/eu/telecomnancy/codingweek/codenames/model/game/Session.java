@@ -5,6 +5,7 @@ import eu.telecomnancy.codingweek.codenames.model.board.Card;
 import eu.telecomnancy.codingweek.codenames.model.clue.Clue;
 import eu.telecomnancy.codingweek.codenames.model.color.Color;
 import eu.telecomnancy.codingweek.codenames.model.coloredTeam.ColoredTeam;
+import eu.telecomnancy.codingweek.codenames.observers.game.SessionColorObserver;
 
 public class Session {
 
@@ -14,6 +15,8 @@ public class Session {
     private final Board board;
     private Color currentColor;
     private Boolean agent = true;
+
+    private SessionColorObserver colorObserver = null;
 
     public Session() {
         this.config = new GameConfig();
@@ -51,6 +54,9 @@ public class Session {
 
     public void setCurrentColor(Color currentColor) {
         this.currentColor = currentColor;
+        if (colorObserver != null) {
+            colorObserver.handle();
+        }
     }
 
     public boolean isAgent() {
@@ -59,6 +65,10 @@ public class Session {
 
     public void changeRole(boolean agent) {
         this.agent = agent;
+    }
+
+    public void setColorObserver(SessionColorObserver observer) {
+        this.colorObserver = observer;
     }
 
     public void guessCard(Card card) {
@@ -74,7 +84,19 @@ public class Session {
                 break;
         }
         if (getCurrentColor() != card.getColor()) {
-            changeRole(true);
+            setNextTeamColor();
+        }
+    }
+    private void setNextTeamColor() {
+        switch (getCurrentColor()) {
+            case Color.BLUE:
+                setCurrentColor(Color.RED);
+                break;
+            case Color.RED:
+                setCurrentColor(Color.BLUE);
+                break;
+            default:
+                throw new AssertionError();
         }
     }
 
@@ -91,5 +113,6 @@ public class Session {
                 break;
         }
     }
+
 
 }

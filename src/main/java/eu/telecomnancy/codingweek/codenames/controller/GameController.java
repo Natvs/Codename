@@ -1,6 +1,8 @@
 package eu.telecomnancy.codingweek.codenames.controller;
 
+import eu.telecomnancy.codingweek.codenames.model.color.Color;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
+import eu.telecomnancy.codingweek.codenames.observers.game.SessionColorObserver;
 import eu.telecomnancy.codingweek.codenames.utils.GenerateCardUtil;
 import eu.telecomnancy.codingweek.codenames.utils.openCardsService;
 import javafx.fxml.FXML;
@@ -27,6 +29,7 @@ public class GameController {
 
     @FXML
     private void initialize() {
+        session.setColorObserver(new SessionColorObserver(this));
         setEvents();
         setCardsBoard();
     }
@@ -63,5 +66,18 @@ public class GameController {
     @FXML
     private void onQuit() {
         RootController.getInstance().changeView("/views/home.fxml");
+    }
+
+    public void setTeamColor() {
+        switch (session.getCurrentColor()) {
+            case Color.BLUE:
+                gameGrid.setStyle("-fx-background-color: #0084ff");
+                break;
+            case Color.RED:
+                gameGrid.setStyle("-fx-background-color: #c80000");
+                break;
+            default:
+                break;
+        }
     }
 }
