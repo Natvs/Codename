@@ -1,6 +1,7 @@
 package eu.telecomnancy.codingweek.codenames.controller;
 
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.concurrent.ScheduledService;
 import javafx.fxml.FXML;
 import eu.telecomnancy.codingweek.codenames.model.color.Color;
@@ -14,7 +15,7 @@ public class GameHeaderController {
     @FXML
     private Label currentTeam; 
     @FXML
-    private Label timer;
+    private ProgressBar timer;
 
     public GameHeaderController(Session session) {
         this.session = session;
@@ -62,10 +63,11 @@ public class GameHeaderController {
             }
         }
         currentTeam.setText(builder.toString());
-        timer.setText("");
+        timer.setProgress(0);
     }
 
     public void setTimeLabel() {
-        timer.setText(String.valueOf(session.getTime()));
+        int timeMax = session.isAgent() ? session.getConfig().timerAgent*10 : session.getConfig().timerSpy*10;
+        timer.setProgress(((double)session.getTime())/timeMax);
     }
 }
