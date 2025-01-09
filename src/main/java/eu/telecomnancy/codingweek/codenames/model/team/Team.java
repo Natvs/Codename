@@ -12,6 +12,11 @@ public abstract class Team {
         this.playersList = playersList;
     }
 
+    public void clone(Team target) {
+        this.playersList.clear();
+        this.playersList.addAll(target.getPlayersList());
+    }
+
     public List<Player> getPlayersList() {
         return this.playersList;
     }

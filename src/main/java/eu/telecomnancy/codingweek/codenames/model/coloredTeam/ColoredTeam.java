@@ -35,6 +35,15 @@ public class ColoredTeam {
         this.agentTeam = agentTeam;
         this.spyTeam = spyTeam;
     }
+
+    public void clone(ColoredTeam target) {
+        this.score = target.getScore();
+        this.cluesList.clear();
+        this.cluesList.addAll(target.getCluesList());
+        this.agentTeam.clone(target.getAgentTeam());
+        this.spyTeam.clone(target.getSpyTeam());
+    }
+
     public Color getColor() {
         return this.color;
     }

@@ -52,7 +52,7 @@ public class RootController {
             FXMLLoader loader = new FXMLLoader(fxmlURL);
             loader.setControllerFactory(iC -> {
                 if (iC == HomeController.class) {
-                    return new HomeController();
+                    return new HomeController(session);
                 } else if (iC == NewConfigController.class) {
                     return new NewConfigController(session);
                 } else if (iC == GameController.class) {

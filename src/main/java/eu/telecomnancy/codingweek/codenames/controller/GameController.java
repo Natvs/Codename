@@ -1,33 +1,32 @@
 package eu.telecomnancy.codingweek.codenames.controller;
 
 import eu.telecomnancy.codingweek.codenames.model.board.Card;
-import eu.telecomnancy.codingweek.codenames.model.color.Color;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
-import eu.telecomnancy.codingweek.codenames.model.team.Team;
 import eu.telecomnancy.codingweek.codenames.observers.game.ColorSetObserver;
 import eu.telecomnancy.codingweek.codenames.observers.game.RoleSetObserver;
 import eu.telecomnancy.codingweek.codenames.utils.GenerateCardUtil;
 import eu.telecomnancy.codingweek.codenames.utils.GenerateFooterUtil;
+import eu.telecomnancy.codingweek.codenames.utils.GenerateHeaderUtil;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 
 public class GameController {
     private Session session;
+    private String hint;
     private int number;
     @FXML
     private GridPane gameView;
     @FXML
     private GridPane gameGrid;
+    @FXML 
+    private HBox header;
     @FXML
-    private Label currentTeam;
-    @FXML
-    private TextField word;
+    private HBox footer;
 
     public GameController(Session session) {
         this.session = session;
@@ -38,7 +37,7 @@ public class GameController {
         session.setRoleObserver(new RoleSetObserver(this));
         session.setColorObserver(new ColorSetObserver(this));
         setEvents();
-        setLabel();
+        setHeader();
         initCardsBoard();
         setFooter();
     }
@@ -68,7 +67,7 @@ public class GameController {
         Card[][] grid = session.getBoard().getGrid();
         for (int i = 0; i < session.getBoard().getWidth(); i++) {
             for (int j = 0; j < session.getBoard().getHeigth(); j++) {
-                var card = grid[i][j];
+                var card = grid[j][i];
                 var cardBox = GenerateCardUtil.generateCard(card, session);
                 cardBox.setOnMouseClicked((mouveEvent) -> 
                 { 
@@ -81,42 +80,34 @@ public class GameController {
         }
     }
 
-    public void setLabel() {
-        var builder = new StringBuilder();
-        builder.append("Equipe ").append(switch (session.getCurrentColor()) {
-            case Color.BLUE -> "bleue";
-            case Color.RED -> "rouge";
-            default -> "undefined";
-        }).append(" - ");
-        if (session.isAgent()) builder.append("agents");
-        else builder.append("espions");
-        builder.append(" : ");
-
-        Team team = session.getCurrentTeam();
-        if (team != null) {
-            boolean first = true;
-            for (var player : team.getPlayersList()) {
-                if (!first) builder.append(" - "); else first = false;
-                builder.append(player.getName());
-            }
-        }
-        currentTeam.setText(builder.toString());
+    public void setHeader() {
+        var HeaderHBox = GenerateHeaderUtil.generateHeader(session,this);
+        header.getChildren().clear();
+        header.getChildren().add(HeaderHBox);
     }
 
     public void setFooter() {
         System.out.println(session.isAgent());
-        var gameHBox = GenerateFooterUtil.generateFooter(this, session);
-        gameView.getChildren().remove(2);
-        gameView.add(gameHBox,0,2);
+        var FooterHBox = GenerateFooterUtil.generateFooter(this,session);
+        footer.getChildren().clear();
+        footer.getChildren().add(FooterHBox);
     }
+    
+    
 
     public void onQuit() {
         RootController.getInstance().changeView("/views/home.fxml");
     }
 
     public void onSubmit() {
-        setLabel();
+        setHeader();
         setCardsBoard();
+    }
+    public String getHint(){
+        return this.hint;
+    }
+    public void setHint(String hint) {
+        this.hint = hint;
     }
 
     public int getNumber() {

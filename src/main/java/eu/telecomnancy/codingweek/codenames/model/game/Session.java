@@ -15,6 +15,10 @@ import eu.telecomnancy.codingweek.codenames.model.coloredTeam.ColoredTeam;
 import eu.telecomnancy.codingweek.codenames.model.team.Team;
 import eu.telecomnancy.codingweek.codenames.observers.game.ColorSetObserver;
 import eu.telecomnancy.codingweek.codenames.observers.game.RoleSetObserver;
+import eu.telecomnancy.codingweek.codenames.observers.game.TimeObserver;
+import javafx.application.Platform;
+import javafx.concurrent.ScheduledService;
+import javafx.concurrent.Task;
 
 public class Session {
 
@@ -25,9 +29,12 @@ public class Session {
     private Color currentColor;
     private Boolean agent = true;
     private Executer executer = new Executer();
-
+    private ScheduledService<Void> service;
+    private int time;
     private RoleSetObserver roleObserver = null;
     private ColorSetObserver colorObserver = null;
+    private TimeObserver timeObserver = null;
+    private boolean activeTimer = false;
 
     public Session() {
         this.config = new GameConfig();
@@ -41,6 +48,15 @@ public class Session {
         else {
             currentColor = Color.RED;
         }
+    }
+
+    public void clone(Session target) {
+        this.config = target.getConfig();
+        this.redTeam.clone(target.getRedTeam());
+        this.blueTeam.clone(target.getBlueTeam());
+        this.board.clone(target.getBoard());
+        this.currentColor = target.getCurrentColor();
+        this.agent = target.isAgent();
     }
 
     public ColoredTeam getRedTeam() {
@@ -59,6 +75,7 @@ public class Session {
             default -> null;
         };
     }
+
     @JsonIgnore
     public Team getCurrentTeam() {
         var coloredTeam = switch (getCurrentColor()) {
@@ -116,6 +133,11 @@ public class Session {
         this.colorObserver = observer;
     }
 
+    public void setTimeObserver(TimeObserver observer) {
+        this.timeObserver = observer;
+    }
+
+    @JsonIgnore
     private void changeRole(boolean agent) {
         this.agent = agent;
         if (roleObserver != null) {
@@ -123,6 +145,7 @@ public class Session {
         }
     }
 
+    @JsonIgnore
     public void nextRole() {
         if (isAgent()){
             changeRole(false);
@@ -132,6 +155,7 @@ public class Session {
         }
     }
 
+    @JsonIgnore
     public Executer getExecuter() {
         return this.executer;
     }
@@ -147,10 +171,61 @@ public class Session {
         getExecuter().executeAll();
     }
 
+    @JsonIgnore
     public void addClue(Clue clue) {
         getExecuter().addCommand(new SetClueCommand(clue, this));
         getExecuter().executeAll();
     }
 
+    public boolean getActiveTimer() {
+        return activeTimer;
+    }
 
+    public void setActiveTimer(boolean activeTimer){
+        this.activeTimer = activeTimer;
+    }
+
+    @JsonIgnore
+    public ScheduledService<Void> getTimer(){
+        return this.service;
+    }
+
+    public void setTimer() {
+        // Create a ScheduledService to run periodically
+        time = 0;
+        service = new ScheduledService<Void>() {
+            @Override
+            protected Task<Void> createTask() {
+                return new Task<Void>() {
+                    @Override
+                    protected Void call() throws Exception {
+                        // Update the UI from the background task
+                        for (int i=0;i<60;i++){
+                            Platform.runLater(() -> {
+                                time ++;
+                                if (timeObserver != null) {
+                                    timeObserver.handle();
+                                }
+                            });
+                            Thread.sleep(1_000);
+                        }
+                        Platform.runLater(() -> {
+                            if (activeTimer){
+                                nextRole();
+                                time=0;
+                            }
+                        });
+                        return null;
+                    }
+                };
+            }
+        };
+        //service.setPeriod(Duration.seconds(10));
+    }
+    public int getTime(){
+        return this.time;
+    }
+    public void resetTime(){
+        this.time=0;
+    }
 }
