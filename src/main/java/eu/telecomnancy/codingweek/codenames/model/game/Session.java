@@ -41,6 +41,15 @@ public class Session {
         }
     }
 
+    public void clone(Session target) {
+        this.config = target.getConfig();
+        this.redTeam.clone(target.getRedTeam());
+        this.blueTeam.clone(target.getBlueTeam());
+        this.board.clone(target.getBoard());
+        this.currentColor = target.getCurrentColor();
+        this.agent = target.isAgent();
+    }
+
     public ColoredTeam getRedTeam() {
         return this.redTeam;
     }
@@ -103,10 +112,12 @@ public class Session {
         this.colorObserver = observer;
     }
 
+    @JsonIgnore
     public boolean isAgent() {
         return this.agent;
     }
 
+    @JsonIgnore
     private void changeRole(boolean agent) {
         this.agent = agent;
         if (roleObserver != null) {
@@ -114,6 +125,7 @@ public class Session {
         }
     }
 
+    @JsonIgnore
     public void nextRole() {
         if (isAgent()){
             changeRole(false);
@@ -123,15 +135,18 @@ public class Session {
         }
     }
 
+    @JsonIgnore
     public Executer getExecuter() {
         return this.executer;
     }
 
+    @JsonIgnore
     public void guessCard(Card card) {
         getExecuter().addCommand(new GuessCardCommand(card, this));
         getExecuter().executeAll();
     }
 
+    @JsonIgnore
     public void addClue(Clue clue) {
         getExecuter().addCommand(new SetClueCommand(clue, this));
         getExecuter().executeAll();

@@ -3,8 +3,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<HBox fx:id="footer" HBox.hgrow="ALWAYS" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.codingweek.codenames.controller.GameFooterController">        
+<HBox fx:id="footerComp" HBox.hgrow="ALWAYS" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.codingweek.codenames.controller.GameFooterController" spacing = "5">        
     <Button fx:id="quitButton" text="Quitter le jeu" onAction="#onQuit"/>
+    <Button fx:id="saveButton" text="Sauvegarder" onAction="#onSave"/>
     <Region HBox.hgrow="ALWAYS"/>
     <TextField fx:id="word" />
     <Spinner fx:id="spinner" min="1" max="99" prefWidth="60" layoutX="50" layoutY="50">

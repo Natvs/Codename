@@ -11,8 +11,9 @@
     <rowConstraints>
         <RowConstraints percentHeight="20" />
         <RowConstraints percentHeight="45" />
-        <RowConstraints percentHeight="15" />
-        <RowConstraints percentHeight="15" />
+        <RowConstraints percentHeight="11" />
+        <RowConstraints percentHeight="11" />
+        <RowConstraints percentHeight="11" />
         <RowConstraints percentHeight="10" />
     </rowConstraints>
 
@@ -33,12 +34,15 @@
 
         <Button fx:id="newGameButton" onAction="#onNewGame" text="Nouvelle partie"
             GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+        
+        <Button fx:id="loadGameButton" onAction="#onLoadGame" text="Charger une partie"
+            GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
 
         <Button fx:id="quitButton" onAction="#onQuit" text="Quitter" GridPane.columnIndex="0"
-            GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+            GridPane.halignment="CENTER" GridPane.rowIndex="4" />
 
         <Label fx:id="Subtitle" text="by AnthropicPotato - APt" GridPane.halignment="CENTER"
-            GridPane.rowIndex="4" />
+            GridPane.rowIndex="5" />
     </children>
 
 </GridPane>
