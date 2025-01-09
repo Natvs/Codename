@@ -192,7 +192,8 @@ public class Session {
 
     public void setTimer() {
         // Create a ScheduledService to run periodically
-        time = 0;
+        resetTime();
+        Session session = this;
         service = new ScheduledService<Void>() {
             @Override
             protected Task<Void> createTask() {
@@ -200,19 +201,20 @@ public class Session {
                     @Override
                     protected Void call() throws Exception {
                         // Update the UI from the background task
-                        for (int i=0;i<60;i++){
+                        int timeMax = session.isAgent() ? session.getConfig().timerAgent*10 : session.getConfig().timerSpy*10;
+                        for (int i=0;i<timeMax ;i++){
                             Platform.runLater(() -> {
-                                time ++;
+                                time --;
                                 if (timeObserver != null) {
                                     timeObserver.handle();
                                 }
                             });
-                            Thread.sleep(1_000);
+                            Thread.sleep(100);
                         }
                         Platform.runLater(() -> {
                             if (activeTimer){
-                                nextRole();
-                                time=0;
+                                addClue(new Clue("Pas d'indice", 1));
+                                resetTime();
                                 this.cancel();
                             }
                         });
@@ -227,6 +229,6 @@ public class Session {
         return this.time;
     }
     public void resetTime(){
-        this.time=0;
+        this.time = isAgent() ? getConfig().timerAgent*10 : getConfig().timerSpy*10;
     }
 }
