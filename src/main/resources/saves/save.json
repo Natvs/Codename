@@ -1,0 +1,222 @@
+{
+  "config" : {
+    "heigth" : 5,
+    "width" : 5,
+    "blueAgentsList" : [ {
+      "name" : "joueur 1"
+    }, {
+      "name" : "joueur 2"
+    }, {
+      "name" : "Lucas"
+    } ],
+    "blueSpiesList" : [ {
+      "name" : "joueur 3"
+    }, {
+      "name" : "joueur 4"
+    }, {
+      "name" : "Nathan"
+    } ],
+    "redAgentsList" : [ {
+      "name" : "joueur 5"
+    }, {
+      "name" : "joueur 6"
+    }, {
+      "name" : "Luca"
+    } ],
+    "redSpiesList" : [ {
+      "name" : "joueur 7"
+    }, {
+      "name" : "joueur 8"
+    }, {
+      "name" : "Arthur"
+    } ]
+  },
+  "redTeam" : {
+    "color" : "RED",
+    "cluesList" : [ ],
+    "agentTeam" : {
+      "playersList" : [ {
+        "name" : "joueur 5"
+      }, {
+        "name" : "joueur 6"
+      }, {
+        "name" : "Luca"
+      } ]
+    },
+    "spyTeam" : {
+      "playersList" : [ {
+        "name" : "joueur 7"
+      }, {
+        "name" : "joueur 8"
+      }, {
+        "name" : "Arthur"
+      } ]
+    },
+    "score" : 0
+  },
+  "blueTeam" : {
+    "color" : "BLUE",
+    "cluesList" : [ ],
+    "agentTeam" : {
+      "playersList" : [ {
+        "name" : "joueur 1"
+      }, {
+        "name" : "joueur 2"
+      }, {
+        "name" : "Lucas"
+      } ]
+    },
+    "spyTeam" : {
+      "playersList" : [ {
+        "name" : "joueur 3"
+      }, {
+        "name" : "joueur 4"
+      }, {
+        "name" : "Nathan"
+      } ]
+    },
+    "score" : 0
+  },
+  "board" : {
+    "width" : 5,
+    "heigth" : 5,
+    "grid" : [ [ {
+      "name" : "effort",
+      "color" : "BLUE",
+      "revealed" : false
+    }, {
+      "name" : "noyau",
+      "color" : "BLUE",
+      "revealed" : false
+    }, {
+      "name" : "incendie",
+      "color" : "BLUE",
+      "revealed" : false
+    }, {
+      "name" : "doigt",
+      "color" : "WHITE",
+      "revealed" : false
+    }, {
+      "name" : "aquarium",
+      "color" : "BLUE",
+      "revealed" : false
+    } ], [ {
+      "name" : "galette",
+      "color" : "BLACK",
+      "revealed" : false
+    }, {
+      "name" : "jeu",
+      "color" : "BLUE",
+      "revealed" : false
+    }, {
+      "name" : "shampoing",
+      "color" : "WHITE",
+      "revealed" : false
+    }, {
+      "name" : "tampon",
+      "color" : "RED",
+      "revealed" : false
+    }, {
+      "name" : "corbeau",
+      "color" : "WHITE",
+      "revealed" : false
+    } ], [ {
+      "name" : "mercredi",
+      "color" : "RED",
+      "revealed" : false
+    }, {
+      "name" : "nez",
+      "color" : "WHITE",
+      "revealed" : false
+    }, {
+      "name" : "barque",
+      "color" : "WHITE",
+      "revealed" : false
+    }, {
+      "name" : "place",
+      "color" : "BLUE",
+      "revealed" : false
+    }, {
+      "name" : "bouée",
+      "color" : "RED",
+      "revealed" : false
+    } ], [ {
+      "name" : "moteur",
+      "color" : "RED",
+      "revealed" : false
+    }, {
+      "name" : "sortie",
+      "color" : "RED",
+      "revealed" : false
+    }, {
+      "name" : "chêne",
+      "color" : "RED",
+      "revealed" : false
+    }, {
+      "name" : "fil",
+      "color" : "WHITE",
+      "revealed" : false
+    }, {
+      "name" : "jambe",
+      "color" : "BLUE",
+      "revealed" : false
+    } ], [ {
+      "name" : "bricolage",
+      "color" : "WHITE",
+      "revealed" : false
+    }, {
+      "name" : "sucre",
+      "color" : "BLUE",
+      "revealed" : false
+    }, {
+      "name" : "poussette",
+      "color" : "BLUE",
+      "revealed" : false
+    }, {
+      "name" : "montagne",
+      "color" : "RED",
+      "revealed" : false
+    }, {
+      "name" : "moustache",
+      "color" : "RED",
+      "revealed" : false
+    } ] ]
+  },
+  "currentColor" : "BLUE",
+  "agent" : true,
+  "executer" : {
+    "historic" : [ ]
+  },
+  "currentTeam" : {
+    "playersList" : [ {
+      "name" : "joueur 1"
+    }, {
+      "name" : "joueur 2"
+    }, {
+      "name" : "Lucas"
+    } ]
+  },
+  "currentColoredTeam" : {
+    "color" : "BLUE",
+    "cluesList" : [ ],
+    "agentTeam" : {
+      "playersList" : [ {
+        "name" : "joueur 1"
+      }, {
+        "name" : "joueur 2"
+      }, {
+        "name" : "Lucas"
+      } ]
+    },
+    "spyTeam" : {
+      "playersList" : [ {
+        "name" : "joueur 3"
+      }, {
+        "name" : "joueur 4"
+      }, {
+        "name" : "Nathan"
+      } ]
+    },
+    "score" : 0
+  }
+}
