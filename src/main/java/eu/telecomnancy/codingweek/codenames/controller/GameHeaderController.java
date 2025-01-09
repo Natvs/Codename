@@ -39,7 +39,6 @@ public class GameHeaderController {
                 session.resetTime();
             }
         }
-        //timer.setText("Timer: ");
     }
 
     private void setCurrentTeam(){

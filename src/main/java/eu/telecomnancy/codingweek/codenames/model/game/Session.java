@@ -32,6 +32,7 @@ public class Session {
     private RoleSetObserver roleObserver = null;
     private ColorSetObserver colorObserver = null;
     private TimeObserver timeObserver = null;
+    private boolean activeTimer = false;
 
     public Session() {
         this.config = new GameConfig();
@@ -132,6 +133,14 @@ public class Session {
         getExecuter().executeAll();
     }
 
+    public boolean getActiveTimer() {
+        return activeTimer;
+    }
+
+    public void setActiveTimer(boolean activeTimer){
+        this.activeTimer = activeTimer;
+    }
+
     @JsonIgnore
     public ScheduledService<Void> getTimer(){
         return this.service;
@@ -157,8 +166,10 @@ public class Session {
                             Thread.sleep(1_000);
                         }
                         Platform.runLater(() -> {
-                            nextRole();
-                            time=0;
+                            if (activeTimer){
+                                nextRole();
+                                time=0;
+                            }
                         });
                         return null;
                     }
