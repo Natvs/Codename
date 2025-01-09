@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Spinner?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
 <GridPane fx:id="newConfigView" stylesheets="@../style/newConfig.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.codingweek.codenames.controller.NewConfigController">
 
     <rowConstraints>
+        <RowConstraints vgrow="ALWAYS" />
         <RowConstraints vgrow="ALWAYS" />
         <RowConstraints vgrow="ALWAYS" />
         <RowConstraints vgrow="ALWAYS" />
@@ -25,8 +20,83 @@
     </columnConstraints>
 
     <children>
-        <Label text="Nombre de joueurs : " GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
-        <Spinner fx:id="nbPlayers" amountToStepBy="1" initialValue="4" max="8" min="2" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
+
+        <GridPane fx:id="playersGrid" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="0">
+            <rowConstraints>
+                <RowConstraints vgrow="ALWAYS" />
+                <RowConstraints vgrow="ALWAYS" />
+                <RowConstraints vgrow="ALWAYS" />
+                <RowConstraints vgrow="ALWAYS" />
+            </rowConstraints>
+
+            <columnConstraints>
+                <ColumnConstraints hgrow="ALWAYS" />
+                <ColumnConstraints hgrow="ALWAYS" />
+                <ColumnConstraints hgrow="ALWAYS" />
+                <ColumnConstraints hgrow="ALWAYS" />
+            </columnConstraints>
+
+            <children>
+                
+                <Label text="Repartition des joueurs :" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.columnSpan="4" />
+                <Label text="Equipe bleue : " GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.columnSpan="2" />
+                <Label text="Equipe rouge : " GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.columnSpan="2" />
+                <Label text="Agents : " GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                <Label text="Espions : " GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                <Label text="Agents : " GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                <Label text="Espions : " GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+
+                <GridPane fx:id="blueAgentGrid" GridPane.columnIndex="0" GridPane.rowIndex="3">
+                    <rowConstraints>
+                        <RowConstraints vgrow="ALWAYS" />
+                        <RowConstraints vgrow="ALWAYS" />
+                    </rowConstraints>
+                    <children>
+                        <TextField fx:id="blueAgent1" />
+                        <Button fx:id="addBlueAgent" onAction="#onAddBlueAgent" 
+                        text="+" GridPane.rowIndex="1" GridPane.halignment="CENTER"/>
+                    </children>
+                </GridPane>
+
+                <GridPane fx:id="blueSpyGrid" GridPane.columnIndex="1" GridPane.rowIndex="3" >
+                    <rowConstraints>
+                        <RowConstraints vgrow="ALWAYS" />
+                        <RowConstraints vgrow="ALWAYS" />
+                        <RowConstraints vgrow="ALWAYS" />
+                    </rowConstraints>
+                    <children>
+                        <TextField fx:id="blueSpy1" />
+                        <Button fx:id="addBlueSpy" onAction="#onAddBlueSpy" text="+"
+                            GridPane.rowIndex="1" GridPane.halignment="CENTER" />
+                    </children>
+                </GridPane>
+
+                <GridPane fx:id="redAgentGrid" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                    <rowConstraints>
+                        <RowConstraints vgrow="ALWAYS" />
+                        <RowConstraints vgrow="ALWAYS" />
+                    </rowConstraints>
+                    <children>
+                        <TextField fx:id="redAgent1" />
+                        <Button fx:id="addRedAgent" onAction="#onAddRedAgent" text="+"
+                            GridPane.rowIndex="1" GridPane.halignment="CENTER" />
+                    </children>
+                </GridPane>
+
+                <GridPane fx:id="redSpyGrid" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                    <rowConstraints>
+                        <RowConstraints vgrow="ALWAYS" />
+                        <RowConstraints vgrow="ALWAYS" />
+                        <RowConstraints vgrow="ALWAYS" />
+                    </rowConstraints>
+                    <children>
+                        <TextField fx:id="redSpy1" />
+                        <Button fx:id="addRedSpy" onAction="#onAddRedSpy" text="+"
+                            GridPane.rowIndex="1" GridPane.halignment="CENTER" />
+                    </children>
+                </GridPane>
+            </children>
+        </GridPane>
 
         <Label text="Taille de la grille : " GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
         <HBox GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
@@ -38,9 +108,32 @@
         <Label text="Thématique : " GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
         <ComboBox fx:id="thematicSelection" onAction="#onThematicSelection" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
 
-        <Button fx:id="startButton" onAction="#onStart" text="C'est parti !" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+        <GridPane fx:id="timerGrid" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+            <rowConstraints>
+                <RowConstraints vgrow="ALWAYS" />
+                <RowConstraints vgrow="ALWAYS" />
+                <RowConstraints vgrow="ALWAYS" />
+            </rowConstraints>
+            <columnConstraints>
+                <ColumnConstraints hgrow="ALWAYS" />
+                <ColumnConstraints hgrow="ALWAYS" />
+                <ColumnConstraints maxWidth="40" minWidth="40" />
+            </columnConstraints>
+            <children>
+                <Label text="Activer le timer : " GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
+                <CheckBox fx:id="timerCheck" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0" onAction="#onTimerCheck" />
+                <Label fx:id="agentTimerDesc" text="Timer Agent : " GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                <Slider fx:id="agentTimer" max="180" min="20" value="60" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                <Label fx:id="agentTimerLabel" text="30" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                <Label fx:id="spyTimerDesc" text="Timer Espion : " GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                <Slider fx:id="spyTimer" max="50" min="10" value="40" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                <Label fx:id="spyTimerLabel" text="30" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            </children>
+        </GridPane>
 
-        <Button onAction="#onBack" text="Retour" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="4" />
+        <Button fx:id="startButton" onAction="#onStart" text="C'est parti !" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+
+        <Button onAction="#onBack" text="Retour" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="5" />
     </children>
 
 </GridPane>

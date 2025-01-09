@@ -1,29 +1,40 @@
 package eu.telecomnancy.codingweek.codenames.model.board;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import eu.telecomnancy.codingweek.codenames.model.color.Color;
 import eu.telecomnancy.codingweek.codenames.utils.openCardsService;
 
 public class Board {
     
-    private int length;
+    private int heigth;
     private int width; 
     private Card[][] grid;
 
-    public Board(int length, int width) {
-        this.length = length;
+    public Board(@JsonProperty("height") int height,@JsonProperty("width") int width) {
+        this.heigth = height;
         this.width = width;
-        this.grid = openCardsService.initGridCards(length, width);
+        this.grid = openCardsService.initGridCards(height, width);
     }
 
-    public int getLength() {
-        return this.length;
+    public void clone(Board target) {
+        this.heigth = target.getHeigth();
+        this.width = target.getWidth();
+        this.grid = target.getGrid();
     }
 
-    public int getWiidth() {
+    public void setSize(int width, int heigth) {
+        this.heigth = heigth;
+        this.width = width;
+        this.grid = openCardsService.initGridCards(heigth, width);
+    }
+
+    public int getHeigth() {
+        return this.heigth;
+    }
+
+    public int getWidth() {
         return this.width;
-    }
-
-    public int getNumberCards() {
-        return this.length * this.width;
     }
 
     public Card[][] getGrid() {
@@ -32,6 +43,18 @@ public class Board {
 
     public Card getCard(int i, int j) {
         return this.grid[i][j];
+    }
+
+    public int getRemainingCards(Color color){
+        int number = 0;
+        for (int j = 0; j < heigth; j++) {
+            for (int i = 0; i < width; i++) {
+                if (grid[i][j].getColor() == color && !grid[i][j].getRevealed()) {
+                    number ++;
+                }
+            }
+        }
+        return number;
     }
 
 }

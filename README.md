@@ -31,33 +31,39 @@
 - [X] 09/09: Création de testes pour la structure "Thème"
 
 ### Luca Mandrelli :
-- [x] 06/01: Implémentation de la fenètre "Acceuil" :
+- [X] 06/01: Implémentation de la fenètre "Acceuil" :
         - Ajouter un bouton "Nouvelle Partie"
         - Ajouter un bouton "Quitter"
-- [x] 06/01: Implémentation de la fenètre "Menu Configuration" :
+- [X] 06/01: Implémentation de la fenètre "Menu Configuration" :
         - Ajouter un bouton statique "Joueur" (Pour fixer le nombre de joueur)
         - Ajouter un bouton statique "Grille" (pour fixer la taille de la grille)
         - Ajouter un bouton statique "Thématique" (pour choisir un thème de mot)
         - Ajouter un bouton "Acceuil"
-- [ ] 06/01: Implémentation de la fenètre "Transition" :
-        - Afficher l'Equipe (Bleu ou Rouge) et le Groupe (Espion ou Maitre-Espion)
-        - Ajouter un bouton "Jouer"
-- [ En cours ] 06/01: Implémentation de la fenètre "Partie (Maitre-Espion)" :
+- [X] 06/01-08/01: Implémentation de la fenètre "Partie (Maitre-Espion)" :
         - Implémenter l'affichage de la grille
         - Afficher les cartes couleur déjà positionnée sur la grille
         - Ajouter un bouton "Sauvegarder et Quitter"
         - Ajouter un bouton "Passe" (pour terminer le tour et transissionner)
-        - Implémenter l'affichage de la carte clée dans la grille
-        - Ajouter un bouton "Mot"
-        - Ajouter un bouton "Nombre"
-- [ En cours ] 06/01: Implémentation de la fenètre "Partie (Espion)" :
-        - Implémenter l'affichage de la grille
-        - Afficher les cartes couleur déjà positionnée sur la grille
-        - Ajouter un bouton "Sauvegarder et Quitter"
-        - Ajouter un bouton "Passe" (pour terminer le tour et transissionner)
-        - Afficher le mot indice du Maitre-Espion 
-        - Afficher le nombre de mot à deviner par le Maitre-Espion 
-        - Ajouter un bouton "Selectionner"
+        - Implémenter l'affichage de la carte clée dans la grille pour l'espion
+- [X] 08/01 : Changement du "Menu Configuration" : 
+        - Ajout d'une gestion de la répartition de l'équipe
+        - Validation du formulaire
+        - Relié au backend
+        - Les champs textes peuvent etre ajoutés et supprimés dynamiquement
+- [X] 08/01 : Generation d'image pour chaque mots :
+        - Config de stable diffusion, premiers tests de prompts
+        - Faire tourner stable diffusion sur le mac, verifier les resultats
+- [X]  09/01 : Fix de la grille de jeu : 
+        - La config de la grille n'est pas repectée
+- [ ]  09/01 : Gestion de la sauvegarde sur le front :
+        - Ajouter les boutons de sauvegarde et de chargement de sauvegarde
+        - Gerer le path de sauvegarde et load par boite de dialogue
+- [ ]  09/01 : CSS -> rework du design pour que ce soit ✨ visuellement potable ✨
+- [ ]  Ajout des themes dans le menu de configuration :
+        - Propose des mots au fil des entrées clavier (si c'est possible sur JavaFX proprement)
+        - Recuperer la liste de mots
+        - La donner au generateur de theme d'Arthur
+        - Remplacer le dictionnaire de jeu par celui des champs lexicaux choisis.
 
 ### Lucas Simonneau :
 - [X] 06/01: Implémentation de gestion de fichier :
@@ -67,7 +73,12 @@
         - Selection d'un nombre fini de mots aléatoire
         - Asignement d'une couleur pour chaque mot
         - Convertion sous forme de grille
-- [X] 06/01: Implémentation de la musique au jeu
+- [X] 07/01: Implémentation de la musique au jeu
+- [X] 08/01: Implémentation de la fenètre "Partie" :
+        - Afficher le mot indice pour l'agent
+        - Ajouter un bouton "Mot" pour l'agent
+        - Afficher le nombre de mot à deviner par l'Agent
+        - Ajouter un bouton "Nombre" pour l'espion
 
 ### Nathans Vernois :
 - [X] 06/01: Implémentation du diagramme de classe
@@ -75,3 +86,16 @@
         - Implémentation du racourcis "Quitter"
         - Implémentation du racourcis "Nouvelle Partie" (Acceuil)
         - Implémentation du racourcis "Démarer Partie" (Menu configuration)
+- [X] 08/01: Implémentation de la fenètre "Partie" :
+        - Pouvoir selectionner la carte pour l'espion
+	- Ajout d'un observateur
+- [X] 08/01 Implémentation de la gestion des tours:
+	- Ajout dans le model
+	- Affichage du joueur actuel
+	- Gestion de la selection de la carte selon le role du joueur
+- [X] 09/01: Implémentation de la fenètre "Transition" :
+        - Afficher l'Equipe (Bleu ou Rouge) et le Groupe (Espion ou Maitre-Espion)
+        - Ajouter un bouton "Jouer"
+- [ ]  09/01 : Fin de jeu :
+        - Quand toutes les cartes d'une couleur sont revelées
+        - Carte noire selectionnée

@@ -26,9 +26,6 @@ public class openCardsService {
         } catch (IOException e){
             System.err.println("Erreur d'entrée/sortie\n"+e.getMessage());
             System.exit(2);
-        } catch (SecurityException e){
-            System.err.println("Erreur de sécurité\n");
-            System.exit(3);
         }
         return lines;
 
@@ -96,10 +93,10 @@ public class openCardsService {
 
     }
 
-    public static Card[][] convertToGrid(ArrayList<Card> list,int length,int width){
+    public static Card[][] convertToGrid(ArrayList<Card> list,int heigth,int width){
         // Initialisation de la Grille
-        Card[][] grid = new Card[length][width];
-        for (int j = 0; j < length; j++) {
+        Card[][] grid = new Card[heigth][width];
+        for (int j = 0; j < heigth; j++) {
             for (int i = 0; i < width; i++) {
                 int index = getIndex(i,j,width);
                 grid[j][i] = list.get(index);
@@ -110,11 +107,11 @@ public class openCardsService {
     public static int getIndex(int i,int j,int width){
         return j*width+i;
     }
-    public static Card[][] initGridCards(int length,int width){
+    public static Card[][] initGridCards(int heigth,int width){
         ArrayList<String> lines = openFile("src/main/resources/words/codenames_words.txt");
-        ArrayList<Card> choosenCards = setRandomCards(lines, length*width);
+        ArrayList<Card> choosenCards = setRandomCards(lines, heigth*width);
         configCards(choosenCards);
-        Card[][] grid = convertToGrid(choosenCards,length,width);
+        Card[][] grid = convertToGrid(choosenCards,heigth,width);
         return grid;
     }
 }

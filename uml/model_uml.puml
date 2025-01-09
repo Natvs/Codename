@@ -27,7 +27,7 @@ package codenames.model.color {
 package codenames.model.game {
 
     class GameConfig {
-        + int length
+        + int heigth
         + int width
         + List<Player> blueAgentsList
         + List<Player> blueSpiesList
@@ -35,15 +35,17 @@ package codenames.model.game {
         + List<Player> redSpiesList
     }
     class Session {
+        - GameConfig config
         - ColoredTeam redTeam
         - ColoredTeam blueTeam
         - Board board
         - GameConfig config
+        - Color currentColor
+        - Boolean agent
         + Session(GameConfig config)
         + ColoredTeam getBlueTeam()
         + ColoredTeam getRedTeam()
         + Board getBoard()
-        + GameConfig getConfig()
     }
 
     GameConfig --> Session
@@ -54,18 +56,14 @@ package codenames.model.team {
 
     abstract class Team {
         - List<Player> playersList
-        - List<Clue> cluesList
-        + Team(List<Player> playersList, List<Clue> cluesList)
+        + Team(List<Player> playersList)
         + List<Player> getPlayersList()
-        + List<Clue> getCluesList()
     }
     class AgentTeam extends Team {
-        + AgentTeam(List<Player> playersList, List<Clue> cluesList)
-        + void addClue(Clue clue)
+        + AgentTeam(List<Player> playersList)
     }
     class SpyTeam extends Team {
-        + SpyTeam(List<Player> players, List<Clue> cluesList)
-        + guess(Card card)
+        + SpyTeam(List<Player> playersList)
     }
 
 }
@@ -77,11 +75,16 @@ package codenames.model.coloredTeam {
         - List<Clue> cluesList
         - AgentTeam agentTeam
         - SpyTeam spyTeam
+        - int score
         + ColoredTeam(Color color, List<Player> AgentsList, List<Player> SpiesList)
         + Color getColor()
         + List<Clue> getCluesList()
         + AgentTeam getAgentTeam()
         + SpyTeam getSpyTeam()
+        + int getScore()
+        + void resetScore()
+        + void addScore(int points)
+        + void addClue(Clue clue)
     }
 
 }
@@ -96,7 +99,7 @@ package codenames.model.player {
 
 }
 
-package codenames.model.card {
+package codenames.model.board {
 
     class Card {
         - String name
@@ -106,10 +109,10 @@ package codenames.model.card {
         + String getName()
         + Color getColor()
         + Boolean getRevealed()
-        + void show()
-        + void hide()
+        + void setName(String name)
         + void setColor(Color color)
-        + CardState getState(Color color)
+        + void reveal()
+        + void hide()
     }
     enum CardState {
         GOOD,
@@ -118,10 +121,10 @@ package codenames.model.card {
         FORBIDDEN
     }
     class Board {
-        - int length
+        - int heigth
         - int width
         - Card[][] grid
-        + Board(int length, int width)
+        + Board(int heigth, int width)
         + int getLength()
         + int getWidth()
         + int getNumberCards()

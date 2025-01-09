@@ -1,86 +1,123 @@
 package eu.telecomnancy.codingweek.codenames.controller;
 
-import javafx.scene.control.Label;
-import java.util.ArrayList;
-import java.util.List;
-
+import eu.telecomnancy.codingweek.codenames.model.board.Card;
+import eu.telecomnancy.codingweek.codenames.model.game.Session;
+import eu.telecomnancy.codingweek.codenames.observers.game.ColorSetObserver;
+import eu.telecomnancy.codingweek.codenames.observers.game.RoleSetObserver;
 import eu.telecomnancy.codingweek.codenames.utils.GenerateCardUtil;
+import eu.telecomnancy.codingweek.codenames.utils.GenerateFooterUtil;
+import eu.telecomnancy.codingweek.codenames.utils.GenerateHeaderUtil;
+import javafx.concurrent.ScheduledService;
 import javafx.fxml.FXML;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.RowConstraints;
 
 public class GameController {
-    //FIXME: these should be loaded from GameConf
-    private List<String> tempWords = new ArrayList<>();
-    private int tempRows = 5;
-    private int tempCols = 5;
-
+    private Session session;
+    private String hint;
+    private int number;
     @FXML
     private GridPane gameView;
     @FXML
     private GridPane gameGrid;
+    @FXML 
+    private HBox header;
     @FXML
-    private Label currentTeam;
+    private HBox footer;
 
-    public GameController() {
-        tempWords.add("Patate");
-        tempWords.add("Froide");
-        tempWords.add("Entropie");
-        tempWords.add("Pomme");
-        tempWords.add("Poire");
-        tempWords.add("Voiture");
-        tempWords.add("Moto");
-        tempWords.add("Bateau");
-        tempWords.add("Avion");
-        tempWords.add("Chaude");
-        tempWords.add("Train");
-        tempWords.add("Bus");
-        tempWords.add("Vélo");
-        tempWords.add("Appareil");
-        tempWords.add("Téléphone");
-        tempWords.add("Ordinateur");
-        tempWords.add("Tablette");
-        tempWords.add("Télévision");
-        tempWords.add("Radio");
-        tempWords.add("Livre");
-        tempWords.add("Magazine");
-        tempWords.add("Marmite");
-        tempWords.add("Arbre");
-        tempWords.add("Plante");
-        tempWords.add("Fleur");
-        tempWords.add("Herbe");
+    public GameController(Session session) {
+        this.session = session;
     }
 
     @FXML
     private void initialize() {
+        session.setRoleObserver(new RoleSetObserver(this));
+        session.setColorObserver(new ColorSetObserver(this));
+        setEvents();
+        setHeader();
+        initCardsBoard();
+        setFooter();
+    }
+    private void setEvents() {
         gameView.setOnKeyPressed((keyevent) ->  {
             switch (keyevent.getCode()) {
-                case KeyCode.Q:
-                    onQuit();
-                    break;
-                default:
-                    break;
+                case KeyCode.Q -> onQuit();
+                default -> {}
             }
         });
-        for (int i = 0; i < tempRows; i++) {
+    }
+    private void initCardsBoard() {
+        for (int i = 0; i < session.getBoard().getWidth(); i++) {
             ColumnConstraints colConstraints = new ColumnConstraints();
             colConstraints.setHgrow(Priority.ALWAYS);
             gameGrid.getColumnConstraints().add(colConstraints);
-            for (int j = 0; j < tempCols; j++) {
-                var card = GenerateCardUtil.generateCard(tempWords.get(i*5+j));
-                gameGrid.add(card, i, j);
-            }
+        }
+        for (int j = 0; j < session.getBoard().getHeigth(); j++) {
             RowConstraints rowConstraints = new RowConstraints();
             rowConstraints.setVgrow(Priority.ALWAYS);
             gameGrid.getRowConstraints().add(rowConstraints);
         }
+        setCardsBoard();
     }
 
-    @FXML
-    private void onQuit() {
-        RootController.getInstance().changeView("/views/home.fxml");
+    public void setCardsBoard() {
+        Card[][] grid = session.getBoard().getGrid();
+        for (int i = 0; i < session.getBoard().getWidth(); i++) {
+            for (int j = 0; j < session.getBoard().getHeigth(); j++) {
+                var card = grid[j][i];
+                var cardBox = GenerateCardUtil.generateCard(card, session);
+                cardBox.setOnMouseClicked((mouveEvent) -> 
+                { 
+                    if (!card.getRevealed() && !session.isAgent()) {
+                        session.guessCard(card); 
+                    } 
+                });
+                gameGrid.add(cardBox, i, j);
+            }
+        }
     }
+
+    public void setHeader() {
+        var HeaderHBox = GenerateHeaderUtil.generateHeader(session);
+        header.getChildren().clear();
+        header.getChildren().add(HeaderHBox);
+    }
+
+    public void setFooter() {
+        var FooterHBox = GenerateFooterUtil.generateFooter(this,session);
+        footer.getChildren().clear();
+        footer.getChildren().add(FooterHBox);
+    }
+    
+    
+
+    public void onQuit() {
+        RootController.getInstance().changeView("/views/home.fxml");
+        ScheduledService<Void> service = session.getService();
+        service.cancel();
+    }
+
+    public void onSubmit() {
+        setHeader();
+        setCardsBoard();
+    }
+    public String getHint(){
+        return this.hint;
+    }
+    public void setHint(String hint) {
+        this.hint = hint;
+    }
+
+    public int getNumber() {
+        return this.number;
+    }
+    
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
 }

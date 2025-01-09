@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.media.Media;
+import javafx.scene.media.MediaException;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
@@ -23,12 +24,12 @@ public class Main extends Application {
             mediaPlayer.setAutoPlay(true);
             mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
             mediaPlayer.play();
-        } catch (IllegalArgumentException e) {
+        } catch (NullPointerException e) {
             // Handle invalid file path or unsupported format
             System.out.println("Error: The media file could not be loaded. Check the file path or format.");
             e.printStackTrace();
 
-        } catch (Exception e) {
+        } catch (MediaException e) {
             // Handle other general exceptions (e.g., issues during playback)
             System.out.println("An error occurred while trying to play the media.");
             e.printStackTrace();
@@ -43,6 +44,8 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(fxmlURL);
 
         Scene scene = new Scene(root, 900, 760);
+        primaryStage.setMinHeight(760);
+        primaryStage.setMinWidth(900);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Codenames for Coding Week");
         primaryStage.show();
