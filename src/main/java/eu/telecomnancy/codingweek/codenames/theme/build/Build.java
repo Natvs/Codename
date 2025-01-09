@@ -3,12 +3,12 @@ package eu.telecomnancy.codingweek.codenames.theme.build;
 import java.util.ArrayList;
 
 
-public class BuildTheme {
+public class Build {
     
-    ArrayList<String> wordsList;
+    private ArrayList<String> wordsList;
     private ArrayList<String> dicoTheme;
 
-    BuildTheme(ArrayList<String> wordsList) {
+    Build(ArrayList<String> wordsList) {
         this.wordsList = wordsList;
         this.dicoTheme = Utility.getDicoTheme(wordsList);
     }
