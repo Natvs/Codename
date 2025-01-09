@@ -10,8 +10,9 @@ public class RoleSetObserver extends SessionObserver {
 
     @Override
     public void handle() {
-        controller.setLabel();
+        controller.setHeader();
         controller.setCardsBoard();
+        controller.setFooter();
     }
 
 }

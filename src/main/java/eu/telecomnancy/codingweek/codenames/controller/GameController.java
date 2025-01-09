@@ -1,19 +1,18 @@
 package eu.telecomnancy.codingweek.codenames.controller;
 
 import eu.telecomnancy.codingweek.codenames.model.board.Card;
-import eu.telecomnancy.codingweek.codenames.model.clue.Clue;
-import eu.telecomnancy.codingweek.codenames.model.color.Color;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import eu.telecomnancy.codingweek.codenames.observers.game.ColorSetObserver;
 import eu.telecomnancy.codingweek.codenames.observers.game.RoleSetObserver;
 import eu.telecomnancy.codingweek.codenames.utils.GenerateCardUtil;
 import eu.telecomnancy.codingweek.codenames.utils.GenerateFooterUtil;
+import eu.telecomnancy.codingweek.codenames.utils.GenerateHeaderUtil;
+import javafx.concurrent.ScheduledService;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 
@@ -25,10 +24,10 @@ public class GameController {
     private GridPane gameView;
     @FXML
     private GridPane gameGrid;
+    @FXML 
+    private HBox header;
     @FXML
-    private Label currentTeam;
-    @FXML
-    private TextField word;
+    private HBox footer;
 
     public GameController(Session session) {
         this.session = session;
@@ -38,19 +37,16 @@ public class GameController {
     private void initialize() {
         session.setRoleObserver(new RoleSetObserver(this));
         session.setColorObserver(new ColorSetObserver(this));
-        setLabel();
         setEvents();
+        setHeader();
         initCardsBoard();
         setFooter();
     }
     private void setEvents() {
         gameView.setOnKeyPressed((keyevent) ->  {
             switch (keyevent.getCode()) {
-                case KeyCode.Q:
-                    onQuit();
-                    break;
-                default:
-                    break;
+                case KeyCode.Q -> onQuit();
+                default -> {}
             }
         });
     }
@@ -72,11 +68,11 @@ public class GameController {
         Card[][] grid = session.getBoard().getGrid();
         for (int i = 0; i < session.getBoard().getWidth(); i++) {
             for (int j = 0; j < session.getBoard().getHeigth(); j++) {
-                var card = grid[i][j];
+                var card = grid[j][i];
                 var cardBox = GenerateCardUtil.generateCard(card, session);
                 cardBox.setOnMouseClicked((mouveEvent) -> 
                 { 
-                    if (!card.getRevealed() && !session.isAgent()) { 
+                    if (!card.getRevealed() && !session.isAgent()) {
                         session.guessCard(card); 
                     } 
                 });
@@ -85,48 +81,30 @@ public class GameController {
         }
     }
 
-    public void setLabel() {
-        String role = new String();
-        String colorName = new String();
-        Color color = session.getCurrentColor();
-        if (session.isAgent()){
-            role = "agent";
-        } else {
-            role = "spy";
-        }
-        if (color == Color.BLUE){
-            colorName = "Blue";
-        } else if (color == Color.RED) {
-            colorName = "Red";
-        }
-        currentTeam.setText(colorName + " " + role);
+    public void setHeader() {
+        var HeaderHBox = GenerateHeaderUtil.generateHeader(session);
+        header.getChildren().clear();
+        header.getChildren().add(HeaderHBox);
     }
 
-    private void setFooter() {
-        System.out.println(session.isAgent());
-        var gameHBox = GenerateFooterUtil.generateFooter(this,session.isAgent());
-        gameView.getChildren().remove(2);
-        gameView.add(gameHBox,0,2);
+    public void setFooter() {
+        var FooterHBox = GenerateFooterUtil.generateFooter(this,session);
+        footer.getChildren().clear();
+        footer.getChildren().add(FooterHBox);
     }
+    
+    
 
     public void onQuit() {
         RootController.getInstance().changeView("/views/home.fxml");
+        ScheduledService<Void> service = session.getService();
+        service.cancel();
     }
 
     public void onSubmit() {
-        if (session.isAgent()){
-            session.changeRole(false);
-            
-        } else {
-            session.setCurrentColor();
-            session.changeRole(true);
-        }
-        setLabel();
+        setHeader();
         setCardsBoard();
-        setFooter();
-        session.addClue(new Clue(0,2));
     }
-
     public String getHint(){
         return this.hint;
     }

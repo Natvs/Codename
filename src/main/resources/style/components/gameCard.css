@@ -1,7 +1,44 @@
 GridPane {
     -fx-background-color: #f0f0f0;
-
     -fx-border-color: #d0d0d0;
+    
     -fx-border-width: 1.5;
     -fx-border-radius: 6.5;
+    -fx-background-radius: 6.5;
+}
+
+#gameCard-red {
+    -fx-background-color: #b50000;
+    -fx-border-color: #b70000;
+}
+#gameCard-red-light {
+    -fx-background-color: #b79191;
+    -fx-border-color: #ffffff;
+}
+
+#gameCard-blue {
+    -fx-background-color: #0000FF;
+    -fx-border-color: #0e00a4;
+}
+#gameCard-blue-light {
+    -fx-background-color: #bfbfff;
+    -fx-border-color: #ffffff;
+}
+
+#gameCard-white {
+    -fx-background-color: #a7a7a7;
+    -fx-border-color: #5f5f5f;
+}
+#gameCard-white-light {
+    -fx-background-color: #e4e4e4;
+    -fx-border-color: #f5f5f5;
+}
+
+#gameCard-black {
+    -fx-background-color: #000000;
+    -fx-border-color: #2e2e2e;
+}
+#gameCard-black-light {
+    -fx-background-color: #818181;
+    -fx-border-color: #fffdfd;
 }

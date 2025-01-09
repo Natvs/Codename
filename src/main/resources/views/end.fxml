@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane xmlns="http://javafx.com/javafx/23.0.1" stylesheets="@../style/end.css"
+    xmlns:fx="http://javafx.com/fxml/1" 
+    fx:controller="eu.telecomnancy.codingweek.codenames.controller.EndController">
+    
+    <rowConstraints>
+        <RowConstraints vgrow="ALWAYS" />
+        <RowConstraints vgrow="ALWAYS" />
+    </rowConstraints>
+
+    <columnConstraints>
+        <ColumnConstraints hgrow="ALWAYS" />
+    </columnConstraints>
+
+    <Label fx:id="teamLabel" text="Couleur de l'équipe gagnante" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="CENTER" />
+    <Button fx:id="nextButton" text="Continuer" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.halignment="CENTER" onAction = "#onContinue" />
+
+</GridPane>

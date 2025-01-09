@@ -26,7 +26,6 @@ def trier_liste(liste_mot):
     def f(mot):
         mot_capitalise = mot.upper()
         mot_capitalise_sansAccent = unidecode.unidecode(mot_capitalise)
-        print(mot_capitalise_sansAccent)
         return mot_capitalise_sansAccent
     liste_mot.sort(key=f)
 

@@ -10,7 +10,7 @@ public class ColorSetObserver extends SessionObserver {
 
     @Override
     public void handle() {
-        controller.setLabel();
+        controller.setHeader();
         controller.setCardsBoard();
     }
 

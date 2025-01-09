@@ -11,6 +11,7 @@
         <RowConstraints vgrow="ALWAYS" />
         <RowConstraints vgrow="ALWAYS" />
         <RowConstraints vgrow="ALWAYS" />
+        <RowConstraints vgrow="ALWAYS" />
     </rowConstraints>
     
     <columnConstraints>
@@ -107,9 +108,32 @@
         <Label text="Thématique : " GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
         <ComboBox fx:id="thematicSelection" onAction="#onThematicSelection" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
 
-        <Button fx:id="startButton" onAction="#onStart" text="C'est parti !" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+        <GridPane fx:id="timerGrid" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+            <rowConstraints>
+                <RowConstraints vgrow="ALWAYS" />
+                <RowConstraints vgrow="ALWAYS" />
+                <RowConstraints vgrow="ALWAYS" />
+            </rowConstraints>
+            <columnConstraints>
+                <ColumnConstraints hgrow="ALWAYS" />
+                <ColumnConstraints hgrow="ALWAYS" />
+                <ColumnConstraints maxWidth="40" minWidth="40" />
+            </columnConstraints>
+            <children>
+                <Label text="Activer le timer : " GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
+                <CheckBox fx:id="timerCheck" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0" onAction="#onTimerCheck" />
+                <Label fx:id="agentTimerDesc" text="Timer Agent : " GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                <Slider fx:id="agentTimer" max="180" min="20" value="60" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                <Label fx:id="agentTimerLabel" text="30" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                <Label fx:id="spyTimerDesc" text="Timer Espion : " GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                <Slider fx:id="spyTimer" max="50" min="10" value="40" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                <Label fx:id="spyTimerLabel" text="30" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            </children>
+        </GridPane>
 
-        <Button onAction="#onBack" text="Retour" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="4" />
+        <Button fx:id="startButton" onAction="#onStart" text="C'est parti !" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+
+        <Button onAction="#onBack" text="Retour" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="5" />
     </children>
 
 </GridPane>

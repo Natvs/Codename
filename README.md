@@ -17,23 +17,28 @@
                 - Implémentation de la structure "Board"
                 - Implémentation de la structure "GameConfig"
                 - Implémentation de la structure "Session"
-- [X] 08/01: Création du dictionnaire des mot française
-- [X] 08/01: Création de la Base de Donnée pour l'IA:
-		- Création d'un script python pour récupérer la liste des champs lexical associer à un mot sur internet
-		- Création de scripts python pour générer la liste des champs lexical associer à chaque mot du dictionnaire
+- [X] 08/01: Création du dictionnaire de 1000 mots
+- [X] 08/01-09/01: Création de Script python pour la géstion de la Base de Donnée (BdD):
+                - Création d'un script python pour récupérer sur internet les champs léxicaus du dictionnaire 
+                        (Pour la création de thème et la BdD de l'IA)
+                - Création d'un script python pour télécharger les images sur internet
+                - Création d'un script python pour séléctionner et traiter les images téléchargé
+- [X] 09/01: Création des Base de Donée
+- [X] 09/01: Implémentation de la structure "Thème" pour la création automatique de thème
+                - Implémentation de la structure "Build"
+                - Implémentation de la structure "Utility"
+- [X] 09/01: Implémentation de la class "Search" dans la structure Thème pour la recherche de mot
+- [X] 09/09: Création de testes pour la structure "Thème"
 
 ### Luca Mandrelli :
-- [x] 06/01: Implémentation de la fenètre "Acceuil" :
+- [X] 06/01: Implémentation de la fenètre "Acceuil" :
         - Ajouter un bouton "Nouvelle Partie"
         - Ajouter un bouton "Quitter"
-- [x] 06/01: Implémentation de la fenètre "Menu Configuration" :
+- [X] 06/01: Implémentation de la fenètre "Menu Configuration" :
         - Ajouter un bouton statique "Joueur" (Pour fixer le nombre de joueur)
         - Ajouter un bouton statique "Grille" (pour fixer la taille de la grille)
         - Ajouter un bouton statique "Thématique" (pour choisir un thème de mot)
         - Ajouter un bouton "Acceuil"
-- [ ] 06/01: Implémentation de la fenètre "Transition" :
-        - Afficher l'Equipe (Bleu ou Rouge) et le Groupe (Espion ou Maitre-Espion)
-        - Ajouter un bouton "Jouer"
 - [X] 06/01-08/01: Implémentation de la fenètre "Partie (Maitre-Espion)" :
         - Implémenter l'affichage de la grille
         - Afficher les cartes couleur déjà positionnée sur la grille
@@ -48,6 +53,17 @@
 - [X] 08/01 : Generation d'image pour chaque mots :
         - Config de stable diffusion, premiers tests de prompts
         - Faire tourner stable diffusion sur le mac, verifier les resultats
+- [X]  09/01 : Fix de la grille de jeu : 
+        - La config de la grille n'est pas repectée
+- [ ]  09/01 : Gestion de la sauvegarde sur le front :
+        - Ajouter les boutons de sauvegarde et de chargement de sauvegarde
+        - Gerer le path de sauvegarde et load par boite de dialogue
+- [ ]  09/01 : CSS -> rework du design pour que ce soit ✨ visuellement potable ✨
+- [ ]  Ajout des themes dans le menu de configuration :
+        - Propose des mots au fil des entrées clavier (si c'est possible sur JavaFX proprement)
+        - Recuperer la liste de mots
+        - La donner au generateur de theme d'Arthur
+        - Remplacer le dictionnaire de jeu par celui des champs lexicaux choisis.
 
 ### Lucas Simonneau :
 - [X] 06/01: Implémentation de gestion de fichier :
@@ -77,3 +93,9 @@
 	- Ajout dans le model
 	- Affichage du joueur actuel
 	- Gestion de la selection de la carte selon le role du joueur
+- [X] 09/01: Implémentation de la fenètre "Transition" :
+        - Afficher l'Equipe (Bleu ou Rouge) et le Groupe (Espion ou Maitre-Espion)
+        - Ajouter un bouton "Jouer"
+- [ ]  09/01 : Fin de jeu :
+        - Quand toutes les cartes d'une couleur sont revelées
+        - Carte noire selectionnée

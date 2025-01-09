@@ -52,11 +52,15 @@ public class RootController {
             FXMLLoader loader = new FXMLLoader(fxmlURL);
             loader.setControllerFactory(iC -> {
                 if (iC == HomeController.class) {
-                    return new HomeController();
+                    return new HomeController(session);
                 } else if (iC == NewConfigController.class) {
                     return new NewConfigController(session);
                 } else if (iC == GameController.class) {
                     return new GameController(session);
+                } else if (iC == TransitionController.class) {
+                    return new TransitionController(session);
+                } else if (iC == EndController.class) {
+                    return new EndController(session);
                 } else {
                     return null;
                 }

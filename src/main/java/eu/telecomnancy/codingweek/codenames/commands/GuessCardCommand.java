@@ -1,5 +1,6 @@
 package eu.telecomnancy.codingweek.codenames.commands;
 
+import eu.telecomnancy.codingweek.codenames.controller.RootController;
 import eu.telecomnancy.codingweek.codenames.model.board.Card;
 import eu.telecomnancy.codingweek.codenames.model.color.Color;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
@@ -16,32 +17,40 @@ public class GuessCardCommand implements Command {
 
     @Override
     public void execute() {
-        if (session.getCurrentColor() == card.getColor()) {
-            session.getCurrentTeam().getCluesList().getLast().countDown();
-            if (session.getCurrentTeam().getCluesList().getLast().getCount() == 0) {
-                session.nextRole();
-            }
-        }
-        else {
+        session.getService().cancel();
+        if (card == null) {
             session.nextRole();
+            RootController.getInstance().changeView("/views/transition.fxml");
+            return;
+        } else if (session.getCurrentColor() == card.getColor()) {
+            session.getCurrentColoredTeam().getCluesList().getLast().countDown();
+            if (session.getCurrentColoredTeam().getCluesList().getLast().getCount() == 0) {
+                session.nextRole();
+                RootController.getInstance().changeView("/views/transition.fxml");
+            }
+        } else {
+            session.nextRole();
+            RootController.getInstance().changeView("/views/transition.fxml");
         }
 
         card.reveal();
         switch (card.getColor()) {
-            case Color.BLUE:
-                session.getBlueTeam().addScore(1);
-                break;
-            case Color.RED:
-                session.getRedTeam().addScore(1);
-                break;
-            default:
-                break;
+            case Color.BLUE -> session.getBlueTeam().addScore(1);
+            case Color.RED -> session.getRedTeam().addScore(1);
+            default -> {}
         }
+        checkEnd();
     }
 
-    @Override
-    public void undo() {
-        
+    private void checkEnd() {
+        if (session.getBoard().getRemainingCards(Color.RED) == 0) {
+            session.setCurrentColor(Color.RED);
+            RootController.getInstance().changeView("/views/end.fxml");
+        }
+        else if (session.getBoard().getRemainingCards(Color.BLUE) == 0) {
+            session.setCurrentColor(Color.BLUE);
+            RootController.getInstance().changeView("/views/end.fxml");
+        }
     }
 
 }

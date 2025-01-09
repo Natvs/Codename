@@ -1,17 +1,22 @@
 package eu.telecomnancy.codingweek.codenames.model.clue;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Clue {
     
-    private int wordId;
+    private String word;
     private int count;
     
-    public Clue(int wordId, int count) {
-        this.wordId = wordId;
+    @JsonCreator
+    public Clue(@JsonProperty("word") String word, 
+                @JsonProperty("number") int count) {
+        this.word = word;
         this.count = count;
     }
 
-    public int getWordId() {
-        return this.wordId;
+    public String getWord() {
+        return this.word;
     }
 
     public int getCount() {
