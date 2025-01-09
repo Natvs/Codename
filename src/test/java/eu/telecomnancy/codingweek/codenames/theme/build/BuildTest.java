@@ -41,7 +41,7 @@ public class BuildTest {
         // Teste 3: avec "zoo"
         listDigit = Utility.getLexicalFieldIntegerList(1000, dico_lexicalField);
         listDigit_expected = new ArrayList<>(Arrays.asList(
-            5685, 28, 139, 36, 491, 671, 438, 827, 527, 343, 661, 74, 467, 872, 977, 997
+            685, 28, 139, 36, 491, 671, 438, 827, 527, 343, 661, 74, 467, 872, 977, 997
         ));
         assertEquals(listDigit, listDigit_expected);
 

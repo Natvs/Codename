@@ -27,7 +27,7 @@ public class Utility {
     public static ArrayList<Integer> getLexicalFieldIntegerList(Integer wordId, ArrayList<String> dico_lexicalField) {
         // Obtenir la liste des id des mots du champ lexical "listDigit" du mot associé à l'id "wordId"
         
-        String ligne = dico_lexicalField.get(wordId);
+        String ligne = dico_lexicalField.get(wordId-1);
         ArrayList<Integer> listDigit = new ArrayList<>();
         
         String[] elements = ligne.split(",\\s*"); // Séparer la chaîne en utilisant la virgule comme délimiteur
@@ -54,7 +54,7 @@ public class Utility {
 
         ArrayList<String> lexicalFieldList = new ArrayList<>();
         for (Integer wordId : listDigit) {
-            String word = dico.get(wordId);
+            String word = dico.get(wordId-1);
             lexicalFieldList.add(word);
         }
         return lexicalFieldList;
