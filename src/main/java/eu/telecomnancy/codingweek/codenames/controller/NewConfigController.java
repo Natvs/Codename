@@ -4,6 +4,7 @@ import java.util.List;
 
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import eu.telecomnancy.codingweek.codenames.model.player.Player;
+import eu.telecomnancy.codingweek.codenames.utils.AutoCompleteTextField;
 import eu.telecomnancy.codingweek.codenames.utils.GeneratePlayerField;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
@@ -32,8 +33,6 @@ public class NewConfigController {
     private GridPane newConfigView;
     @FXML
     private Button startButton;
-    @FXML
-    private ComboBox<String> thematicSelection;
     @FXML
     private Spinner<Integer> nbRows;
     @FXML
@@ -83,6 +82,14 @@ public class NewConfigController {
     @FXML
     private Label spyTimerLabel;
 
+    //Theme
+    @FXML
+    private GridPane themeGrid;
+    @FXML
+    private AutoCompleteTextField themeField;
+    @FXML
+    private Label nbWordsLabel;
+
 
     private Boolean startEnable = false;
 
@@ -95,7 +102,6 @@ public class NewConfigController {
         nbRows.getValueFactory().setValue(session.getConfig().heigth);
         nbCols.getValueFactory().setValue(session.getConfig().width);
         initializeEvents();
-        disableStart();
         initializePlayers();
 
         agentTimer.setVisible(false);
@@ -111,7 +117,7 @@ public class NewConfigController {
         spyTimerLabel.textProperty().bind(
                 Bindings.format("%.0f s", spyTimer.valueProperty()));
         
-        thematicSelection.getItems().addAll("Tout", "Patate", "Entropie"); //FIXME: get from db
+        themeField.setEntries(session.getBoard().getFullWordList());
     }
 
     private void initializePlayers() {
@@ -323,11 +329,6 @@ public class NewConfigController {
             default:
                 break;
         }
-    }
-
-    @FXML
-    private void onThematicSelection() {
-        enableStart();
     }
 
     private void disableStart() {
