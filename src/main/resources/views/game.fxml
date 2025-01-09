@@ -17,10 +17,7 @@
     <children>
         <Label fx:id="currentTeam" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
         <GridPane fx:id="gameGrid" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-        <HBox spacing="10" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" >
-            <Button fx:id="quitButton" text="Quitter le jeu" onAction="#onQuit"/>
-            <TextField fx:id="word" />
-            <Button fx:id="nextPlayer" text="Submit" onAction="#onSubmit"/> 
+        <HBox fx:id="gameHBox" spacing="10" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" >
         </HBox>
     </children>
 </GridPane>

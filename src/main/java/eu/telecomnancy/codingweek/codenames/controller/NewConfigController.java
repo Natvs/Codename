@@ -1,6 +1,9 @@
 package eu.telecomnancy.codingweek.codenames.controller;
 
+import java.util.List;
+
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
+import eu.telecomnancy.codingweek.codenames.model.player.Player;
 import eu.telecomnancy.codingweek.codenames.utils.GeneratePlayerField;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,6 +12,7 @@ import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.Node;
 
 public class NewConfigController {
@@ -111,6 +115,62 @@ public class NewConfigController {
 
     @FXML
     private void onStart() {
+        List<Player> blueAgents = session.getBlueTeam().getAgentTeam().getPlayersList();
+        List<Player> blueSpys = session.getBlueTeam().getSpyTeam().getPlayersList();
+        List<Player> redAgents = session.getRedTeam().getAgentTeam().getPlayersList();
+        List<Player> redSpys = session.getRedTeam().getSpyTeam().getPlayersList();
+
+        blueAgents.clear();
+        blueSpys.clear();
+        redAgents.clear();
+        redSpys.clear();
+
+        blueAgents.add(new Player(blueAgent1.getText()));
+        blueSpys.add(new Player(blueSpy1.getText()));
+        redAgents.add(new Player(redAgent1.getText()));
+        redSpys.add(new Player(redSpy1.getText()));
+
+        for (int i = 1; i <= nbBlueAgents; i++) {
+            if (blueAgentGrid.getChildren().get(i) == null) {
+                continue;
+            } else if (blueAgentGrid.getChildren().get(i) instanceof HBox) {
+                if ((TextField)((HBox) blueAgentGrid.getChildren().get(i)).getChildren().get(0) == null) {
+                    continue;
+                }
+                blueAgents.add(new Player(((TextField)((HBox) blueAgentGrid.getChildren().get(i)).getChildren().get(0)).getText()));
+            }
+        }
+        for (int i = 1; i <= nbBlueSpy; i++) {
+            if (blueSpyGrid.getChildren().get(i) == null) {
+                continue;
+            } else if (blueSpyGrid.getChildren().get(i) instanceof HBox) {
+                if ((TextField)((HBox) blueSpyGrid.getChildren().get(i)).getChildren().get(0) == null) {
+                    continue;
+                }
+                blueSpys.add(new Player(((TextField)((HBox) blueSpyGrid.getChildren().get(i)).getChildren().get(0)).getText()));
+            }
+        }
+        for (int i = 1; i <= nbRedAgents; i++) {
+            if (redAgentGrid.getChildren().get(i) == null) {
+                continue;
+            } else if (redAgentGrid.getChildren().get(i) instanceof HBox) {
+                if ((TextField)((HBox) redAgentGrid.getChildren().get(i)).getChildren().get(0) == null) {
+                    continue;
+                }
+                redAgents.add(new Player(((TextField)((HBox) redAgentGrid.getChildren().get(i)).getChildren().get(0)).getText()));
+            }
+        }
+        for (int i = 1; i <= nbRedSpy; i++) {
+            if (redSpyGrid.getChildren().get(i) == null) {
+                continue;
+            } else if (redSpyGrid.getChildren().get(i) instanceof HBox) {
+                if ((TextField)((HBox) redSpyGrid.getChildren().get(i)).getChildren().get(0) == null) {
+                    continue;
+                }
+                redSpys.add(new Player(((TextField)((HBox) redSpyGrid.getChildren().get(i)).getChildren().get(0)).getText()));
+            }
+        }
+
         var config = session.getConfig();
         session.getBoard().setSize(config.width, config.heigth);
         RootController.getInstance().changeView("/views/game.fxml");
