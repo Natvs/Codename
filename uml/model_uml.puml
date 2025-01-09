@@ -39,13 +39,19 @@ package codenames.model.game {
         - ColoredTeam redTeam
         - ColoredTeam blueTeam
         - Board board
-        - GameConfig config
         - Color currentColor
         - Boolean agent
         + Session(GameConfig config)
         + ColoredTeam getBlueTeam()
         + ColoredTeam getRedTeam()
         + Board getBoard()
+        + GameConfig getConfig()
+        + Color getCurrentColor()
+        + void setCurrentColor(Color color)
+        + Boolean isAgent()
+        + void changeRole(Boolean agent)
+        + void guessCard(Card card)
+        + void addClue(Clue clue)
     }
 
     GameConfig --> Session
@@ -125,6 +131,152 @@ package codenames.model.board {
         - int width
         - Card[][] grid
         + Board(int heigth, int width)
+        + int getLength()
+        + int getWidth()
+        + int getNumberCards()
+        + Card[][] getGrid()
+        + Card getCard(int i, int j)
+    }
+
+    CardState --> Card
+    Card --o Board
+
+}
+
+Player --o Team
+Color --> ColoredTeam
+Color --> Card
+Board --> Session
+AgentTeam --> ColoredTeam
+SpyTeam --> ColoredTeam
+Clue --> ColoredTeam
+Clue --> Team
+
+@enduml
+@startuml
+
+package codenames.model.clue {
+
+    class Clue {
+        - int wordId
+        - int count
+        + Clue(int wordId, int count)
+        + int getWordId()
+        + int getCount()
+    }
+
+}
+
+package codenames.model.color {
+
+    enum Color {
+        NULL,
+        WHITE,
+        BLACK,
+        BLUE,
+        RED
+    }
+
+}
+
+package codenames.model.game {
+
+    class GameConfig {
+        + int length
+        + int width
+        + List<Player> blueAgentsList
+        + List<Player> blueSpiesList
+        + List<Player> redAgentsList
+        + List<Player> redSpiesList
+    }
+    class Session {
+        - ColoredTeam redTeam
+        - ColoredTeam blueTeam
+        - Board board
+        - GameConfig config
+        + Session(GameConfig config)
+        + ColoredTeam getBlueTeam()
+        + ColoredTeam getRedTeam()
+        + Board getBoard()
+        + GameConfig getConfig()
+    }
+
+    GameConfig --> Session
+ 
+}
+
+package codenames.model.team {
+
+    abstract class Team {
+        - List<Player> playersList
+        - List<Clue> cluesList
+        + Team(List<Player> playersList, List<Clue> cluesList)
+        + List<Player> getPlayersList()
+        + List<Clue> getCluesList()
+    }
+    class AgentTeam extends Team {
+        + AgentTeam(List<Player> playersList, List<Clue> cluesList)
+        + void addClue(Clue clue)
+    }
+    class SpyTeam extends Team {
+        + SpyTeam(List<Player> players, List<Clue> cluesList)
+        + guess(Card card)
+    }
+
+}
+
+package codenames.model.coloredTeam {
+
+    class ColoredTeam {
+        - Color color;
+        - List<Clue> cluesList
+        - AgentTeam agentTeam
+        - SpyTeam spyTeam
+        + ColoredTeam(Color color, List<Player> AgentsList, List<Player> SpiesList)
+        + Color getColor()
+        + List<Clue> getCluesList()
+        + AgentTeam getAgentTeam()
+        + SpyTeam getSpyTeam()
+    }
+
+}
+
+package codenames.model.player {
+
+    class Player {
+        - String name
+        + Player(String name)
+        + String getName()
+    }
+
+}
+
+package codenames.model.card {
+
+    class Card {
+        - String name
+        - Color color
+        - Boolean revealed
+        + Card(String name, Color color)
+        + String getName()
+        + Color getColor()
+        + Boolean getRevealed()
+        + void show()
+        + void hide()
+        + void setColor(Color color)
+        + CardState getState(Color color)
+    }
+    enum CardState {
+        GOOD,
+        ENEMY,
+        NEUTRAL,
+        FORBIDDEN
+    }
+    class Board {
+        - int length
+        - int width
+        - Card[][] grid
+        + Board(int length, int width)
         + int getLength()
         + int getWidth()
         + int getNumberCards()
