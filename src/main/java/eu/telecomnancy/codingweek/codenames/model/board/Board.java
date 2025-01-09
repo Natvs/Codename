@@ -2,6 +2,7 @@ package eu.telecomnancy.codingweek.codenames.model.board;
 
 import java.util.ArrayList;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import eu.telecomnancy.codingweek.codenames.model.color.Color;
@@ -12,6 +13,7 @@ public class Board {
     private int heigth;
     private int width; 
     private Card[][] grid;
+    @JsonIgnore
     private final ArrayList<String> fullWordList;
     private ArrayList<String> wordsList;
 
