@@ -102,7 +102,11 @@ public class GameController {
             else team = coloredTeam.getSpyTeam();
         }
         if (team != null) {
-            for (var player : team.getPlayersList()) builder.append(player.getName()).append(" - ");
+            boolean first = true;
+            for (var player : team.getPlayersList()) {
+                if (!first) builder.append(" - "); else first = false;
+                builder.append(player.getName());
+            }
         }
 
         currentTeam.setText(builder.toString());
