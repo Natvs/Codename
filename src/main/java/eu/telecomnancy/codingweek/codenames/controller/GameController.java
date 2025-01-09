@@ -24,7 +24,6 @@ public class GameController {
     private Session session;
     private String hint;
     private int number;
-    private ScheduledService<Void> service;
     @FXML
     private GridPane gameView;
     @FXML
@@ -114,7 +113,6 @@ public class GameController {
         }
         else {
             session.guessCard(null);
-            service.cancel();
         }
         setLabel();
         setCardsBoard();
@@ -132,12 +130,6 @@ public class GameController {
     
     public void setNumber(int number) {
         this.number = number;
-    }
-    public ScheduledService<Void> getService(){
-        return this.service;
-    }
-    public void setService(ScheduledService<Void> service){
-        this.service = service;
     }
 
 }
