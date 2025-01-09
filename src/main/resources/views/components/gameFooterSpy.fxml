@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<HBox fx:id="gameHBox" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.codingweek.codenames.controller.GameFooterController">        
+<HBox fx:id="footerComp" HBox.hgrow="ALWAYS" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.codingweek.codenames.controller.GameFooterController" spacing = "5">        
     <Button fx:id="quitButton" text="Quitter le jeu" onAction="#onQuit"/>
     <Region HBox.hgrow="ALWAYS"/>
     <Label fx:id="indication" />
