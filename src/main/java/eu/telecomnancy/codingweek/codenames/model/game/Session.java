@@ -85,7 +85,11 @@ public class Session {
         return this.currentColor;
     }
 
-    public void setCurrentColor() {
+    public boolean isAgent() {
+        return this.agent;
+    }
+
+    private void setCurrentColor() {
         if (this.currentColor == Color.RED){
             this.currentColor = Color.BLUE;
         } else {
@@ -96,6 +100,14 @@ public class Session {
         }
     }
 
+    public void setCurrentColor(Color color) {
+        this.currentColor = color;
+        if (colorObserver != null) {
+            colorObserver.handle();
+        }
+    }
+    
+
     public void setRoleObserver(RoleSetObserver observer) {
         this.roleObserver = observer;
     }
@@ -104,11 +116,7 @@ public class Session {
         this.colorObserver = observer;
     }
 
-    public boolean isAgent() {
-        return this.agent;
-    }
-
-    public void changeRole(boolean agent) {
+    private void changeRole(boolean agent) {
         this.agent = agent;
         if (roleObserver != null) {
             roleObserver.handle();

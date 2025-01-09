@@ -39,6 +39,15 @@ public class GuessCardCommand implements Command {
             case Color.RED -> session.getRedTeam().addScore(1);
             default -> {}
         }
+
+        if (session.getBoard().getRemainingCards(Color.RED) == 0) {
+            session.setCurrentColor(Color.RED);
+            RootController.getInstance().changeView("/views/end.fxml");
+        }
+        else if (session.getBoard().getRemainingCards(Color.BLUE) == 0) {
+            session.setCurrentColor(Color.BLUE);
+            RootController.getInstance().changeView("/views/end.fxml");
+        }
     }
 
 }
