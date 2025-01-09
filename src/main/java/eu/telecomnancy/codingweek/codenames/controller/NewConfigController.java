@@ -5,10 +5,14 @@ import java.util.List;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import eu.telecomnancy.codingweek.codenames.model.player.Player;
 import eu.telecomnancy.codingweek.codenames.utils.GeneratePlayerField;
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -63,6 +67,22 @@ public class NewConfigController {
     @FXML
     private Button addRedSpy;
 
+    //Timers
+    @FXML
+    private CheckBox timerCheck;
+    @FXML
+    private Label agentTimerDesc;
+    @FXML
+    private Slider agentTimer;
+    @FXML
+    private Slider spyTimer;
+    @FXML
+    private Label spyTimerDesc;
+    @FXML
+    private Label agentTimerLabel;
+    @FXML
+    private Label spyTimerLabel;
+
 
     private Boolean startEnable = false;
 
@@ -77,6 +97,20 @@ public class NewConfigController {
         initializeEvents();
         disableStart();
         initializePlayers();
+
+        agentTimer.setVisible(false);
+        spyTimer.setVisible(false);
+        agentTimerLabel.setVisible(false);
+        spyTimerLabel.setVisible(false);
+        agentTimerDesc.setVisible(false);
+        spyTimerDesc.setVisible(false);
+
+        agentTimerLabel.textProperty().bind(
+                Bindings.format("%.0f s", agentTimer.valueProperty()));
+
+        spyTimerLabel.textProperty().bind(
+                Bindings.format("%.0f s", spyTimer.valueProperty()));
+        
         thematicSelection.getItems().addAll("Tout", "Patate", "Entropie"); //FIXME: get from db
     }
 
@@ -106,6 +140,25 @@ public class NewConfigController {
         nbCols.valueProperty().addListener(((observable, oldValue, newValue) -> {
             session.getConfig().width = nbCols.getValue();
         }));
+    }
+
+    @FXML
+    private void onTimerCheck() {
+        if (timerCheck.isSelected()) {
+            agentTimerDesc.setVisible(true);
+            agentTimer.setVisible(true);
+            spyTimer.setVisible(true);
+            agentTimerLabel.setVisible(true);
+            spyTimerLabel.setVisible(true);
+            spyTimerDesc.setVisible(true);
+        } else {
+            agentTimerDesc.setVisible(false);
+            agentTimer.setVisible(false);
+            spyTimer.setVisible(false);
+            agentTimerLabel.setVisible(false);
+            spyTimerLabel.setVisible(false);
+            spyTimerDesc.setVisible(false);
+        }
     }
 
     @FXML
@@ -169,6 +222,8 @@ public class NewConfigController {
                 }
                 redSpies.add(new Player(((TextField)((HBox) redSpyGrid.getChildren().get(i)).getChildren().get(0)).getText()));
             }
+
+            //TODO: add timer value to backend
         }
 
         var config = session.getConfig();
