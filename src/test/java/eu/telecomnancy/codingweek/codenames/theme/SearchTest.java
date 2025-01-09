@@ -13,9 +13,7 @@ import org.junit.jupiter.api.Test;
 public class SearchTest {
     @Test
     void testSearchTheme() {
-
-        ArrayList<String> dico = openCardsService.openFile("src/main/resources/words/codenames_words.txt");
-
+        
         // Test Utility.getSearchDico
         // Test 1: attention aux mots avec majuscule et "oe" colée
         String keyWord = "no";
