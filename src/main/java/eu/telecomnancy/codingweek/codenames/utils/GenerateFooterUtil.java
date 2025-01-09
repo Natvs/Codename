@@ -2,15 +2,16 @@ package eu.telecomnancy.codingweek.codenames.utils;
 
 import java.net.URL;
 
-import eu.telecomnancy.codingweek.codenames.controller.GameFooterController;
 import eu.telecomnancy.codingweek.codenames.controller.GameController;
+import eu.telecomnancy.codingweek.codenames.controller.GameFooterController;
+import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 
 public class GenerateFooterUtil {
-    public static Node generateFooter(GameController gameController, boolean isAgent) {
+    public static Node generateFooter(GameController gameController, Session session) {
         URL fxmlURL;
-        if (isAgent){
+        if (session.isAgent()){
             fxmlURL = GenerateCardUtil.class.getResource("/views/components/gameFooterAgent.fxml");
             if (fxmlURL == null) {
                 System.err.println("Could not find /views/components/gameFooterAgent.fxml");
@@ -25,7 +26,7 @@ public class GenerateFooterUtil {
         }
         try {
             FXMLLoader loader = new FXMLLoader(fxmlURL);
-            loader.setControllerFactory(iC -> new GameFooterController(gameController,isAgent));
+            loader.setControllerFactory(iC -> new GameFooterController(gameController, session));
             return loader.load();
         } catch (Exception e) {
             e.printStackTrace();

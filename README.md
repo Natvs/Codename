@@ -45,12 +45,12 @@
 - [X] 08/01 : Generation d'image pour chaque mots :
         - Config de stable diffusion, premiers tests de prompts
         - Faire tourner stable diffusion sur le mac, verifier les resultats
-- [ ]  09/01 : Fix de la grille de jeu : 
+- [X]  09/01 : Fix de la grille de jeu : 
         - La config de la grille n'est pas repectée
-- [ ]  09/01 : Fin de jeu :
-        - Quand toutes les cartes d'une couleur sont revelées
-        - Carte noire selectionnée
-- [ ]  09/01 : CSS : rework du design pour que ce soit ✨ visuellement potable ✨
+- [ ]  09/01 : Gestion de la sauvegarde sur le front :
+        - Ajouter les boutons de sauvegarde et de chargement de sauvegarde
+        - Gerer le path de sauvegarde et load par boite de dialogue
+- [ ]  09/01 : CSS -> rework du design pour que ce soit ✨ visuellement potable ✨
 - [ ]  Ajout des themes dans le menu de configuration :
         - Propose des mots au fil des entrées clavier (si c'est possible sur JavaFX proprement)
         - Recuperer la liste de mots
@@ -88,3 +88,6 @@
 - [X] 09/01: Implémentation de la fenètre "Transition" :
         - Afficher l'Equipe (Bleu ou Rouge) et le Groupe (Espion ou Maitre-Espion)
         - Ajouter un bouton "Jouer"
+- [ ]  09/01 : Fin de jeu :
+        - Quand toutes les cartes d'une couleur sont revelées
+        - Carte noire selectionnée
