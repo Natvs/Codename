@@ -5,21 +5,18 @@ import tkinter as tk
 from tkinter import messagebox
 from PIL import Image, ImageTk
 
+from Script_traitement import trier_liste
+
 
 # Charger les images d'un répertoire donné
-def charger_images(repertoire="BdD"):
-    liste_paquets_images = []
-
-    for file_name in os.listdir(repertoire):
-        file_path = os.path.join(repertoire, file_name)
-        liste_images = []
-        for image_name in os.listdir(file_path):
-            if image_name.lower().endswith(('.png', '.jpg', '.jpeg', '.gif', '.bmp')):
-                image_path = os.path.join(file_path, image_name)
-                image = Image.open(image_path)
-                liste_images.append((image, image_path))  # Inclure le chemin complet
-        liste_paquets_images.append(liste_images)
-    return liste_paquets_images
+def charger_images(file_path):
+    liste_images = []
+    for image_name in os.listdir(file_path):
+        if image_name.lower().endswith(('.png', '.jpg', '.jpeg', '.gif', '.bmp')):
+            image_path = os.path.join(file_path, image_name)
+            image = Image.open(image_path)
+            liste_images.append((image, image_path))  # Inclure le chemin complet
+    return liste_images
 
 # Afficher les images 5 par 5 dans une fenêtre Tkinter
 def afficher_images(liste_images, fenetre):
@@ -82,9 +79,13 @@ def couper_coller_image(source_path, destination_path):
 def nettoyer():
     assert os.path.exists("BdD")
 
-    liste_paquets_images = charger_images()
+    list_files = os.listdir("BdD")
+    trier_liste(list_files)
+    for file_name in list_files:
+        print(file_name)
+        file_path = os.path.join("BdD", file_name)
+        liste_images = charger_images(file_path)
 
-    for liste_images in liste_paquets_images:
         # Créer la fenêtre Tkinter
         fenetre = tk.Tk()
         fenetre.title("Sélection d'images")
