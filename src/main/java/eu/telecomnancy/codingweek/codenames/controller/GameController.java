@@ -1,9 +1,11 @@
 package eu.telecomnancy.codingweek.codenames.controller;
 
 import eu.telecomnancy.codingweek.codenames.model.board.Card;
+import eu.telecomnancy.codingweek.codenames.model.clue.Clue;
 import eu.telecomnancy.codingweek.codenames.model.color.Color;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
-import eu.telecomnancy.codingweek.codenames.observers.game.SessionColorObserver;
+import eu.telecomnancy.codingweek.codenames.observers.game.ColorSetObserver;
+import eu.telecomnancy.codingweek.codenames.observers.game.RoleSetObserver;
 import eu.telecomnancy.codingweek.codenames.utils.GenerateCardUtil;
 import eu.telecomnancy.codingweek.codenames.utils.GenerateFooterUtil;
 import javafx.fxml.FXML;
@@ -34,10 +36,11 @@ public class GameController {
 
     @FXML
     private void initialize() {
-        session.setColorObserver(new SessionColorObserver(this));
+        session.setRoleObserver(new RoleSetObserver(this));
+        session.setColorObserver(new ColorSetObserver(this));
         setLabel();
         setEvents();
-        setCardsBoardInit();
+        initCardsBoard();
         setFooter();
     }
     private void setEvents() {
@@ -51,29 +54,21 @@ public class GameController {
             }
         });
     }
-    private void setCardsBoardInit() {
-        Card[][] grid = session.getBoard().getGrid();
+    private void initCardsBoard() {
         for (int i = 0; i < session.getBoard().getWidth(); i++) {
             ColumnConstraints colConstraints = new ColumnConstraints();
             colConstraints.setHgrow(Priority.ALWAYS);
             gameGrid.getColumnConstraints().add(colConstraints);
-            for (int j = 0; j < session.getBoard().getHeigth(); j++) {
-                var card = grid[i][j];
-                var cardBox = GenerateCardUtil.generateCard(card, session);
-                cardBox.setOnMouseClicked((mouveEvent) -> 
-                { 
-                    if (!card.getRevealed() && !session.isAgent()) { 
-                        session.guessCard(card); 
-                    } 
-                });
-                gameGrid.add(cardBox, i, j);
-            }
+        }
+        for (int j = 0; j < session.getBoard().getHeigth(); j++) {
             RowConstraints rowConstraints = new RowConstraints();
             rowConstraints.setVgrow(Priority.ALWAYS);
             gameGrid.getRowConstraints().add(rowConstraints);
         }
+        setCardsBoard();
     }
-    private void setCardsBoard() {
+
+    public void setCardsBoard() {
         Card[][] grid = session.getBoard().getGrid();
         for (int i = 0; i < session.getBoard().getWidth(); i++) {
             for (int j = 0; j < session.getBoard().getHeigth(); j++) {
@@ -89,7 +84,8 @@ public class GameController {
             }
         }
     }
-    private void setLabel() {
+
+    public void setLabel() {
         String role = new String();
         String colorName = new String();
         Color color = session.getCurrentColor();
@@ -128,6 +124,7 @@ public class GameController {
         setLabel();
         setCardsBoard();
         setFooter();
+        session.addClue(new Clue(0,2));
     }
 
     public String getHint(){
@@ -140,7 +137,9 @@ public class GameController {
     public int getNumber() {
         return this.number;
     }
+    
     public void setNumber(int number) {
         this.number = number;
     }
+
 }

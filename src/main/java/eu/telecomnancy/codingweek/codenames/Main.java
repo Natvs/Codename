@@ -44,6 +44,8 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(fxmlURL);
 
         Scene scene = new Scene(root, 900, 760);
+        primaryStage.setMinHeight(760);
+        primaryStage.setMinWidth(900);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Codenames for Coding Week");
         primaryStage.show();
