@@ -13,6 +13,7 @@ public class ForbiddenCardCommand implements Command {
 
     @Override
     public void execute() {
+        session.getService().cancel();
         session.nextRole();
         RootController.getInstance().changeView("/views/end.fxml");
     }

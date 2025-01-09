@@ -17,6 +17,7 @@ public class GuessCardCommand implements Command {
 
     @Override
     public void execute() {
+        session.getService().cancel();
         if (card == null) {
             session.nextRole();
             RootController.getInstance().changeView("/views/transition.fxml");

@@ -97,7 +97,7 @@ public class GameController {
 
     public void onQuit() {
         RootController.getInstance().changeView("/views/home.fxml");
-        ScheduledService<Void> service = session.getTimer();
+        ScheduledService<Void> service = session.getService();
         service.cancel();
     }
 

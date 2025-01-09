@@ -3,7 +3,6 @@ package eu.telecomnancy.codingweek.codenames.controller;
 import eu.telecomnancy.codingweek.codenames.model.color.Color;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import eu.telecomnancy.codingweek.codenames.model.team.Team;
-import javafx.concurrent.ScheduledService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
@@ -23,10 +22,6 @@ public class TransitionController {
 
     public void initialize() {
         setLabel();
-        ScheduledService<Void> service = session.getTimer();
-        if (service != null && service.isRunning()){
-            service.cancel();
-        }
     }
 
     public void setLabel() {

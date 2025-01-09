@@ -38,16 +38,52 @@ public class Session {
 
     public Session() {
         this.config = new GameConfig();
-        this.config = new GameConfig();
         this.redTeam = new ColoredTeam(Color.RED, config.redAgentsList, config.redSpiesList);
         this.blueTeam = new ColoredTeam(Color.BLUE, config.blueAgentsList, config.blueSpiesList);
         this.board = new Board(config.heigth, config.width);
+        setService();
         if (board.getRemainingCards(Color.BLUE) > board.getRemainingCards(Color.RED)) {
             currentColor = Color.BLUE;
         }
         else {
             currentColor = Color.RED;
         }
+    }
+
+    private void setService() {
+        time = 0;
+        Session session = this;
+        service = new ScheduledService<Void>() {
+            @Override
+            protected Task<Void> createTask() {
+                return new Task<Void>() {
+                    @Override
+                    protected Void call() throws Exception {
+                        // Update the UI from the background task
+                        for (int i=0;i<60;i++){
+                            Platform.runLater(() -> {
+                                time ++;
+                                if (timeObserver != null) {
+                                    timeObserver.handle();
+                                }
+                            });
+                            Thread.sleep(1_000);
+                        }
+                        Platform.runLater(() -> {
+                            if (activeTimer){
+                                this.cancel();
+                                if (session.isAgent()) getExecuter().addCommand(new SetClueCommand(null, session));
+                                else getExecuter().addCommand(new GuessCardCommand(null, session));
+                                getExecuter().executeAll();
+                                time=0;
+                            }
+                        });
+                        return null;
+                    }
+                };
+            }
+        };
+        //service.setPeriod(Duration.seconds(10));
     }
 
     public void clone(Session target) {
@@ -186,45 +222,10 @@ public class Session {
     }
 
     @JsonIgnore
-    public ScheduledService<Void> getTimer(){
+    public ScheduledService<Void> getService(){
         return this.service;
     }
 
-    public void setTimer() {
-        // Create a ScheduledService to run periodically
-        resetTime();
-        Session session = this;
-        service = new ScheduledService<Void>() {
-            @Override
-            protected Task<Void> createTask() {
-                return new Task<Void>() {
-                    @Override
-                    protected Void call() throws Exception {
-                        // Update the UI from the background task
-                        int timeMax = session.isAgent() ? session.getConfig().timerAgent*10 : session.getConfig().timerSpy*10;
-                        for (int i=0;i<timeMax ;i++){
-                            Platform.runLater(() -> {
-                                time --;
-                                if (timeObserver != null) {
-                                    timeObserver.handle();
-                                }
-                            });
-                            Thread.sleep(100);
-                        }
-                        Platform.runLater(() -> {
-                            if (activeTimer){
-                                addClue(new Clue("Pas d'indice", 1));
-                                resetTime();
-                                this.cancel();
-                            }
-                        });
-                        return null;
-                    }
-                };
-            }
-        };
-        //service.setPeriod(Duration.seconds(10));
-    }
     public int getTime(){
         return this.time;
     }

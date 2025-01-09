@@ -9,6 +9,8 @@ import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import eu.telecomnancy.codingweek.codenames.model.team.Team;
 import eu.telecomnancy.codingweek.codenames.observers.game.TimeObserver;
 import javafx.concurrent.Worker.State;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 
 public class GameHeaderController {
     private Session session;
@@ -24,22 +26,14 @@ public class GameHeaderController {
     @FXML
     public void initialize(){
         setCurrentTeam();
-        ScheduledService<Void> service = session.getTimer();
         session.setTimeObserver(new TimeObserver(this));
-        if (service == null) {
-            session.setTimer();
-            service = session.getTimer();
+        session.resetTime();
+        var service = session.getService();
+        if (service.getState() == State.READY) {
             service.start();
-        } else {
-            if (service.getState() == State.READY) {
-                service.start();
-            } else if (service.getState() == State.RUNNING){
-                service.restart();
-                session.resetTime();
-            } else if (service.getState() == State.CANCELLED){
-                service.restart();
-                session.resetTime();
-            }
+        }
+        else if (service.getState() == State.CANCELLED){
+            service.restart();
         }
     }
 
