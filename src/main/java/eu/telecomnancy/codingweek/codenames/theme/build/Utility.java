@@ -68,7 +68,7 @@ public class Utility {
         ArrayList<Integer> listDigitTheme = new ArrayList<>();
         for (String word : wordsList) {
             Integer wordId = Utility.getWordId(word, dico);
-            if (wordId == -1) {
+            if (wordId != -1) {
                 ArrayList<Integer> wordListDigit = Utility.getLexicalFieldIntegerList(wordId, dico_lexicalField);
                 wordListDigit.add(wordId);
                 listDigitTheme = Utility.joinListDigit(listDigitTheme, wordListDigit);
