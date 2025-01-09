@@ -115,16 +115,11 @@ public class GameController {
 
     public void onSubmit() {
         if (session.isAgent()){
-            session.changeRole(false);
-            
-        } else {
-            session.setCurrentColor();
-            session.changeRole(true);
+            session.addClue(new Clue(0,number));            
         }
         setLabel();
         setCardsBoard();
         setFooter();
-        session.addClue(new Clue(0,2));
     }
 
     public String getHint(){
