@@ -223,7 +223,9 @@ public class NewConfigController {
                 redSpies.add(new Player(((TextField)((HBox) redSpyGrid.getChildren().get(i)).getChildren().get(0)).getText()));
             }
 
-            //TODO: add timer value to backend
+            session.getConfig().timerAgent = (int) agentTimer.getValue();
+            session.getConfig().timerSpy = (int) spyTimer.getValue();
+            session.setActiveTimer(timerCheck.isSelected());
         }
 
         var config = session.getConfig();

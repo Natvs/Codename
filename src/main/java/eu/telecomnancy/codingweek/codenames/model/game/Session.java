@@ -59,15 +59,15 @@ public class Session {
                 return new Task<Void>() {
                     @Override
                     protected Void call() throws Exception {
-                        // Update the UI from the background task
-                        for (int i=0;i<60;i++){
+                        int maxTime = session.isAgent() ? session.getConfig().timerAgent*10 : session.getConfig().timerSpy*10;
+                        for (int i=0;i<maxTime;i++){
                             Platform.runLater(() -> {
                                 time ++;
                                 if (timeObserver != null) {
                                     timeObserver.handle();
                                 }
                             });
-                            Thread.sleep(1_000);
+                            Thread.sleep(100);
                         }
                         Platform.runLater(() -> {
                             if (activeTimer){
