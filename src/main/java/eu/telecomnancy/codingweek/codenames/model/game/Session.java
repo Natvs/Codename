@@ -1,7 +1,10 @@
 package eu.telecomnancy.codingweek.codenames.model.game;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import eu.telecomnancy.codingweek.codenames.commands.Executer;
 import eu.telecomnancy.codingweek.codenames.commands.GuessCardCommand;
+import eu.telecomnancy.codingweek.codenames.commands.NewGameCommand;
 import eu.telecomnancy.codingweek.codenames.commands.SetClueCommand;
 import eu.telecomnancy.codingweek.codenames.model.board.Board;
 import eu.telecomnancy.codingweek.codenames.model.board.Card;
@@ -47,6 +50,7 @@ public class Session {
         return this.blueTeam;
     }
 
+    @JsonIgnore
     public ColoredTeam getCurrentColoredTeam() {
         return switch (getCurrentColor()) {
             case Color.RED -> getRedTeam();
@@ -54,6 +58,7 @@ public class Session {
             default -> null;
         };
     }
+    @JsonIgnore
     public Team getCurrentTeam() {
         var coloredTeam = switch (getCurrentColor()) {
             case Color.BLUE -> getBlueTeam();
@@ -120,6 +125,11 @@ public class Session {
 
     public Executer getExecuter() {
         return this.executer;
+    }
+
+    public void startNewGame() {
+        getExecuter().addCommand(new NewGameCommand(this));
+        getExecuter().executeAll();
     }
 
     public void guessCard(Card card) {

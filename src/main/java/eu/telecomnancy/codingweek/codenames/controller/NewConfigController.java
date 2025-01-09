@@ -6,6 +6,7 @@ import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import eu.telecomnancy.codingweek.codenames.model.player.Player;
 import eu.telecomnancy.codingweek.codenames.utils.GeneratePlayerField;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Spinner;
@@ -13,7 +14,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.Node;
 
 public class NewConfigController {
     private Session session;
@@ -173,7 +173,8 @@ public class NewConfigController {
 
         var config = session.getConfig();
         session.getBoard().setSize(config.width, config.heigth);
-        RootController.getInstance().changeView("/views/game.fxml");
+
+        session.startNewGame();
     }
 
     @FXML
