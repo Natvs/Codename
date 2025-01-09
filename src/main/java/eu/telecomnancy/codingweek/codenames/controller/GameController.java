@@ -72,7 +72,7 @@ public class GameController {
         Card[][] grid = session.getBoard().getGrid();
         for (int i = 0; i < session.getBoard().getWidth(); i++) {
             for (int j = 0; j < session.getBoard().getHeigth(); j++) {
-                var card = grid[i][j];
+                var card = grid[j][i];
                 var cardBox = GenerateCardUtil.generateCard(card, session);
                 cardBox.setOnMouseClicked((mouveEvent) -> 
                 { 

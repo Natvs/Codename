@@ -9,7 +9,7 @@ public class Board {
     
     private int heigth;
     private int width; 
-    private final Card[][] grid;
+    private Card[][] grid;
 
     public Board(@JsonProperty("height") int height,@JsonProperty("width") int width) {
         this.heigth = height;
@@ -20,6 +20,7 @@ public class Board {
     public void setSize(int width, int heigth) {
         this.heigth = heigth;
         this.width = width;
+        this.grid = openCardsService.initGridCards(heigth, width);
     }
 
     public int getHeigth() {
