@@ -3,7 +3,9 @@ package eu.telecomnancy.codingweek.codenames.model.game;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import eu.telecomnancy.codingweek.codenames.commands.Executer;
+import eu.telecomnancy.codingweek.codenames.commands.ForbiddenCardCommand;
 import eu.telecomnancy.codingweek.codenames.commands.GuessCardCommand;
+import eu.telecomnancy.codingweek.codenames.commands.NewGameCommand;
 import eu.telecomnancy.codingweek.codenames.commands.SetClueCommand;
 import eu.telecomnancy.codingweek.codenames.model.board.Board;
 import eu.telecomnancy.codingweek.codenames.model.board.Card;
@@ -100,6 +102,10 @@ public class Session {
         return this.currentColor;
     }
 
+    public boolean isAgent() {
+        return this.agent;
+    }
+
     private void setCurrentColor() {
         if (this.currentColor == Color.RED){
             this.currentColor = Color.BLUE;
@@ -111,6 +117,14 @@ public class Session {
         }
     }
 
+    public void setCurrentColor(Color color) {
+        this.currentColor = color;
+        if (colorObserver != null) {
+            colorObserver.handle();
+        }
+    }
+    
+
     public void setRoleObserver(RoleSetObserver observer) {
         this.roleObserver = observer;
     }
@@ -121,11 +135,6 @@ public class Session {
 
     public void setTimeObserver(TimeObserver observer) {
         this.timeObserver = observer;
-    }
-
-    @JsonIgnore
-    public boolean isAgent() {
-        return this.agent;
     }
 
     @JsonIgnore
@@ -151,9 +160,14 @@ public class Session {
         return this.executer;
     }
 
-    @JsonIgnore
+    public void startNewGame() {
+        getExecuter().addCommand(new NewGameCommand(this));
+        getExecuter().executeAll();
+    }
+
     public void guessCard(Card card) {
-        getExecuter().addCommand(new GuessCardCommand(card, this));
+        if (card != null && card.getColor() == Color.BLACK) getExecuter().addCommand(new ForbiddenCardCommand(this));
+        else getExecuter().addCommand(new GuessCardCommand(card, this));
         getExecuter().executeAll();
     }
 

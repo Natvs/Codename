@@ -26,9 +26,4 @@ public class SetClueCommand implements Command {
         RootController.getInstance().changeView("/views/transition.fxml");
     }
 
-    @Override
-    public void undo() {
-
-    }
-
 }
