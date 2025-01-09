@@ -16,11 +16,15 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class GameController {
     private Session session;
     private String hint;
     private int number;
+    private Timer timer;
+
     @FXML
     private GridPane gameView;
     @FXML
@@ -120,13 +124,24 @@ public class GameController {
         } else {
             session.setCurrentColor();
             session.changeRole(true);
+            setTimer();
         }
         setLabel();
         setCardsBoard();
         setFooter();
         session.addClue(new Clue(0,2));
     }
-
+    private void setTimer() {
+        this.timer = new Timer();
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                System.out.println("passe ici");
+                session.nextRole();
+            }
+        };
+        timer.schedule(task, 1000);
+    }
     public String getHint(){
         return this.hint;
     }
