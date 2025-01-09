@@ -72,8 +72,8 @@ public class NewConfigController {
 
     @FXML
     private void initialize() {
-        nbRows.getValueFactory().setValue(session.getConfig().width);
-        nbCols.getValueFactory().setValue(session.getConfig().heigth);
+        nbRows.getValueFactory().setValue(session.getConfig().heigth);
+        nbCols.getValueFactory().setValue(session.getConfig().width);
         initializeEvents();
         disableStart();
         initializePlayers();
@@ -104,7 +104,7 @@ public class NewConfigController {
             session.getConfig().heigth = nbRows.getValue();
         }));
         nbCols.valueProperty().addListener(((observable, oldValue, newValue) -> {
-            session.getConfig().width = nbRows.getValue();
+            session.getConfig().width = nbCols.getValue();
         }));
     }
 

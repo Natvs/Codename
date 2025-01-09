@@ -8,6 +8,9 @@ import eu.telecomnancy.codingweek.codenames.observers.game.ColorSetObserver;
 import eu.telecomnancy.codingweek.codenames.observers.game.RoleSetObserver;
 import eu.telecomnancy.codingweek.codenames.utils.GenerateCardUtil;
 import eu.telecomnancy.codingweek.codenames.utils.GenerateFooterUtil;
+import javafx.application.Platform;
+import javafx.concurrent.ScheduledService;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -16,15 +19,13 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
-import java.util.Timer;
-import java.util.TimerTask;
+import javafx.util.Duration;
 
 public class GameController {
     private Session session;
     private String hint;
     private int number;
-    private Timer timer;
-
+    private ScheduledService<Void> service;
     @FXML
     private GridPane gameView;
     @FXML
@@ -46,6 +47,7 @@ public class GameController {
         setEvents();
         initCardsBoard();
         setFooter();
+        //setTimer();
     }
     private void setEvents() {
         gameView.setOnKeyPressed((keyevent) ->  {
@@ -76,7 +78,7 @@ public class GameController {
         Card[][] grid = session.getBoard().getGrid();
         for (int i = 0; i < session.getBoard().getWidth(); i++) {
             for (int j = 0; j < session.getBoard().getHeigth(); j++) {
-                var card = grid[i][j];
+                var card = grid[j][i];
                 var cardBox = GenerateCardUtil.generateCard(card, session);
                 cardBox.setOnMouseClicked((mouveEvent) -> 
                 { 
@@ -106,11 +108,33 @@ public class GameController {
         currentTeam.setText(colorName + " " + role);
     }
 
-    private void setFooter() {
+    public void setFooter() {
         System.out.println(session.isAgent());
         var gameHBox = GenerateFooterUtil.generateFooter(this,session.isAgent());
         gameView.getChildren().remove(2);
         gameView.add(gameHBox,0,2);
+    }
+    
+    private void setTimer() {
+        //int count = 0;
+        // Create a ScheduledService to run periodically
+        service = new ScheduledService<Void>() {
+            @Override
+            protected Task<Void> createTask() {
+                return new Task<Void>() {
+                    @Override
+                    protected Void call() throws Exception {
+                        // Update the UI from the background task
+                        Platform.runLater(() -> {
+                            System.out.println("Timer: ");
+                        });
+                        return null;
+                    }
+                };
+            }
+        };
+        service.setPeriod(Duration.seconds(1));
+        service.start();
     }
 
     public void onQuit() {
@@ -119,28 +143,15 @@ public class GameController {
 
     public void onSubmit() {
         if (session.isAgent()){
-            session.changeRole(false);
-            
-        } else {
-            session.setCurrentColor();
-            session.changeRole(true);
-            setTimer();
+            session.addClue(new Clue(getHint(),number)); 
+            setTimer();         
+        }
+        else {
+            session.guessCard(null);
+            service.cancel();
         }
         setLabel();
         setCardsBoard();
-        setFooter();
-        session.addClue(new Clue(0,2));
-    }
-    private void setTimer() {
-        this.timer = new Timer();
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                System.out.println("passe ici");
-                session.nextRole();
-            }
-        };
-        timer.schedule(task, 1000);
     }
     public String getHint(){
         return this.hint;
