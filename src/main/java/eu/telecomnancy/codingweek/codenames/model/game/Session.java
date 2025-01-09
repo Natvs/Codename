@@ -1,5 +1,7 @@
 package eu.telecomnancy.codingweek.codenames.model.game;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import eu.telecomnancy.codingweek.codenames.commands.Executer;
 import eu.telecomnancy.codingweek.codenames.commands.GuessCardCommand;
 import eu.telecomnancy.codingweek.codenames.commands.SetClueCommand;
@@ -45,7 +47,7 @@ public class Session {
     public ColoredTeam getBlueTeam() {
         return this.blueTeam;
     }
-
+    @JsonIgnore
     public ColoredTeam getCurrentTeam() {
         return switch (getCurrentColor()) {
             case Color.RED -> getRedTeam();
