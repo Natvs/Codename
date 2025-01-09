@@ -27,11 +27,6 @@ public class PlayerFieldController {
     }
 
     @FXML
-    private String getName() {
-        return playerName.getText();
-    }
-
-    @FXML
     private void onRemovePlayer() {
         newConfigController.removePlayerField(playerField, playerType);
     }
