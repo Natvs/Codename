@@ -82,13 +82,12 @@ public class GameController {
     }
 
     public void setHeader() {
-        var HeaderHBox = GenerateHeaderUtil.generateHeader(session,this);
+        var HeaderHBox = GenerateHeaderUtil.generateHeader(session);
         header.getChildren().clear();
         header.getChildren().add(HeaderHBox);
     }
 
     public void setFooter() {
-        System.out.println(session.isAgent());
         var FooterHBox = GenerateFooterUtil.generateFooter(this,session);
         footer.getChildren().clear();
         footer.getChildren().add(FooterHBox);

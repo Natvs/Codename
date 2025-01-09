@@ -66,7 +66,6 @@ public class GameHeaderController {
     }
 
     public void setTimeLabel() {
-        System.out.println("test timer");
         timer.setText(String.valueOf(session.getTime()));
     }
 }
