@@ -72,7 +72,7 @@ public class GameController {
                 var cardBox = GenerateCardUtil.generateCard(card, session);
                 cardBox.setOnMouseClicked((mouveEvent) -> 
                 { 
-                    if (!card.getRevealed() && !session.isAgent()) { 
+                    if (!card.getRevealed() && !session.isAgent()) {
                         session.guessCard(card); 
                     } 
                 });

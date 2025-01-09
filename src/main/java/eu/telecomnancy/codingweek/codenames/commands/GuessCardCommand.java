@@ -41,9 +41,4 @@ public class GuessCardCommand implements Command {
         }
     }
 
-    @Override
-    public void undo() {
-        
-    }
-
 }

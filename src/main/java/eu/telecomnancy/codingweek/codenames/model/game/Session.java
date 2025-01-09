@@ -3,6 +3,7 @@ package eu.telecomnancy.codingweek.codenames.model.game;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import eu.telecomnancy.codingweek.codenames.commands.Executer;
+import eu.telecomnancy.codingweek.codenames.commands.ForbiddenCardCommand;
 import eu.telecomnancy.codingweek.codenames.commands.GuessCardCommand;
 import eu.telecomnancy.codingweek.codenames.commands.NewGameCommand;
 import eu.telecomnancy.codingweek.codenames.commands.SetClueCommand;
@@ -133,7 +134,8 @@ public class Session {
     }
 
     public void guessCard(Card card) {
-        getExecuter().addCommand(new GuessCardCommand(card, this));
+        if (card != null && card.getColor() == Color.BLACK) getExecuter().addCommand(new ForbiddenCardCommand(this));
+        else getExecuter().addCommand(new GuessCardCommand(card, this));
         getExecuter().executeAll();
     }
 

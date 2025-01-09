@@ -116,19 +116,19 @@ public class NewConfigController {
     @FXML
     private void onStart() {
         List<Player> blueAgents = session.getBlueTeam().getAgentTeam().getPlayersList();
-        List<Player> blueSpys = session.getBlueTeam().getSpyTeam().getPlayersList();
+        List<Player> blueSpies = session.getBlueTeam().getSpyTeam().getPlayersList();
         List<Player> redAgents = session.getRedTeam().getAgentTeam().getPlayersList();
-        List<Player> redSpys = session.getRedTeam().getSpyTeam().getPlayersList();
+        List<Player> redSpies = session.getRedTeam().getSpyTeam().getPlayersList();
 
         blueAgents.clear();
-        blueSpys.clear();
+        blueSpies.clear();
         redAgents.clear();
-        redSpys.clear();
+        redSpies.clear();
 
         blueAgents.add(new Player(blueAgent1.getText()));
-        blueSpys.add(new Player(blueSpy1.getText()));
+        blueSpies.add(new Player(blueSpy1.getText()));
         redAgents.add(new Player(redAgent1.getText()));
-        redSpys.add(new Player(redSpy1.getText()));
+        redSpies.add(new Player(redSpy1.getText()));
 
         for (int i = 1; i <= nbBlueAgents; i++) {
             if (blueAgentGrid.getChildren().get(i) == null) {
@@ -147,7 +147,7 @@ public class NewConfigController {
                 if ((TextField)((HBox) blueSpyGrid.getChildren().get(i)).getChildren().get(0) == null) {
                     continue;
                 }
-                blueSpys.add(new Player(((TextField)((HBox) blueSpyGrid.getChildren().get(i)).getChildren().get(0)).getText()));
+                blueSpies.add(new Player(((TextField)((HBox) blueSpyGrid.getChildren().get(i)).getChildren().get(0)).getText()));
             }
         }
         for (int i = 1; i <= nbRedAgents; i++) {
@@ -167,13 +167,12 @@ public class NewConfigController {
                 if ((TextField)((HBox) redSpyGrid.getChildren().get(i)).getChildren().get(0) == null) {
                     continue;
                 }
-                redSpys.add(new Player(((TextField)((HBox) redSpyGrid.getChildren().get(i)).getChildren().get(0)).getText()));
+                redSpies.add(new Player(((TextField)((HBox) redSpyGrid.getChildren().get(i)).getChildren().get(0)).getText()));
             }
         }
 
         var config = session.getConfig();
         session.getBoard().setSize(config.width, config.heigth);
-
         session.startNewGame();
     }
 
