@@ -20,15 +20,13 @@ public class GuessCardCommand implements Command {
         if (card == null) {
             session.nextRole();
             return;
-        }
-        if (session.getCurrentColor() == card.getColor()) {
+        } else if (session.getCurrentColor() == card.getColor()) {
             session.getCurrentColoredTeam().getCluesList().getLast().countDown();
             if (session.getCurrentColoredTeam().getCluesList().getLast().getCount() == 0) {
                 session.nextRole();
                 RootController.getInstance().changeView("/views/transition.fxml");
             }
-        }
-        else {
+        } else {
             session.nextRole();
             RootController.getInstance().changeView("/views/transition.fxml");
         }

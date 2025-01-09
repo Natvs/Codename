@@ -1,5 +1,7 @@
 package eu.telecomnancy.codingweek.codenames.model.game;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import eu.telecomnancy.codingweek.codenames.commands.Executer;
 import eu.telecomnancy.codingweek.codenames.commands.GuessCardCommand;
 import eu.telecomnancy.codingweek.codenames.commands.SetClueCommand;
@@ -47,6 +49,7 @@ public class Session {
         return this.blueTeam;
     }
 
+    @JsonIgnore
     public ColoredTeam getCurrentColoredTeam() {
         return switch (getCurrentColor()) {
             case Color.RED -> getRedTeam();
@@ -54,6 +57,8 @@ public class Session {
             default -> null;
         };
     }
+
+    @JsonIgnore
     public Team getCurrentTeam() {
         var coloredTeam = switch (getCurrentColor()) {
             case Color.BLUE -> getBlueTeam();
@@ -79,7 +84,7 @@ public class Session {
         return this.currentColor;
     }
 
-    public void setCurrentColor() {
+    private void setCurrentColor() {
         if (this.currentColor == Color.RED){
             this.currentColor = Color.BLUE;
         } else {
@@ -102,7 +107,7 @@ public class Session {
         return this.agent;
     }
 
-    public void changeRole(boolean agent) {
+    private void changeRole(boolean agent) {
         this.agent = agent;
         if (roleObserver != null) {
             roleObserver.handle();

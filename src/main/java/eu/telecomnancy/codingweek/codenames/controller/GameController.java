@@ -103,12 +103,6 @@ public class GameController {
     }
 
     public void onSubmit() {
-        if (session.isAgent()){
-            session.addClue(new Clue(getHint(),number));            
-        }
-        else {
-            session.guessCard(null);
-        }
         setHeader();
         setCardsBoard();
     }
