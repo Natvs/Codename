@@ -1,33 +1,42 @@
 package eu.telecomnancy.codingweek.codenames.controller;
 
 import javafx.scene.control.Label;
-import javafx.util.Duration;
-import javafx.application.Platform;
 import javafx.concurrent.ScheduledService;
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import eu.telecomnancy.codingweek.codenames.model.color.Color;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import eu.telecomnancy.codingweek.codenames.model.team.Team;
+import eu.telecomnancy.codingweek.codenames.observers.game.TimeObserver;
+import javafx.concurrent.Worker.State;
 
 public class GameHeaderController {
     private Session session;
-    private GameController controller;
     @FXML
     private Label currentTeam; 
     @FXML
     private Label timer;
 
-    public GameHeaderController(Session session, GameController gameController) {
+    public GameHeaderController(Session session) {
         this.session = session;
-        this.controller = gameController;
     }
 
     @FXML
-    private void initialize(){
+    public void initialize(){
         setCurrentTeam();
-        if (!session.isAgent()){
-            setTimer();
+        ScheduledService<Void> service = session.getTimer();
+        session.setTimeObserver(new TimeObserver(this));
+        if (service == null) {
+            session.setTimer();
+        } else if (session.isAgent() && service.isRunning()){
+            service.cancel();
+        } else if (!session.isAgent()) {
+            if (service.getState() == State.READY) {
+                service.start();
+            }
+            if (service.getState() == State.CANCELLED){
+                service.restart();
+                session.resetTime();
+            }
         }
     }
 
@@ -51,28 +60,11 @@ public class GameHeaderController {
             }
         }
         currentTeam.setText(builder.toString());
+        timer.setText("");
     }
 
-    private void setTimer() {
-        // Create a ScheduledService to run periodically
-        ScheduledService<Void> service = new ScheduledService<Void>() {
-            @Override
-            protected Task<Void> createTask() {
-                return new Task<Void>() {
-                    @Override
-                    protected Void call() throws Exception {
-                        // Update the UI from the background task
-                        Platform.runLater(() -> {
-                            System.out.println("Timer: ");
-                        });
-                        return null;
-                    }
-                };
-            }
-        };
-        
-        service.setPeriod(Duration.seconds(10));
-        service.start();
-        controller.setService(service);
+    public void setTimeLabel() {
+        System.out.println("test timer");
+        timer.setText(String.valueOf(session.getTime()));
     }
 }

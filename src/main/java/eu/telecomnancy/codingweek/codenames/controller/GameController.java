@@ -7,7 +7,6 @@ import eu.telecomnancy.codingweek.codenames.observers.game.RoleSetObserver;
 import eu.telecomnancy.codingweek.codenames.utils.GenerateCardUtil;
 import eu.telecomnancy.codingweek.codenames.utils.GenerateFooterUtil;
 import eu.telecomnancy.codingweek.codenames.utils.GenerateHeaderUtil;
-import javafx.concurrent.ScheduledService;
 import javafx.fxml.FXML;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.ColumnConstraints;
@@ -20,7 +19,6 @@ public class GameController {
     private Session session;
     private String hint;
     private int number;
-    private ScheduledService<Void> service;
     @FXML
     private GridPane gameView;
     @FXML
@@ -118,12 +116,6 @@ public class GameController {
     
     public void setNumber(int number) {
         this.number = number;
-    }
-    public ScheduledService<Void> getService(){
-        return this.service;
-    }
-    public void setService(ScheduledService<Void> service){
-        this.service = service;
     }
 
 }
