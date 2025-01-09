@@ -19,6 +19,7 @@ public class GuessCardCommand implements Command {
     public void execute() {
         if (card == null) {
             session.nextRole();
+            RootController.getInstance().changeView("/views/transition.fxml");
             return;
         }
         if (session.getCurrentColor() == card.getColor()) {
@@ -39,7 +40,10 @@ public class GuessCardCommand implements Command {
             case Color.RED -> session.getRedTeam().addScore(1);
             default -> {}
         }
+        checkEnd();
+    }
 
+    private void checkEnd() {
         if (session.getBoard().getRemainingCards(Color.RED) == 0) {
             session.setCurrentColor(Color.RED);
             RootController.getInstance().changeView("/views/end.fxml");
