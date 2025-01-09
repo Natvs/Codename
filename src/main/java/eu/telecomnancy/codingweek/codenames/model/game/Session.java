@@ -34,7 +34,7 @@ public class Session {
     private RoleSetObserver roleObserver = null;
     private ColorSetObserver colorObserver = null;
     private TimeObserver timeObserver = null;
-    private boolean activeTimer = false;
+    private boolean activeTimer = true;
 
     public Session() {
         this.config = new GameConfig();
@@ -52,12 +52,14 @@ public class Session {
 
     private void setService() {
         time = 0;
+        Session session = this;
         service = new ScheduledService<Void>() {
             @Override
             protected Task<Void> createTask() {
                 return new Task<Void>() {
                     @Override
                     protected Void call() throws Exception {
+                        // Update the UI from the background task
                         for (int i=0;i<60;i++){
                             Platform.runLater(() -> {
                                 time ++;
@@ -69,7 +71,10 @@ public class Session {
                         }
                         Platform.runLater(() -> {
                             if (activeTimer){
-                                nextRole();
+                                this.cancel();
+                                if (session.isAgent()) getExecuter().addCommand(new SetClueCommand(null, session));
+                                else getExecuter().addCommand(new GuessCardCommand(null, session));
+                                getExecuter().executeAll();
                                 time=0;
                             }
                         });

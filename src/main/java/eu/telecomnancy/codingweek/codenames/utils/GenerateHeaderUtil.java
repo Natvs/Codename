@@ -1,15 +1,13 @@
 package eu.telecomnancy.codingweek.codenames.utils;
 
 import java.net.URL;
-
-import eu.telecomnancy.codingweek.codenames.controller.GameController;
 import eu.telecomnancy.codingweek.codenames.controller.GameHeaderController;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 
 public class GenerateHeaderUtil {
-    public static Node generateHeader(Session session,GameController gameController) {
+    public static Node generateHeader(Session session) {
         URL fxmlURL;
         fxmlURL = GenerateCardUtil.class.getResource("/views/components/gameHeader.fxml");
         if (fxmlURL == null) {
