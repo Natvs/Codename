@@ -5,6 +5,7 @@ import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -65,5 +66,13 @@ public class AutoCompleteTextField extends TextField {
         }
         contextMenu.getItems().clear();
         contextMenu.getItems().addAll(menuItems);
+    }
+
+    public ArrayList<String> getWords() {
+        ArrayList<String> words = new ArrayList<>();
+        for (String word : getText().split(",")) {
+            words.add(word.trim());
+        }
+        return words;
     }
 }

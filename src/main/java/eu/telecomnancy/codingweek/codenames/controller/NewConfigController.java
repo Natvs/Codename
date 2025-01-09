@@ -1,9 +1,11 @@
 package eu.telecomnancy.codingweek.codenames.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import eu.telecomnancy.codingweek.codenames.model.player.Player;
+import eu.telecomnancy.codingweek.codenames.theme.Utility;
 import eu.telecomnancy.codingweek.codenames.utils.AutoCompleteTextField;
 import eu.telecomnancy.codingweek.codenames.utils.GeneratePlayerField;
 import javafx.beans.binding.Bindings;
@@ -11,7 +13,6 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.Spinner;
@@ -28,6 +29,7 @@ public class NewConfigController {
     private int nbBlueSpy = 1;
     private int nbRedSpy = 1;
 
+    private ArrayList<String> wordsList = null;
 
     @FXML
     private GridPane newConfigView;
@@ -236,6 +238,11 @@ public class NewConfigController {
 
         var config = session.getConfig();
         session.getBoard().setSize(config.width, config.heigth);
+
+        if (wordsList != null) {
+            session.getBoard().setWords(wordsList);
+        }
+
         session.startNewGame();
     }
 
@@ -328,6 +335,22 @@ public class NewConfigController {
                 break;
             default:
                 break;
+        }
+    }
+
+    public void onGenTheme() {
+        ArrayList<String> words = themeField.getWords();
+        if (words.isEmpty()) {
+            return;
+        }
+        ArrayList<String> dico = Utility.getDicoTheme(words);
+        wordsList = dico;
+
+        nbWordsLabel.setText("" + dico.size() + " mots, il en faut " + session.getConfig().heigth * session.getConfig().width);
+        if (dico.size() >= session.getConfig().heigth * session.getConfig().width) {
+            enableStart();
+        } else {
+            disableStart();
         }
     }
 

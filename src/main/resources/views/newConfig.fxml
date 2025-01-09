@@ -110,6 +110,7 @@
             <rowConstraints>
                 <RowConstraints vgrow="ALWAYS" />
                 <RowConstraints vgrow="ALWAYS" />
+                <RowConstraints vgrow="ALWAYS" />
             </rowConstraints>
             <columnConstraints>
                 <ColumnConstraints hgrow="ALWAYS" />
@@ -118,6 +119,7 @@
             <children>
                 <Label text="Choix du theme par champ lexical : " GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
                 <AutoCompleteTextField fx:id="themeField" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
+                <Button fx:id="genThemeButton" onAction="#onGenTheme" text="Generer un thème" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />  
                 <Label text="Nombre de mots du champs lexical : " GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                 <Label fx:id="nbWordsLabel" text="" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
             </children>

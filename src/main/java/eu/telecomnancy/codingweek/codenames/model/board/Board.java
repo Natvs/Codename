@@ -67,4 +67,8 @@ public class Board {
         return number;
     }
 
+    public void setWords(ArrayList<String> words) {
+        this.wordsList = words;
+        this.grid = openCardsService.initGridCards(heigth, width, wordsList);
+    }
 }
