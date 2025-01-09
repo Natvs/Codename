@@ -17,7 +17,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 
 public class GameController {
-    private Session session;
+    private final Session session;
 
     @FXML
     private GridPane gameView;
@@ -36,18 +36,15 @@ public class GameController {
     private void initialize() {
         session.setRoleObserver(new RoleSetObserver(this));
         session.setColorObserver(new ColorSetObserver(this));
-        setLabel();
         setEvents();
+        setLabel();
         initCardsBoard();
     }
     private void setEvents() {
         gameView.setOnKeyPressed((keyevent) ->  {
             switch (keyevent.getCode()) {
-                case KeyCode.Q:
-                    onQuit();
-                    break;
-                default:
-                    break;
+                case KeyCode.Q -> onQuit();
+                default -> {}
             }
         });
     }
