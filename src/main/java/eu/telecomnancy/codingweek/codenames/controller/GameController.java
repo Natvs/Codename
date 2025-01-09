@@ -102,7 +102,7 @@ public class GameController {
         currentTeam.setText(colorName + " " + role);
     }
 
-    private void setFooter() {
+    public void setFooter() {
         System.out.println(session.isAgent());
         var gameHBox = GenerateFooterUtil.generateFooter(this,session.isAgent());
         gameView.getChildren().remove(2);
@@ -115,11 +115,13 @@ public class GameController {
 
     public void onSubmit() {
         if (session.isAgent()){
-            session.addClue(new Clue(0,number));            
+            session.addClue(new Clue(getHint(),number));            
+        }
+        else {
+            session.guessCard(null);
         }
         setLabel();
         setCardsBoard();
-        setFooter();
     }
 
     public String getHint(){

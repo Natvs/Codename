@@ -12,6 +12,7 @@ public class RoleSetObserver extends SessionObserver {
     public void handle() {
         controller.setLabel();
         controller.setCardsBoard();
+        controller.setFooter();
     }
 
 }
