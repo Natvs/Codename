@@ -59,6 +59,8 @@ public class RootController {
                     return new GameController(session);
                 } else if (iC == TransitionController.class) {
                     return new TransitionController(session);
+                } else if (iC == EndController.class) {
+                    return new EndController(session);
                 } else {
                     return null;
                 }

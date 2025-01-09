@@ -12,8 +12,8 @@ GridPane {
     -fx-border-color: #b70000;
 }
 #gameCard-red-light {
-    -fx-background-color: #bb6f6f;
-    -fx-border-color: #ad7777;
+    -fx-background-color: #b79191;
+    -fx-border-color: #ffffff;
 }
 
 #gameCard-blue {
@@ -21,8 +21,8 @@ GridPane {
     -fx-border-color: #0e00a4;
 }
 #gameCard-blue-light {
-    -fx-background-color: #9595ff;
-    -fx-border-color: #7a76a2;
+    -fx-background-color: #bfbfff;
+    -fx-border-color: #ffffff;
 }
 
 #gameCard-white {
@@ -39,6 +39,6 @@ GridPane {
     -fx-border-color: #2e2e2e;
 }
 #gameCard-black-light {
-    -fx-background-color: #4c4c4c;
-    -fx-border-color: #a7a7a7;
+    -fx-background-color: #818181;
+    -fx-border-color: #fffdfd;
 }

@@ -6,8 +6,8 @@ import java.util.List;
 
 public class Executer {
     
-    private ArrayDeque<Command> historic = new ArrayDeque<>();
-    private ArrayList<Command> commands = new ArrayList<>();
+    private final ArrayDeque<Command> historic = new ArrayDeque<>();
+    private final ArrayList<Command> commands = new ArrayList<>();
 
     public ArrayDeque<Command> getHistoric() {
         return this.historic;
@@ -38,19 +38,6 @@ public class Executer {
             commands.get(i).execute();
             commands.remove(i);
             historic.push(commands.get(i));
-        }
-    }
-
-    public void undoAll() {
-        while (!historic.isEmpty()) {
-            var command = historic.pop();
-            command.undo();
-        }
-    }
-    public void undo(int n) {
-        while (!historic.isEmpty() && n > 0) {
-            var command = historic.pop();
-            command.undo();
         }
     }
 
