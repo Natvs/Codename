@@ -17,6 +17,7 @@ public class SetClueCommand implements Command {
 
     @Override
     public void execute() {
+        session.getService().cancel();
         switch (session.getCurrentColor()) {
             case Color.BLUE -> session.getBlueTeam().addClue(clue);
             case Color.RED -> session.getRedTeam().addClue(clue);
