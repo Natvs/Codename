@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
-import eu.telecomnancy.codingweek.codenames.theme.build.Utility;
 import eu.telecomnancy.codingweek.codenames.utils.openCardsService;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -13,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 public class BuildTest {
     @Test
-    void testTheme() {
+    void testBuildTheme() {
 
         ArrayList<String> dico = openCardsService.openFile("src/main/resources/words/codenames_words.txt");
         ArrayList<String> dico_lexicalField = openCardsService.openFile("src/main/resources/words/lexical_field.txt");

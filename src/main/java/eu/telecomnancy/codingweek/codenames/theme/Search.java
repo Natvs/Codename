@@ -1,4 +1,4 @@
-package eu.telecomnancy.codingweek.codenames.theme.search;
+package eu.telecomnancy.codingweek.codenames.theme;
 
 import java.util.ArrayList;
 
