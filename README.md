@@ -23,17 +23,14 @@
 		- Création de scripts python pour générer la liste des champs lexical associer à chaque mot du dictionnaire
 
 ### Luca Mandrelli :
-- [x] 06/01: Implémentation de la fenètre "Acceuil" :
+- [X] 06/01: Implémentation de la fenètre "Acceuil" :
         - Ajouter un bouton "Nouvelle Partie"
         - Ajouter un bouton "Quitter"
-- [x] 06/01: Implémentation de la fenètre "Menu Configuration" :
+- [X] 06/01: Implémentation de la fenètre "Menu Configuration" :
         - Ajouter un bouton statique "Joueur" (Pour fixer le nombre de joueur)
         - Ajouter un bouton statique "Grille" (pour fixer la taille de la grille)
         - Ajouter un bouton statique "Thématique" (pour choisir un thème de mot)
         - Ajouter un bouton "Acceuil"
-- [ ] 06/01: Implémentation de la fenètre "Transition" :
-        - Afficher l'Equipe (Bleu ou Rouge) et le Groupe (Espion ou Maitre-Espion)
-        - Ajouter un bouton "Jouer"
 - [X] 06/01-08/01: Implémentation de la fenètre "Partie (Maitre-Espion)" :
         - Implémenter l'affichage de la grille
         - Afficher les cartes couleur déjà positionnée sur la grille
@@ -48,6 +45,17 @@
 - [X] 08/01 : Generation d'image pour chaque mots :
         - Config de stable diffusion, premiers tests de prompts
         - Faire tourner stable diffusion sur le mac, verifier les resultats
+- [ ]  09/01 : Fix de la grille de jeu : 
+        - La config de la grille n'est pas repectée
+- [ ]  09/01 : Fin de jeu :
+        - Quand toutes les cartes d'une couleur sont revelées
+        - Carte noire selectionnée
+- [ ]  09/01 : CSS : rework du design pour que ce soit ✨ visuellement potable ✨
+- [ ]  Ajout des themes dans le menu de configuration :
+        - Propose des mots au fil des entrées clavier (si c'est possible sur JavaFX proprement)
+        - Recuperer la liste de mots
+        - La donner au generateur de theme d'Arthur
+        - Remplacer le dictionnaire de jeu par celui des champs lexicaux choisis.
 
 ### Lucas Simonneau :
 - [X] 06/01: Implémentation de gestion de fichier :
@@ -77,3 +85,6 @@
 	- Ajout dans le model
 	- Affichage du joueur actuel
 	- Gestion de la selection de la carte selon le role du joueur
+- [X] 09/01: Implémentation de la fenètre "Transition" :
+        - Afficher l'Equipe (Bleu ou Rouge) et le Groupe (Espion ou Maitre-Espion)
+        - Ajouter un bouton "Jouer"
