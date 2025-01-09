@@ -38,12 +38,21 @@ public class GameCardController {
     }
 
     public void setColor() {
-        if (card.getRevealed() || session.isAgent()) {
+        if (card.getRevealed()) {
             switch (card.getColor()) {
                 case RED -> gameCard.setId("gameCard-red");
                 case BLUE -> gameCard.setId("gameCard-blue");
                 case WHITE -> gameCard.setId("gameCard-white");
                 case BLACK -> gameCard.setId("gameCard-black");
+                default -> {}
+            }
+        }
+        else if (session.isAgent()) {
+            switch (card.getColor()) {
+                case RED -> gameCard.setId("gameCard-red-light");
+                case BLUE -> gameCard.setId("gameCard-blue-light");
+                case WHITE -> gameCard.setId("gameCard-white-light");
+                case BLACK -> gameCard.setId("gameCard-black-light");
                 default -> {}
             }
         }
