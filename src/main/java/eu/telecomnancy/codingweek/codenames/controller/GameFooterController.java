@@ -2,6 +2,7 @@ package eu.telecomnancy.codingweek.codenames.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 
 public class GameFooterController {
@@ -9,6 +10,8 @@ public class GameFooterController {
     private boolean isAgent;
     @FXML
     private TextField word;
+    @FXML
+    private Spinner<Integer> spinner;
     @FXML
     private Label indication;
 
@@ -20,7 +23,7 @@ public class GameFooterController {
     @FXML
     private void initialize(){
         if (!isAgent) {
-            indication.setText(gameController.getHint());
+            indication.setText(gameController.getHint() + " en " + gameController.getNumber());
         }
     }
 
@@ -32,8 +35,9 @@ public class GameFooterController {
     private void onSubmit() {
         if (isAgent){
             String hintValue = word.getText();
-            System.out.println(hintValue);
             gameController.setHint(hintValue);
+            Integer number = spinner.getValue();
+            gameController.setNumber(number);
         }
         gameController.onSubmit();
     }

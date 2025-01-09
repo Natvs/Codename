@@ -18,6 +18,7 @@ import javafx.scene.layout.RowConstraints;
 public class GameController {
     private Session session;
     private String hint;
+    private int number;
     @FXML
     private GridPane gameView;
     @FXML
@@ -134,5 +135,12 @@ public class GameController {
     }
     public void setHint(String hint) {
         this.hint = hint;
+    }
+
+    public int getNumber() {
+        return this.number;
+    }
+    public void setNumber(int number) {
+        this.number = number;
     }
 }

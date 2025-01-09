@@ -7,6 +7,8 @@
     <Button fx:id="quitButton" text="Quitter le jeu" onAction="#onQuit"/>
     <Region HBox.hgrow="ALWAYS"/>
     <TextField fx:id="word" />
+    <Spinner fx:id="spinner" min="1" max="99" prefWidth="60" layoutX="50" layoutY="50">
+    </Spinner>
     <Region HBox.hgrow="ALWAYS"/>
     <Button fx:id="nextPlayer" text="Submit" onAction="#onSubmit"/> 
 </HBox>
