@@ -8,6 +8,7 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import eu.telecomnancy.codingweek.codenames.model.color.Color;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
+import eu.telecomnancy.codingweek.codenames.model.team.Team;
 
 public class GameHeaderController {
     private Session session;
@@ -31,20 +32,25 @@ public class GameHeaderController {
     }
 
     private void setCurrentTeam(){
-        String role = new String();
-        String colorName = new String();
-        Color color = session.getCurrentColor();
-        if (session.isAgent()){
-            role = "agent";
-        } else {
-            role = "spy";
+        var builder = new StringBuilder();
+        builder.append("Equipe ").append(switch (session.getCurrentColor()) {
+            case Color.BLUE -> "bleue";
+            case Color.RED -> "rouge";
+            default -> "undefined";
+        }).append(" - ");
+        if (session.isAgent()) builder.append("agents");
+        else builder.append("espions");
+        builder.append(" : ");
+
+        Team team = session.getCurrentTeam();
+        if (team != null) {
+            boolean first = true;
+            for (var player : team.getPlayersList()) {
+                if (!first) builder.append(" - "); else first = false;
+                builder.append(player.getName());
+            }
         }
-        if (color == Color.BLUE){
-            colorName = "Blue";
-        } else if (color == Color.RED) {
-            colorName = "Red";
-        }
-        currentTeam.setText(colorName + " " + role);
+        currentTeam.setText(builder.toString());
     }
 
     private void setTimer() {
