@@ -1,7 +1,6 @@
 package eu.telecomnancy.codingweek.codenames.controller;
 
 import eu.telecomnancy.codingweek.codenames.model.board.Card;
-import eu.telecomnancy.codingweek.codenames.model.color.Color;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import eu.telecomnancy.codingweek.codenames.observers.board.CardColorObserver;
 import eu.telecomnancy.codingweek.codenames.observers.board.CardNameObserver;
@@ -39,25 +38,14 @@ public class GameCardController {
     }
 
     public void setColor() {
-        if (session.isAgent() || card.getRevealed()){
+        if (card.getRevealed() || session.isAgent()) {
             switch (card.getColor()) {
-                case Color.RED:
-                    gameCard.setStyle("-fx-background-color: #c80000");
-                    break;
-                case Color.BLUE:
-                    gameCard.setStyle("-fx-background-color: #0084ff");
-                    break;
-                case Color.WHITE:
-                    gameCard.setStyle("-fx-background-color: #FFFFFF");
-                    break;
-                case Color.BLACK:
-                    gameCard.setStyle("-fx-background-color: #000000");
-                    break;
-                default:
-                    break;
+                case RED -> gameCard.setId("gameCard-red");
+                case BLUE -> gameCard.setId("gameCard-blue");
+                case WHITE -> gameCard.setId("gameCard-white");
+                case BLACK -> gameCard.setId("gameCard-black");
+                default -> {}
             }
-        } else {
-            gameCard.setStyle("-fx-background-color:rgb(92, 88, 88)");
         }
     }
 
