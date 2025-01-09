@@ -15,9 +15,10 @@
     </columnConstraints>
 
     <children>
-        <Label fx:id="currentTeam" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
+        <HBox fx:id="header"  GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0">
+        </HBox>
         <GridPane fx:id="gameGrid" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-        <HBox fx:id="gameHBox" spacing="10" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" >
+        <HBox fx:id="footer" spacing="10" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" >
         </HBox>
     </children>
 </GridPane>

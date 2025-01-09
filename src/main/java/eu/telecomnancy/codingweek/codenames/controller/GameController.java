@@ -2,21 +2,20 @@ package eu.telecomnancy.codingweek.codenames.controller;
 
 import eu.telecomnancy.codingweek.codenames.model.board.Card;
 import eu.telecomnancy.codingweek.codenames.model.clue.Clue;
-import eu.telecomnancy.codingweek.codenames.model.color.Color;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import eu.telecomnancy.codingweek.codenames.observers.game.ColorSetObserver;
 import eu.telecomnancy.codingweek.codenames.observers.game.RoleSetObserver;
 import eu.telecomnancy.codingweek.codenames.utils.GenerateCardUtil;
 import eu.telecomnancy.codingweek.codenames.utils.GenerateFooterUtil;
+import eu.telecomnancy.codingweek.codenames.utils.GenerateHeaderUtil;
 import javafx.application.Platform;
 import javafx.concurrent.ScheduledService;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.util.Duration;
@@ -30,10 +29,10 @@ public class GameController {
     private GridPane gameView;
     @FXML
     private GridPane gameGrid;
+    @FXML 
+    private HBox header;
     @FXML
-    private Label currentTeam;
-    @FXML
-    private TextField word;
+    private HBox footer;
 
     public GameController(Session session) {
         this.session = session;
@@ -47,7 +46,6 @@ public class GameController {
         setEvents();
         initCardsBoard();
         setFooter();
-        //setTimer();
     }
     private void setEvents() {
         gameView.setOnKeyPressed((keyevent) ->  {
@@ -92,50 +90,19 @@ public class GameController {
     }
 
     public void setLabel() {
-        String role = new String();
-        String colorName = new String();
-        Color color = session.getCurrentColor();
-        if (session.isAgent()){
-            role = "agent";
-        } else {
-            role = "spy";
-        }
-        if (color == Color.BLUE){
-            colorName = "Blue";
-        } else if (color == Color.RED) {
-            colorName = "Red";
-        }
-        currentTeam.setText(colorName + " " + role);
+        var HeaderHBox = GenerateHeaderUtil.generateHeader(session,this);
+        header.getChildren().clear();
+        header.getChildren().add(HeaderHBox);
     }
 
     public void setFooter() {
         System.out.println(session.isAgent());
-        var gameHBox = GenerateFooterUtil.generateFooter(this,session.isAgent());
-        gameView.getChildren().remove(2);
-        gameView.add(gameHBox,0,2);
+        var FooterHBox = GenerateFooterUtil.generateFooter(this,session.isAgent());
+        footer.getChildren().clear();
+        footer.getChildren().add(FooterHBox);
     }
     
-    private void setTimer() {
-        //int count = 0;
-        // Create a ScheduledService to run periodically
-        service = new ScheduledService<Void>() {
-            @Override
-            protected Task<Void> createTask() {
-                return new Task<Void>() {
-                    @Override
-                    protected Void call() throws Exception {
-                        // Update the UI from the background task
-                        Platform.runLater(() -> {
-                            System.out.println("Timer: ");
-                        });
-                        return null;
-                    }
-                };
-            }
-        };
-        service.setPeriod(Duration.seconds(1));
-        service.start();
-    }
+    
 
     public void onQuit() {
         RootController.getInstance().changeView("/views/home.fxml");
@@ -143,8 +110,7 @@ public class GameController {
 
     public void onSubmit() {
         if (session.isAgent()){
-            session.addClue(new Clue(getHint(),number)); 
-            setTimer();         
+            session.addClue(new Clue(getHint(),number));         
         }
         else {
             session.guessCard(null);
@@ -166,6 +132,12 @@ public class GameController {
     
     public void setNumber(int number) {
         this.number = number;
+    }
+    public ScheduledService<Void> getService(){
+        return this.service;
+    }
+    public void setService(ScheduledService<Void> service){
+        this.service = service;
     }
 
 }

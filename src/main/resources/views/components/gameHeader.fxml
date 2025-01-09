@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox fx:id="headerComp" HBox.hgrow="ALWAYS" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.codingweek.codenames.controller.GameHeaderController">        
+    <Region HBox.hgrow="ALWAYS"/>
+    <Label fx:id="currentTeam"/>
+    <Region HBox.hgrow="ALWAYS"/>
+    <Label fx:id="timer"/> 
+</HBox>
