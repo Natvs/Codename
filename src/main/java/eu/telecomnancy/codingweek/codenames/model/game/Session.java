@@ -11,6 +11,7 @@ import eu.telecomnancy.codingweek.codenames.model.board.Card;
 import eu.telecomnancy.codingweek.codenames.model.clue.Clue;
 import eu.telecomnancy.codingweek.codenames.model.color.Color;
 import eu.telecomnancy.codingweek.codenames.model.coloredTeam.ColoredTeam;
+import eu.telecomnancy.codingweek.codenames.model.team.Team;
 import eu.telecomnancy.codingweek.codenames.observers.game.ColorSetObserver;
 import eu.telecomnancy.codingweek.codenames.observers.game.RoleSetObserver;
 import eu.telecomnancy.codingweek.codenames.observers.game.TimeObserver;
@@ -48,6 +49,15 @@ public class Session {
         }
     }
 
+    public void clone(Session target) {
+        this.config = target.getConfig();
+        this.redTeam.clone(target.getRedTeam());
+        this.blueTeam.clone(target.getBlueTeam());
+        this.board.clone(target.getBoard());
+        this.currentColor = target.getCurrentColor();
+        this.agent = target.isAgent();
+    }
+
     public ColoredTeam getRedTeam() {
         return this.redTeam;
     }
@@ -55,13 +65,28 @@ public class Session {
     public ColoredTeam getBlueTeam() {
         return this.blueTeam;
     }
+
     @JsonIgnore
-    public ColoredTeam getCurrentTeam() {
+    public ColoredTeam getCurrentColoredTeam() {
         return switch (getCurrentColor()) {
             case Color.RED -> getRedTeam();
             case Color.BLUE -> getBlueTeam() ;
             default -> null;
         };
+    }
+
+    @JsonIgnore
+    public Team getCurrentTeam() {
+        var coloredTeam = switch (getCurrentColor()) {
+            case Color.BLUE -> getBlueTeam();
+            case Color.RED -> getRedTeam();
+            default -> null;
+        };
+        if (coloredTeam != null) {
+            if (isAgent()) return coloredTeam.getAgentTeam();
+            else return coloredTeam.getSpyTeam();
+        }
+        return null;
     }
 
     public Board getBoard() {
@@ -76,7 +101,7 @@ public class Session {
         return this.currentColor;
     }
 
-    public void setCurrentColor() {
+    private void setCurrentColor() {
         if (this.currentColor == Color.RED){
             this.currentColor = Color.BLUE;
         } else {
@@ -99,17 +124,20 @@ public class Session {
         this.timeObserver = observer;
     }
 
+    @JsonIgnore
     public boolean isAgent() {
         return this.agent;
     }
 
-    public void changeRole(boolean agent) {
+    @JsonIgnore
+    private void changeRole(boolean agent) {
         this.agent = agent;
         if (roleObserver != null) {
             roleObserver.handle();
         }
     }
 
+    @JsonIgnore
     public void nextRole() {
         if (isAgent()){
             changeRole(false);
@@ -119,15 +147,18 @@ public class Session {
         }
     }
 
+    @JsonIgnore
     public Executer getExecuter() {
         return this.executer;
     }
 
+    @JsonIgnore
     public void guessCard(Card card) {
         getExecuter().addCommand(new GuessCardCommand(card, this));
         getExecuter().executeAll();
     }
 
+    @JsonIgnore
     public void addClue(Clue clue) {
         getExecuter().addCommand(new SetClueCommand(clue, this));
         getExecuter().executeAll();

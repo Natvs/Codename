@@ -1,10 +1,13 @@
 package eu.telecomnancy.codingweek.codenames.controller;
 
 import javafx.scene.control.Label;
+import javafx.application.Platform;
 import javafx.concurrent.ScheduledService;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import eu.telecomnancy.codingweek.codenames.model.color.Color;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
+import eu.telecomnancy.codingweek.codenames.model.team.Team;
 import eu.telecomnancy.codingweek.codenames.observers.game.TimeObserver;
 import javafx.concurrent.Worker.State;
 
@@ -42,26 +45,55 @@ public class GameHeaderController {
     }
 
     private void setCurrentTeam(){
-        String role = new String();
-        String colorName = new String();
-        Color color = session.getCurrentColor();
-        if (session.isAgent()){
-            role = "agent";
-        } else {
-            role = "spy";
+        var builder = new StringBuilder();
+        builder.append("Equipe ").append(switch (session.getCurrentColor()) {
+            case Color.BLUE -> "bleue";
+            case Color.RED -> "rouge";
+            default -> "undefined";
+        }).append(" - ");
+        if (session.isAgent()) builder.append("agents");
+        else builder.append("espions");
+        builder.append(" : ");
+
+        Team team = session.getCurrentTeam();
+        if (team != null) {
+            boolean first = true;
+            for (var player : team.getPlayersList()) {
+                if (!first) builder.append(" - "); else first = false;
+                builder.append(player.getName());
+            }
         }
-        if (color == Color.BLUE){
-            colorName = "Blue";
-        } else if (color == Color.RED) {
-            colorName = "Red";
-        }
-        currentTeam.setText(colorName + " " + role);
+        currentTeam.setText(builder.toString());
         timer.setText("");
     }
 
     public void setTimeLabel() {
         System.out.println("test timer");
         timer.setText(String.valueOf(session.getTime()));
+    }
+    
+
+    private void setTimer() {
+        // Create a ScheduledService to run periodically
+        ScheduledService<Void> service = new ScheduledService<Void>() {
+            @Override
+            protected Task<Void> createTask() {
+                return new Task<Void>() {
+                    @Override
+                    protected Void call() throws Exception {
+                        // Update the UI from the background task
+                        Platform.runLater(() -> {
+                            System.out.println("Timer: ");
+                        });
+                        return null;
+                    }
+                };
+            }
+        };
+        
+        service.setPeriod(Duration.seconds(10));
+        service.start();
+        controller.setService(service);
     }
 
 }

@@ -17,6 +17,12 @@ public class Board {
         this.grid = openCardsService.initGridCards(height, width);
     }
 
+    public void clone(Board target) {
+        this.heigth = target.getHeigth();
+        this.width = target.getWidth();
+        this.grid = target.getGrid();
+    }
+
     public void setSize(int width, int heigth) {
         this.heigth = heigth;
         this.width = width;
