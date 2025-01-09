@@ -4,6 +4,7 @@ import eu.telecomnancy.codingweek.codenames.model.board.Card;
 import eu.telecomnancy.codingweek.codenames.model.clue.Clue;
 import eu.telecomnancy.codingweek.codenames.model.color.Color;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
+import eu.telecomnancy.codingweek.codenames.model.team.Team;
 import eu.telecomnancy.codingweek.codenames.observers.game.ColorSetObserver;
 import eu.telecomnancy.codingweek.codenames.observers.game.RoleSetObserver;
 import eu.telecomnancy.codingweek.codenames.utils.GenerateCardUtil;
@@ -80,20 +81,31 @@ public class GameController {
     }
 
     public void setLabel() {
-        String role = new String();
-        String colorName = new String();
-        Color color = session.getCurrentColor();
-        if (session.isAgent()){
-            role = "agent";
-        } else {
-            role = "spy";
+        var builder = new StringBuilder();
+        builder.append("Equipe ").append(switch (session.getCurrentColor()) {
+            case Color.BLUE -> "bleue";
+            case Color.RED -> "rouge";
+            default -> "undefined";
+        }).append(" - ");
+        if (session.isAgent()) builder.append("agents");
+        else builder.append("espions");
+        builder.append(" : ");
+
+        var coloredTeam = switch (session.getCurrentColor()) {
+            case Color.BLUE -> session.getBlueTeam();
+            case Color.RED -> session.getRedTeam();
+            default -> null;
+        };
+        Team team = null;
+        if (coloredTeam != null) {
+            if (session.isAgent()) team = coloredTeam.getAgentTeam();
+            else team = coloredTeam.getSpyTeam();
         }
-        if (color == Color.BLUE){
-            colorName = "Blue";
-        } else if (color == Color.RED) {
-            colorName = "Red";
+        if (team != null) {
+            for (var player : team.getPlayersList()) builder.append(player.getName()).append(" - ");
         }
-        currentTeam.setText(colorName + " " + role);
+
+        currentTeam.setText(builder.toString());
     }
     @FXML
     private void onQuit() {
