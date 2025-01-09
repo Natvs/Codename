@@ -12,9 +12,14 @@ def import_listeDeMot(path):
 
 def intersection(liste1, liste2):
     liste_intersection = []
-    for element in liste1:
-        if element in liste2:
-            liste_intersection.append(element)
+    if len(liste1) < len(liste2):
+        for element in liste1:
+            if element in liste2:
+                liste_intersection.append(element)
+    else:
+        for element in liste2:
+            if element in liste1:
+                liste_intersection.append(element)
     return liste_intersection
 
 def trier_liste(liste_mot):
@@ -36,7 +41,7 @@ def supprimer_virgule(liste_mot):
 def traitement_champLexical():
     liste_mots_dico = import_listeDeMot("Dico.txt")
     liste_mots_selec = supprimer_virgule(import_listeDeMot("Selec.txt"))
-    liste_intersection = intersection(liste_mots_dico, liste_mots_selec)
+    liste_intersection = intersection(liste_mots_selec, liste_mots_dico)
     return liste_intersection
 
 def obtenir_listeIdMot(liste_champLexical):
