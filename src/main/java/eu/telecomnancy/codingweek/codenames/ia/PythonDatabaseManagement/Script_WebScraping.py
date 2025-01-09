@@ -99,28 +99,29 @@ def rechercher_internet_image(word_search, nb_picture=5):
     nb_picture_download = 0
 
     for i, img in enumerate(image_elements):
-        try:
-            img_src = img.get_attribute("src")
+        if i%2 == 0:
+            try:
+                img_src = img.get_attribute("src")
 
-            if img_src and img_src.startswith("data:image/"):
-                # Sauvegarder une image en base64
-                file_extension = img_src.split(';')[0].split('/')[1]  # Exemple : "data:image/png;base64,"
-                file_path = os.path.join("BdD", word_search, f"{word_search}_{nb_picture_download + 1}.{file_extension}")
-                save_base64_image(img_src, file_path)
-                nb_picture_download += 1
-            elif img_src and (img_src.startswith("http://") or img_src.startswith("https://")):
-                # Télécharger une image via une URL
-                file_extension = img_src.split('.')[-1].split('?')[0]  # Obtenir l'extension du fichier
-                if file_extension.lower() in ['jpg', 'jpeg', 'png', 'gif']:
+                if img_src and img_src.startswith("data:image/"):
+                    # Sauvegarder une image en base64
+                    file_extension = img_src.split(';')[0].split('/')[1]  # Exemple : "data:image/png;base64,"
                     file_path = os.path.join("BdD", word_search, f"{word_search}_{nb_picture_download + 1}.{file_extension}")
-                    save_image_from_url(img_src, file_path)
+                    save_base64_image(img_src, file_path)
                     nb_picture_download += 1
+                elif img_src and (img_src.startswith("http://") or img_src.startswith("https://")):
+                    # Télécharger une image via une URL
+                    file_extension = img_src.split('.')[-1].split('?')[0]  # Obtenir l'extension du fichier
+                    if file_extension.lower() in ['jpg', 'jpeg', 'png']:
+                        file_path = os.path.join("BdD", word_search, f"{word_search}_{nb_picture_download + 1}.{file_extension}")
+                        save_image_from_url(img_src, file_path)
+                        nb_picture_download += 1
 
-            if nb_picture_download >= nb_picture:
-                break
+                if nb_picture_download >= nb_picture:
+                    break
 
-        except Exception as e:
-            print(f"Erreur lors de l'extraction d'une image : {e}")
+            except Exception as e:
+                print(f"Erreur lors de l'extraction d'une image : {e}")
 
     if nb_picture_download < nb_picture:
         print(f"\nAttention : {nb_picture - nb_picture_download} image(s) manquante(s) pour {word_search}.")
