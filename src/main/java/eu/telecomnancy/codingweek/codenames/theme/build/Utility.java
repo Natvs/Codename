@@ -2,17 +2,18 @@ package eu.telecomnancy.codingweek.codenames.theme.build;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Collections;
 
 import eu.telecomnancy.codingweek.codenames.utils.openCardsService;
 
 
 public class Utility {
     
-    public static int getWordId(String word, ArrayList<String> dico) {
+    public static Integer getWordId(String word, ArrayList<String> dico) {
         // Obtenir l'id du mot "word" dans le dictionnaire "dico"
 
-        int wordId = 0;
-        int dicoLength = dico.size();
+        Integer wordId = 0;
+        Integer dicoLength = dico.size();
 
         while (wordId < dicoLength && !(word.equals(dico.get(wordId)))) {
             wordId++;
@@ -20,10 +21,10 @@ public class Utility {
         if (wordId == dicoLength) {
             wordId = -1; // en cas d'erreur on renvois -1
         }
-        return wordId;
+        return wordId+1;
     }
 
-    public static ArrayList<Integer> getLexicalFieldIntegerList(int wordId, ArrayList<String> dico_lexicalField) {
+    public static ArrayList<Integer> getLexicalFieldIntegerList(Integer wordId, ArrayList<String> dico_lexicalField) {
         // Obtenir la liste des id des mots du champ lexical "listDigit" du mot associé à l'id "wordId"
         
         String ligne = dico_lexicalField.get(wordId);
@@ -36,50 +37,45 @@ public class Utility {
         return listDigit;
     }
 
-    public static ArrayList<String> getLexicalFieldList(ArrayList<Integer> listDigit, ArrayList<String> dico) {
+    public static ArrayList<Integer> joinListDigit(ArrayList<Integer> list1, ArrayList<Integer> list2) {
+        // Utiliser un HashSet pour éviter les doublons
+        HashSet<Integer> set = new HashSet<>();
+        
+        // Ajouter tous les éléments des deux listes au set
+        set.addAll(list1);
+        set.addAll(list2);
+        
+        // Convertir le set en ArrayList
+        return new ArrayList<>(set);
+    }
+
+    public static ArrayList<String> convertListDigitToLexicalFieldList(ArrayList<Integer> listDigit, ArrayList<String> dico) {
         // Convertir la liste d'id "listDigit" en la la liste de mot associé au "dico"
 
         ArrayList<String> lexicalFieldList = new ArrayList<>();
-        for (int wordId : listDigit) {
+        for (Integer wordId : listDigit) {
             String word = dico.get(wordId);
             lexicalFieldList.add(word);
         }
         return lexicalFieldList;
     }
 
-    public static ArrayList<String> getWordDicoTheme(String word, ArrayList<String> dico, ArrayList<String> dico_lexicalField) {
-        // Obtenir le cictionnaire des champs lexical associé au mot "word"
-        ArrayList<String> wordDicoTheme;
-
-        int wordId = Utility.getWordId(word, dico);
-        if (wordId == -1) { // en cas d'erreur on renvois un "dicoTheme" vide
-            wordDicoTheme = null;
-        } else {
-            ArrayList<Integer> listDigit = Utility.getLexicalFieldIntegerList(wordId, dico_lexicalField);
-            wordDicoTheme = Utility.getLexicalFieldList(listDigit, dico); 
-        }
-
-        return wordDicoTheme;
-    }
-
-    public static ArrayList<String> joinDico(ArrayList<String> dico1, ArrayList<String> dico2) {
-        // Utilisation d'un HashSet pour éliminer les doublons
-        HashSet<String> set = new HashSet<>(dico1);
-        set.addAll(dico2);
-
-        // Convertir le HashSet en ArrayList
-        return new ArrayList<>(set);
-    }
-
     public static ArrayList<String> getDicoTheme(ArrayList<String> wordsList) {
         ArrayList<String> dicoTheme = new ArrayList<>();
-        ArrayList<String> dico = openCardsService.openFile("src/main/java/resources/words/codenames_words.txt");
-        ArrayList<String> dico_lexicalField = openCardsService.openFile("src/main/java/resources/words/lexical_field.txt");
-        
+        ArrayList<String> dico = openCardsService.openFile("src/main/resources/words/codenames_words.txt");
+        ArrayList<String> dico_lexicalField = openCardsService.openFile("src/main/resources/words/lexical_field.txt");
+
+        ArrayList<Integer> listDigitTheme = new ArrayList<>();
         for (String word : wordsList) {
-            ArrayList<String> wordDicoTheme = Utility.getWordDicoTheme(word, dico, dico_lexicalField);
-            dicoTheme = Utility.joinDico(dicoTheme, wordDicoTheme);
+            Integer wordId = Utility.getWordId(word, dico);
+            if (wordId == -1) {
+                ArrayList<Integer> wordListDigit = Utility.getLexicalFieldIntegerList(wordId, dico_lexicalField);
+                wordListDigit.add(wordId);
+                listDigitTheme = Utility.joinListDigit(listDigitTheme, wordListDigit);
+            }
         }
+        Collections.sort(listDigitTheme);
+        dicoTheme = Utility.convertListDigitToLexicalFieldList(listDigitTheme, dico);
         return dicoTheme;
     }
 
