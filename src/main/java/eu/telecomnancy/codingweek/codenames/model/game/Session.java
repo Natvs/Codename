@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import eu.telecomnancy.codingweek.codenames.commands.Executer;
 import eu.telecomnancy.codingweek.codenames.commands.GuessCardCommand;
 import eu.telecomnancy.codingweek.codenames.commands.SetClueCommand;
-import eu.telecomnancy.codingweek.codenames.controller.GameHeaderController;
 import eu.telecomnancy.codingweek.codenames.model.board.Board;
 import eu.telecomnancy.codingweek.codenames.model.board.Card;
 import eu.telecomnancy.codingweek.codenames.model.clue.Clue;

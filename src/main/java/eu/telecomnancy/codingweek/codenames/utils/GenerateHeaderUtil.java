@@ -18,7 +18,7 @@ public class GenerateHeaderUtil {
         }
         try {
             FXMLLoader loader = new FXMLLoader(fxmlURL);
-            loader.setControllerFactory(iC -> new GameHeaderController(session,gameController));
+            loader.setControllerFactory(iC -> new GameHeaderController(session));
             return loader.load();
         } catch (Exception e) {
             e.printStackTrace();
