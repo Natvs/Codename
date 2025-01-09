@@ -18,7 +18,7 @@ public class Utility {
         while (wordId < dicoLength && !(word.equals(dico.get(wordId)))) {
             wordId++;
         }
-        if (wordId == dicoLength) {
+        if (wordId >= dicoLength) {
             wordId = -1; // en cas d'erreur on renvois -1
         }
         return wordId+1;
@@ -68,7 +68,7 @@ public class Utility {
         ArrayList<Integer> listDigitTheme = new ArrayList<>();
         for (String word : wordsList) {
             Integer wordId = Utility.getWordId(word, dico);
-            if (wordId != -1) {
+            if (wordId >= 1) {
                 ArrayList<Integer> wordListDigit = Utility.getLexicalFieldIntegerList(wordId, dico_lexicalField);
                 wordListDigit.add(wordId);
                 listDigitTheme = Utility.joinListDigit(listDigitTheme, wordListDigit);

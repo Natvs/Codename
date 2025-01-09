@@ -62,6 +62,7 @@ public class BuildTest {
         assertEquals(lexicalFieldList_expected, lexicalFieldList);
 
         // Teste Utility.getDicoTheme
+        // Test 1: avec mot du dictionnaire "dico"
         ArrayList<String> wordsList = new ArrayList<>(Arrays.asList("abeille", "abricot"));
         ArrayList<String> dicoTheme = Utility.getDicoTheme(wordsList);
         ArrayList<String> dicoTheme_attendu = new ArrayList<>(Arrays.asList(
@@ -70,8 +71,13 @@ public class BuildTest {
             "miel", "mouche", "nid", "nourriture", "noyau", "orange", "pamplemousse", "papillon", "pêche", "piqûre", 
             "poire", "pomme", "prune", "raisin", "rayon", "reine", "rosé", "sucre", "tarte"
         ));
-        // System.err.println(dico_lexicalField);
         assertEquals(dicoTheme_attendu, dicoTheme);
+        // Teste 2: avec mots inconus
+        wordsList = new ArrayList<>(Arrays.asList("bougabouga", "42", "patate chaude"));
+        dicoTheme = Utility.getDicoTheme(wordsList);
+        dicoTheme_attendu = new ArrayList<>();
+        assertEquals(dicoTheme_attendu, dicoTheme);
+
     }
 
 }
