@@ -34,7 +34,7 @@ public class Session {
     private RoleSetObserver roleObserver = null;
     private ColorSetObserver colorObserver = null;
     private TimeObserver timeObserver = null;
-    private boolean activeTimer = false;
+    private boolean activeTimer = true;
 
     public Session() {
         this.config = new GameConfig();
@@ -213,6 +213,7 @@ public class Session {
                             if (activeTimer){
                                 nextRole();
                                 time=0;
+                                this.cancel();
                             }
                         });
                         return null;

@@ -27,13 +27,15 @@ public class GameHeaderController {
         session.setTimeObserver(new TimeObserver(this));
         if (service == null) {
             session.setTimer();
-        } else if (session.isAgent() && service.isRunning()){
-            service.cancel();
-        } else if (!session.isAgent()) {
+            service = session.getTimer();
+            service.start();
+        } else {
             if (service.getState() == State.READY) {
                 service.start();
-            }
-            if (service.getState() == State.CANCELLED){
+            } else if (service.getState() == State.RUNNING){
+                service.restart();
+                session.resetTime();
+            } else if (service.getState() == State.CANCELLED){
                 service.restart();
                 session.resetTime();
             }
