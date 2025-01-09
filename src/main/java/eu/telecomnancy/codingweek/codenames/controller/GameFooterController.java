@@ -1,13 +1,13 @@
 package eu.telecomnancy.codingweek.codenames.controller;
 
+import eu.telecomnancy.codingweek.codenames.model.clue.Clue;
+import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 
 public class GameFooterController {
-    private GameController gameController;
-    private boolean isAgent;
     @FXML
     private TextField word;
     @FXML
@@ -15,30 +15,34 @@ public class GameFooterController {
     @FXML
     private Label indication;
 
-    public GameFooterController(GameController gameController,boolean isAgent){
-        this.gameController = gameController;
-        this.isAgent = isAgent;
+    private Session session;
+    private GameController controller;
+
+    public GameFooterController(GameController controller, Session session){
+        this.session = session;
+        this.controller = controller;
     }
 
     @FXML
     private void initialize(){
-        if (!isAgent) {
-            indication.setText(gameController.getHint() + " en " + gameController.getNumber());
+        if (!session.isAgent()) {
+            var clue = session.getCurrentColoredTeam().getCluesList().getLast();
+            indication.setText(clue.getWord() + " en " + clue.getCount());
         }
     }
 
     @FXML
     private void onQuit(){
-        gameController.onQuit();
+        controller.onQuit();
     }
     @FXML
     private void onSubmit() {
-        if (isAgent){
-            String hintValue = word.getText();
-            gameController.setHint(hintValue);
-            Integer number = spinner.getValue();
-            gameController.setNumber(number);
+        controller.onSubmit();
+        if (session.isAgent()){
+            session.addClue(new Clue(word.getText(), spinner.getValue()));  
         }
-        gameController.onSubmit();
+        else {
+            session.guessCard(null);
+        }
     }
 }

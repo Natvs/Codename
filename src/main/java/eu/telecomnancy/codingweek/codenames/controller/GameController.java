@@ -8,9 +8,7 @@ import eu.telecomnancy.codingweek.codenames.observers.game.RoleSetObserver;
 import eu.telecomnancy.codingweek.codenames.utils.GenerateCardUtil;
 import eu.telecomnancy.codingweek.codenames.utils.GenerateFooterUtil;
 import eu.telecomnancy.codingweek.codenames.utils.GenerateHeaderUtil;
-import javafx.application.Platform;
 import javafx.concurrent.ScheduledService;
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.ColumnConstraints;
@@ -18,7 +16,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
-import javafx.util.Duration;
 
 public class GameController {
     private Session session;
@@ -42,19 +39,16 @@ public class GameController {
     private void initialize() {
         session.setRoleObserver(new RoleSetObserver(this));
         session.setColorObserver(new ColorSetObserver(this));
-        setLabel();
         setEvents();
+        setHeader();
         initCardsBoard();
         setFooter();
     }
     private void setEvents() {
         gameView.setOnKeyPressed((keyevent) ->  {
             switch (keyevent.getCode()) {
-                case KeyCode.Q:
-                    onQuit();
-                    break;
-                default:
-                    break;
+                case KeyCode.Q -> onQuit();
+                default -> {}
             }
         });
     }
@@ -89,7 +83,7 @@ public class GameController {
         }
     }
 
-    public void setLabel() {
+    public void setHeader() {
         var HeaderHBox = GenerateHeaderUtil.generateHeader(session,this);
         header.getChildren().clear();
         header.getChildren().add(HeaderHBox);
@@ -97,7 +91,7 @@ public class GameController {
 
     public void setFooter() {
         System.out.println(session.isAgent());
-        var FooterHBox = GenerateFooterUtil.generateFooter(this,session.isAgent());
+        var FooterHBox = GenerateFooterUtil.generateFooter(this,session);
         footer.getChildren().clear();
         footer.getChildren().add(FooterHBox);
     }
@@ -110,13 +104,12 @@ public class GameController {
 
     public void onSubmit() {
         if (session.isAgent()){
-            session.addClue(new Clue(getHint(),number));         
+            session.addClue(new Clue(getHint(),number));            
         }
         else {
             session.guessCard(null);
-            service.cancel();
         }
-        setLabel();
+        setHeader();
         setCardsBoard();
     }
     public String getHint(){
