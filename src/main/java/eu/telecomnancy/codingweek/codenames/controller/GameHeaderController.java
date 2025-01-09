@@ -7,13 +7,14 @@ import eu.telecomnancy.codingweek.codenames.observers.game.TimeObserver;
 import javafx.concurrent.Worker.State;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 
 public class GameHeaderController {
     private Session session;
     @FXML
     private Label currentTeam; 
     @FXML
-    private Label timer;
+    private ProgressBar timer;
 
     public GameHeaderController(Session session) {
         this.session = session;
@@ -53,10 +54,11 @@ public class GameHeaderController {
             }
         }
         currentTeam.setText(builder.toString());
-        timer.setText("");
+        timer.setProgress(0);
     }
 
     public void setTimeLabel() {
-        timer.setText(String.valueOf(session.getTime()));
+        int timeMax = session.isAgent() ? session.getConfig().timerAgent*10 : session.getConfig().timerSpy*10;
+        timer.setProgress(((double)session.getTime())/timeMax);
     }
 }

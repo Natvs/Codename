@@ -60,14 +60,19 @@ public class Session {
                     @Override
                     protected Void call() throws Exception {
                         // Update the UI from the background task
-                        for (int i=0;i<60;i++){
+                        int timeMax = session.isAgent() ? session.getConfig().timerAgent*10 : session.getConfig().timerSpy*10;
+                        for (int i=0;i<timeMax ;i++){
                             Platform.runLater(() -> {
-                                time ++;
+                                time --;
                                 if (timeObserver != null) {
                                     timeObserver.handle();
                                 }
                             });
-                            Thread.sleep(1_000);
+                            try {
+                                Thread.sleep(100);
+                            } catch (InterruptedException e){
+                                e.getStackTrace();
+                            }
                         }
                         Platform.runLater(() -> {
                             if (activeTimer){
@@ -230,6 +235,6 @@ public class Session {
         return this.time;
     }
     public void resetTime(){
-        this.time=0;
+        this.time = isAgent() ? getConfig().timerAgent*10 : getConfig().timerSpy*10;
     }
 }
