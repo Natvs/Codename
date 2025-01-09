@@ -1,9 +1,9 @@
 package eu.telecomnancy.codingweek.codenames.controller;
 
 import eu.telecomnancy.codingweek.codenames.model.board.Card;
-import eu.telecomnancy.codingweek.codenames.model.clue.Clue;
 import eu.telecomnancy.codingweek.codenames.model.color.Color;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
+import eu.telecomnancy.codingweek.codenames.model.team.Team;
 import eu.telecomnancy.codingweek.codenames.observers.game.ColorSetObserver;
 import eu.telecomnancy.codingweek.codenames.observers.game.RoleSetObserver;
 import eu.telecomnancy.codingweek.codenames.utils.GenerateCardUtil;
@@ -19,7 +19,6 @@ import javafx.scene.layout.RowConstraints;
 
 public class GameController {
     private Session session;
-    private String hint;
     private int number;
     @FXML
     private GridPane gameView;
@@ -38,19 +37,16 @@ public class GameController {
     private void initialize() {
         session.setRoleObserver(new RoleSetObserver(this));
         session.setColorObserver(new ColorSetObserver(this));
-        setLabel();
         setEvents();
+        setLabel();
         initCardsBoard();
         setFooter();
     }
     private void setEvents() {
         gameView.setOnKeyPressed((keyevent) ->  {
             switch (keyevent.getCode()) {
-                case KeyCode.Q:
-                    onQuit();
-                    break;
-                default:
-                    break;
+                case KeyCode.Q -> onQuit();
+                default -> {}
             }
         });
     }
@@ -86,25 +82,30 @@ public class GameController {
     }
 
     public void setLabel() {
-        String role = new String();
-        String colorName = new String();
-        Color color = session.getCurrentColor();
-        if (session.isAgent()){
-            role = "agent";
-        } else {
-            role = "spy";
+        var builder = new StringBuilder();
+        builder.append("Equipe ").append(switch (session.getCurrentColor()) {
+            case Color.BLUE -> "bleue";
+            case Color.RED -> "rouge";
+            default -> "undefined";
+        }).append(" - ");
+        if (session.isAgent()) builder.append("agents");
+        else builder.append("espions");
+        builder.append(" : ");
+
+        Team team = session.getCurrentTeam();
+        if (team != null) {
+            boolean first = true;
+            for (var player : team.getPlayersList()) {
+                if (!first) builder.append(" - "); else first = false;
+                builder.append(player.getName());
+            }
         }
-        if (color == Color.BLUE){
-            colorName = "Blue";
-        } else if (color == Color.RED) {
-            colorName = "Red";
-        }
-        currentTeam.setText(colorName + " " + role);
+        currentTeam.setText(builder.toString());
     }
 
     public void setFooter() {
         System.out.println(session.isAgent());
-        var gameHBox = GenerateFooterUtil.generateFooter(this,session.isAgent());
+        var gameHBox = GenerateFooterUtil.generateFooter(this, session);
         gameView.getChildren().remove(2);
         gameView.add(gameHBox,0,2);
     }
@@ -114,21 +115,8 @@ public class GameController {
     }
 
     public void onSubmit() {
-        if (session.isAgent()){
-            session.addClue(new Clue(getHint(),number));            
-        }
-        else {
-            session.guessCard(null);
-        }
         setLabel();
         setCardsBoard();
-    }
-
-    public String getHint(){
-        return this.hint;
-    }
-    public void setHint(String hint) {
-        this.hint = hint;
     }
 
     public int getNumber() {

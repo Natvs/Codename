@@ -1,7 +1,5 @@
 package eu.telecomnancy.codingweek.codenames.model.game;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import eu.telecomnancy.codingweek.codenames.commands.Executer;
 import eu.telecomnancy.codingweek.codenames.commands.GuessCardCommand;
 import eu.telecomnancy.codingweek.codenames.commands.SetClueCommand;
@@ -10,6 +8,7 @@ import eu.telecomnancy.codingweek.codenames.model.board.Card;
 import eu.telecomnancy.codingweek.codenames.model.clue.Clue;
 import eu.telecomnancy.codingweek.codenames.model.color.Color;
 import eu.telecomnancy.codingweek.codenames.model.coloredTeam.ColoredTeam;
+import eu.telecomnancy.codingweek.codenames.model.team.Team;
 import eu.telecomnancy.codingweek.codenames.observers.game.ColorSetObserver;
 import eu.telecomnancy.codingweek.codenames.observers.game.RoleSetObserver;
 
@@ -47,13 +46,25 @@ public class Session {
     public ColoredTeam getBlueTeam() {
         return this.blueTeam;
     }
-    @JsonIgnore
-    public ColoredTeam getCurrentTeam() {
+
+    public ColoredTeam getCurrentColoredTeam() {
         return switch (getCurrentColor()) {
             case Color.RED -> getRedTeam();
             case Color.BLUE -> getBlueTeam() ;
             default -> null;
         };
+    }
+    public Team getCurrentTeam() {
+        var coloredTeam = switch (getCurrentColor()) {
+            case Color.BLUE -> getBlueTeam();
+            case Color.RED -> getRedTeam();
+            default -> null;
+        };
+        if (coloredTeam != null) {
+            if (isAgent()) return coloredTeam.getAgentTeam();
+            else return coloredTeam.getSpyTeam();
+        }
+        return null;
     }
 
     public Board getBoard() {

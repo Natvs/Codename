@@ -1,5 +1,6 @@
 package eu.telecomnancy.codingweek.codenames.commands;
 
+import eu.telecomnancy.codingweek.codenames.controller.RootController;
 import eu.telecomnancy.codingweek.codenames.model.clue.Clue;
 import eu.telecomnancy.codingweek.codenames.model.color.Color;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
@@ -16,17 +17,13 @@ public class SetClueCommand implements Command {
 
     @Override
     public void execute() {
-        session.nextRole();
         switch (session.getCurrentColor()) {
-            case Color.BLUE:
-                session.getBlueTeam().addClue(clue);
-                break;
-            case Color.RED:
-                session.getRedTeam().addClue(clue);
-                break;
-            default:
-                break;
+            case Color.BLUE -> session.getBlueTeam().addClue(clue);
+            case Color.RED -> session.getRedTeam().addClue(clue);
+            default -> {}
         }
+        session.nextRole();
+        RootController.getInstance().changeView("/views/transition.fxml");
     }
 
     @Override
