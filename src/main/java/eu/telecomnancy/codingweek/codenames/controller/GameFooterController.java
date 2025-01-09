@@ -17,8 +17,11 @@ public class GameFooterController {
         this.isAgent = isAgent;
     }
 
-    private void setFooter(){
-        
+    @FXML
+    private void initialize(){
+        if (!isAgent) {
+            indication.setText(gameController.getHint());
+        }
     }
 
     @FXML
@@ -31,8 +34,6 @@ public class GameFooterController {
             String hintValue = word.getText();
             System.out.println(hintValue);
             gameController.setHint(hintValue);
-        } else {
-            indication.setText("test");
         }
         gameController.onSubmit();
     }
