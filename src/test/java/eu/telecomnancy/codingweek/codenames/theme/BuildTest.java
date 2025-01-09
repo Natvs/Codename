@@ -1,9 +1,10 @@
-package eu.telecomnancy.codingweek.codenames.theme.build;
+package eu.telecomnancy.codingweek.codenames.theme;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
+import eu.telecomnancy.codingweek.codenames.theme.build.Utility;
 import eu.telecomnancy.codingweek.codenames.utils.openCardsService;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
