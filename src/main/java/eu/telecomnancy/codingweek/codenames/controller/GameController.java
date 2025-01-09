@@ -91,16 +91,7 @@ public class GameController {
         else builder.append("espions");
         builder.append(" : ");
 
-        var coloredTeam = switch (session.getCurrentColor()) {
-            case Color.BLUE -> session.getBlueTeam();
-            case Color.RED -> session.getRedTeam();
-            default -> null;
-        };
-        Team team = null;
-        if (coloredTeam != null) {
-            if (session.isAgent()) team = coloredTeam.getAgentTeam();
-            else team = coloredTeam.getSpyTeam();
-        }
+        Team team = session.getCurrentTeam();
         if (team != null) {
             boolean first = true;
             for (var player : team.getPlayersList()) {

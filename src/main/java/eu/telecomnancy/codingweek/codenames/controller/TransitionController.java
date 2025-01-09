@@ -2,6 +2,7 @@ package eu.telecomnancy.codingweek.codenames.controller;
 
 import eu.telecomnancy.codingweek.codenames.model.color.Color;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
+import eu.telecomnancy.codingweek.codenames.model.team.Team;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
@@ -34,9 +35,16 @@ public class TransitionController {
         teamLabel.setText(teamBuilder.toString());
 
         var roleBuilder = new StringBuilder();
-        roleBuilder.append("Rôle : ");
-        if (session.isAgent()) roleBuilder.append("agent");
-        else roleBuilder.append("espion");
+        if (session.isAgent()) roleBuilder.append("Agents : ");
+        else roleBuilder.append("Espions : ");
+        Team team = session.getCurrentTeam();
+        if (team != null) {
+            boolean first = true;
+            for (var player : team.getPlayersList()) {
+                if (!first) roleBuilder.append(" - "); else first = false;
+                roleBuilder.append(player.getName());
+            }
+        }
         roleLabel.setText(roleBuilder.toString());
     }
 

@@ -18,8 +18,8 @@ public class GuessCardCommand implements Command {
     @Override
     public void execute() {
         if (session.getCurrentColor() == card.getColor()) {
-            session.getCurrentTeam().getCluesList().getLast().countDown();
-            if (session.getCurrentTeam().getCluesList().getLast().getCount() == 0) {
+            session.getCurrentColoredTeam().getCluesList().getLast().countDown();
+            if (session.getCurrentColoredTeam().getCluesList().getLast().getCount() == 0) {
                 session.nextRole();
                 RootController.getInstance().changeView("/views/transition.fxml");
             }

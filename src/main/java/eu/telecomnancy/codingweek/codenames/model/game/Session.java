@@ -8,6 +8,7 @@ import eu.telecomnancy.codingweek.codenames.model.board.Card;
 import eu.telecomnancy.codingweek.codenames.model.clue.Clue;
 import eu.telecomnancy.codingweek.codenames.model.color.Color;
 import eu.telecomnancy.codingweek.codenames.model.coloredTeam.ColoredTeam;
+import eu.telecomnancy.codingweek.codenames.model.team.Team;
 import eu.telecomnancy.codingweek.codenames.observers.game.ColorSetObserver;
 import eu.telecomnancy.codingweek.codenames.observers.game.RoleSetObserver;
 
@@ -46,12 +47,24 @@ public class Session {
         return this.blueTeam;
     }
 
-    public ColoredTeam getCurrentTeam() {
+    public ColoredTeam getCurrentColoredTeam() {
         return switch (getCurrentColor()) {
             case Color.RED -> getRedTeam();
             case Color.BLUE -> getBlueTeam() ;
             default -> null;
         };
+    }
+    public Team getCurrentTeam() {
+        var coloredTeam = switch (getCurrentColor()) {
+            case Color.BLUE -> getBlueTeam();
+            case Color.RED -> getRedTeam();
+            default -> null;
+        };
+        if (coloredTeam != null) {
+            if (isAgent()) return coloredTeam.getAgentTeam();
+            else return coloredTeam.getSpyTeam();
+        }
+        return null;
     }
 
     public Board getBoard() {
