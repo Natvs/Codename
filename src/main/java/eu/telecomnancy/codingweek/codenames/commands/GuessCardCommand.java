@@ -17,6 +17,10 @@ public class GuessCardCommand implements Command {
 
     @Override
     public void execute() {
+        if (card == null) {
+            session.nextRole();
+            return;
+        }
         if (session.getCurrentColor() == card.getColor()) {
             session.getCurrentColoredTeam().getCluesList().getLast().countDown();
             if (session.getCurrentColoredTeam().getCluesList().getLast().getCount() == 0) {

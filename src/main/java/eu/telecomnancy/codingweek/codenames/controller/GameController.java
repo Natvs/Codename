@@ -1,13 +1,13 @@
 package eu.telecomnancy.codingweek.codenames.controller;
 
 import eu.telecomnancy.codingweek.codenames.model.board.Card;
-import eu.telecomnancy.codingweek.codenames.model.clue.Clue;
 import eu.telecomnancy.codingweek.codenames.model.color.Color;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import eu.telecomnancy.codingweek.codenames.model.team.Team;
 import eu.telecomnancy.codingweek.codenames.observers.game.ColorSetObserver;
 import eu.telecomnancy.codingweek.codenames.observers.game.RoleSetObserver;
 import eu.telecomnancy.codingweek.codenames.utils.GenerateCardUtil;
+import eu.telecomnancy.codingweek.codenames.utils.GenerateFooterUtil;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -18,8 +18,8 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 
 public class GameController {
-    private final Session session;
-
+    private Session session;
+    private int number;
     @FXML
     private GridPane gameView;
     @FXML
@@ -40,6 +40,7 @@ public class GameController {
         setEvents();
         setLabel();
         initCardsBoard();
+        setFooter();
     }
     private void setEvents() {
         gameView.setOnKeyPressed((keyevent) ->  {
@@ -99,17 +100,31 @@ public class GameController {
                 builder.append(player.getName());
             }
         }
-
         currentTeam.setText(builder.toString());
     }
-    @FXML
-    private void onQuit() {
+
+    public void setFooter() {
+        System.out.println(session.isAgent());
+        var gameHBox = GenerateFooterUtil.generateFooter(this, session);
+        gameView.getChildren().remove(2);
+        gameView.add(gameHBox,0,2);
+    }
+
+    public void onQuit() {
         RootController.getInstance().changeView("/views/home.fxml");
     }
 
-    @FXML
-    private void onSubmit() {
-        session.addClue(new Clue(0,2));
+    public void onSubmit() {
+        setLabel();
+        setCardsBoard();
+    }
+
+    public int getNumber() {
+        return this.number;
+    }
+    
+    public void setNumber(int number) {
+        this.number = number;
     }
 
 }
