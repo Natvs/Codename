@@ -17,6 +17,7 @@ import eu.telecomnancy.codingweek.codenames.model.team.Team;
 import eu.telecomnancy.codingweek.codenames.observers.game.ColorSetObserver;
 import eu.telecomnancy.codingweek.codenames.observers.game.RoleSetObserver;
 import eu.telecomnancy.codingweek.codenames.observers.game.TimeObserver;
+import eu.telecomnancy.codingweek.codenames.observers.newconfig.ImageModeObserver;
 import javafx.application.Platform;
 import javafx.concurrent.ScheduledService;
 import javafx.concurrent.Task;
@@ -39,9 +40,9 @@ public class Session {
     private ColorSetObserver colorObserver = null;
     private TimeObserver timeObserver = null;
 
+
     private ScheduledService<Void> timerService;
     private int time;
-    private boolean activeTimer = true;
 
     public Session() {
         this.config = new GameConfig();
@@ -50,8 +51,6 @@ public class Session {
         this.board = new Board(config.heigth, config.width);
         initialize();
         setTimerService();
-        music = new Music();
-        music.NewMusic("/music/apt.mp3");
     }
 
     public void initialize() {
@@ -74,7 +73,7 @@ public class Session {
                     @Override
                     protected Void call() throws Exception {
                         // Update the UI from the background task
-                        int timeMax = session.isAgent() ? session.getConfig().timerAgent*10 : session.getConfig().timerSpy*10;
+                        int timeMax = session.isAgent() ? session.getConfig().agentTime*10 : session.getConfig().spyTime*10;
                         for (int i=0;i<timeMax ;i++){
                             Platform.runLater(() -> {
                                 time --;
@@ -92,7 +91,7 @@ public class Session {
                             }
                             if (time == 0) {
                                 Platform.runLater(() -> {
-                                    if (activeTimer){
+                                    if (getConfig().getTimer()){
                                         if (session.isAgent()) getExecuter().addCommand(new SetClueCommand(null, session));
                                         else getExecuter().addCommand(new GuessCardCommand(null, session));
                                         getExecuter().executeAll();
@@ -157,6 +156,9 @@ public class Session {
         return this.config;
     }
 
+    public void setConfig(GameConfig config) {
+        this.config = config;
+    }
     public Color getCurrentColor() {
         return this.currentColor;
     }
@@ -182,7 +184,8 @@ public class Session {
             colorObserver.handle();
         }
     }
-    
+
+
 
     public void setRoleObserver(RoleSetObserver observer) {
         this.roleObserver = observer;
@@ -241,15 +244,6 @@ public class Session {
         getExecuter().executeAll();
     }
 
-
-    public boolean getActiveTimer() {
-        return activeTimer;
-    }
-
-    public void setActiveTimer(boolean activeTimer){
-        this.activeTimer = activeTimer;
-    }
-
     @JsonIgnore
     public ScheduledService<Void> getTimerService(){
         return this.timerService;
@@ -259,9 +253,15 @@ public class Session {
         return this.time;
     }
     public void resetTime(){
-        this.time = isAgent() ? getConfig().timerAgent*10 : getConfig().timerSpy*10;
+        this.time = isAgent() ? getConfig().agentTime*10 : getConfig().spyTime*10;
     }
+    @JsonIgnore
     public Music getMusic() {
         return music;
+    }
+
+    @JsonIgnore
+    public void setMusic(Music music){
+        this.music = music;
     }
 }
