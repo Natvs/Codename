@@ -48,7 +48,7 @@ public class GameController {
         setFooter();
 
         if (session.isAgent()) {
-            ClueGuesser clueGuesser = new ClueGuesser(session);
+            ClueGuesser clueGuesser = new ClueGuesser(session.getCurrentColor(), session);
             Clue clue = clueGuesser.getClue();
             session.addClue(clue);
         } else {

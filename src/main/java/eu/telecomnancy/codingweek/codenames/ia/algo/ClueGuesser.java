@@ -2,6 +2,7 @@ package eu.telecomnancy.codingweek.codenames.ia.algo;
 
 import java.util.ArrayList;
 
+import eu.telecomnancy.codingweek.codenames.model.color.Color;
 import eu.telecomnancy.codingweek.codenames.model.board.Board;
 import eu.telecomnancy.codingweek.codenames.model.board.Card;
 import eu.telecomnancy.codingweek.codenames.model.clue.Clue;
@@ -13,7 +14,7 @@ public class ClueGuesser {
     
     private Clue clue;
 
-    public ClueGuesser(Session session) {
+    public ClueGuesser(Color color, Session session) {
 
         // importe les dico
         ArrayList<String> dico = openCardsService.openFile("src/main/resources/words/codenames_words.txt");
@@ -27,7 +28,7 @@ public class ClueGuesser {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 Card card = board.getCard(i,j);
-                if (!(card.getRevealed())) {
+                if (!(card.getRevealed()) && card.getColor() == color) {
                     String cardName = card.getName();
                     cardsNameList.add(cardName);
                 }
