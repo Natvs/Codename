@@ -12,7 +12,7 @@ function createGrid() {
     const container = document.getElementById('grid-container');
     const cellSize = Math.min(window.innerWidth / width, window.innerHeight / height);
 
-    container.style.width = `${width * cellSize}px`;
+    container.style.gridTemplateColumns = `repeat(${width}, ${cellSize}px)`;
     
     for (let i = 0; i < height * width; i++) {
         const cell = document.createElement('div');

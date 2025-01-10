@@ -10,7 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 
 public class GameHeaderController {
-    private Session session;
+    private final Session session;
     @FXML
     private Label currentTeam; 
     @FXML

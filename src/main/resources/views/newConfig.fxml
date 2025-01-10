@@ -20,6 +20,7 @@
     <columnConstraints>
         <ColumnConstraints hgrow="ALWAYS" />
         <ColumnConstraints hgrow="ALWAYS" />
+        <ColumnConstraints hgrow="ALWAYS" />
     </columnConstraints>
 
     <children>
@@ -67,10 +68,16 @@
                         <RowConstraints vgrow="ALWAYS" />
                         <RowConstraints vgrow="ALWAYS" />
                     </rowConstraints>
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="ALWAYS" />
+                        <ColumnConstraints hgrow="ALWAYS" />
+                    </columnConstraints>
                     <children>
-                        <TextField fx:id="blueSpy1" />
+                        <TextField fx:id="blueSpy1" GridPane.columnSpan="2"/>
                         <Button fx:id="addBlueSpy" onAction="#onAddBlueSpy" text="+"
-                            GridPane.rowIndex="1" GridPane.halignment="CENTER" />
+                            GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.halignment="CENTER" />
+                        <Button fx:id="setBlueSpyIA" onAction="#onSetBlueSpyIA" text = "IA"
+                            GridPane.rowIndex="1" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
                     </children>
                 </GridPane>
 
@@ -80,7 +87,7 @@
                         <RowConstraints vgrow="ALWAYS" />
                     </rowConstraints>
                     <children>
-                        <TextField fx:id="redAgent1" />
+                        <TextField fx:id="redAgent1"/>
                         <Button fx:id="addRedAgent" onAction="#onAddRedAgent" text="+"
                             GridPane.rowIndex="1" GridPane.halignment="CENTER" />
                     </children>
@@ -92,10 +99,16 @@
                         <RowConstraints vgrow="ALWAYS" />
                         <RowConstraints vgrow="ALWAYS" />
                     </rowConstraints>
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="ALWAYS" />
+                        <ColumnConstraints hgrow="ALWAYS" />
+                    </columnConstraints>
                     <children>
-                        <TextField fx:id="redSpy1" />
+                        <TextField fx:id="redSpy1" GridPane.columnSpan="2"/>
                         <Button fx:id="addRedSpy" onAction="#onAddRedSpy" text="+"
                             GridPane.rowIndex="1" GridPane.halignment="CENTER" />
+                        <Button fx:id="setRedSpyIA" onAction="#onSetRedSpyIA" text = "IA"
+                            GridPane.rowIndex="1" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
                     </children>
                 </GridPane>
             </children>

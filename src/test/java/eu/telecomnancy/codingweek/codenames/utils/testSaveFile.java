@@ -1,9 +1,8 @@
 package eu.telecomnancy.codingweek.codenames.utils;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import java.io.File;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import eu.telecomnancy.codingweek.codenames.model.coloredTeam.ColoredTeam;
@@ -22,7 +21,6 @@ public class testSaveFile {
 
     @Test
     void testLoad() {
-        // TODO do more tests
         String fileName = "src/main/resources/saves/save.json";
         SaveFile.erraseData(fileName);
         Session session = setGameConfig();

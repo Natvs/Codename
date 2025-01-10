@@ -105,20 +105,26 @@ dist/Script_DictionaryManager.exe "abat-jour" "BdD" "codenames_words.txt" "lexic
 
 ### Nathans Vernois :
 - [X] 06/01: Implémentation du diagramme de classe
-- [X] 07/01: Implémentation des racourcis claviers
-        - Implémentation du racourcis "Quitter"
-        - Implémentation du racourcis "Nouvelle Partie" (Acceuil)
-        - Implémentation du racourcis "Démarer Partie" (Menu configuration)
+- [X] 07/01: Implémentation de racourcis claviers (commencer une partie, quitter)
+- [X] 07/01: Ajout des patters observers et commands
 - [X] 08/01: Implémentation de la fenètre "Partie" :
         - Pouvoir selectionner la carte pour l'espion
 	- Ajout d'un observateur
 - [X] 08/01 Implémentation de la gestion des tours:
-	- Ajout dans le model
+	- Ajout dans le modèle
 	- Affichage du joueur actuel
 	- Gestion de la selection de la carte selon le role du joueur
 - [X] 09/01: Implémentation de la fenètre "Transition" :
         - Afficher l'Equipe (Bleu ou Rouge) et le Groupe (Espion ou Maitre-Espion)
         - Ajouter un bouton "Jouer"
-- [ ]  09/01 : Fin de jeu :
-        - Quand toutes les cartes d'une couleur sont revelées
+- [X]  09/01 : Fin de jeu :
+        - Quand toutes les cartes d'une couleur sont revélées
         - Carte noire selectionnée
+- [X] 10/01 : Gestion du jeu 
+        - Ajout de nombreux observers afin de lier le modèle aux graphismes
+        - Ajout de commandes afin de simplifier la gestion du jeu
+- [X] 10/01 : Implémentations de plusieurs petits aspects du jeu :
+        - Ajout de raccourcis claviers pour toutes les pages (retour, charger une partie, sauvegarder, passer)
+        - Le timer disparait lorsqu'il n'a pas été activé dans les configurations
+        - Les mots des indices doivent appartenir au dictionnaire pour être validés
+- [X] 10/01 : Ajout des boutons pour inclure des IA en tant que espions

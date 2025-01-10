@@ -30,7 +30,7 @@ public class AutoCompleteTextField extends TextField {
                         .filter(e -> e.toLowerCase().contains(lastWord.toLowerCase()))
                         .collect(Collectors.toList()));
                 
-                if (searchResult.size() > 0) {
+                if (!searchResult.isEmpty()) {
                     populatePopup(searchResult);
                     if (!contextMenu.isShowing()) {
                         contextMenu.show(AutoCompleteTextField.this, Side.BOTTOM, 0, 0);

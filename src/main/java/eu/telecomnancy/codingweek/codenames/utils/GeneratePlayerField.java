@@ -1,5 +1,6 @@
 package eu.telecomnancy.codingweek.codenames.utils;
 
+import java.io.IOException;
 import java.net.URL;
 
 import eu.telecomnancy.codingweek.codenames.controller.NewConfigController;
@@ -18,8 +19,7 @@ public class GeneratePlayerField {
             FXMLLoader loader = new FXMLLoader(fxmlURL);
             loader.setControllerFactory(iC -> new PlayerFieldController(name, newConfigController, playerType));
             return loader.load();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e) {
             return null;
         }
     }
