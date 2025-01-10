@@ -66,6 +66,8 @@ public class RootController {
                     return new TransitionController(session);
                 } else if (iC == EndController.class) {
                     return new EndController(session);
+                } else if (iC == CreditController.class) {
+                    return new CreditController(session);
                 } else {
                     return null;
                 }

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+
+<GridPane
+    fx:id="creditView"
+    xmlns="http://javafx.com/javafx"
+    xmlns:fx="http://javafx.com/fxml"
+    fx:controller="eu.telecomnancy.codingweek.codenames.controller.CreditController">
+    
+    <rowConstraints>
+        <RowConstraints vgrow="ALWAYS" />
+        <RowConstraints vgrow="ALWAYS" />
+        <RowConstraints vgrow="ALWAYS" />
+    </rowConstraints>
+
+    <columnConstraints>
+        <ColumnConstraints hgrow="ALWAYS" />
+        <ColumnConstraints hgrow="ALWAYS" />
+        <ColumnConstraints hgrow="ALWAYS" />
+    </columnConstraints>
+
+    <children>
+        <ImageView fx:id="imageView" fitWidth="900" fitHeight="760" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowSpan="3">
+        <image>
+            <Image url="@../images/graphic_design_passion.jpg"/>
+        </image>
+        </ImageView>
+        <Label fx:id="word" text="ratio" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.halignment="CENTER" />
+        <Button fx:id="Rose" text="Rosé" GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.halignment="CENTER" onAction="#onRose" />
+        <Button fx:id="Krokmou" text="Krokmou" GridPane.rowIndex="1" GridPane.columnIndex="1" GridPane.halignment="CENTER" onAction="#onKrokmou" />
+        <Button fx:id="James" text="James" GridPane.rowIndex="1" GridPane.columnIndex="2" GridPane.halignment="CENTER" onAction="#onJames" />
+        <Button fx:id="Back" text="Retour au menu" GridPane.rowIndex="2" GridPane.halignment="CENTER" onAction="#onBack" />
+    </children>
+
+</GridPane>
