@@ -8,20 +8,24 @@ public class DicoManager {
     
     public static void main(String[] args) {
         try {
-            // Commande pour exécuter le script Python
-            ProcessBuilder pb = new ProcessBuilder("python", "script.py");
-            Process process = pb.start();
-            
+            // Chemin vers l'exécutable
+            String project_file_path = "src/main/java/eu/telecomnancy/codingweek/codenames/dictionaryManager/PythonDictionaryManager/";
+            String executablePath = project_file_path + "dist/Script_DictionaryManager.exe";
+
+            // Construire le processus
+            ProcessBuilder processBuilder = new ProcessBuilder(executablePath);
+            Process process = processBuilder.start();
+
             // Lire la sortie du script Python
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String line;
             while ((line = reader.readLine()) != null) {
                 System.out.println(line);
             }
-            
-            // Attendre que le processus se termine
+
+            // Attendre la fin du processus
             int exitCode = process.waitFor();
-            System.out.println("Exit Code : " + exitCode);
+            System.out.println("Process exited with code: " + exitCode);
         } catch (Exception e) {
             e.printStackTrace();
         }

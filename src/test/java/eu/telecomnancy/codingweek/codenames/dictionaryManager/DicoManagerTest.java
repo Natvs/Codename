@@ -5,10 +5,10 @@ import org.junit.jupiter.api.Test;
 
 public class DicoManagerTest {
     @Test
-    void testIA() {
+    void testDicoManager() {
 
         // Paramètres :
-        String project_file_path = "src/mai/java/eu/telecomnancy/codingweek/codenames/dictionaryManager/PythonDictionaryManager";
+        String project_file_path = "src/main/java/eu/telecomnancy/codingweek/codenames/dictionaryManager/PythonDictionaryManager/";
         String word = "abat-jour";
         String image_save_path = project_file_path + "BdD";
         String codenamesWords_path = project_file_path + "codenames_words.txt";
