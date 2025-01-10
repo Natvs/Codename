@@ -17,6 +17,14 @@ public class Board {
     private final ArrayList<String> fullWordList;
     private ArrayList<String> wordsList;
 
+    // Ajouter constructeur par défaut pour Jackson
+    public Board() {
+        // Initialisation par défaut
+        this.wordsList = new ArrayList<>();
+        this.fullWordList = openCardsService.openFile("src/main/resources/words/codenames_words.txt");
+        this.grid = new Card[5][5];
+    }
+
     public Board(@JsonProperty("height") int height,@JsonProperty("width") int width) {
         this.heigth = height;
         this.width = width;
@@ -49,6 +57,10 @@ public class Board {
         return this.grid;
     }
 
+    public void setGrid(Card[][] grid) {
+        this.grid = grid;
+    }
+
     public Card getCard(int i, int j) {
         return this.grid[i][j];
     }
@@ -56,8 +68,13 @@ public class Board {
     public ArrayList<String> getFullWordList() {
         return this.fullWordList;
     }
+
     public ArrayList<String> getWordList() {
         return this.wordsList;
+    }
+
+    public void setWordList(ArrayList<String> wordList) {
+        this.wordsList = wordList;
     }
 
     public int getRemainingCards(Color color){
