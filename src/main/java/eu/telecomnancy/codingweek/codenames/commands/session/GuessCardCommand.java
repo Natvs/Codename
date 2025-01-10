@@ -1,4 +1,4 @@
-package eu.telecomnancy.codingweek.codenames.commands;
+package eu.telecomnancy.codingweek.codenames.commands.session;
 
 import eu.telecomnancy.codingweek.codenames.controller.RootController;
 import eu.telecomnancy.codingweek.codenames.model.board.Card;
@@ -6,13 +6,12 @@ import eu.telecomnancy.codingweek.codenames.model.color.Color;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import javafx.application.Platform;
 
-public class GuessCardCommand implements Command {
+public class GuessCardCommand extends SessionCommand {
     
-    private final Session session;
     private final Card card;
 
     public GuessCardCommand(Card card, Session session) {
-        this.session = session;
+        super(session);
         this.card = card;
     }
 

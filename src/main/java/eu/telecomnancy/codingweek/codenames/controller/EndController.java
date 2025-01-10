@@ -4,12 +4,15 @@ import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 
 public class EndController {
     
+
+    @FXML
+    private GridPane endView;
     @FXML
     private Label teamLabel;
-
     @FXML
     private Button nextButton;
 
@@ -19,8 +22,18 @@ public class EndController {
         this.session = session;
     }
 
-    public void initialize() {
+    @FXML
+    private void initialize() {
         setLabel();
+        initializeEvents();
+    }
+    private void initializeEvents() {
+        endView.setOnKeyPressed((keyevent) ->  {
+            switch (keyevent.getCode()) {
+                case Q -> onContinue();
+                default -> {}
+            }
+        });
     }
 
     private void setLabel() {

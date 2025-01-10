@@ -5,12 +5,15 @@ import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import eu.telecomnancy.codingweek.codenames.model.team.Team;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.GridPane;
 
 public class TransitionController {
     
+    @FXML 
+    private GridPane transitionView;
     @FXML
     private Label teamLabel;
-
     @FXML
     private Label roleLabel;
 
@@ -22,6 +25,16 @@ public class TransitionController {
 
     public void initialize() {
         setLabel();
+        setEvents();
+    }
+    private void setEvents() {
+        transitionView.setOnKeyPressed((keyevent) ->  {
+            switch (keyevent.getCode()) {
+                case KeyCode.Q -> onQuit();
+                case KeyCode.C -> onContinue();
+                default -> {}
+            }
+        });
     }
 
     public void setLabel() {
@@ -51,6 +64,10 @@ public class TransitionController {
     @FXML
     private void onContinue() {
         RootController.getInstance().changeView("/views/game.fxml");
+    }
+
+    public void onQuit() {
+        session.quitGame();
     }
 
 }
