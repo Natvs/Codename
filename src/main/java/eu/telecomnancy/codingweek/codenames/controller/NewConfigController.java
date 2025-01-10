@@ -294,12 +294,24 @@ public class NewConfigController {
 
     @FXML
     private void onSetBlueSpyIA() {
-        
+        if (session.getConfig().blueSpyIA) {
+            session.getConfig().blueSpyIA = false;
+        }
+        else {
+            session.getConfig().blueSpyIA = true;
+        }
+        addBlueSpy.setVisible(!session.getConfig().blueSpyIA);
     }
 
     @FXML
     private void onSetRedSpyIA() {
-
+        if (session.getConfig().redSpyIA) {
+            session.getConfig().redSpyIA = false;
+        }
+        else {
+            session.getConfig().redSpyIA = true;
+        }
+        addRedSpy.setVisible(!session.getConfig().redSpyIA);
     }
     
     public void removePlayerField(Node playerField, int playerType) {
