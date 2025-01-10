@@ -15,7 +15,6 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        // Tackle music
         URL fxmlURL = getClass().getResource("/views/root.fxml");
         if (fxmlURL == null) {
             System.err.println("Could not find root.fxml");
