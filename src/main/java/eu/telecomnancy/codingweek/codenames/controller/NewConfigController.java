@@ -5,6 +5,7 @@ import java.util.List;
 
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import eu.telecomnancy.codingweek.codenames.model.player.Player;
+import eu.telecomnancy.codingweek.codenames.observers.newconfig.ImageModeObserver;
 import eu.telecomnancy.codingweek.codenames.theme.Utility;
 import eu.telecomnancy.codingweek.codenames.utils.AutoCompleteTextField;
 import eu.telecomnancy.codingweek.codenames.utils.GeneratePlayerField;
@@ -16,12 +17,13 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
 public class NewConfigController {
-    private Session session;
+    private final Session session;
 
     private int nbBlueAgents = 1;
     private int nbRedAgents = 1;
@@ -102,6 +104,8 @@ public class NewConfigController {
 
     @FXML
     private void initialize() {
+        session.setImageModeObserver(new ImageModeObserver(this));
+
         nbRows.getValueFactory().setValue(session.getConfig().heigth);
         nbCols.getValueFactory().setValue(session.getConfig().width);
         initializeEvents();
@@ -143,6 +147,9 @@ public class NewConfigController {
         }));
         nbCols.valueProperty().addListener(((observable, oldValue, newValue) -> {
             session.getConfig().width = nbCols.getValue();
+        }));
+        imageModeCheck.selectedProperty().addListener(((value) -> {
+             session.setImageMode(imageModeCheck.selectedProperty().get()); 
         }));
     }
 
@@ -359,6 +366,19 @@ public class NewConfigController {
     private void enableStart() {
         startButton.setDisable(false);
         startEnable = true;
+    }
+
+    public void setMaxBoardSize() {
+        SpinnerValueFactory.IntegerSpinnerValueFactory rowFactory = (SpinnerValueFactory.IntegerSpinnerValueFactory) nbRows.getValueFactory();
+        SpinnerValueFactory.IntegerSpinnerValueFactory colFactory = (SpinnerValueFactory.IntegerSpinnerValueFactory) nbCols.getValueFactory();
+        if (session.getConfig().imageMode) {
+            rowFactory.setMax(5);
+            colFactory.setMax(5);
+        }
+        else {
+            rowFactory.setMax(10);
+            colFactory.setMax(10);
+        }
     }
 
 }

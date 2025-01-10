@@ -17,6 +17,7 @@ import eu.telecomnancy.codingweek.codenames.model.team.Team;
 import eu.telecomnancy.codingweek.codenames.observers.game.ColorSetObserver;
 import eu.telecomnancy.codingweek.codenames.observers.game.RoleSetObserver;
 import eu.telecomnancy.codingweek.codenames.observers.game.TimeObserver;
+import eu.telecomnancy.codingweek.codenames.observers.newconfig.ImageModeObserver;
 import javafx.application.Platform;
 import javafx.concurrent.ScheduledService;
 import javafx.concurrent.Task;
@@ -35,6 +36,7 @@ public class Session {
     private RoleSetObserver roleObserver = null;
     private ColorSetObserver colorObserver = null;
     private TimeObserver timeObserver = null;
+    private ImageModeObserver imageModeObserver = null;
 
     private ScheduledService<Void> timerService;
     private int time;
@@ -156,6 +158,10 @@ public class Session {
         return this.currentColor;
     }
 
+    public boolean getImageMode() {
+        return getConfig().imageMode;
+    }
+
     public boolean isAgent() {
         return this.agent;
     }
@@ -177,7 +183,13 @@ public class Session {
             colorObserver.handle();
         }
     }
-    
+
+    public void setImageMode(boolean imageMode) {
+        getConfig().imageMode = imageMode;
+        if (imageModeObserver != null) {
+            imageModeObserver.handle();
+        }
+    }
 
     public void setRoleObserver(RoleSetObserver observer) {
         this.roleObserver = observer;
@@ -189,6 +201,10 @@ public class Session {
 
     public void setTimeObserver(TimeObserver observer) {
         this.timeObserver = observer;
+    }
+
+    public void setImageModeObserver(ImageModeObserver observer) {
+        this.imageModeObserver = observer;
     }
 
     @JsonIgnore
