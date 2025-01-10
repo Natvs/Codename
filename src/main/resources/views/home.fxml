@@ -9,12 +9,13 @@
     xmlns:fx="http://javafx.com/fxml/1"
     fx:controller="eu.telecomnancy.codingweek.codenames.controller.HomeController">
     <rowConstraints>
-        <RowConstraints percentHeight="20" />
+        <RowConstraints percentHeight="15" />
         <RowConstraints percentHeight="45" />
         <RowConstraints percentHeight="11" />
         <RowConstraints percentHeight="11" />
         <RowConstraints percentHeight="11" />
         <RowConstraints percentHeight="10" />
+        <RowConstraints percentHeight="7" /> 
     </rowConstraints>
 
     <columnConstraints>
@@ -25,7 +26,7 @@
         <Label fx:id="Title" text="Codenames" GridPane.columnIndex="0"
             GridPane.halignment="CENTER" GridPane.rowIndex="0" />
         
-        <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true"
+        <ImageView fitHeight="230.0" fitWidth="230.0" pickOnBounds="true" preserveRatio="true"
              GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1">
             <image>
                 <Image url="@../images/logo.jpg" />
@@ -44,5 +45,11 @@
         <Label fx:id="Subtitle" text="by AnthropicPotato - APt" GridPane.halignment="CENTER"
             GridPane.rowIndex="5" />
     </children>
+
+    <HBox GridPane.columnIndex="0" GridPane.rowIndex="6" alignment="CENTER" spacing="10" HBox.hgrow="ALWAYS">
+        <children>
+            <Label text="Version 1.0" />
+        </children>
+    </HBox>
 
 </GridPane>

@@ -20,8 +20,11 @@ import eu.telecomnancy.codingweek.codenames.observers.game.TimeObserver;
 import javafx.application.Platform;
 import javafx.concurrent.ScheduledService;
 import javafx.concurrent.Task;
+import eu.telecomnancy.codingweek.codenames.music.Music;
 
 public class Session {
+
+    private Music music;
 
     private GameConfig config;
     private final ColoredTeam redTeam;
@@ -47,6 +50,8 @@ public class Session {
         this.board = new Board(config.heigth, config.width);
         initialize();
         setTimerService();
+        music = new Music();
+        music.NewMusic("/music/apt.mp3");
     }
 
     public void initialize() {
@@ -259,5 +264,7 @@ public class Session {
     public void resetTime(){
         this.time = isAgent() ? getConfig().timerAgent*10 : getConfig().timerSpy*10;
     }
-
+    public Music getMusic() {
+        return music;
+    }
 }
