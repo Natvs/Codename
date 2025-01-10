@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
 
 <GridPane
     fx:id="gameCard"
@@ -20,6 +21,7 @@
 
     <children>
         <Label fx:id="word" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.halignment="CENTER" />
+        <ImageView fx:id="imageView" GridPane.rowIndex="1" GridPane.columnIndex="0" fitWidth="150" fitHeight="150" preserveRatio="true" />
     </children>
 
 </GridPane>

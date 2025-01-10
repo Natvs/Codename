@@ -64,6 +64,21 @@ public class Utility {
         return lexicalFieldList;
     }
 
+    public static ArrayList<String> getLexicalFieldList(String word) {
+        ArrayList<String> dico = openCardsService.openFile("src/main/resources/words/codenames_words.txt");
+        ArrayList<String> dico_lexicalField = openCardsService.openFile("src/main/resources/words/lexical_field.txt");
+
+        ArrayList<String> lexicalFieldList;
+        Integer wordId = Utility.getWordId(word, dico);
+        if (wordId < 1) {
+            lexicalFieldList = new ArrayList<>();
+        } else {
+            ArrayList<Integer> listDigit = Utility.getLexicalFieldIntegerList(wordId, dico_lexicalField);
+            lexicalFieldList = convertListDigitToLexicalFieldList(listDigit, dico);
+        }
+        return lexicalFieldList;
+    }
+
     public static ArrayList<String> getDicoTheme(ArrayList<String> wordsList) {
         ArrayList<String> dicoTheme = new ArrayList<>();
         ArrayList<String> dico = openCardsService.openFile("src/main/resources/words/codenames_words.txt");

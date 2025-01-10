@@ -28,7 +28,7 @@ public class GameHeaderController {
             timer.setManaged(true);
             session.setTimeObserver(new TimeObserver(this));
             session.resetTime();
-            var service = session.getService();
+            var service = session.getTimerService();
             if (service.getState() == State.READY) {
                 service.start();
             }
