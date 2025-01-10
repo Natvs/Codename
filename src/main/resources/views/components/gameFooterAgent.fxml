@@ -2,14 +2,15 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import eu.telecomnancy.codingweek.codenames.utils.AutoCompleteTextField ?>
 
 <HBox fx:id="footerComp" HBox.hgrow="ALWAYS" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.codingweek.codenames.controller.GameFooterController" spacing = "5">        
     <Button fx:id="quitButton" text="Quitter le jeu" onAction="#onQuit"/>
     <Button fx:id="saveButton" text="Sauvegarder" onAction="#onSave"/>
     <Region HBox.hgrow="ALWAYS"/>
-    <TextField fx:id="word" />
-    <Spinner fx:id="spinner" min="1" max="99" prefWidth="60" layoutX="50" layoutY="50">
-    </Spinner>
+    <AutoCompleteTextField fx:id="word" />
+    <Spinner fx:id="spinner" min="1" max="99" prefWidth="60" layoutX="50" layoutY="50" />
+    <Label fx:id="indication" />
     <Region HBox.hgrow="ALWAYS"/>
     <Button fx:id="nextPlayer" text="Submit" onAction="#onSubmit"/> 
 </HBox>
