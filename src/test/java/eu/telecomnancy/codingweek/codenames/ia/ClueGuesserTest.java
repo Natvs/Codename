@@ -17,10 +17,10 @@ public class ClueGuesserTest {
 
         // Config Session
         Session session = new Session();
-        Integer width = 2;
-        Integer height = 3;
+        Integer height = 2;
+        Integer width = 3;
         session.getBoard().setSize(width, height);
-        Card[][] grid = new Card[width][height];
+        Card[][] grid = new Card[height][width];
         grid[0][0] = new Card("miel", Color.BLUE);
         grid[0][1] = new Card("œil", Color.WHITE);
         grid[0][2] = new Card("tricycle", Color.RED);
@@ -31,8 +31,8 @@ public class ClueGuesserTest {
         // Test CardGuesser
         ClueGuesser ia = new ClueGuesser(Color.BLUE, session);
         Clue clue = ia.getClue();
-        Clue clue_expected = new Clue("abeille", 2);
-        assertEquals(clue_expected, clue);
+        assertEquals("abeille", clue.getWord());
+        assertEquals(2, clue.getCount());
     }
 
 }

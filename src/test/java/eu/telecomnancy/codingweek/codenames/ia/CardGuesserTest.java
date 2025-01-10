@@ -18,10 +18,10 @@ public class CardGuesserTest {
 
         // Config Session
         Session session = new Session();
-        Integer width = 2;
-        Integer height = 3;
+        Integer height = 2;
+        Integer width = 3;
         session.getBoard().setSize(width, height);
-        Card[][] grid = new Card[width][height];
+        Card[][] grid = new Card[height][width];
         grid[0][0] = new Card("miel", Color.BLUE);
         grid[0][1] = new Card("œil", Color.WHITE);
         grid[0][2] = new Card("tricycle", Color.RED);
@@ -30,7 +30,7 @@ public class CardGuesserTest {
         grid[1][2] = new Card("santé", Color.WHITE);
         session.getBoard().setGrid(grid);
         // Créer un indice "Clue"
-        Clue clue = new Clue("abeille", 3);
+        Clue clue = new Clue("abeille", 2);
         session.getCurrentColoredTeam().getCluesList().add(clue);
         // Test CardGuesser
         CardGuesser ia = new CardGuesser(session);
