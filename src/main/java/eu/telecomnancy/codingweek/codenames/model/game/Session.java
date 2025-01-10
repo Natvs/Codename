@@ -152,6 +152,9 @@ public class Session {
         return this.config;
     }
 
+    public void setConfig(GameConfig config) {
+        this.config = config;
+    }
     public Color getCurrentColor() {
         return this.currentColor;
     }

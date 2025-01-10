@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+
+<GridPane
+    fx:id="creditView"
+    xmlns="http://javafx.com/javafx"
+    xmlns:fx="http://javafx.com/fxml"
+    stylesheets="@../../style/components/gameCard.css"
+    fx:controller="eu.telecomnancy.codingweek.codenames.controller.CreditController">
+    
+    <rowConstraints>
+        <RowConstraints vgrow="ALWAYS" />
+        <RowConstraints vgrow="ALWAYS" />
+        <RowConstraints vgrow="ALWAYS" />
+    </rowConstraints>
+
+    <columnConstraints>
+        <ColumnConstraints hgrow="ALWAYS" />
+        <ColumnConstraints hgrow="ALWAYS" />
+    </columnConstraints>
+
+    <children>
+        <ImageView fx:id="imageView" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.rowSpan="3" GridPane.columnSpan="2">
+        <image>
+            <Image url="@../images/graphic_design_passion.jpg"/>
+        </image>
+        </ImageView>
+        <Label fx:id="word" text="ratio" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.halignment="CENTER" />
+        <Button fx:id="Rose" GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.halignment="CENTER" onAction="#onRose" />
+    </children>
+
+</GridPane>
