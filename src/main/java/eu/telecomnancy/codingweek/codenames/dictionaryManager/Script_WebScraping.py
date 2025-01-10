@@ -41,7 +41,7 @@ def rechercher_internet_champLexical(mot_cle,
             texte = driver.find_element("tag name", "body").text
             texte_recadre = texte[102+len(mot_cle) : -201] + ",\n"
             fichier.write(texte_recadre)
-
+    
     finally:
         # Fermer le navigateur
         driver.quit()
@@ -64,8 +64,9 @@ def save_image_from_url(url, file_path):
     except Exception as e:
         print(f"Erreur lors du téléchargement depuis l'URL : {e}")
 
-def rechercher_internet_image(word_search, nb_picture=5):
-    assert os.path.exists("BdD")
+def rechercher_internet_image(word_search, image_save_path):
+    assert os.path.exists(image_save_path)
+    nb_picture = 1
 
     options = Options()
     options.add_argument("--disable-blink-features=AutomationControlled")
@@ -95,7 +96,6 @@ def rechercher_internet_image(word_search, nb_picture=5):
         EC.presence_of_all_elements_located((By.CSS_SELECTOR, "#search img.YQ4gaf"))
     )[:nb_picture * 2]
 
-    os.makedirs(f"BdD/{word_search}", exist_ok=True)
     nb_picture_download = 0
 
     for i, img in enumerate(image_elements):
@@ -106,14 +106,14 @@ def rechercher_internet_image(word_search, nb_picture=5):
                 if img_src and img_src.startswith("data:image/"):
                     # Sauvegarder une image en base64
                     file_extension = img_src.split(';')[0].split('/')[1]  # Exemple : "data:image/png;base64,"
-                    file_path = os.path.join("BdD", word_search, f"{word_search}_{nb_picture_download + 1}.{file_extension}")
+                    file_path = os.path.join(image_save_path, f"{word_search}.{file_extension}")
                     save_base64_image(img_src, file_path)
                     nb_picture_download += 1
                 elif img_src and (img_src.startswith("http://") or img_src.startswith("https://")):
                     # Télécharger une image via une URL
                     file_extension = img_src.split('.')[-1].split('?')[0]  # Obtenir l'extension du fichier
                     if file_extension.lower() in ['jpg', 'jpeg', 'png', 'gif']:
-                        file_path = os.path.join("BdD", word_search, f"{word_search}_{nb_picture_download + 1}.{file_extension}")
+                        file_path = os.path.join(image_save_path, f"{word_search}.{file_extension}")
                         save_image_from_url(img_src, file_path)
                         nb_picture_download += 1
 
