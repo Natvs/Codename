@@ -60,6 +60,8 @@ public class NewConfigController {
     @FXML
     private Button addBlueSpy;
     @FXML
+    private Button setBlueSpyIA;
+    @FXML
     private GridPane redAgentGrid;
     @FXML
     private TextField redAgent1;
@@ -71,6 +73,8 @@ public class NewConfigController {
     private TextField redSpy1;
     @FXML
     private Button addRedSpy;
+    @FXML
+    private Button setRedSpyIA;
 
     //Timers
     @FXML
@@ -250,6 +254,8 @@ public class NewConfigController {
         blueSpyGrid.add(GeneratePlayerField.generateField("Blue Spy " + nbBlueSpy, this, 1), 0, nbBlueSpy-1);
 
         GridPane.setRowIndex(addBlueSpy, nbBlueSpy);
+        GridPane.setRowIndex(setBlueSpyIA, nbBlueSpy);
+        setBlueSpyIA.setVisible(false);
 
         if (nbBlueSpy >= 3) {
             addBlueSpy.setVisible(false);
@@ -278,10 +284,22 @@ public class NewConfigController {
         redSpyGrid.add(GeneratePlayerField.generateField("Red Spy " + nbRedSpy, this, 3), 0, nbRedSpy-1);
 
         GridPane.setRowIndex(addRedSpy, nbRedSpy);
+        GridPane.setRowIndex(setRedSpyIA, nbRedSpy);
+        setRedSpyIA.setVisible(false);
 
         if (nbRedSpy >= 3) {
             addRedSpy.setVisible(false);
         }
+    }
+
+    @FXML
+    private void onSetBlueSpyIA() {
+        
+    }
+
+    @FXML
+    private void onSetRedSpyIA() {
+
     }
     
     public void removePlayerField(Node playerField, int playerType) {
@@ -296,10 +314,12 @@ public class NewConfigController {
                 blueSpyGrid.getChildren().remove(playerField);
                 nbBlueSpy--;
                 addBlueSpy.setVisible(true);
+                if (nbBlueSpy == 1) setBlueSpyIA.setVisible(true);
                 if (blueSpyGrid.getChildren().size() > 2) {
                     GridPane.setRowIndex(blueSpyGrid.getChildren().get(2), nbBlueSpy-1);
                 }
                 GridPane.setRowIndex(addBlueSpy, nbBlueSpy);
+                GridPane.setRowIndex(setBlueSpyIA, nbBlueSpy);
                 break;
             case 2:
                 redAgentGrid.getChildren().remove(playerField);
@@ -311,10 +331,12 @@ public class NewConfigController {
                 redSpyGrid.getChildren().remove(playerField);
                 nbRedSpy--;
                 addRedSpy.setVisible(true);
+                if (nbRedSpy == 1) setRedSpyIA.setVisible(true);
                 if (redSpyGrid.getChildren().size() > 2) {
                     GridPane.setRowIndex(redSpyGrid.getChildren().get(2), nbRedSpy-1);
                 }
                 GridPane.setRowIndex(addRedSpy, nbRedSpy);
+                GridPane.setRowIndex(setRedSpyIA, nbRedSpy);
                 break;
             default:
                 break;
