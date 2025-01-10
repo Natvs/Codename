@@ -1,13 +1,13 @@
 package eu.telecomnancy.codingweek.codenames.controller;
 
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
-import javafx.fxml.FXML;
 import eu.telecomnancy.codingweek.codenames.model.color.Color;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import eu.telecomnancy.codingweek.codenames.model.team.Team;
 import eu.telecomnancy.codingweek.codenames.observers.game.TimeObserver;
 import javafx.concurrent.Worker.State;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 
 public class GameHeaderController {
     private Session session;
@@ -23,7 +23,7 @@ public class GameHeaderController {
     @FXML
     public void initialize(){
         setCurrentTeam();
-        if (session.getActiveTimer()) {
+        if (session.getConfig().getTimer()) {
             timer.setVisible(true);
             timer.setManaged(true);
             session.setTimeObserver(new TimeObserver(this));
@@ -65,7 +65,7 @@ public class GameHeaderController {
     }
 
     public void setTimeLabel() {
-        int timeMax = session.isAgent() ? session.getConfig().timerAgent*10 : session.getConfig().timerSpy*10;
+        int timeMax = session.isAgent() ? session.getConfig().agentTime*10 : session.getConfig().spyTime*10;
         timer.setProgress(((double)session.getTime())/timeMax);
     }
 }

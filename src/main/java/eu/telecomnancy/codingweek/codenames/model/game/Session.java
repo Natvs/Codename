@@ -36,11 +36,10 @@ public class Session {
     private RoleSetObserver roleObserver = null;
     private ColorSetObserver colorObserver = null;
     private TimeObserver timeObserver = null;
-    private ImageModeObserver imageModeObserver = null;
+
 
     private ScheduledService<Void> timerService;
     private int time;
-    private boolean activeTimer = true;
 
     public Session() {
         this.config = new GameConfig();
@@ -71,7 +70,7 @@ public class Session {
                     @Override
                     protected Void call() throws Exception {
                         // Update the UI from the background task
-                        int timeMax = session.isAgent() ? session.getConfig().timerAgent*10 : session.getConfig().timerSpy*10;
+                        int timeMax = session.isAgent() ? session.getConfig().agentTime*10 : session.getConfig().spyTime*10;
                         for (int i=0;i<timeMax ;i++){
                             Platform.runLater(() -> {
                                 time --;
@@ -89,7 +88,7 @@ public class Session {
                             }
                             if (time == 0) {
                                 Platform.runLater(() -> {
-                                    if (activeTimer){
+                                    if (getConfig().getTimer()){
                                         if (session.isAgent()) getExecuter().addCommand(new SetClueCommand(null, session));
                                         else getExecuter().addCommand(new GuessCardCommand(null, session));
                                         getExecuter().executeAll();
@@ -158,10 +157,6 @@ public class Session {
         return this.currentColor;
     }
 
-    public boolean getImageMode() {
-        return getConfig().imageMode;
-    }
-
     public boolean isAgent() {
         return this.agent;
     }
@@ -184,12 +179,7 @@ public class Session {
         }
     }
 
-    public void setImageMode(boolean imageMode) {
-        getConfig().imageMode = imageMode;
-        if (imageModeObserver != null) {
-            imageModeObserver.handle();
-        }
-    }
+
 
     public void setRoleObserver(RoleSetObserver observer) {
         this.roleObserver = observer;
@@ -201,10 +191,6 @@ public class Session {
 
     public void setTimeObserver(TimeObserver observer) {
         this.timeObserver = observer;
-    }
-
-    public void setImageModeObserver(ImageModeObserver observer) {
-        this.imageModeObserver = observer;
     }
 
     @JsonIgnore
@@ -252,15 +238,6 @@ public class Session {
         getExecuter().executeAll();
     }
 
-
-    public boolean getActiveTimer() {
-        return activeTimer;
-    }
-
-    public void setActiveTimer(boolean activeTimer){
-        this.activeTimer = activeTimer;
-    }
-
     @JsonIgnore
     public ScheduledService<Void> getTimerService(){
         return this.timerService;
@@ -270,7 +247,7 @@ public class Session {
         return this.time;
     }
     public void resetTime(){
-        this.time = isAgent() ? getConfig().timerAgent*10 : getConfig().timerSpy*10;
+        this.time = isAgent() ? getConfig().agentTime*10 : getConfig().spyTime*10;
     }
 
 }

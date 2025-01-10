@@ -39,7 +39,7 @@ public class GameCardController {
     }
 
     public void setCard() {
-        if (session.getConfig().imageMode) {
+        if (session.getConfig().getImageMode()) {
             word.setManaged(false);
             imageView.setImage(new Image(card.getImageURL()));
         } else {
