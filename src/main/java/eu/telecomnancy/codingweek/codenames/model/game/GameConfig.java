@@ -22,6 +22,7 @@ public class GameConfig {
     public int spyTime = 30;
     private boolean timer = true;
     private boolean imageMode = false;
+    public boolean discreetMode = false;
 
     private ImageModeObserver imageModeObserver = null;
     private TimerObserver timerObserver = null;

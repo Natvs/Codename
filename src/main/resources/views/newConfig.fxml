@@ -14,6 +14,7 @@
         <RowConstraints vgrow="ALWAYS" />
         <RowConstraints vgrow="ALWAYS" />
         <RowConstraints vgrow="ALWAYS" />
+        <RowConstraints vgrow="ALWAYS" />
     </rowConstraints>
     
     <columnConstraints>
@@ -164,9 +165,12 @@
 
         <CheckBox fx:id="imageModeCheck" text="Mode Image" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
 
-        <Button fx:id="startButton" onAction="#onStart" text="C'est parti !" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+        <CheckBox fx:id="discreetModeCheck" text="Activer le mode discret (Internet requis : QRCode)"
+            GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
 
-        <Button onAction="#onBack" text="Retour" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="6" />
+        <Button fx:id="startButton" onAction="#onStart" text="C'est parti !" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+
+        <Button onAction="#onBack" text="Retour" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="7" />
     </children>
 
 </GridPane>
