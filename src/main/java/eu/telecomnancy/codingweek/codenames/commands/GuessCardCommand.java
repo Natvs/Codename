@@ -20,7 +20,7 @@ public class GuessCardCommand implements Command {
     public void execute() {
         Platform.runLater(( ) -> {
             if (session.getActiveTimer()) {
-                session.getTask().cancel();
+                session.getService().cancel();
             }
         } );
         if (card == null) {

@@ -28,9 +28,8 @@ public class Session {
     private final Board board;
     private Color currentColor;
     private Boolean agent = true;
-    private Executer executer = new Executer();
+    private final Executer executer = new Executer();
     private ScheduledService<Void> service;
-    private Task task;
     private int time;
     private RoleSetObserver roleObserver = null;
     private ColorSetObserver colorObserver = null;
@@ -57,7 +56,7 @@ public class Session {
         service = new ScheduledService<Void>() {
             @Override
             protected Task<Void> createTask() {
-                task = new Task<Void>() {
+                return new Task<Void>() {
                     @Override
                     protected Void call() throws Exception {
                         // Update the UI from the background task
@@ -91,13 +90,9 @@ public class Session {
                         return null;
                     }
                 };
-                return task;
             }
         };
         //service.setPeriod(Duration.seconds(10));
-    }
-    public Task getTask() {
-        return this.task;
     }
 
     public void clone(Session target) {
