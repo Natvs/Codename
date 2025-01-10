@@ -41,6 +41,8 @@ public class NewConfigController {
     private Spinner<Integer> nbCols;
     @FXML
     private GridPane playersGrid;
+    @FXML
+    private CheckBox imageModeCheck;
 
     //Teams fields
     @FXML
@@ -241,6 +243,10 @@ public class NewConfigController {
 
         if (wordsList != null) {
             session.getBoard().setWords(wordsList);
+        }
+
+        if (imageModeCheck.isSelected()) {
+            session.getConfig().imageMode = true;
         }
 
         session.startNewGame();
