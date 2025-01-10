@@ -67,9 +67,45 @@ public class TransitionController {
     }
 
     private void showQRCode() {
-        String urlToEncode = "https://telecomnancy.univ-lorraine.fr";
+        int width = session.getBoard().getWidth();
+        int height = session.getBoard().getHeigth();
+
+        String builder ="";
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                switch (session.getBoard().getCard(i, j).getColor()) {
+                    case WHITE :
+                        builder += "0";
+                        if ((i + 1) * (j + 1) != width * height)
+                            builder += ",";
+                        break;
+                    case BLACK :
+                        builder += "1";
+                        if ((i + 1) * (j + 1) != width * height)
+                            builder += ",";
+                        break;
+                    case BLUE :
+                        builder += "2";
+                        if ((i + 1) * (j + 1) != width * height)
+                            builder += ",";
+                        break;
+                    case RED :
+                         builder += "3";
+                         if ((i + 1) * (j + 1) != width * height)
+                             builder += ",";
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+
+
+        String urlToEncode = "https://lmandrelli.github.io/AnthropicPotato" + "?width=" + width + "&height="+ height +"&colors= +" + builder;
+        System.out.println(urlToEncode);
         String encodedUrl = java.net.URLEncoder.encode(urlToEncode, java.nio.charset.StandardCharsets.UTF_8);
-        String qrCodeUrl = String.format("https://api.qrserver.com/v1/create-qr-code/?data=%s&size=300x300&format=png", encodedUrl);
+        String qrCodeUrl = String.format("https://api.qrserver.com/v1/create-qr-code/?data=%s&size=512x512&format=png", encodedUrl);
         
         Image image = new Image(qrCodeUrl);
         ImageView imageView = new ImageView(image);

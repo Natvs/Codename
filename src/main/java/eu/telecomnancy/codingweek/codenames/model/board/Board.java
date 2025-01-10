@@ -73,10 +73,6 @@ public class Board {
         return this.wordsList;
     }
 
-    public void setWordList(ArrayList<String> wordList) {
-        this.wordsList = wordList;
-    }
-
     public int getRemainingCards(Color color){
         int number = 0;
         for (int j = 0; j < heigth; j++) {
