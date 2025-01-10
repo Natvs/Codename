@@ -349,9 +349,9 @@ public class NewConfigController {
         // Paramètres :
         String project_file_path = "src/main/resources/script/PythonDictionaryManager/";
         String word = addWord.getText();
-        String image_save_path = project_file_path + "BdD";
-        String codenamesWords_path = project_file_path + "codenames_words.txt";
-        String lexicalField_path = project_file_path + "lexical_field.txt";
+        String image_save_path = project_file_path + "../../images";
+        String codenamesWords_path = project_file_path + "../../words/codenames_words.txt";
+        String lexicalField_path = project_file_path + "../../words/lexical_field.txt";
         String[] args = {word, image_save_path, codenamesWords_path, lexicalField_path};
         // Test DicoManager.main
         try {
