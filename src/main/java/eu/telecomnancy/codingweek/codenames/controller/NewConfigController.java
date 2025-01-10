@@ -360,7 +360,6 @@ public class NewConfigController {
     }
 
     public void checkTimers() {
-        System.out.println(session.getConfig().getTimer());
         if (session.getConfig().getTimer()) {
             agentTimerDesc.setVisible(true);
             agentTimer.setVisible(true);
