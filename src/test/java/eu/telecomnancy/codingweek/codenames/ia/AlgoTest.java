@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import eu.telecomnancy.codingweek.codenames.theme.Utility;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import eu.telecomnancy.codingweek.codenames.ia.algo.Algo;
-import eu.telecomnancy.codingweek.codenames.model.board.Board;
 import eu.telecomnancy.codingweek.codenames.model.clue.Clue;
 
 

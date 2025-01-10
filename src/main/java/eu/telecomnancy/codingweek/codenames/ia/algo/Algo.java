@@ -8,8 +8,6 @@ import eu.telecomnancy.codingweek.codenames.model.clue.Clue;
 import eu.telecomnancy.codingweek.codenames.model.board.Board;
 import java.util.Random;
 
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
-
 
 public class Algo {
     
