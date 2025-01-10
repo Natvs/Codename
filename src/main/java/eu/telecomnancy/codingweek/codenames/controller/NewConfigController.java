@@ -3,6 +3,7 @@ package eu.telecomnancy.codingweek.codenames.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import eu.telecomnancy.codingweek.codenames.dictionaryManager.DicoManager;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import eu.telecomnancy.codingweek.codenames.model.player.Player;
 import eu.telecomnancy.codingweek.codenames.observers.newconfig.ImageModeObserver;
@@ -96,6 +97,9 @@ public class NewConfigController {
     @FXML
     private Label nbWordsLabel;
 
+    // Words
+    @FXML
+    private TextField addWord;
 
     private Boolean startEnable = false;
 
@@ -336,7 +340,21 @@ public class NewConfigController {
             disableStart();
         }
     }
-    public void onWord(){}
+    public void onWord(){
+        // Paramètres :
+        String project_file_path = "src/main/java/eu/telecomnancy/codingweek/codenames/dictionaryManager/PythonDictionaryManager/";
+        String word = addWord.getText();
+        String image_save_path = project_file_path + "BdD";
+        String codenamesWords_path = project_file_path + "codenames_words.txt";
+        String lexicalField_path = project_file_path + "lexical_field.txt";
+        String[] args = {word, image_save_path, codenamesWords_path, lexicalField_path};
+        // Test DicoManager.main
+        try {
+            DicoManager.manage(args);
+        } catch (Exception e){
+            e.getStackTrace();
+        }
+    }
     
     private void disableStart() {
         startButton.setDisable(true);
@@ -361,7 +379,6 @@ public class NewConfigController {
     }
 
     public void checkTimers() {
-        System.out.println(session.getConfig().getTimer());
         if (session.getConfig().getTimer()) {
             agentTimerDesc.setVisible(true);
             agentTimer.setVisible(true);

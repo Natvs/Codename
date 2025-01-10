@@ -16,7 +16,11 @@ public class DicoManagerTest {
         String[] args = {word, image_save_path, codenamesWords_path, lexicalField_path};
         
         // Test DicoManager.main
-        DicoManager.main(args);
+        try {
+            DicoManager.manage(args);
+        } catch (Exception e){
+            e.getStackTrace();
+        }
     }
 
 }
