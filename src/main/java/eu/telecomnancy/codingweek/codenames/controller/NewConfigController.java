@@ -105,6 +105,7 @@ public class NewConfigController {
 
     @FXML
     private void initialize() {
+        imageModeCheck.selectedProperty().set(session.getConfig().getImageMode());
         nbRows.getValueFactory().setValue(session.getConfig().heigth);
         nbCols.getValueFactory().setValue(session.getConfig().width);
         initializeEvents();

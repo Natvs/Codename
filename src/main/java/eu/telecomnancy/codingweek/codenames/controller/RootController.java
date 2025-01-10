@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
+import javafx.beans.value.ChangeListener;
 
 public class RootController {
     private static RootController instance;
@@ -77,5 +78,18 @@ public class RootController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public double getWindowWidth() {
+        return root.getScene().getWindow().getWidth();
+    }
+
+    public double getWindowHeight() {
+        return root.getScene().getWindow().getHeight();
+    }
+
+    public void addWindowResizeListener(ChangeListener<Number> listener) {
+        root.getScene().widthProperty().addListener(listener);
+        root.getScene().heightProperty().addListener(listener);
     }
 }

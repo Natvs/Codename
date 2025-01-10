@@ -12,6 +12,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
 public class GameCardController {
+    private int width;
+    private int height;
+
     @FXML
     private GridPane gameCard;
     
@@ -24,9 +27,11 @@ public class GameCardController {
     private Card card;
     private Session session;
 
-    public GameCardController(Card card,Session session) {
+    public GameCardController(Card card,Session session, double width, double height) {
         this.card = card;
         this.session = session;
+        this.width = (int) width;
+        this.height = (int) height;
     }
 
     @FXML
@@ -42,10 +47,11 @@ public class GameCardController {
         if (session.getConfig().getImageMode()) {
             word.setManaged(false);
             imageView.setImage(new Image(card.getImageURL()));
-            imageView.setFitHeight(100);
-            imageView.setFitWidth(100);
+            imageView.setFitHeight(height);
+            imageView.setFitWidth(width);
         } else {
             word.setText(card.getName());
+            word.wrapTextProperty().setValue(true);
             imageView.setManaged(false);
         }
     }
