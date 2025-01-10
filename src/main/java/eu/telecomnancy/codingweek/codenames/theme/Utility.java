@@ -65,10 +65,14 @@ public class Utility {
         ArrayList<String> dico = openCardsService.openFile("src/main/resources/words/codenames_words.txt");
         ArrayList<String> dico_lexicalField = openCardsService.openFile("src/main/resources/words/lexical_field.txt");
 
+        ArrayList<String> lexicalFieldList;
         Integer wordId = Utility.getWordId(word, dico);
-        ArrayList<Integer> listDigit = Utility.getLexicalFieldIntegerList(wordId, dico_lexicalField);
-        ArrayList<String> lexicalFieldList = convertListDigitToLexicalFieldList(listDigit, dico);
-
+        if (wordId > 1) {
+            lexicalFieldList = new ArrayList<>();
+        } else {
+            ArrayList<Integer> listDigit = Utility.getLexicalFieldIntegerList(wordId, dico_lexicalField);
+            lexicalFieldList = convertListDigitToLexicalFieldList(listDigit, dico);
+        }
         return lexicalFieldList;
     }
 
