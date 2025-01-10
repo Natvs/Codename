@@ -102,6 +102,8 @@ public class NewConfigController {
     // Words
     @FXML
     private TextField addWord;
+    @FXML
+    private Button submitWord;
 
     private Boolean startEnable = false;
 
@@ -128,6 +130,12 @@ public class NewConfigController {
                 Bindings.format("%.0f s", spyTimer.valueProperty()));
         
         themeField.setEntries(session.getBoard().getFullWordList());
+
+        String os = System.getProperty("os.name").toLowerCase();
+        if (!os.contains("win")) {
+            addWord.setManaged(false);
+            submitWord.setManaged(false);
+        }
     }
 
     private void initializePlayers() {
@@ -354,12 +362,29 @@ public class NewConfigController {
         String lexicalField_path = project_file_path + "../../words/lexical_field.txt";
         String[] args = {word, image_save_path, codenamesWords_path, lexicalField_path};
         // Test DicoManager.main
-        try {
-            DicoManager.manage(args);
-        } catch (Exception e){
-            e.getStackTrace();
+        String os = System.getProperty("os.name").toLowerCase();
+        if (os.contains("win")) {
+            System.out.println("Running on Windows");
+            try {
+                DicoManager.manage(args);
+            } catch (Exception e){
+                e.getStackTrace();
+            }
         }
+        /*
+        } else if (os.contains("mac")) {
+            executablePath = project_file_path + "dist/Script_DictionaryManagerMac";
+            System.out.println("Running on macOS");
+
+        } else if (os.contains("nix") || os.contains("nux")) {
+            executablePath = project_file_path + "dist/Script_DictionaryManagerLinux";
+            System.out.println("Running on Linux/Unix");
+
+        } else {
+            throw new Exception("Unknown OS");
+            */
     }
+        
     
     private void disableStart() {
         startButton.setDisable(true);
