@@ -42,6 +42,8 @@ public class GameCardController {
         if (session.getConfig().getImageMode()) {
             word.setManaged(false);
             imageView.setImage(new Image(card.getImageURL()));
+            imageView.setFitHeight(100);
+            imageView.setFitWidth(100);
         } else {
             word.setText(card.getName());
             imageView.setManaged(false);
