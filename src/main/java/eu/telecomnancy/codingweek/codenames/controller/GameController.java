@@ -20,6 +20,7 @@ public class GameController {
     private Session session;
     private String hint;
     private int number;
+
     @FXML
     private GridPane gameView;
     @FXML
@@ -97,8 +98,7 @@ public class GameController {
 
     public void onQuit() {
         RootController.getInstance().changeView("/views/home.fxml");
-        ScheduledService<Void> service = session.getService();
-        service.cancel();
+        session.getService().cancel();
     }
 
     public void onSubmit() {
