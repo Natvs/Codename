@@ -30,6 +30,7 @@ public class Session {
     private Boolean agent = true;
     private Executer executer = new Executer();
     private ScheduledService<Void> service;
+    private Task task;
     private int time;
     private RoleSetObserver roleObserver = null;
     private ColorSetObserver colorObserver = null;
@@ -56,7 +57,7 @@ public class Session {
         service = new ScheduledService<Void>() {
             @Override
             protected Task<Void> createTask() {
-                return new Task<Void>() {
+                task = new Task<Void>() {
                     @Override
                     protected Void call() throws Exception {
                         // Update the UI from the background task
@@ -73,22 +74,30 @@ public class Session {
                             } catch (InterruptedException e){
                                 e.getStackTrace();
                             }
-                        }
-                        Platform.runLater(() -> {
-                            if (activeTimer){
-                                this.cancel();
-                                if (session.isAgent()) getExecuter().addCommand(new SetClueCommand(null, session));
-                                else getExecuter().addCommand(new GuessCardCommand(null, session));
-                                getExecuter().executeAll();
-                                time=0;
+                            if (isCancelled()) {
+                                break;
                             }
-                        });
+                            if (time == 0) {
+                                Platform.runLater(() -> {
+                                    if (activeTimer){
+                                        if (session.isAgent()) getExecuter().addCommand(new SetClueCommand(null, session));
+                                        else getExecuter().addCommand(new GuessCardCommand(null, session));
+                                        getExecuter().executeAll();
+                                        time=0;
+                                    }
+                                });
+                            }
+                         }
                         return null;
                     }
                 };
+                return task;
             }
         };
         //service.setPeriod(Duration.seconds(10));
+    }
+    public Task getTask() {
+        return this.task;
     }
 
     public void clone(Session target) {
@@ -217,6 +226,7 @@ public class Session {
         getExecuter().addCommand(new SetClueCommand(clue, this));
         getExecuter().executeAll();
     }
+
 
     public boolean getActiveTimer() {
         return activeTimer;

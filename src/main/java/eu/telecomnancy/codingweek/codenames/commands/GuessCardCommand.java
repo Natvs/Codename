@@ -4,6 +4,7 @@ import eu.telecomnancy.codingweek.codenames.controller.RootController;
 import eu.telecomnancy.codingweek.codenames.model.board.Card;
 import eu.telecomnancy.codingweek.codenames.model.color.Color;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
+import javafx.application.Platform;
 
 public class GuessCardCommand implements Command {
     
@@ -17,7 +18,11 @@ public class GuessCardCommand implements Command {
 
     @Override
     public void execute() {
-        session.getService().cancel();
+        Platform.runLater(( ) -> {
+            if (session.getActiveTimer()) {
+                session.getTask().cancel();
+            }
+        } );
         if (card == null) {
             session.nextRole();
             RootController.getInstance().changeView("/views/transition.fxml");

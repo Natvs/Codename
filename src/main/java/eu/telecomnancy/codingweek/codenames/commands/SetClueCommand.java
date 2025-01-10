@@ -3,6 +3,7 @@ package eu.telecomnancy.codingweek.codenames.commands;
 import eu.telecomnancy.codingweek.codenames.controller.RootController;
 import eu.telecomnancy.codingweek.codenames.model.clue.Clue;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
+import javafx.application.Platform;
 
 public class SetClueCommand implements Command {
     
@@ -16,7 +17,11 @@ public class SetClueCommand implements Command {
 
     @Override
     public void execute() {
-        session.getService().cancel();
+        Platform.runLater(( ) -> {
+            if (session.getActiveTimer()) {
+                session.getTask().cancel();
+            }
+        } );
         if (clue == null) {
             session.getCurrentColoredTeam().addClue(new Clue("Pas d'indice", 1));
         }

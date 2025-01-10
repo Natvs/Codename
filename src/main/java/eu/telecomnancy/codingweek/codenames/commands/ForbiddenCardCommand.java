@@ -2,6 +2,7 @@ package eu.telecomnancy.codingweek.codenames.commands;
 
 import eu.telecomnancy.codingweek.codenames.controller.RootController;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
+import javafx.application.Platform;
 
 public class ForbiddenCardCommand implements Command {
     
@@ -13,7 +14,11 @@ public class ForbiddenCardCommand implements Command {
 
     @Override
     public void execute() {
-        session.getService().cancel();
+        Platform.runLater(( ) -> {
+            if (session.getActiveTimer()) {
+                session.getTask().cancel();
+            }
+        } );
         session.nextRole();
         RootController.getInstance().changeView("/views/end.fxml");
     }
