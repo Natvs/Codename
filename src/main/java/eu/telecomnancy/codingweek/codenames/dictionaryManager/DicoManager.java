@@ -1,12 +1,8 @@
 package eu.telecomnancy.codingweek.codenames.dictionaryManager;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
-
 public class DicoManager {
     
-    public static void main(String[] args) {
+    public static void manageDico(String[] args) {
         try {
             // Chemin vers l'exécutable
             String project_file_path = "src/main/java/eu/telecomnancy/codingweek/codenames/dictionaryManager/PythonDictionaryManager/";
