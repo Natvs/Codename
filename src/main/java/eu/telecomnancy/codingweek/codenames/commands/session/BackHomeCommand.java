@@ -12,7 +12,7 @@ public class BackHomeCommand extends SessionCommand {
     @Override
     public void execute() {
         RootController.getInstance().changeView("/views/home.fxml");
-        session.getService().cancel();
+        session.getTimerService().cancel();
     }
 
 }

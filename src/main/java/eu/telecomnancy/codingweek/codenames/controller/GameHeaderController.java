@@ -1,9 +1,5 @@
 package eu.telecomnancy.codingweek.codenames.controller;
 
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
-import javafx.concurrent.ScheduledService;
-import javafx.fxml.FXML;
 import eu.telecomnancy.codingweek.codenames.model.color.Color;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import eu.telecomnancy.codingweek.codenames.model.team.Team;
@@ -32,7 +28,7 @@ public class GameHeaderController {
             timer.setManaged(true);
             session.setTimeObserver(new TimeObserver(this));
             session.resetTime();
-            var service = session.getService();
+            var service = session.getTimerService();
             if (service.getState() == State.READY) {
                 service.start();
             }
