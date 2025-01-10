@@ -15,7 +15,7 @@ public class Algo {
     private Clue clue;
     private ArrayList<String> result;
 
-    Algo(Clue clue) {
+    public Algo(Clue clue) {
         this.clue = clue;
         this.result = new ArrayList<String>();
     }
