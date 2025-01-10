@@ -1,3 +1,12 @@
+function getUrlParameters() {
+    const params = new URLSearchParams(window.location.search);
+    return {
+        width: parseInt(params.get('width')) || 10,
+        height: parseInt(params.get('height')) || 10,
+        colors: (params.get('colors') || '').split(',').map(c => parseInt(c))
+    };
+}
+
 function createGrid() {
     const { width, height, colors } = getUrlParameters();
     const container = document.getElementById('grid-container');

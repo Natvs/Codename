@@ -1,8 +1,13 @@
 package eu.telecomnancy.codingweek.codenames.controller;
 
+import java.io.IOException;
+
+import com.google.zxing.WriterException;
+
 import eu.telecomnancy.codingweek.codenames.model.color.Color;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import eu.telecomnancy.codingweek.codenames.model.team.Team;
+import eu.telecomnancy.codingweek.codenames.utils.QRCodeGenerator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -102,18 +107,20 @@ public class TransitionController {
 
 
 
-        String urlToEncode = "https://lmandrelli.github.io/AnthropicPotato" + "?width=" + width + "&height="+ height +"&colors= +" + builder;
+        String urlToEncode = "https://lmandrelli.github.io/AnthropicPotato" + "?width=" + width + "&height="+ height +"&colors=" + builder;
         System.out.println(urlToEncode);
-        String encodedUrl = java.net.URLEncoder.encode(urlToEncode, java.nio.charset.StandardCharsets.UTF_8);
-        String qrCodeUrl = String.format("https://api.qrserver.com/v1/create-qr-code/?data=%s&size=512x512&format=png", encodedUrl);
         
-        Image image = new Image(qrCodeUrl);
-        ImageView imageView = new ImageView(image);
-        imageView.setFitHeight(200);
-        imageView.setFitWidth(200); 
-        imageView.setPreserveRatio(true);
-        GridPane.setHalignment(imageView, javafx.geometry.HPos.CENTER);
-        transitionView.add(imageView, 0, 2);
+        try {
+            Image image = QRCodeGenerator.generateQRCodeImage(urlToEncode);
+            ImageView imageView = new ImageView(image);
+            imageView.setFitHeight(200);
+            imageView.setFitWidth(200);
+            imageView.setPreserveRatio(true);
+            GridPane.setHalignment(imageView, javafx.geometry.HPos.CENTER);
+            transitionView.add(imageView, 0, 2);
+        } catch (WriterException | IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
