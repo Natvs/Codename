@@ -24,17 +24,20 @@ import javafx.concurrent.Task;
 public class Session {
 
     private GameConfig config;
-    private final  ColoredTeam redTeam;
-    private final  ColoredTeam blueTeam;
+    private final ColoredTeam redTeam;
+    private final ColoredTeam blueTeam;
     private final Board board;
     private Color currentColor;
     private Boolean agent = true;
     private final Executer executer = new Executer();
-    private ScheduledService<Void> service;
-    private int time;
+
+
     private RoleSetObserver roleObserver = null;
     private ColorSetObserver colorObserver = null;
     private TimeObserver timeObserver = null;
+
+    private ScheduledService<Void> timerService;
+    private int time;
     private boolean activeTimer = true;
 
     public Session() {
@@ -42,7 +45,12 @@ public class Session {
         this.redTeam = new ColoredTeam(Color.RED, config.redAgentsList, config.redSpiesList);
         this.blueTeam = new ColoredTeam(Color.BLUE, config.blueAgentsList, config.blueSpiesList);
         this.board = new Board(config.heigth, config.width);
-        setService();
+        initialize();
+        setTimerService();
+    }
+
+    public void initialize() {
+        agent = true;
         if (board.getRemainingCards(Color.BLUE) > board.getRemainingCards(Color.RED)) {
             currentColor = Color.BLUE;
         }
@@ -51,10 +59,10 @@ public class Session {
         }
     }
 
-    private void setService() {
+    private void setTimerService() {
         time = 0;
         Session session = this;
-        service = new ScheduledService<Void>() {
+        timerService = new ScheduledService<Void>() {
             @Override
             protected Task<Void> createTask() {
                 return new Task<Void>() {
@@ -238,8 +246,8 @@ public class Session {
     }
 
     @JsonIgnore
-    public ScheduledService<Void> getService(){
-        return this.service;
+    public ScheduledService<Void> getTimerService(){
+        return this.timerService;
     }
 
     public int getTime(){
@@ -248,4 +256,5 @@ public class Session {
     public void resetTime(){
         this.time = isAgent() ? getConfig().timerAgent*10 : getConfig().timerSpy*10;
     }
+
 }

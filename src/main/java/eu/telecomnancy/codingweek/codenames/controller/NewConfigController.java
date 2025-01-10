@@ -40,6 +40,8 @@ public class NewConfigController {
     private Spinner<Integer> nbCols;
     @FXML
     private GridPane playersGrid;
+    @FXML
+    private CheckBox imageModeCheck;
 
     //Teams fields
     @FXML
@@ -224,17 +226,19 @@ public class NewConfigController {
                 }
                 redSpies.add(new Player(((TextField)((HBox) redSpyGrid.getChildren().get(i)).getChildren().get(0)).getText()));
             }
-
-            session.getConfig().timerAgent = (int) agentTimer.getValue();
-            session.getConfig().timerSpy = (int) spyTimer.getValue();
-            session.setActiveTimer(timerCheck.isSelected());
         }
 
-        var config = session.getConfig();
-        session.getBoard().setSize(config.width, config.heigth);
+        session.getConfig().timerAgent = (int) agentTimer.getValue();
+        session.getConfig().timerSpy = (int) spyTimer.getValue();
+        session.setActiveTimer(timerCheck.isSelected());
+        session.getBoard().setSize(session.getConfig().width, session.getConfig().heigth);
 
         if (wordsList != null) {
             session.getBoard().setWords(wordsList);
+        }
+
+        if (imageModeCheck.isSelected()) {
+            session.getConfig().imageMode = true;
         }
 
         session.startNewGame();

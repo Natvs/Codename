@@ -14,7 +14,7 @@ public class ForbiddenCardCommand extends SessionCommand {
     public void execute() {
         Platform.runLater(( ) -> {
             if (session.getActiveTimer()) {
-                session.getService().cancel();
+                session.getTimerService().cancel();
             }
         } );
         session.nextRole();
