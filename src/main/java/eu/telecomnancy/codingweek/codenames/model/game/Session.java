@@ -28,7 +28,7 @@ public class Session {
     private final Board board;
     private Color currentColor;
     private Boolean agent = true;
-    private Executer executer = new Executer();
+    private final Executer executer = new Executer();
     private ScheduledService<Void> service;
     private int time;
     private RoleSetObserver roleObserver = null;
@@ -73,16 +73,20 @@ public class Session {
                             } catch (InterruptedException e){
                                 e.getStackTrace();
                             }
-                        }
-                        Platform.runLater(() -> {
-                            if (activeTimer){
-                                this.cancel();
-                                if (session.isAgent()) getExecuter().addCommand(new SetClueCommand(null, session));
-                                else getExecuter().addCommand(new GuessCardCommand(null, session));
-                                getExecuter().executeAll();
-                                time=0;
+                            if (isCancelled()) {
+                                break;
                             }
-                        });
+                            if (time == 0) {
+                                Platform.runLater(() -> {
+                                    if (activeTimer){
+                                        if (session.isAgent()) getExecuter().addCommand(new SetClueCommand(null, session));
+                                        else getExecuter().addCommand(new GuessCardCommand(null, session));
+                                        getExecuter().executeAll();
+                                        time=0;
+                                    }
+                                });
+                            }
+                         }
                         return null;
                     }
                 };
@@ -217,6 +221,7 @@ public class Session {
         getExecuter().addCommand(new SetClueCommand(clue, this));
         getExecuter().executeAll();
     }
+
 
     public boolean getActiveTimer() {
         return activeTimer;
