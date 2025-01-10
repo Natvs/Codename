@@ -5,6 +5,8 @@ import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import eu.telecomnancy.codingweek.codenames.model.team.Team;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 
@@ -26,6 +28,9 @@ public class TransitionController {
     public void initialize() {
         setLabel();
         setEvents();
+        if (session.getConfig().discreetMode && session.isAgent()) {
+            showQRCode();
+        }
     }
     private void setEvents() {
         transitionView.setOnKeyPressed((keyevent) ->  {
@@ -59,6 +64,20 @@ public class TransitionController {
             }
         }
         roleLabel.setText(roleBuilder.toString());
+    }
+
+    private void showQRCode() {
+        String urlToEncode = "https://telecomnancy.univ-lorraine.fr";
+        String encodedUrl = java.net.URLEncoder.encode(urlToEncode, java.nio.charset.StandardCharsets.UTF_8);
+        String qrCodeUrl = String.format("https://api.qrserver.com/v1/create-qr-code/?data=%s&size=300x300&format=png", encodedUrl);
+        
+        Image image = new Image(qrCodeUrl);
+        ImageView imageView = new ImageView(image);
+        imageView.setFitHeight(200);
+        imageView.setFitWidth(200); 
+        imageView.setPreserveRatio(true);
+        GridPane.setHalignment(imageView, javafx.geometry.HPos.CENTER);
+        transitionView.add(imageView, 0, 2);
     }
 
     @FXML

@@ -66,7 +66,7 @@ public class GameCardController {
                 default -> {}
             }
         }
-        else if (session.isAgent()) {
+        else if (session.isAgent()  && !session.getConfig().discreetMode) {
             switch (card.getColor()) {
                 case RED -> gameCard.setId("gameCard-red-light");
                 case BLUE -> gameCard.setId("gameCard-blue-light");
