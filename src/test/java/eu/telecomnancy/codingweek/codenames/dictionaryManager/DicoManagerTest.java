@@ -13,10 +13,10 @@ public class DicoManagerTest {
         String image_save_path = project_file_path + "BdD";
         String codenamesWords_path = project_file_path + "codenames_words.txt";
         String lexicalField_path = project_file_path + "lexical_field.txt";
-        String[] args = {word, image_save_path, codenamesWords_path, lexicalField_path};
+        String[] scriptArgs = new String[]{word, image_save_path, codenamesWords_path, lexicalField_path};
         
         // Test DicoManager.main
-        DicoManager.manageDico(args);
+        DicoManager.manage(scriptArgs);
     }
 
 }

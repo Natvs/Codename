@@ -1,3 +1,5 @@
+import sys
+
 from Script_traitement import ajouter_champLexical_fichier
 from Script_WebScraping import rechercher_internet_champLexical, rechercher_internet_image
     
@@ -16,3 +18,12 @@ def manage(word, image_save_path="BdD", codenamesWords_path="codenames_words.txt
             est_telecharge = True
         except Exception:
             est_telecharge = False
+
+# Point d'entrée
+
+if __name__ == "__main__":
+    word = sys.argv[1]
+    image_save_path = sys.argv[2]
+    codenamesWords_path = sys.argv[3]
+    lexicalField_path = sys.argv[4]
+    manage(word, image_save_path, codenamesWords_path, lexicalField_path)
