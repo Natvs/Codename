@@ -7,7 +7,7 @@ plugins {
 }
 
 group 'eu.telecomnancy.codingweek'
-version '0.0.3'
+version '0.1.0'
 
 sourceCompatibility = '21'
 targetCompatibility = '21'

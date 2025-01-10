@@ -1,16 +1,18 @@
 package eu.telecomnancy.codingweek.codenames.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import eu.telecomnancy.codingweek.codenames.model.player.Player;
+import eu.telecomnancy.codingweek.codenames.theme.Utility;
+import eu.telecomnancy.codingweek.codenames.utils.AutoCompleteTextField;
 import eu.telecomnancy.codingweek.codenames.utils.GeneratePlayerField;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.Spinner;
@@ -27,13 +29,12 @@ public class NewConfigController {
     private int nbBlueSpy = 1;
     private int nbRedSpy = 1;
 
+    private ArrayList<String> wordsList = null;
 
     @FXML
     private GridPane newConfigView;
     @FXML
     private Button startButton;
-    @FXML
-    private ComboBox<String> thematicSelection;
     @FXML
     private Spinner<Integer> nbRows;
     @FXML
@@ -83,6 +84,14 @@ public class NewConfigController {
     @FXML
     private Label spyTimerLabel;
 
+    //Theme
+    @FXML
+    private GridPane themeGrid;
+    @FXML
+    private AutoCompleteTextField themeField;
+    @FXML
+    private Label nbWordsLabel;
+
 
     private Boolean startEnable = false;
 
@@ -95,7 +104,6 @@ public class NewConfigController {
         nbRows.getValueFactory().setValue(session.getConfig().heigth);
         nbCols.getValueFactory().setValue(session.getConfig().width);
         initializeEvents();
-        disableStart();
         initializePlayers();
 
         agentTimer.setVisible(false);
@@ -111,7 +119,7 @@ public class NewConfigController {
         spyTimerLabel.textProperty().bind(
                 Bindings.format("%.0f s", spyTimer.valueProperty()));
         
-        thematicSelection.getItems().addAll("Tout", "Patate", "Entropie"); //FIXME: get from db
+        themeField.setEntries(session.getBoard().getFullWordList());
     }
 
     private void initializePlayers() {
@@ -230,6 +238,11 @@ public class NewConfigController {
 
         var config = session.getConfig();
         session.getBoard().setSize(config.width, config.heigth);
+
+        if (wordsList != null) {
+            session.getBoard().setWords(wordsList);
+        }
+
         session.startNewGame();
     }
 
@@ -325,9 +338,20 @@ public class NewConfigController {
         }
     }
 
-    @FXML
-    private void onThematicSelection() {
-        enableStart();
+    public void onGenTheme() {
+        ArrayList<String> words = themeField.getWords();
+        if (words.isEmpty()) {
+            return;
+        }
+        ArrayList<String> dico = Utility.getDicoTheme(words);
+        wordsList = dico;
+
+        nbWordsLabel.setText("" + dico.size() + " mots, il en faut " + session.getConfig().heigth * session.getConfig().width);
+        if (dico.size() >= session.getConfig().heigth * session.getConfig().width) {
+            enableStart();
+        } else {
+            disableStart();
+        }
     }
 
     private void disableStart() {

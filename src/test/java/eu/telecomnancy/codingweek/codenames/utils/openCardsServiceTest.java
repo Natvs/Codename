@@ -97,7 +97,8 @@ public class openCardsServiceTest {
 
     @Test
     void testGridCreator() {
-        Card[][] grid = openCardsService.initGridCards(5,3);
+        ArrayList<String> lines = openCardsService.openFile("src/main/resources/words/codenames_words.txt");
+        Card[][] grid = openCardsService.initGridCards(5,3, lines);
         displayGrid(grid, 5, 3);
         assertEquals(true, grid[0][0] instanceof Card);
         assertEquals(true, grid[3][1] instanceof Card);
