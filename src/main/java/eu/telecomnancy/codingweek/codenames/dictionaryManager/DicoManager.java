@@ -16,13 +16,6 @@ public class DicoManager {
             ProcessBuilder processBuilder = new ProcessBuilder(executablePath);
             Process process = processBuilder.start();
 
-            // Lire la sortie du script Python
-            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                System.out.println(line);
-            }
-
             // Attendre la fin du processus
             int exitCode = process.waitFor();
             System.out.println("Process exited with code: " + exitCode);
