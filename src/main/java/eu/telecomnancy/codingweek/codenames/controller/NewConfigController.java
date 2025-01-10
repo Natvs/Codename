@@ -55,6 +55,8 @@ public class NewConfigController {
     @FXML
     private Button addBlueAgent;
     @FXML
+    private Button setBlueAgentIA;
+    @FXML
     private GridPane blueSpyGrid;
     @FXML
     private TextField blueSpy1;
@@ -68,6 +70,8 @@ public class NewConfigController {
     private TextField redAgent1;
     @FXML
     private Button addRedAgent;
+    @FXML
+    private Button setRedAgentIA;
     @FXML
     private GridPane redSpyGrid;
     @FXML
@@ -253,6 +257,8 @@ public class NewConfigController {
         blueAgentGrid.add(GeneratePlayerField.generateField("Blue Agent " + nbBlueAgents, this, 0), 0, nbBlueAgents-1);
 
         GridPane.setRowIndex(addBlueAgent, nbBlueAgents);
+        GridPane.setRowIndex(setBlueAgentIA, nbBlueAgents);
+        setBlueAgentIA.setVisible(false);
 
         if (nbBlueAgents >= 2) {
             addBlueAgent.setVisible(false);
@@ -283,6 +289,8 @@ public class NewConfigController {
         redAgentGrid.add(GeneratePlayerField.generateField("Red Agent " + nbRedAgents, this, 2), 0, nbRedAgents-1);
 
         GridPane.setRowIndex(addRedAgent, nbRedAgents);
+        GridPane.setRowIndex(setRedAgentIA, nbRedAgents);
+        setRedAgentIA.setVisible(true);
 
         if (nbRedAgents >= 2) {
             addRedAgent.setVisible(false);
@@ -316,15 +324,28 @@ public class NewConfigController {
         session.getConfig().redSpyIA = !session.getConfig().redSpyIA;
         addRedSpy.setVisible(!session.getConfig().redSpyIA);
     }
+
+    @FXML
+    private void onSetBlueAgentIA() {
+        session.getConfig().blueAgentIA = !session.getConfig().blueAgentIA;
+        addBlueAgent.setVisible(!session.getConfig().blueAgentIA);
+    }
+
+    @FXML
+    private void onSetRedAgentIA() {
+        session.getConfig().redAgentIA = !session.getConfig().redAgentIA;
+        addRedAgent.setVisible(!session.getConfig().redAgentIA);
+    }
     
     public void removePlayerField(Node playerField, int playerType) {
         switch (playerType) {
-            case 0 -> {
-                
+            case 0 -> {   
                 blueAgentGrid.getChildren().remove(playerField);
                 nbBlueAgents--;
                 addBlueAgent.setVisible(true);
+                if (nbBlueAgents == 1) setBlueAgentIA.setVisible(true);
                 GridPane.setRowIndex(addBlueAgent, nbBlueAgents);
+                GridPane.setRowIndex(setBlueAgentIA, nbBlueAgents);
             }
             case 1 -> {
                 blueSpyGrid.getChildren().remove(playerField);
@@ -341,7 +362,9 @@ public class NewConfigController {
                 redAgentGrid.getChildren().remove(playerField);
                 nbRedAgents--;
                 addRedAgent.setVisible(true);
+                if (nbRedAgents == 1) setRedAgentIA.setVisible(true);
                 GridPane.setRowIndex(addRedAgent, nbRedAgents);
+                GridPane.setRowIndex(setRedAgentIA, nbRedAgents);
             }
             case 3 -> {
                 redSpyGrid.getChildren().remove(playerField);

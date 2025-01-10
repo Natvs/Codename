@@ -55,10 +55,16 @@
                         <RowConstraints vgrow="ALWAYS" />
                         <RowConstraints vgrow="ALWAYS" />
                     </rowConstraints>
+                        <columnConstraints>
+                        <ColumnConstraints hgrow="ALWAYS" />
+                        <ColumnConstraints hgrow="ALWAYS" />
+                    </columnConstraints>
                     <children>
-                        <TextField fx:id="blueAgent1" />
+                        <TextField fx:id="blueAgent1" GridPane.columnSpan="2"/>
                         <Button fx:id="addBlueAgent" onAction="#onAddBlueAgent" 
                         text="+" GridPane.rowIndex="1" GridPane.halignment="CENTER"/>
+                        <Button fx:id="setBlueAgentIA" onAction="#onSetBlueAgentIA" text = "IA"
+                            GridPane.rowIndex="1" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
                     </children>
                 </GridPane>
 
@@ -86,10 +92,16 @@
                         <RowConstraints vgrow="ALWAYS" />
                         <RowConstraints vgrow="ALWAYS" />
                     </rowConstraints>
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="ALWAYS" />
+                        <ColumnConstraints hgrow="ALWAYS" />
+                    </columnConstraints>
                     <children>
-                        <TextField fx:id="redAgent1"/>
+                        <TextField fx:id="redAgent1" GridPane.columnSpan="2"/>
                         <Button fx:id="addRedAgent" onAction="#onAddRedAgent" text="+"
                             GridPane.rowIndex="1" GridPane.halignment="CENTER" />
+                        <Button fx:id="setRedAgentIA" onAction="#onSetRedAgentIA" text = "IA"
+                            GridPane.rowIndex="1" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
                     </children>
                 </GridPane>
 

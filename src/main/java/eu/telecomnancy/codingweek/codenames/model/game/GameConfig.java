@@ -14,6 +14,8 @@ public class GameConfig {
     public int width = 5;
     public boolean blueSpyIA = false;
     public boolean redSpyIA = false;
+    public boolean blueAgentIA = false;
+    public boolean redAgentIA = false;
     public List<Player> blueAgentsList = new ArrayList<>(Arrays.asList(new Player("joueur 1"), new Player("joueur 2")));
     public List<Player> blueSpiesList = new ArrayList<>(Arrays.asList(new Player("joueur 3"), new Player("joueur 4")));
     public List<Player> redAgentsList = new ArrayList<>(Arrays.asList(new Player("joueur 5"), new Player("joueur 6")));
