@@ -9,7 +9,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 
-import eu.telecomnancy.codingweek.codenames.music.Music;
 
 public class Main extends Application {
 
