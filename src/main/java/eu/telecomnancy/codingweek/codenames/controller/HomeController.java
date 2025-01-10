@@ -6,12 +6,16 @@ import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import eu.telecomnancy.codingweek.codenames.utils.SaveFile;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 
 
 public class HomeController {
     private Session session;
+
+    private boolean isMuted = false;
 
     @FXML
     private GridPane homeView;
@@ -21,6 +25,12 @@ public class HomeController {
 
     @FXML
     private Button quitButton;
+
+    @FXML 
+    private ImageView muteImage;
+
+    @FXML 
+    private Button muteButton;
 
     public HomeController(Session session) {
         this.session = session;
@@ -63,5 +73,21 @@ public class HomeController {
     @FXML
     private void onQuit() {
         System.exit(0);
+    }
+
+    @FXML
+    private void onCredits() {
+        RootController.getInstance().changeView("/views/credit.fxml");
+    }
+
+    @FXML
+    private void onMute() {
+        if (isMuted) {
+            muteImage.setImage(new Image(getClass().getResource("/images/sound-high-svgrepo-com.png").toString()));
+            isMuted = false;
+        } else {
+            muteImage.setImage(new Image(getClass().getResource("/images/sound-mute-svgrepo-com.png").toString()));
+            isMuted = true;
+        }
     }
 }

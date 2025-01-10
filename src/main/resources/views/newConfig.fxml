@@ -139,7 +139,7 @@
             </columnConstraints>
             <children>
                 <Label text="Activer le timer : " GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
-                <CheckBox fx:id="timerCheck" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0" onAction="#onTimerCheck" />
+                <CheckBox fx:id="timerCheck" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
                 <Label fx:id="agentTimerDesc" text="Timer Agent : " GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                 <Slider fx:id="agentTimer" max="180" min="20" value="60" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                 <Label fx:id="agentTimerLabel" text="30" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />

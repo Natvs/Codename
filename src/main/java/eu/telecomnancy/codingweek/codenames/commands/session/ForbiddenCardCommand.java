@@ -13,7 +13,7 @@ public class ForbiddenCardCommand extends SessionCommand {
     @Override
     public void execute() {
         Platform.runLater(( ) -> {
-            if (session.getActiveTimer()) {
+            if (session.getConfig().getTimer()) {
                 session.getTimerService().cancel();
             }
         } );

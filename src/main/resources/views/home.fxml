@@ -29,7 +29,7 @@
         <ImageView fitHeight="230.0" fitWidth="230.0" pickOnBounds="true" preserveRatio="true"
              GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1">
             <image>
-                <Image url="@../images/logo.jpg" />
+                <Image url="@../images/game_logo_codenames.jpg" />
             </image>
         </ImageView>
 
@@ -42,14 +42,22 @@
         <Button fx:id="quitButton" onAction="#onQuit" text="Quitter" GridPane.columnIndex="0"
             GridPane.halignment="CENTER" GridPane.rowIndex="4" />
 
+        <HBox GridPane.columnIndex="0" GridPane.rowIndex="5" alignment="CENTER" spacing="10"
+            HBox.hgrow="ALWAYS">
+            <Button fx:id="creditsButton" onAction="#onCredits" text="Crédits" />
+            <Button fx:id="muteButton" onAction="#onMute" styleClass="transparent-button">
+                <graphic>
+                    <ImageView fx:id="muteImage" fitHeight="30.0" fitWidth="30.0"
+                        preserveRatio="true">
+                        <image>
+                            <Image url="@../images/sound-mute-svgrepo-com.png" />
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
+        </HBox>
+
         <Label fx:id="Subtitle" text="by AnthropicPotato - APt" GridPane.halignment="CENTER"
-            GridPane.rowIndex="5" />
+            GridPane.rowIndex="6" />
     </children>
-
-    <HBox GridPane.columnIndex="0" GridPane.rowIndex="6" alignment="CENTER" spacing="10" HBox.hgrow="ALWAYS">
-        <children>
-            <Label text="Version 1.0" />
-        </children>
-    </HBox>
-
 </GridPane>

@@ -5,3 +5,12 @@
 Button {
     -fx-font-size: 2em;
 }
+
+.transparent-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.transparent-button:hover {
+    -fx-background-color: rgba(0, 0, 0, 0.1);
+}

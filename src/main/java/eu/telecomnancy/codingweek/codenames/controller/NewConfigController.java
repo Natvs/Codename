@@ -5,6 +5,8 @@ import java.util.List;
 
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import eu.telecomnancy.codingweek.codenames.model.player.Player;
+import eu.telecomnancy.codingweek.codenames.observers.newconfig.ImageModeObserver;
+import eu.telecomnancy.codingweek.codenames.observers.newconfig.TimerObserver;
 import eu.telecomnancy.codingweek.codenames.theme.Utility;
 import eu.telecomnancy.codingweek.codenames.utils.AutoCompleteTextField;
 import eu.telecomnancy.codingweek.codenames.utils.GeneratePlayerField;
@@ -16,12 +18,13 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
 public class NewConfigController {
-    private Session session;
+    private final Session session;
 
     private int nbBlueAgents = 1;
     private int nbRedAgents = 1;
@@ -107,12 +110,9 @@ public class NewConfigController {
         initializeEvents();
         initializePlayers();
 
-        agentTimer.setVisible(false);
-        spyTimer.setVisible(false);
-        agentTimerLabel.setVisible(false);
-        spyTimerLabel.setVisible(false);
-        agentTimerDesc.setVisible(false);
-        spyTimerDesc.setVisible(false);
+        timerCheck.selectedProperty().set(session.getConfig().getTimer());
+        setMaxBoardSize();
+        checkTimers();
 
         agentTimerLabel.textProperty().bind(
                 Bindings.format("%.0f s", agentTimer.valueProperty()));
@@ -144,25 +144,15 @@ public class NewConfigController {
         nbCols.valueProperty().addListener(((observable, oldValue, newValue) -> {
             session.getConfig().width = nbCols.getValue();
         }));
-    }
 
-    @FXML
-    private void onTimerCheck() {
-        if (timerCheck.isSelected()) {
-            agentTimerDesc.setVisible(true);
-            agentTimer.setVisible(true);
-            spyTimer.setVisible(true);
-            agentTimerLabel.setVisible(true);
-            spyTimerLabel.setVisible(true);
-            spyTimerDesc.setVisible(true);
-        } else {
-            agentTimerDesc.setVisible(false);
-            agentTimer.setVisible(false);
-            spyTimer.setVisible(false);
-            agentTimerLabel.setVisible(false);
-            spyTimerLabel.setVisible(false);
-            spyTimerDesc.setVisible(false);
-        }
+        session.getConfig().setImageModeObserver(new ImageModeObserver(this));
+        imageModeCheck.selectedProperty().addListener(((value) -> {
+             session.getConfig().setImageMode(imageModeCheck.selectedProperty().get()); 
+        }));
+        session.getConfig().setTimerObserver(new TimerObserver(this));
+        timerCheck.selectedProperty().addListener(((value) -> {
+            session.getConfig().setTimer(timerCheck.selectedProperty().get());
+        }));
     }
 
     @FXML
@@ -228,17 +218,12 @@ public class NewConfigController {
             }
         }
 
-        session.getConfig().timerAgent = (int) agentTimer.getValue();
-        session.getConfig().timerSpy = (int) spyTimer.getValue();
-        session.setActiveTimer(timerCheck.isSelected());
+        session.getConfig().agentTime = (int) agentTimer.getValue();
+        session.getConfig().spyTime = (int) spyTimer.getValue();
         session.getBoard().setSize(session.getConfig().width, session.getConfig().heigth);
 
         if (wordsList != null) {
             session.getBoard().setWords(wordsList);
-        }
-
-        if (imageModeCheck.isSelected()) {
-            session.getConfig().imageMode = true;
         }
 
         session.startNewGame();
@@ -360,6 +345,38 @@ public class NewConfigController {
     private void enableStart() {
         startButton.setDisable(false);
         startEnable = true;
+    }
+
+    public void setMaxBoardSize() {
+        SpinnerValueFactory.IntegerSpinnerValueFactory rowFactory = (SpinnerValueFactory.IntegerSpinnerValueFactory) nbRows.getValueFactory();
+        SpinnerValueFactory.IntegerSpinnerValueFactory colFactory = (SpinnerValueFactory.IntegerSpinnerValueFactory) nbCols.getValueFactory();
+        if (session.getConfig().getImageMode()) {
+            rowFactory.setMax(5);
+            colFactory.setMax(5);
+        }
+        else {
+            rowFactory.setMax(10);
+            colFactory.setMax(10);
+        }
+    }
+
+    public void checkTimers() {
+        System.out.println(session.getConfig().getTimer());
+        if (session.getConfig().getTimer()) {
+            agentTimerDesc.setVisible(true);
+            agentTimer.setVisible(true);
+            spyTimer.setVisible(true);
+            agentTimerLabel.setVisible(true);
+            spyTimerLabel.setVisible(true);
+            spyTimerDesc.setVisible(true);
+        } else {
+            agentTimerDesc.setVisible(false);
+            agentTimer.setVisible(false);
+            spyTimer.setVisible(false);
+            agentTimerLabel.setVisible(false);
+            spyTimerLabel.setVisible(false);
+            spyTimerDesc.setVisible(false);
+        }
     }
 
 }
