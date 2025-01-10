@@ -24,7 +24,7 @@ public class Board {
         fullWordList = new ArrayList<String>(wordsList);
         this.grid = openCardsService.initGridCards(height, width, wordsList);
     }
-
+    
     public void clone(Board target) {
         this.heigth = target.getHeigth();
         this.width = target.getWidth();
@@ -72,7 +72,7 @@ public class Board {
         return number;
     }
 
-    public void setWords(ArrayList<String> words) {
+    public void setWordList(ArrayList<String> words) {
         this.wordsList = words;
         this.grid = openCardsService.initGridCards(heigth, width, wordsList);
     }
