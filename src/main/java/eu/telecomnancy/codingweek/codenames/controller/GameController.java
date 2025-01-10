@@ -1,6 +1,9 @@
 package eu.telecomnancy.codingweek.codenames.controller;
 
+import eu.telecomnancy.codingweek.codenames.ia.algo.CardGuesser;
+import eu.telecomnancy.codingweek.codenames.ia.algo.ClueGuesser;
 import eu.telecomnancy.codingweek.codenames.model.board.Card;
+import eu.telecomnancy.codingweek.codenames.model.clue.Clue;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import eu.telecomnancy.codingweek.codenames.observers.game.ColorSetObserver;
 import eu.telecomnancy.codingweek.codenames.observers.game.RoleSetObserver;
@@ -12,7 +15,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 
 public class GameController {
@@ -44,6 +46,29 @@ public class GameController {
         setHeader();
         initCardsBoard();
         setFooter();
+
+        if (session.isAgent()) {
+            ClueGuesser clueGuesser = new ClueGuesser(session);
+            Clue clue = clueGuesser.getClue();
+            session.addClue(clue);
+        } else {
+            if (!session.getCurrentColoredTeam().getCluesList().isEmpty()) {
+                var cardGuesser = new CardGuesser(session);
+                var result = cardGuesser.getResult();
+                var i = 0;
+                var error = false;
+                while (!error && i < result.length) {
+                    var card = result[i];
+                    var role = session.isAgent();
+                    session.guessCard(card);
+                    i++;
+                    if (role != session.isAgent()) {
+                        error = true;
+                    }
+                }
+            }
+        }
+
     }
 
     private void initializeEvents() {

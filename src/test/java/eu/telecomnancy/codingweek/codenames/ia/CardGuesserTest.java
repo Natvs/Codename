@@ -10,13 +10,14 @@ import org.junit.jupiter.api.Test;
 
 import eu.telecomnancy.codingweek.codenames.theme.Utility;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
-import eu.telecomnancy.codingweek.codenames.ia.algo.Algo;
+import eu.telecomnancy.codingweek.codenames.ia.algo.CardGuesser;
 import eu.telecomnancy.codingweek.codenames.model.clue.Clue;
+import eu.telecomnancy.codingweek.codenames.model.board.Card;
 
 
-public class AlgoTest {
+public class CardGuesserTest {
     @Test
-    void testIA() {
+    void testCardGuesser() {
         
         // Test Utility.getLexicalFieldList
         // Test 1: avec "abeille"
@@ -45,15 +46,16 @@ public class AlgoTest {
         lexicalFieldList_expected = new ArrayList<>();
         assertEquals(lexicalFieldList_expected, lexicalFieldList);
 
-        // Test simulate
-        Clue clue = new Clue("abeille", 3);
-        Algo ia = new Algo(clue);
+        // Test CardGuesser
         Session session = new Session();
         session.getBoard().setSize(5, 5);
-        ia.simulate(session);
-        ArrayList<String> result = ia.getResult();
+        Clue clue = new Clue("abeille", 3);
+        session.getCurrentColoredTeam().getCluesList().add(clue);
+        
+        CardGuesser ia = new CardGuesser(session);
+        Card[] result = ia.getResult();
         assertNotEquals(null, result);
-        assert(!(result.isEmpty()));
+        assertEquals(clue.getCount(), result.length);
     }
 
 }
