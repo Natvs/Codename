@@ -351,7 +351,8 @@ public class NewConfigController {
             disableStart();
         }
     }
-
+    public void onWord(){}
+    
     private void disableStart() {
         startButton.setDisable(true);
         startEnable = false;
