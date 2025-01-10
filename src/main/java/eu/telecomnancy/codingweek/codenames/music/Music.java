@@ -1,5 +1,6 @@
 package eu.telecomnancy.codingweek.codenames.music;
 
+
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaException;
 import javafx.scene.media.MediaPlayer;
@@ -7,20 +8,6 @@ import javafx.scene.media.MediaPlayer;
 public class Music {
     private String path;
     private MediaPlayer mediaPlayer;
-    private Thread musicThread;
-
-    private void startMusic(){
-        musicThread = new Thread(() -> {
-            try {
-                // Load and play the audio clip in the background
-                playAudio();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-        musicThread.setDaemon(true);  // Make it a daemon thread so it won't block program termination
-        musicThread.start();
-    }
         
     private void playAudio(){// throws UnsupportedAudioFileException, IOException, LineUnavailableException {
         String musicFile = getClass().getResource(path).toString();
@@ -30,7 +17,6 @@ public class Music {
             mediaPlayer.setAutoPlay(true);
             mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
             mediaPlayer.setOnReady(() -> mediaPlayer.play());
-            
         } catch (NullPointerException e) {
             // Handle invalid file path or unsupported format
             System.out.println("Error: The media file could not be loaded. Check the file path or format.");
@@ -45,11 +31,10 @@ public class Music {
 
     public void NewMusic(String path){
         this.path = path;
-        if (musicThread == null){
-            startMusic();
-        } else if (mediaPlayer != null){
+        if (mediaPlayer != null){
             mediaPlayer.stop();
         }
+        playAudio();
     }
 
     public void mute(){

@@ -50,8 +50,6 @@ public class Session {
         this.board = new Board(config.heigth, config.width);
         initialize();
         setTimerService();
-        music = new Music();
-        music.NewMusic("/music/apt.mp3");
     }
 
     public void initialize() {
@@ -264,7 +262,13 @@ public class Session {
     public void resetTime(){
         this.time = isAgent() ? getConfig().timerAgent*10 : getConfig().timerSpy*10;
     }
+    @JsonIgnore
     public Music getMusic() {
         return music;
+    }
+
+    @JsonIgnore
+    public void setMusic(Music music){
+        this.music = music;
     }
 }

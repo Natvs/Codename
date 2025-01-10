@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
+import eu.telecomnancy.codingweek.codenames.music.Music;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -13,13 +14,17 @@ public class RootController {
     private static RootController instance;
     private Node activeView;
     private Session session;
-
+    private Music music;
     @FXML
     private BorderPane root;
 
     public RootController() {
         session = new Session();
         instance = this;
+        // Tackle music
+        music = new Music();
+        music.NewMusic("/music/apt.mp3");
+        session.setMusic(music);
     }
 
     @FXML
