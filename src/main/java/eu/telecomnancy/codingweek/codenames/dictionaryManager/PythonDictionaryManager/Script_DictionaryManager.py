@@ -16,6 +16,3 @@ def manage(word, image_save_path="BdD", codenamesWords_path="codenames_words.txt
             est_telecharge = True
         except Exception:
             est_telecharge = False
-
-
-manage("abat-jour")
