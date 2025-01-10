@@ -65,11 +65,14 @@ public class GameFooterController {
     private void onSubmit() {
         controller.onSubmit();
         if (session.isAgent()){
-            if (session.getBoard().getFullWordList().contains(word.getText())) {
-                session.addClue(new Clue(word.getText(), spinner.getValue()));  
+            if (!session.getBoard().getFullWordList().contains(word.getText())) {
+                indication.setText("Mon introuvable dans le dictionnaire");
+            }
+            else if (session.getBoard().getWordList().contains(word.getText())) {
+                indication.setText("Mot dans la grille");
             }
             else {
-                indication.setText("Mon non valide");
+                session.addClue(new Clue(word.getText(), spinner.getValue()));  
             }
         }
         else {

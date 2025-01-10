@@ -56,6 +56,9 @@ public class Board {
     public ArrayList<String> getFullWordList() {
         return this.fullWordList;
     }
+    public ArrayList<String> getWordList() {
+        return this.wordsList;
+    }
 
     public int getRemainingCards(Color color){
         int number = 0;
