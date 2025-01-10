@@ -84,10 +84,12 @@ public class HomeController {
     private void onMute() {
         if (isMuted) {
             muteImage.setImage(new Image(getClass().getResource("/images/sound-high-svgrepo-com.png").toString()));
+            session.getMusic().unMute();
             isMuted = false;
         } else {
             muteImage.setImage(new Image(getClass().getResource("/images/sound-mute-svgrepo-com.png").toString()));
             isMuted = true;
+            session.getMusic().mute();
         }
     }
 }

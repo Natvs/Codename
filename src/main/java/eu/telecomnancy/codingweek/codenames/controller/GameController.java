@@ -20,6 +20,9 @@ public class GameController {
     private String hint;
     private int number;
 
+    private double width = 100;
+    private double height = 100;
+
     @FXML
     private GridPane gameView;
     @FXML
@@ -53,14 +56,20 @@ public class GameController {
     }
 
     private void initCardsBoard() {
+        double percentWidth = 100.0 / session.getBoard().getWidth();
+        double percentHeigth = 100.0 / session.getBoard().getHeigth();
+
+        this.width = RootController.getInstance().getWindowWidth() * (percentWidth-8) / 100;
+        this.height = RootController.getInstance().getWindowHeight() * (percentHeigth-8) / 100;
+
         for (int i = 0; i < session.getBoard().getWidth(); i++) {
             ColumnConstraints colConstraints = new ColumnConstraints();
-            colConstraints.setHgrow(Priority.ALWAYS);
+            colConstraints.setPercentWidth(percentWidth);
             gameGrid.getColumnConstraints().add(colConstraints);
         }
         for (int j = 0; j < session.getBoard().getHeigth(); j++) {
             RowConstraints rowConstraints = new RowConstraints();
-            rowConstraints.setVgrow(Priority.ALWAYS);
+            rowConstraints.setPercentHeight(percentHeigth);
             gameGrid.getRowConstraints().add(rowConstraints);
         }
         setCardsBoard();
@@ -71,7 +80,7 @@ public class GameController {
         for (int i = 0; i < session.getBoard().getWidth(); i++) {
             for (int j = 0; j < session.getBoard().getHeigth(); j++) {
                 var card = grid[j][i];
-                var cardBox = GenerateCardUtil.generateCard(card, session);
+                var cardBox = GenerateCardUtil.generateCard(card, session, width, height);
                 cardBox.setOnMouseClicked((mouveEvent) -> 
                 { 
                     if (!card.getRevealed() && !session.isAgent()) {

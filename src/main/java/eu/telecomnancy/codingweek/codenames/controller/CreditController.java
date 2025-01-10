@@ -16,11 +16,6 @@ public class CreditController {
     public CreditController(Session session){
         this.session = session;
     }
-    @FXML
-    public void initialize() {
-        imageView.fitWidthProperty().bind(creditView.widthProperty());
-        imageView.fitHeightProperty().bind(creditView.heightProperty());
-    }
 
     @FXML
     private void onRose(){
@@ -38,5 +33,10 @@ public class CreditController {
     private void onJames() {
         Music music = session.getMusic();
         music.NewMusic("/music/James.mp3");
+    }
+
+    @FXML
+    private void onBack() {
+        RootController.getInstance().changeView("/views/home.fxml");
     }
 }

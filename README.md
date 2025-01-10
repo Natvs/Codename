@@ -73,17 +73,35 @@ dist/Script_DictionaryManager.exe "abat-jour" "BdD" "codenames_words.txt" "lexic
 ### Lucas Simonneau :
 - [X] 06/01: Implémentation de gestion de fichier :
         - Implémentation de la structure de donnée ouverture et modification d'un fichier texte
+        - Réalisation de tests
 - [X] 06/01-07/01: Implémentation de la constitution du Dictionnaire :
         - Ouvrir un fichier texte : une BdD de mots issue du dictionnaire français
         - Selection d'un nombre fini de mots aléatoire
         - Asignement d'une couleur pour chaque mot
         - Convertion sous forme de grille
-- [X] 07/01: Implémentation de la musique au jeu
-- [X] 08/01: Implémentation de la fenètre "Partie" :
+        - Réalisation de tests
+- [X] 07/01 - 10/01: Implémentation de la musique au jeu
+        - Lecture d'une musique et changement de musique
+        - Mettre le son ou le couper 
+- [X] 07/01: Implémentation de la sauvegarde (Back-End)
+        - Chargement d'un fichier
+        - Sauvegarde d'une partie sous forme d'un fichier .json
+        - Suppression d'une partie
+        - Réalisation de tests
+- [X] 08/01: Implémentation de la fenêtre "Partie" :
         - Afficher le mot indice pour l'agent
         - Ajouter un bouton "Mot" pour l'agent
         - Afficher le nombre de mot à deviner par l'Agent
         - Ajouter un bouton "Nombre" pour l'espion
+- [X] 09/01: Implémentation du Timer :
+        - Affichage du timer
+        - Changement de joueur si le délai est atteint
+        - Gestion du thread de timer 
+        - Actualisation graphique en temps réel du timer
+- [X] 10/01: Implémentation des crédits :
+        - Rédaction de la partie Back-End des crédits
+- [X] 10/01: Implémentation de l'affichage de l'ajout d'un mot :
+        - On peut ajouter un mot. Le clic sur le bouton submit envoie vers le Back-End.
 
 ### Nathans Vernois :
 - [X] 06/01: Implémentation du diagramme de classe

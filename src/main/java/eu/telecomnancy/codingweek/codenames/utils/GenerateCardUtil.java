@@ -9,7 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 
 public class GenerateCardUtil {
-    public static Node generateCard(Card card, Session session) {
+    public static Node generateCard(Card card, Session session, double width, double height) {
         URL fxmlURL = GenerateCardUtil.class.getResource("/views/components/gameCard.fxml");
         if (fxmlURL == null) {
             System.err.println("Could not find /views/components/gameCard.fxml");
@@ -17,7 +17,7 @@ public class GenerateCardUtil {
         }
         try {
             FXMLLoader loader = new FXMLLoader(fxmlURL);
-            loader.setControllerFactory(iC -> new GameCardController(card,session));
+            loader.setControllerFactory(iC -> new GameCardController(card,session, width, height));
             return loader.load();
         } catch (Exception e) {
             e.printStackTrace();

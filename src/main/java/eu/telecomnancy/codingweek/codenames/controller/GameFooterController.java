@@ -4,11 +4,11 @@ import java.io.File;
 
 import eu.telecomnancy.codingweek.codenames.model.clue.Clue;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
+import eu.telecomnancy.codingweek.codenames.utils.AutoCompleteTextField;
 import eu.telecomnancy.codingweek.codenames.utils.SaveFile;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
-import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
@@ -17,7 +17,7 @@ public class GameFooterController {
     @FXML
     private HBox footerComp;
     @FXML
-    private TextField word;
+    private AutoCompleteTextField word;
     @FXML
     private Spinner<Integer> spinner;
     @FXML
@@ -33,7 +33,10 @@ public class GameFooterController {
 
     @FXML
     private void initialize(){
-        if (!session.isAgent()) {
+        if (session.isAgent()) {
+            word.setEntries(session.getBoard().getFullWordList());
+        }
+        else {
             var clue = session.getCurrentColoredTeam().getCluesList().getLast();
             indication.setText(clue.getWord() + " en " + clue.getCount());
         }
@@ -47,6 +50,11 @@ public class GameFooterController {
                 default -> {}
             }
         });
+        if (session.isAgent()) {
+            word.textProperty().addListener(( (value) -> {
+                onWordChanged();
+            } ));
+        }
     }
 
     @FXML
@@ -57,10 +65,24 @@ public class GameFooterController {
     private void onSubmit() {
         controller.onSubmit();
         if (session.isAgent()){
-            session.addClue(new Clue(word.getText(), spinner.getValue()));  
+            if (!session.getBoard().getFullWordList().contains(word.getText())) {
+                indication.setText("Mon introuvable dans le dictionnaire");
+            }
+            else if (session.getBoard().getWordList().contains(word.getText())) {
+                indication.setText("Mot dans la grille");
+            }
+            else {
+                session.addClue(new Clue(word.getText(), spinner.getValue()));  
+            }
         }
         else {
             session.guessCard(null);
+        }
+    }
+
+    private void onWordChanged() {
+        if (session.isAgent()) {
+            indication.setText("");
         }
     }
 
