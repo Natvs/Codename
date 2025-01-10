@@ -2,16 +2,12 @@ package eu.telecomnancy.codingweek.codenames.controller;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-import javafx.concurrent.ScheduledService;
 import javafx.fxml.FXML;
 import eu.telecomnancy.codingweek.codenames.model.color.Color;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import eu.telecomnancy.codingweek.codenames.model.team.Team;
 import eu.telecomnancy.codingweek.codenames.observers.game.TimeObserver;
 import javafx.concurrent.Worker.State;
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
 
 public class GameHeaderController {
     private Session session;

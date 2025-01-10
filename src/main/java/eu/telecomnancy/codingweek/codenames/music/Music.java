@@ -13,44 +13,47 @@ public class Music {
     private String path;
     private MediaPlayer mediaPlayer;
     private Thread musicThread;
-    public Music(String path){
-        this.path=path;
-    }
 
-    public void startMusic(){
-        String musicFile = getClass().getResource(path).toString();
-        try{
-                Media media = new Media(musicFile);
-                mediaPlayer = new MediaPlayer(media);
-                mediaPlayer.setAutoPlay(true);
-                mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-                mediaPlayer.setOnReady(() -> mediaPlayer.play());
-                mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.stop());
-
-            } catch (NullPointerException e) {
-                // Handle invalid file path or unsupported format
-                System.out.println("Error: The media file could not be loaded. Check the file path or format.");
-                e.printStackTrace();
-    
-            } catch (MediaException e) {
-                // Handle other general exceptions (e.g., issues during playback)
-                System.out.println("An error occurred while trying to play the media.");
+    private void startMusic(){
+        musicThread = new Thread(() -> {
+            try {
+                // Load and play the audio clip in the background
+                playAudio();
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-            musicThread = new Thread(() -> {
-                try {
-                    // Load and play the audio clip in the background
-                    playAudio();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            });
-            musicThread.setDaemon(true);  // Make it a daemon thread so it won't block program termination
-            musicThread.start();
-        }
+        });
+        musicThread.setDaemon(true);  // Make it a daemon thread so it won't block program termination
+        musicThread.start();
+    }
         
-        private void playAudio() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-            mediaPlayer.play();
+    private void playAudio(){// throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+        String musicFile = getClass().getResource(path).toString();
+        try{
+            Media media = new Media(musicFile);
+            mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.setAutoPlay(true);
+            mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+            mediaPlayer.setOnReady(() -> mediaPlayer.play());
             
+        } catch (NullPointerException e) {
+            // Handle invalid file path or unsupported format
+            System.out.println("Error: The media file could not be loaded. Check the file path or format.");
+            e.printStackTrace();
+
+        } catch (MediaException e) {
+            // Handle other general exceptions (e.g., issues during playback)
+            System.out.println("An error occurred while trying to play the media.");
+            e.printStackTrace();
+        }  
+    }
+
+    public void NewMusic(String path){
+        this.path = path;
+        if (musicThread == null){
+            startMusic();
+        } else if (mediaPlayer != null){
+            mediaPlayer.stop();
+        }
     }
 }
