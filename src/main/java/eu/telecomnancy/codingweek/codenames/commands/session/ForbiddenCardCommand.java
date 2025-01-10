@@ -1,15 +1,13 @@
-package eu.telecomnancy.codingweek.codenames.commands;
+package eu.telecomnancy.codingweek.codenames.commands.session;
 
 import eu.telecomnancy.codingweek.codenames.controller.RootController;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import javafx.application.Platform;
 
-public class ForbiddenCardCommand implements Command {
-    
-    private Session session;
+public class ForbiddenCardCommand extends SessionCommand {
 
     public ForbiddenCardCommand(Session session) {
-        this.session = session;
+        super(session);
     }
 
     @Override
