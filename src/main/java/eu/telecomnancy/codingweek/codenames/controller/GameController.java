@@ -7,7 +7,6 @@ import eu.telecomnancy.codingweek.codenames.observers.game.RoleSetObserver;
 import eu.telecomnancy.codingweek.codenames.utils.GenerateCardUtil;
 import eu.telecomnancy.codingweek.codenames.utils.GenerateFooterUtil;
 import eu.telecomnancy.codingweek.codenames.utils.GenerateHeaderUtil;
-import javafx.concurrent.ScheduledService;
 import javafx.fxml.FXML;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.ColumnConstraints;
@@ -17,9 +16,10 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 
 public class GameController {
-    private Session session;
+    private final Session session;
     private String hint;
     private int number;
+
     @FXML
     private GridPane gameView;
     @FXML
@@ -37,12 +37,13 @@ public class GameController {
     private void initialize() {
         session.setRoleObserver(new RoleSetObserver(this));
         session.setColorObserver(new ColorSetObserver(this));
-        setEvents();
+        initializeEvents();
         setHeader();
         initCardsBoard();
         setFooter();
     }
-    private void setEvents() {
+
+    private void initializeEvents() {
         gameView.setOnKeyPressed((keyevent) ->  {
             switch (keyevent.getCode()) {
                 case KeyCode.Q -> onQuit();
@@ -50,6 +51,7 @@ public class GameController {
             }
         });
     }
+
     private void initCardsBoard() {
         for (int i = 0; i < session.getBoard().getWidth(); i++) {
             ColumnConstraints colConstraints = new ColumnConstraints();
@@ -86,7 +88,7 @@ public class GameController {
         header.getChildren().clear();
         header.getChildren().add(HeaderHBox);
     }
-
+    
     public void setFooter() {
         var FooterHBox = GenerateFooterUtil.generateFooter(this,session);
         footer.getChildren().clear();
@@ -96,25 +98,25 @@ public class GameController {
     
 
     public void onQuit() {
-        RootController.getInstance().changeView("/views/home.fxml");
-        ScheduledService<Void> service = session.getService();
-        service.cancel();
+        session.quitGame();
     }
 
     public void onSubmit() {
         setHeader();
         setCardsBoard();
     }
+    
     public String getHint(){
         return this.hint;
     }
+    
     public void setHint(String hint) {
         this.hint = hint;
     }
 
     public int getNumber() {
         return this.number;
-    }
+    }   
     
     public void setNumber(int number) {
         this.number = number;

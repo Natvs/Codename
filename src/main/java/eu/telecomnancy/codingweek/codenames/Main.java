@@ -4,38 +4,21 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaException;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+
+import eu.telecomnancy.codingweek.codenames.music.Music;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
         // Tackle music
-        String musicFile = getClass().getResource("/music/apt.mp3").toString();
-        try{
-            Media media = new Media(musicFile);
-            MediaPlayer mediaPlayer = new MediaPlayer(media);
-            mediaPlayer.setAutoPlay(true);
-            mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-            mediaPlayer.play();
-        } catch (NullPointerException e) {
-            // Handle invalid file path or unsupported format
-            System.out.println("Error: The media file could not be loaded. Check the file path or format.");
-            e.printStackTrace();
-
-        } catch (MediaException e) {
-            // Handle other general exceptions (e.g., issues during playback)
-            System.out.println("An error occurred while trying to play the media.");
-            e.printStackTrace();
-        }
-        
-
+        Music music = new Music();
+        music.NewMusic("/music/apt.mp3");
+        music.NewMusic("/music/pokemon.mp3");
         URL fxmlURL = getClass().getResource("/views/root.fxml");
         if (fxmlURL == null) {
             System.err.println("Could not find root.fxml");

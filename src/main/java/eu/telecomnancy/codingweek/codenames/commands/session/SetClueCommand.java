@@ -1,18 +1,17 @@
-package eu.telecomnancy.codingweek.codenames.commands;
+package eu.telecomnancy.codingweek.codenames.commands.session;
 
 import eu.telecomnancy.codingweek.codenames.controller.RootController;
 import eu.telecomnancy.codingweek.codenames.model.clue.Clue;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import javafx.application.Platform;
 
-public class SetClueCommand implements Command {
+public class SetClueCommand extends SessionCommand {
     
     private final Clue clue;
-    private final Session session;
 
     public SetClueCommand(Clue clue, Session session) {
+        super(session);
         this.clue = clue;
-        this.session = session;
     }
 
     @Override

@@ -17,7 +17,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
@@ -134,14 +133,9 @@ public class NewConfigController {
     private void initializeEvents() {
         newConfigView.setOnKeyPressed((keyevent) -> {
             switch (keyevent.getCode()) {
-                case KeyCode.Q:
-                    onBack();
-                    break;
-                case KeyCode.S:
-                    if (startEnable) { onStart(); }
-                    break;
-                default:
-                    break;
+                case Q -> onBack();
+                case N -> { if (startEnable) onStart(); }
+                default -> {}
             }
         });
         nbRows.valueProperty().addListener(((observable, oldValue, newValue) -> {

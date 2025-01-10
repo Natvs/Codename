@@ -6,7 +6,6 @@ import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import eu.telecomnancy.codingweek.codenames.utils.SaveFile;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 
@@ -29,16 +28,16 @@ public class HomeController {
 
     @FXML
     public void initialize() {
+        setEvents();
+    }
+
+    private void setEvents() {
         homeView.setOnKeyPressed((keyevent) -> {
             switch (keyevent.getCode()) {
-                case KeyCode.Q:
-                    onQuit();
-                    break;
-                case KeyCode.N:
-                    onNewGame();
-                    break;
-                default:
-                    break;
+                case Q -> onQuit();
+                case N -> onNewGame();
+                case C -> onLoadGame();
+                default -> {}
             }
         });
     }
