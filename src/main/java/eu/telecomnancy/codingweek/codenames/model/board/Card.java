@@ -54,7 +54,9 @@ public class Card {
                     String imagePathBMP = imagePath + ".bmp";
                     this.imageURL = getClass().getResource(imagePathBMP).toString();
                 } catch (Exception e5) {
-                    throw new RuntimeException("Could not find image for card " + this.name);
+                    String imagePathBMP = "/images/file_not_found.png";
+                    this.imageURL = getClass().getResource(imagePathBMP).toString();
+                    //throw new RuntimeException("Could not find image for card " + this.name);
                 }
                 }
             }
