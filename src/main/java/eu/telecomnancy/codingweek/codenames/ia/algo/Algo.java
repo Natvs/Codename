@@ -1,13 +1,14 @@
 package eu.telecomnancy.codingweek.codenames.ia.algo;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import eu.telecomnancy.codingweek.codenames.theme.Utility;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import eu.telecomnancy.codingweek.codenames.model.clue.Clue;
 import eu.telecomnancy.codingweek.codenames.model.board.Board;
 import java.util.Random;
+
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
 
 
 public class Algo {
@@ -40,7 +41,7 @@ public class Algo {
         int height = board.getHeigth();
         int width = board.getWidth();
         for (int i = 0; i < height; i++) {
-            for (int j = 0; i < width; i++) {
+            for (int j = 0; j < width; j++) {
                 String cardName = board.getCard(i,j).getName();
                 cardsNameList.add(cardName);
             }
@@ -61,9 +62,12 @@ public class Algo {
         if (numberMissingCards > 0) {
             for (int k = 0; k < numberMissingCards; k++) {
                 int r = -1;
-                while (r == -1 || result.contains(cardsNameList.get(r))) {
+                while (r == -1) {
                     Random random = new Random();
                     r = random.nextInt(height*width);
+                    if (result.contains(cardsNameList.get(r))) {
+                        r = -1;
+                    }
                 }
                 String cardName = cardsNameList.get(r);
                 result.add(cardName);

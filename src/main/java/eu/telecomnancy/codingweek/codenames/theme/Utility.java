@@ -67,7 +67,7 @@ public class Utility {
 
         ArrayList<String> lexicalFieldList;
         Integer wordId = Utility.getWordId(word, dico);
-        if (wordId > 1) {
+        if (wordId < 1) {
             lexicalFieldList = new ArrayList<>();
         } else {
             ArrayList<Integer> listDigit = Utility.getLexicalFieldIntegerList(wordId, dico_lexicalField);

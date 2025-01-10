@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
 import org.junit.jupiter.api.Test;
 
 import eu.telecomnancy.codingweek.codenames.theme.Utility;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import eu.telecomnancy.codingweek.codenames.ia.algo.Algo;
+import eu.telecomnancy.codingweek.codenames.model.board.Board;
 import eu.telecomnancy.codingweek.codenames.model.clue.Clue;
 
 
@@ -44,7 +47,14 @@ public class AlgoTest {
         assertEquals(lexicalFieldList_expected, lexicalFieldList);
 
         // Test simulate
-        // A_REVOIR
+        Clue clue = new Clue("abeille", 3);
+        Algo ia = new Algo(clue);
+        Session session = new Session();
+        session.getBoard().setSize(5, 5);
+        ia.simulate(session);
+        ArrayList<String> result = ia.getResult();
+        assertNotEquals(null, result);
+        assert(!(result.isEmpty()));
     }
 
 }
