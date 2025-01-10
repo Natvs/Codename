@@ -5,7 +5,6 @@ import java.io.File;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import eu.telecomnancy.codingweek.codenames.utils.SaveFile;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -13,24 +12,15 @@ import javafx.stage.FileChooser;
 
 
 public class HomeController {
-    private Session session;
+    private final Session session;
 
     private boolean isMuted = false;
 
     @FXML
     private GridPane homeView;
 
-    @FXML
-    private Button newGameButton;
-
-    @FXML
-    private Button quitButton;
-
     @FXML 
     private ImageView muteImage;
-
-    @FXML 
-    private Button muteButton;
 
     public HomeController(Session session) {
         this.session = session;
@@ -64,8 +54,7 @@ public class HomeController {
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichier JSON", "*.json"));
         File file = fileChooser.showOpenDialog(homeView.getScene().getWindow());
         if (file != null) {
-            Session session = SaveFile.loadData(file.getAbsolutePath());
-            this.session.clone(session);
+            this.session.clone(SaveFile.loadData(file.getAbsolutePath()));
             RootController.getInstance().changeView("/views/game.fxml");
         }
     }

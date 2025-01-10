@@ -42,8 +42,6 @@ public class NewConfigController {
     @FXML
     private Spinner<Integer> nbCols;
     @FXML
-    private GridPane playersGrid;
-    @FXML
     private CheckBox imageModeCheck;
 
     //Teams fields
@@ -93,8 +91,6 @@ public class NewConfigController {
     private Label spyTimerLabel;
 
     //Theme
-    @FXML
-    private GridPane themeGrid;
     @FXML
     private AutoCompleteTextField themeField;
     @FXML
@@ -183,42 +179,42 @@ public class NewConfigController {
 
         for (int i = 1; i <= nbBlueAgents; i++) {
             if (blueAgentGrid.getChildren().get(i) == null) {
-                continue;
-            } else if (blueAgentGrid.getChildren().get(i) instanceof HBox) {
-                if ((TextField)((HBox) blueAgentGrid.getChildren().get(i)).getChildren().get(0) == null) {
+                
+            } else if (blueAgentGrid.getChildren().get(i) instanceof HBox hBox) {
+                if ((TextField)hBox.getChildren().get(0) == null) {
                     continue;
                 }
-                blueAgents.add(new Player(((TextField)((HBox) blueAgentGrid.getChildren().get(i)).getChildren().get(0)).getText()));
+                blueAgents.add(new Player(((TextField)hBox.getChildren().get(0)).getText()));
             }
         }
         for (int i = 1; i <= nbBlueSpy; i++) {
             if (blueSpyGrid.getChildren().get(i) == null) {
-                continue;
-            } else if (blueSpyGrid.getChildren().get(i) instanceof HBox) {
-                if ((TextField)((HBox) blueSpyGrid.getChildren().get(i)).getChildren().get(0) == null) {
+                
+            } else if (blueSpyGrid.getChildren().get(i) instanceof HBox hBox) {
+                if ((TextField)hBox.getChildren().get(0) == null) {
                     continue;
                 }
-                blueSpies.add(new Player(((TextField)((HBox) blueSpyGrid.getChildren().get(i)).getChildren().get(0)).getText()));
+                blueSpies.add(new Player(((TextField)hBox.getChildren().get(0)).getText()));
             }
         }
         for (int i = 1; i <= nbRedAgents; i++) {
             if (redAgentGrid.getChildren().get(i) == null) {
-                continue;
-            } else if (redAgentGrid.getChildren().get(i) instanceof HBox) {
-                if ((TextField)((HBox) redAgentGrid.getChildren().get(i)).getChildren().get(0) == null) {
+                
+            } else if (redAgentGrid.getChildren().get(i) instanceof HBox hBox) {
+                if ((TextField)hBox.getChildren().get(0) == null) {
                     continue;
                 }
-                redAgents.add(new Player(((TextField)((HBox) redAgentGrid.getChildren().get(i)).getChildren().get(0)).getText()));
+                redAgents.add(new Player(((TextField)hBox.getChildren().get(0)).getText()));
             }
         }
         for (int i = 1; i <= nbRedSpy; i++) {
             if (redSpyGrid.getChildren().get(i) == null) {
-                continue;
-            } else if (redSpyGrid.getChildren().get(i) instanceof HBox) {
-                if ((TextField)((HBox) redSpyGrid.getChildren().get(i)).getChildren().get(0) == null) {
+                
+            } else if (redSpyGrid.getChildren().get(i) instanceof HBox hBox) {
+                if ((TextField)hBox.getChildren().get(0) == null) {
                     continue;
                 }
-                redSpies.add(new Player(((TextField)((HBox) redSpyGrid.getChildren().get(i)).getChildren().get(0)).getText()));
+                redSpies.add(new Player(((TextField)hBox.getChildren().get(0)).getText()));
             }
         }
 
@@ -294,35 +290,26 @@ public class NewConfigController {
 
     @FXML
     private void onSetBlueSpyIA() {
-        if (session.getConfig().blueSpyIA) {
-            session.getConfig().blueSpyIA = false;
-        }
-        else {
-            session.getConfig().blueSpyIA = true;
-        }
+        session.getConfig().blueSpyIA = !session.getConfig().blueSpyIA;
         addBlueSpy.setVisible(!session.getConfig().blueSpyIA);
     }
 
     @FXML
     private void onSetRedSpyIA() {
-        if (session.getConfig().redSpyIA) {
-            session.getConfig().redSpyIA = false;
-        }
-        else {
-            session.getConfig().redSpyIA = true;
-        }
+        session.getConfig().redSpyIA = !session.getConfig().redSpyIA;
         addRedSpy.setVisible(!session.getConfig().redSpyIA);
     }
     
     public void removePlayerField(Node playerField, int playerType) {
         switch (playerType) {
-            case 0:
+            case 0 -> {
+                
                 blueAgentGrid.getChildren().remove(playerField);
                 nbBlueAgents--;
                 addBlueAgent.setVisible(true);
                 GridPane.setRowIndex(addBlueAgent, nbBlueAgents);
-                break;
-            case 1:
+            }
+            case 1 -> {
                 blueSpyGrid.getChildren().remove(playerField);
                 nbBlueSpy--;
                 addBlueSpy.setVisible(true);
@@ -332,14 +319,14 @@ public class NewConfigController {
                 }
                 GridPane.setRowIndex(addBlueSpy, nbBlueSpy);
                 GridPane.setRowIndex(setBlueSpyIA, nbBlueSpy);
-                break;
-            case 2:
+            }
+            case 2 -> {
                 redAgentGrid.getChildren().remove(playerField);
                 nbRedAgents--;
                 addRedAgent.setVisible(true);
                 GridPane.setRowIndex(addRedAgent, nbRedAgents);
-                break;
-            case 3:
+            }
+            case 3 -> {
                 redSpyGrid.getChildren().remove(playerField);
                 nbRedSpy--;
                 addRedSpy.setVisible(true);
@@ -349,9 +336,8 @@ public class NewConfigController {
                 }
                 GridPane.setRowIndex(addRedSpy, nbRedSpy);
                 GridPane.setRowIndex(setRedSpyIA, nbRedSpy);
-                break;
-            default:
-                break;
+            }
+            default -> {}
         }
     }
 

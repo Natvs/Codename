@@ -21,7 +21,7 @@ public class Board {
         this.heigth = height;
         this.width = width;
         wordsList = openCardsService.openFile("src/main/resources/words/codenames_words.txt");
-        fullWordList = new ArrayList<String>(wordsList);
+        fullWordList = new ArrayList<>(wordsList);
         this.grid = openCardsService.initGridCards(height, width, wordsList);
     }
 

@@ -21,8 +21,8 @@ public class GameCardController {
     @FXML
     private ImageView imageView;
 
-    private Card card;
-    private Session session;
+    private final Card card;
+    private final Session session;
 
     public GameCardController(Card card,Session session) {
         this.card = card;

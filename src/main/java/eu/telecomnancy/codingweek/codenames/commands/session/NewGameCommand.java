@@ -11,7 +11,7 @@ public class NewGameCommand extends SessionCommand {
 
     @Override
     public void execute() {
-        session.initialize();
+        session.initSession();
         RootController.getInstance().changeView("/views/transition.fxml");
     }
 

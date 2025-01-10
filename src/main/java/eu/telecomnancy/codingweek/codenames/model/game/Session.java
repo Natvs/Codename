@@ -17,13 +17,12 @@ import eu.telecomnancy.codingweek.codenames.model.team.Team;
 import eu.telecomnancy.codingweek.codenames.observers.game.ColorSetObserver;
 import eu.telecomnancy.codingweek.codenames.observers.game.RoleSetObserver;
 import eu.telecomnancy.codingweek.codenames.observers.game.TimeObserver;
-import eu.telecomnancy.codingweek.codenames.observers.newconfig.ImageModeObserver;
 import javafx.application.Platform;
 import javafx.concurrent.ScheduledService;
 import javafx.concurrent.Task;
 import eu.telecomnancy.codingweek.codenames.music.Music;
 
-public class Session {
+public final class Session {
 
     private Music music;
 
@@ -49,11 +48,11 @@ public class Session {
         this.redTeam = new ColoredTeam(Color.RED, config.redAgentsList, config.redSpiesList);
         this.blueTeam = new ColoredTeam(Color.BLUE, config.blueAgentsList, config.blueSpiesList);
         this.board = new Board(config.heigth, config.width);
-        initialize();
+        initSession();
         setTimerService();
     }
 
-    public void initialize() {
+    public void initSession() {
         agent = true;
         if (board.getRemainingCards(Color.BLUE) > board.getRemainingCards(Color.RED)) {
             currentColor = Color.BLUE;

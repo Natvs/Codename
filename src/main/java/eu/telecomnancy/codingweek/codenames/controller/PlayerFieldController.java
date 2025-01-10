@@ -5,9 +5,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 
 public class PlayerFieldController {
-    private String name;
-    private NewConfigController newConfigController;
-    private int playerType;
+    private final String name;
+    private final NewConfigController newConfigController;
+    private final int playerType;
 
     @FXML
     private HBox playerField;

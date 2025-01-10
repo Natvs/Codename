@@ -1,22 +1,22 @@
 package eu.telecomnancy.codingweek.codenames.ia.algo;
 
 import java.util.ArrayList;
-
-import eu.telecomnancy.codingweek.codenames.theme.Utility;
-import eu.telecomnancy.codingweek.codenames.model.game.Session;
-import eu.telecomnancy.codingweek.codenames.model.clue.Clue;
-import eu.telecomnancy.codingweek.codenames.model.board.Board;
 import java.util.Random;
+
+import eu.telecomnancy.codingweek.codenames.model.board.Board;
+import eu.telecomnancy.codingweek.codenames.model.clue.Clue;
+import eu.telecomnancy.codingweek.codenames.model.game.Session;
+import eu.telecomnancy.codingweek.codenames.theme.Utility;
 
 
 public class Algo {
     
-    private Clue clue;
-    private ArrayList<String> result;
+    private final Clue clue;
+    private final ArrayList<String> result;
 
     public Algo(Clue clue) {
         this.clue = clue;
-        this.result = new ArrayList<String>();
+        this.result = new ArrayList<>();
     }
 
     public Clue getClue() {
@@ -49,12 +49,13 @@ public class Algo {
         ArrayList<String> lexicalFieldList = Utility.getLexicalFieldList(word);
         
         // On récupère les "count" premières cartes qui sont dan la iste des champs lexicaus "lexicalFieldList" 
-        ArrayList<String> result = new ArrayList<>();
+        result.clear();
         for (String LexicalFieldWord : lexicalFieldList) {
             if (result.size() < count && cardsNameList.contains(LexicalFieldWord)) {
                 result.add(LexicalFieldWord);
             }
         }
+
         // en cas d'echecs on complète la liste avec des mots aléatoire
         int numberMissingCards = count - result.size();
         if (numberMissingCards > 0) {
@@ -71,7 +72,6 @@ public class Algo {
                 result.add(cardName);
             }
         }
-        this.result = result; 
     }
 
 }
