@@ -226,7 +226,7 @@ public class NewConfigController {
         session.getBoard().setSize(session.getConfig().width, session.getConfig().heigth);
 
         if (wordsList != null) {
-            session.getBoard().setWords(wordsList);
+            session.getBoard().setWordList(wordsList);
         }
 
         session.getConfig().discreetMode = discreetModeCheck.isSelected();
