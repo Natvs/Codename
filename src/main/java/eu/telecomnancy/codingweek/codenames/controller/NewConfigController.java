@@ -46,6 +46,8 @@ public class NewConfigController {
     private GridPane playersGrid;
     @FXML
     private CheckBox imageModeCheck;
+    @FXML
+    private CheckBox discreetModeCheck;
 
     //Teams fields
     @FXML
@@ -109,6 +111,7 @@ public class NewConfigController {
 
     @FXML
     private void initialize() {
+        imageModeCheck.selectedProperty().set(session.getConfig().getImageMode());
         nbRows.getValueFactory().setValue(session.getConfig().heigth);
         nbCols.getValueFactory().setValue(session.getConfig().width);
         initializeEvents();
@@ -227,8 +230,10 @@ public class NewConfigController {
         session.getBoard().setSize(session.getConfig().width, session.getConfig().heigth);
 
         if (wordsList != null) {
-            session.getBoard().setWords(wordsList);
+            session.getBoard().setWordList(wordsList);
         }
+
+        session.getConfig().discreetMode = discreetModeCheck.isSelected();
 
         session.startNewGame();
     }
