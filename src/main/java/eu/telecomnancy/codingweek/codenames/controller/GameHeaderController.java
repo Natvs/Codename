@@ -2,16 +2,12 @@ package eu.telecomnancy.codingweek.codenames.controller;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-import javafx.concurrent.ScheduledService;
 import javafx.fxml.FXML;
 import eu.telecomnancy.codingweek.codenames.model.color.Color;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import eu.telecomnancy.codingweek.codenames.model.team.Team;
 import eu.telecomnancy.codingweek.codenames.observers.game.TimeObserver;
 import javafx.concurrent.Worker.State;
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
 
 public class GameHeaderController {
     private Session session;
@@ -27,14 +23,21 @@ public class GameHeaderController {
     @FXML
     public void initialize(){
         setCurrentTeam();
-        session.setTimeObserver(new TimeObserver(this));
-        session.resetTime();
-        var service = session.getService();
-        if (service.getState() == State.READY) {
-            service.start();
-        }
-        else if (service.getState() == State.CANCELLED){
-            service.restart();
+        if (session.getActiveTimer()) {
+            timer.setVisible(true);
+            timer.setManaged(true);
+            session.setTimeObserver(new TimeObserver(this));
+            session.resetTime();
+            var service = session.getTimerService();
+            if (service.getState() == State.READY) {
+                service.start();
+            }
+            else if (service.getState() == State.CANCELLED){
+                service.restart();
+            }
+        } else {
+            timer.setVisible(false);
+            timer.setManaged(false);
         }
     }
 

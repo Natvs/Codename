@@ -16,4 +16,5 @@ public class GameConfig {
     public List<Player> redSpiesList = new ArrayList<>(Arrays.asList(new Player("joueur 7"), new Player("joueur 8")));
     public int timerAgent = 40;
     public int timerSpy = 30;
+    public boolean imageMode = false;
 }

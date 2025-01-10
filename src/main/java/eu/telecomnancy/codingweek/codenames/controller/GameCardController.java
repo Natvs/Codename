@@ -7,6 +7,8 @@ import eu.telecomnancy.codingweek.codenames.observers.board.CardNameObserver;
 import eu.telecomnancy.codingweek.codenames.observers.board.CardRevealedObserver;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
 public class GameCardController {
@@ -15,6 +17,9 @@ public class GameCardController {
     
     @FXML
     private Label word;
+
+    @FXML
+    private ImageView imageView;
 
     private Card card;
     private Session session;
@@ -26,15 +31,21 @@ public class GameCardController {
 
     @FXML
     private void initialize() {
-        setName();
+        setCard();
         setColor();
         card.setColorObserver(new CardColorObserver(this));
         card.setNameObserver(new CardNameObserver(this));
         card.setRevealedObserver(new CardRevealedObserver(this));
     }
 
-    public void setName() {
-        word.setText(card.getName());
+    public void setCard() {
+        if (session.getConfig().imageMode) {
+            word.setManaged(false);
+            imageView.setImage(new Image(card.getImageURL()));
+        } else {
+            word.setText(card.getName());
+            imageView.setManaged(false);
+        }
     }
 
     public void setColor() {

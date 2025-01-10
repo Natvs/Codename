@@ -32,6 +32,9 @@ public class Utility {
         ArrayList<Integer> listDigit = new ArrayList<>();
         
         String[] elements = ligne.split(",\\s*"); // Séparer la chaîne en utilisant la virgule comme délimiteur
+        if (elements[0].equals("")) {
+            return listDigit;
+        }
         for (String element : elements) { // Parcourir chaque élément et convertir en Integer
             listDigit.add(Integer.parseInt(element));
         }
