@@ -7,7 +7,7 @@ import eu.telecomnancy.codingweek.codenames.model.board.Board;
 import eu.telecomnancy.codingweek.codenames.model.board.Card;
 import eu.telecomnancy.codingweek.codenames.model.clue.Clue;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
-import eu.telecomnancy.codingweek.codenames.theme.Utility;
+import eu.telecomnancy.codingweek.codenames.utils.openCardsService;
 
 
 public class CardGuesser {
@@ -38,8 +38,12 @@ public class CardGuesser {
             }
         }
 
+        // importe les dico
+        ArrayList<String> dico = openCardsService.openFile("src/main/resources/words/codenames_words.txt");
+        ArrayList<String> dico_lexicalField = openCardsService.openFile("src/main/resources/words/lexical_field.txt");
+
         // On récupère la liste des champs lexicaus "lexicalFieldList" associé au mot "word"
-        ArrayList<String> lexicalFieldList = Utility.getLexicalFieldList(word);
+        ArrayList<String> lexicalFieldList = UtilityIA.getLexicalFieldList(word, dico, dico_lexicalField);
         
         // On récupère les "count" premières cartes qui sont dan la iste des champs lexicaus "lexicalFieldList" 
         ArrayList<String> result_withCardsName = new ArrayList<>();

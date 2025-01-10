@@ -1,14 +1,11 @@
 package eu.telecomnancy.codingweek.codenames.ia.algo;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 
 import eu.telecomnancy.codingweek.codenames.model.board.Board;
 import eu.telecomnancy.codingweek.codenames.model.board.Card;
 import eu.telecomnancy.codingweek.codenames.model.clue.Clue;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
-import eu.telecomnancy.codingweek.codenames.theme.Utility;
-import eu.telecomnancy.codingweek.codenames.ia.algo.UtilityIA;
 import eu.telecomnancy.codingweek.codenames.utils.openCardsService;
 
 
@@ -17,9 +14,6 @@ public class ClueGuesser {
     private Clue clue;
 
     public ClueGuesser(Session session) {
-
-        // Initialise la sortie de l'ia
-        Clue clue;
 
         // importe les dico
         ArrayList<String> dico = openCardsService.openFile("src/main/resources/words/codenames_words.txt");
