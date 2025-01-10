@@ -17,10 +17,18 @@
                 - Implémentation de la structure "Board"
                 - Implémentation de la structure "GameConfig"
                 - Implémentation de la structure "Session"
-- [X] 08/01: Création du dictionnaire des mot française
-- [X] 08/01: Création de la Base de Donnée pour l'IA:
-		- Création d'un script python pour récupérer la liste des champs lexical associer à un mot sur internet
-		- Création de scripts python pour générer la liste des champs lexical associer à chaque mot du dictionnaire
+- [X] 08/01: Création du dictionnaire de 1000 mots
+- [X] 08/01-09/01: Création de Script python pour la géstion de la Base de Donnée (BdD):
+                - Création d'un script python pour récupérer sur internet les champs léxicaus du dictionnaire 
+                        (Pour la création de thème et la BdD de l'IA)
+                - Création d'un script python pour télécharger les images sur internet
+                - Création d'un script python pour séléctionner et traiter les images téléchargé
+- [X] 09/01: Création des Base de Donée
+- [X] 09/01: Implémentation de la structure "Thème" pour la création automatique de thème
+                - Implémentation de la structure "Build"
+                - Implémentation de la structure "Utility"
+- [X] 09/01: Implémentation de la class "Search" dans la structure Thème pour la recherche de mot
+- [X] 09/09: Création de testes pour la structure "Thème"
 
 ### Luca Mandrelli :
 - [X] 06/01: Implémentation de la fenètre "Acceuil" :

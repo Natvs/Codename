@@ -27,14 +27,21 @@ public class GameHeaderController {
     @FXML
     public void initialize(){
         setCurrentTeam();
-        session.setTimeObserver(new TimeObserver(this));
-        session.resetTime();
-        var service = session.getService();
-        if (service.getState() == State.READY) {
-            service.start();
-        }
-        else if (service.getState() == State.CANCELLED){
-            service.restart();
+        if (session.getActiveTimer()) {
+            timer.setVisible(true);
+            timer.setManaged(true);
+            session.setTimeObserver(new TimeObserver(this));
+            session.resetTime();
+            var service = session.getService();
+            if (service.getState() == State.READY) {
+                service.start();
+            }
+            else if (service.getState() == State.CANCELLED){
+                service.restart();
+            }
+        } else {
+            timer.setVisible(false);
+            timer.setManaged(false);
         }
     }
 

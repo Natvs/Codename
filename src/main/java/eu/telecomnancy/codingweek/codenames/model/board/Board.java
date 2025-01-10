@@ -1,5 +1,8 @@
 package eu.telecomnancy.codingweek.codenames.model.board;
 
+import java.util.ArrayList;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import eu.telecomnancy.codingweek.codenames.model.color.Color;
@@ -10,11 +13,16 @@ public class Board {
     private int heigth;
     private int width; 
     private Card[][] grid;
+    @JsonIgnore
+    private final ArrayList<String> fullWordList;
+    private ArrayList<String> wordsList;
 
     public Board(@JsonProperty("height") int height,@JsonProperty("width") int width) {
         this.heigth = height;
         this.width = width;
-        this.grid = openCardsService.initGridCards(height, width);
+        wordsList = openCardsService.openFile("src/main/resources/words/codenames_words.txt");
+        fullWordList = new ArrayList<String>(wordsList);
+        this.grid = openCardsService.initGridCards(height, width, wordsList);
     }
 
     public void clone(Board target) {
@@ -26,7 +34,7 @@ public class Board {
     public void setSize(int width, int heigth) {
         this.heigth = heigth;
         this.width = width;
-        this.grid = openCardsService.initGridCards(heigth, width);
+        this.grid = openCardsService.initGridCards(heigth, width, wordsList);
     }
 
     public int getHeigth() {
@@ -45,6 +53,10 @@ public class Board {
         return this.grid[i][j];
     }
 
+    public ArrayList<String> getFullWordList() {
+        return this.fullWordList;
+    }
+
     public int getRemainingCards(Color color){
         int number = 0;
         for (int j = 0; j < heigth; j++) {
@@ -57,4 +69,8 @@ public class Board {
         return number;
     }
 
+    public void setWords(ArrayList<String> words) {
+        this.wordsList = words;
+        this.grid = openCardsService.initGridCards(heigth, width, wordsList);
+    }
 }
