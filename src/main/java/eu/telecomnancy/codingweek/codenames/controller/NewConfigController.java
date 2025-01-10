@@ -1,21 +1,22 @@
 package eu.telecomnancy.codingweek.codenames.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import eu.telecomnancy.codingweek.codenames.model.player.Player;
+import eu.telecomnancy.codingweek.codenames.theme.Utility;
+import eu.telecomnancy.codingweek.codenames.utils.AutoCompleteTextField;
 import eu.telecomnancy.codingweek.codenames.utils.GeneratePlayerField;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
@@ -27,19 +28,20 @@ public class NewConfigController {
     private int nbBlueSpy = 1;
     private int nbRedSpy = 1;
 
+    private ArrayList<String> wordsList = null;
 
     @FXML
     private GridPane newConfigView;
     @FXML
     private Button startButton;
     @FXML
-    private ComboBox<String> thematicSelection;
-    @FXML
     private Spinner<Integer> nbRows;
     @FXML
     private Spinner<Integer> nbCols;
     @FXML
     private GridPane playersGrid;
+    @FXML
+    private CheckBox imageModeCheck;
 
     //Teams fields
     @FXML
@@ -83,6 +85,14 @@ public class NewConfigController {
     @FXML
     private Label spyTimerLabel;
 
+    //Theme
+    @FXML
+    private GridPane themeGrid;
+    @FXML
+    private AutoCompleteTextField themeField;
+    @FXML
+    private Label nbWordsLabel;
+
 
     private Boolean startEnable = false;
 
@@ -95,7 +105,6 @@ public class NewConfigController {
         nbRows.getValueFactory().setValue(session.getConfig().heigth);
         nbCols.getValueFactory().setValue(session.getConfig().width);
         initializeEvents();
-        disableStart();
         initializePlayers();
 
         agentTimer.setVisible(false);
@@ -111,7 +120,7 @@ public class NewConfigController {
         spyTimerLabel.textProperty().bind(
                 Bindings.format("%.0f s", spyTimer.valueProperty()));
         
-        thematicSelection.getItems().addAll("Tout", "Patate", "Entropie"); //FIXME: get from db
+        themeField.setEntries(session.getBoard().getFullWordList());
     }
 
     private void initializePlayers() {
@@ -124,14 +133,9 @@ public class NewConfigController {
     private void initializeEvents() {
         newConfigView.setOnKeyPressed((keyevent) -> {
             switch (keyevent.getCode()) {
-                case KeyCode.Q:
-                    onBack();
-                    break;
-                case KeyCode.S:
-                    if (startEnable) { onStart(); }
-                    break;
-                default:
-                    break;
+                case Q -> onBack();
+                case N -> { if (startEnable) onStart(); }
+                default -> {}
             }
         });
         nbRows.valueProperty().addListener(((observable, oldValue, newValue) -> {
@@ -222,14 +226,21 @@ public class NewConfigController {
                 }
                 redSpies.add(new Player(((TextField)((HBox) redSpyGrid.getChildren().get(i)).getChildren().get(0)).getText()));
             }
-
-            session.getConfig().timerAgent = (int) agentTimer.getValue();
-            session.getConfig().timerSpy = (int) spyTimer.getValue();
-            session.setActiveTimer(timerCheck.isSelected());
         }
 
-        var config = session.getConfig();
-        session.getBoard().setSize(config.width, config.heigth);
+        session.getConfig().timerAgent = (int) agentTimer.getValue();
+        session.getConfig().timerSpy = (int) spyTimer.getValue();
+        session.setActiveTimer(timerCheck.isSelected());
+        session.getBoard().setSize(session.getConfig().width, session.getConfig().heigth);
+
+        if (wordsList != null) {
+            session.getBoard().setWords(wordsList);
+        }
+
+        if (imageModeCheck.isSelected()) {
+            session.getConfig().imageMode = true;
+        }
+
         session.startNewGame();
     }
 
@@ -325,9 +336,20 @@ public class NewConfigController {
         }
     }
 
-    @FXML
-    private void onThematicSelection() {
-        enableStart();
+    public void onGenTheme() {
+        ArrayList<String> words = themeField.getWords();
+        if (words.isEmpty()) {
+            return;
+        }
+        ArrayList<String> dico = Utility.getDicoTheme(words);
+        wordsList = dico;
+
+        nbWordsLabel.setText("" + dico.size() + " mots, il en faut " + session.getConfig().heigth * session.getConfig().width);
+        if (dico.size() >= session.getConfig().heigth * session.getConfig().width) {
+            enableStart();
+        } else {
+            disableStart();
+        }
     }
 
     private void disableStart() {

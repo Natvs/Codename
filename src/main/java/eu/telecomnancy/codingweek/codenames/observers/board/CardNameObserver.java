@@ -10,7 +10,7 @@ public class CardNameObserver extends CardObserver {
 
     @Override
     public void handle() {
-        controller.setName();
+        controller.setCard();
     }
     
 }

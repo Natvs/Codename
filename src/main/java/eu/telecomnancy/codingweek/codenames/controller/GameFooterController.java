@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 
@@ -22,8 +23,8 @@ public class GameFooterController {
     @FXML
     private Label indication;
 
-    private Session session;
-    private GameController controller;
+    private final Session session;
+    private final GameController controller;
 
     public GameFooterController(GameController controller, Session session){
         this.session = session;
@@ -36,6 +37,16 @@ public class GameFooterController {
             var clue = session.getCurrentColoredTeam().getCluesList().getLast();
             indication.setText(clue.getWord() + " en " + clue.getCount());
         }
+        initializeEvents();
+    }
+    private void initializeEvents() {
+        footerComp.setOnKeyPressed((keyevent) ->  {
+            switch (keyevent.getCode()) {
+                case KeyCode.P -> onSubmit();
+                case KeyCode.S -> onSave();
+                default -> {}
+            }
+        });
     }
 
     @FXML

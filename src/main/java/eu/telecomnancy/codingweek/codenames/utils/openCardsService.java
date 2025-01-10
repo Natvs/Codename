@@ -107,8 +107,7 @@ public class openCardsService {
     public static int getIndex(int i,int j,int width){
         return j*width+i;
     }
-    public static Card[][] initGridCards(int heigth,int width){
-        ArrayList<String> lines = openFile("src/main/resources/words/codenames_words.txt");
+    public static Card[][] initGridCards(int heigth,int width, ArrayList<String> lines){
         ArrayList<Card> choosenCards = setRandomCards(lines, heigth*width);
         configCards(choosenCards);
         Card[][] grid = convertToGrid(choosenCards,heigth,width);

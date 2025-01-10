@@ -3,10 +3,11 @@ package eu.telecomnancy.codingweek.codenames.model.game;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import eu.telecomnancy.codingweek.codenames.commands.Executer;
-import eu.telecomnancy.codingweek.codenames.commands.ForbiddenCardCommand;
-import eu.telecomnancy.codingweek.codenames.commands.GuessCardCommand;
-import eu.telecomnancy.codingweek.codenames.commands.NewGameCommand;
-import eu.telecomnancy.codingweek.codenames.commands.SetClueCommand;
+import eu.telecomnancy.codingweek.codenames.commands.session.BackHomeCommand;
+import eu.telecomnancy.codingweek.codenames.commands.session.ForbiddenCardCommand;
+import eu.telecomnancy.codingweek.codenames.commands.session.GuessCardCommand;
+import eu.telecomnancy.codingweek.codenames.commands.session.NewGameCommand;
+import eu.telecomnancy.codingweek.codenames.commands.session.SetClueCommand;
 import eu.telecomnancy.codingweek.codenames.model.board.Board;
 import eu.telecomnancy.codingweek.codenames.model.board.Card;
 import eu.telecomnancy.codingweek.codenames.model.clue.Clue;
@@ -23,17 +24,20 @@ import javafx.concurrent.Task;
 public class Session {
 
     private GameConfig config;
-    private final  ColoredTeam redTeam;
-    private final  ColoredTeam blueTeam;
+    private final ColoredTeam redTeam;
+    private final ColoredTeam blueTeam;
     private final Board board;
     private Color currentColor;
     private Boolean agent = true;
-    private Executer executer = new Executer();
-    private ScheduledService<Void> service;
-    private int time;
+    private final Executer executer = new Executer();
+
+
     private RoleSetObserver roleObserver = null;
     private ColorSetObserver colorObserver = null;
     private TimeObserver timeObserver = null;
+
+    private ScheduledService<Void> timerService;
+    private int time;
     private boolean activeTimer = true;
 
     public Session() {
@@ -41,7 +45,12 @@ public class Session {
         this.redTeam = new ColoredTeam(Color.RED, config.redAgentsList, config.redSpiesList);
         this.blueTeam = new ColoredTeam(Color.BLUE, config.blueAgentsList, config.blueSpiesList);
         this.board = new Board(config.heigth, config.width);
-        setService();
+        initialize();
+        setTimerService();
+    }
+
+    public void initialize() {
+        agent = true;
         if (board.getRemainingCards(Color.BLUE) > board.getRemainingCards(Color.RED)) {
             currentColor = Color.BLUE;
         }
@@ -50,10 +59,10 @@ public class Session {
         }
     }
 
-    private void setService() {
+    private void setTimerService() {
         time = 0;
         Session session = this;
-        service = new ScheduledService<Void>() {
+        timerService = new ScheduledService<Void>() {
             @Override
             protected Task<Void> createTask() {
                 return new Task<Void>() {
@@ -73,16 +82,20 @@ public class Session {
                             } catch (InterruptedException e){
                                 e.getStackTrace();
                             }
-                        }
-                        Platform.runLater(() -> {
-                            if (activeTimer){
-                                this.cancel();
-                                if (session.isAgent()) getExecuter().addCommand(new SetClueCommand(null, session));
-                                else getExecuter().addCommand(new GuessCardCommand(null, session));
-                                getExecuter().executeAll();
-                                time=0;
+                            if (isCancelled()) {
+                                break;
                             }
-                        });
+                            if (time == 0) {
+                                Platform.runLater(() -> {
+                                    if (activeTimer){
+                                        if (session.isAgent()) getExecuter().addCommand(new SetClueCommand(null, session));
+                                        else getExecuter().addCommand(new GuessCardCommand(null, session));
+                                        getExecuter().executeAll();
+                                        time=0;
+                                    }
+                                });
+                            }
+                         }
                         return null;
                     }
                 };
@@ -201,6 +214,11 @@ public class Session {
         return this.executer;
     }
 
+    public void quitGame() {
+        getExecuter().addCommand(new BackHomeCommand(this));
+        getExecuter().executeAll();
+    }
+
     public void startNewGame() {
         getExecuter().addCommand(new NewGameCommand(this));
         getExecuter().executeAll();
@@ -218,6 +236,7 @@ public class Session {
         getExecuter().executeAll();
     }
 
+
     public boolean getActiveTimer() {
         return activeTimer;
     }
@@ -227,8 +246,8 @@ public class Session {
     }
 
     @JsonIgnore
-    public ScheduledService<Void> getService(){
-        return this.service;
+    public ScheduledService<Void> getTimerService(){
+        return this.timerService;
     }
 
     public int getTime(){
@@ -237,4 +256,5 @@ public class Session {
     public void resetTime(){
         this.time = isAgent() ? getConfig().timerAgent*10 : getConfig().timerSpy*10;
     }
+
 }
