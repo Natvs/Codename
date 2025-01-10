@@ -1,10 +1,5 @@
 package eu.telecomnancy.codingweek.codenames.music;
 
-import java.io.IOException;
-
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
-
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaException;
 import javafx.scene.media.MediaPlayer;
@@ -54,6 +49,17 @@ public class Music {
             startMusic();
         } else if (mediaPlayer != null){
             mediaPlayer.stop();
+        }
+    }
+
+    public void mute(){
+        if (mediaPlayer != null){
+            mediaPlayer.setMute(true);
+        }
+    }
+    public void unMute(){
+        if (mediaPlayer != null){
+            mediaPlayer.setMute(false);
         }
     }
 }
