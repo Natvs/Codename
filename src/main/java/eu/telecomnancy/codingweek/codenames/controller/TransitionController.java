@@ -67,8 +67,7 @@ public class TransitionController {
     }
 
     public void onQuit() {
-        RootController.getInstance().changeView("/views/home.fxml");
-        session.getService().cancel();
+        session.quitGame();
     }
 
 }

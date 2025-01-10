@@ -7,7 +7,6 @@ import eu.telecomnancy.codingweek.codenames.observers.game.RoleSetObserver;
 import eu.telecomnancy.codingweek.codenames.utils.GenerateCardUtil;
 import eu.telecomnancy.codingweek.codenames.utils.GenerateFooterUtil;
 import eu.telecomnancy.codingweek.codenames.utils.GenerateHeaderUtil;
-import javafx.concurrent.ScheduledService;
 import javafx.fxml.FXML;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.ColumnConstraints;
@@ -97,8 +96,7 @@ public class GameController {
     
 
     public void onQuit() {
-        RootController.getInstance().changeView("/views/home.fxml");
-        session.getService().cancel();
+        session.quitGame();
     }
 
     public void onSubmit() {

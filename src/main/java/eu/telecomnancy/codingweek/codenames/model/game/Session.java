@@ -3,10 +3,11 @@ package eu.telecomnancy.codingweek.codenames.model.game;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import eu.telecomnancy.codingweek.codenames.commands.Executer;
-import eu.telecomnancy.codingweek.codenames.commands.ForbiddenCardCommand;
-import eu.telecomnancy.codingweek.codenames.commands.GuessCardCommand;
-import eu.telecomnancy.codingweek.codenames.commands.NewGameCommand;
-import eu.telecomnancy.codingweek.codenames.commands.SetClueCommand;
+import eu.telecomnancy.codingweek.codenames.commands.session.BackHomeCommand;
+import eu.telecomnancy.codingweek.codenames.commands.session.ForbiddenCardCommand;
+import eu.telecomnancy.codingweek.codenames.commands.session.GuessCardCommand;
+import eu.telecomnancy.codingweek.codenames.commands.session.NewGameCommand;
+import eu.telecomnancy.codingweek.codenames.commands.session.SetClueCommand;
 import eu.telecomnancy.codingweek.codenames.model.board.Board;
 import eu.telecomnancy.codingweek.codenames.model.board.Card;
 import eu.telecomnancy.codingweek.codenames.model.clue.Clue;
@@ -203,6 +204,11 @@ public class Session {
     @JsonIgnore
     public Executer getExecuter() {
         return this.executer;
+    }
+
+    public void quitGame() {
+        getExecuter().addCommand(new BackHomeCommand(this));
+        getExecuter().executeAll();
     }
 
     public void startNewGame() {
