@@ -1,6 +1,11 @@
 # CodingWeek 2025
 **TELECOM Nancy - 06/01 au 10/01**
 
+## Pyinstaller Configuration:
+pyinstaller Script_DictionaryManager.py --onefile --windowed
+dist/Script_DictionaryManager.exe "abat-jour" "BdD" "codenames_words.txt" "lexical_field.txt"
+
+
 ## Liste de tâches :
 
 ### Arthur JEANNE :

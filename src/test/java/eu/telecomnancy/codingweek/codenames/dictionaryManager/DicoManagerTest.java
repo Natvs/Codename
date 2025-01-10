@@ -8,7 +8,7 @@ public class DicoManagerTest {
     void testDicoManager() {
 
         // Paramètres :
-        String project_file_path = "src/main/java/eu/telecomnancy/codingweek/codenames/dictionaryManager/PythonDictionaryManager/";
+        String project_file_path = "src/main/resources/script/PythonDictionaryManager/";
         String word = "abat-jour";
         String image_save_path = project_file_path + "BdD";
         String codenamesWords_path = project_file_path + "codenames_words.txt";
