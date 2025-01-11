@@ -7,18 +7,20 @@
     xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.codingweek.codenames.controller.TransitionController">
     
     <rowConstraints>
-        <RowConstraints vgrow="ALWAYS" />
-        <RowConstraints vgrow="ALWAYS" />
-        <RowConstraints vgrow="ALWAYS" />
-        <RowConstraints vgrow="ALWAYS" />
+        <RowConstraints percentHeight="7" />
+        <RowConstraints percentHeight="7" />
+        <RowConstraints percentHeight="50" />
+        <RowConstraints percentHeight="29" />
+        <RowConstraints percentHeight="7" />
     </rowConstraints>
 
     <columnConstraints>
         <ColumnConstraints hgrow="ALWAYS" />
     </columnConstraints>
 
-    <Label fx:id="teamLabel" text="Couleur de l'équipe" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="CENTER" />
+    <Label text="Changement de joueur !" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="CENTER" />
     <Label fx:id="roleLabel" text="Passer l'ordinateur" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.halignment="CENTER" />
-    <Button fx:id="nextButton" text="Continuer" GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.halignment="CENTER" onAction = "#onContinue" />
+    <GridPane fx:id="gamePreviewGrid" GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.halignment="CENTER" />
+    <Button fx:id="nextButton" text="Continuer" GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.halignment="CENTER" onAction = "#onContinue" />
 
 </GridPane>

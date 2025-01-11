@@ -3,8 +3,6 @@ package eu.telecomnancy.codingweek.codenames.ia.algo;
 import java.text.Normalizer;
 import java.util.ArrayList;
 
-import eu.telecomnancy.codingweek.codenames.theme.Utility;
-
 
 public class UtilityIA {
 
@@ -52,11 +50,11 @@ public class UtilityIA {
     
     public static ArrayList<String> getLexicalFieldList(String word, ArrayList<String> dico, ArrayList<String> dico_lexicalField) {
         ArrayList<String> lexicalFieldList;
-        Integer wordId = Utility.getWordId(word, dico);
+        Integer wordId = UtilityIA.getWordId(word, dico);
         if (wordId < 1) {
             lexicalFieldList = new ArrayList<>();
         } else {
-            ArrayList<Integer> listDigit = Utility.getLexicalFieldIntegerList(wordId, dico_lexicalField);
+            ArrayList<Integer> listDigit = UtilityIA.getLexicalFieldIntegerList(wordId, dico_lexicalField);
             lexicalFieldList = convertListDigitToLexicalFieldList(listDigit, dico);
         }
         return lexicalFieldList;

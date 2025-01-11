@@ -10,6 +10,7 @@
     <rowConstraints>
         <RowConstraints vgrow="ALWAYS" />
         <RowConstraints vgrow="ALWAYS" />
+        <RowConstraints vgrow="ALWAYS" />
     </rowConstraints>
 
     <columnConstraints>
@@ -17,6 +18,7 @@
     </columnConstraints>
 
     <Label fx:id="teamLabel" text="Couleur de l'équipe gagnante" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="CENTER" />
-    <Button fx:id="nextButton" text="Continuer" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.halignment="CENTER" onAction = "#onContinue" />
+    <GridPane fx:id="gamePreviewGrid" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.halignment="CENTER" />
+    <Button fx:id="nextButton" text="Continuer" GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.halignment="CENTER" onAction = "#onContinue" />
 
 </GridPane>
