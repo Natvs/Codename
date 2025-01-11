@@ -168,7 +168,7 @@ public class TransitionController {
     private void onContinue() {
         if (session.isIA()) {
             if (session.isAgent()) {
-                ClueGuesser clueGuesser = new ClueGuesser(session);
+                ClueGuesser clueGuesser = new ClueGuesser(session.getCurrentColor(), session);
                 Clue clue = clueGuesser.getClue();
                 session.getExecuter().cancelCommands();
                 session.addClue(clue);
