@@ -1,9 +1,8 @@
 # CodingWeek 2025
 **TELECOM Nancy - 06/01 au 10/01**
 
-## Pyinstaller Configuration:
-pyinstaller Script_DictionaryManager.py --onefile --windowed
-dist/Script_DictionaryManager.exe "abat-jour" "BdD" "codenames_words.txt" "lexical_field.txt"
+## Comment Executer le projet :
+./gradlew clean run
 
 
 ## Liste de tâches :
@@ -45,6 +44,8 @@ dist/Script_DictionaryManager.exe "abat-jour" "BdD" "codenames_words.txt" "lexic
 - [X] 10/01: Implémenation de l'IA pour les Espions
 - [X] 10/01: Implémenation de l'IA pour les Maitres-Espions
 - [X] 10/01: Création de tests pour les IA Espions et Maitres-Espions
+- [X] 11/01: Amélioration de l'IA
+- [X] 11/01: Correction global de bugs
 
 ### Luca Mandrelli :
 - [X] 06/01: Implémentation de la fenètre "Acceuil" :
@@ -74,7 +75,7 @@ dist/Script_DictionaryManager.exe "abat-jour" "BdD" "codenames_words.txt" "lexic
 - [ ]  09/01 : Gestion de la sauvegarde sur le front :
         - Ajouter les boutons de sauvegarde et de chargement de sauvegarde
         - Gerer le path de sauvegarde et load par boite de dialogue
-- [ ]  09/01 : CSS -> rework du design pour que ce soit ✨ visuellement potable ✨
+- [ ]  09/01 : CSS -> rework du design pour que ce soit visuellement propre
 - [ ]  Ajout des themes dans le menu de configuration :
         - Propose des mots au fil des entrées clavier (si c'est possible sur JavaFX proprement)
         - Recuperer la liste de mots
@@ -115,7 +116,7 @@ dist/Script_DictionaryManager.exe "abat-jour" "BdD" "codenames_words.txt" "lexic
         - On peut ajouter un mot. Le clic sur le bouton submit envoie vers le Back-End.
 
 ### Nathans Vernois :
-- [X] 06/01: Implémentation du diagramme de classe
+- [X] 06/01: Implémentation du diagramme de classe (Voir dans le répertoir uml)
 - [X] 07/01: Implémentation de racourcis claviers (commencer une partie, quitter)
 - [X] 07/01: Ajout des patters observers et commands
 - [X] 08/01: Implémentation de la fenètre "Partie" :
