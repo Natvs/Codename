@@ -52,7 +52,6 @@ public class EndController {
     }
 
     private void setGamePreview() {
-        System.out.println("setGamePreview");
         gamePreviewGrid.getChildren().clear();
 
         gamePreviewGrid.setHgap(5);

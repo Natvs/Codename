@@ -42,7 +42,7 @@ public class TransitionController {
         setLabel();
         setEvents();
         setGamePreview();
-        if (session.getConfig().discreetMode && session.isAgent()) {
+        if (session.getConfig().discreetMode && session.isAgent() && !session.isIA()) {
             showQRCode();
         }
     }
@@ -184,7 +184,6 @@ public class TransitionController {
                 session.getExecuter().cancelCommands();
                 session.addClue(clue);
             } else {
-                System.out.print("count = " + session.getCurrentColoredTeam().getCluesList().isEmpty());
                 if (!session.getCurrentColoredTeam().getCluesList().isEmpty()) {
                     var cardGuesser = new CardGuesser(session);
                     var result = cardGuesser.getResult();
@@ -193,7 +192,6 @@ public class TransitionController {
                     while (!error && i < result.length) {
                         var card = result[i];
                         var role = session.isAgent();
-                        System.out.println(String.valueOf(i));
                         session.getExecuter().cancelCommands();
                         session.guessCard(card);
                         i++;
