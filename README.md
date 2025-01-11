@@ -45,6 +45,8 @@ dist/Script_DictionaryManager.exe "abat-jour" "BdD" "codenames_words.txt" "lexic
 - [X] 10/01: Implémenation de l'IA pour les Espions
 - [X] 10/01: Implémenation de l'IA pour les Maitres-Espions
 - [X] 10/01: Création de tests pour les IA Espions et Maitres-Espions
+- [X] 11/01: Amélioration de l'IA
+- [X] 11/01: Correction global de bugs
 
 ### Luca Mandrelli :
 - [X] 06/01: Implémentation de la fenètre "Acceuil" :
