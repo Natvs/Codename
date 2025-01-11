@@ -18,6 +18,7 @@ public class AutoCompleteTextField extends TextField {
         super();
         entries = new LinkedList<>();
         contextMenu = new ContextMenu();
+        contextMenu.setStyle("-fx-background-color: #2d3133; -fx-text-fill: white;");
         
         textProperty().addListener((observable, oldValue, newValue) -> {
             if (getText().length() == 0) {

@@ -142,9 +142,29 @@ public class NewConfigController {
         }
 
         addBlueSpy.setVisible(!session.getConfig().blueSpyIA);
+        if (session.getConfig().blueSpyIA) {
+            setBlueSpyIA.setText("IA");
+        } else {
+            setBlueSpyIA.setText("Humains");
+        }
         addRedSpy.setVisible(!session.getConfig().redSpyIA);
+        if (session.getConfig().redSpyIA) {
+            setRedSpyIA.setText("IA");
+        } else {
+            setRedSpyIA.setText("Humains");
+        }
         addBlueAgent.setVisible(!session.getConfig().blueAgentIA);
+        if (session.getConfig().blueAgentIA) {
+            setBlueAgentIA.setText("IA");
+        } else {
+            setBlueAgentIA.setText("Humains");
+        }
         addRedAgent.setVisible(!session.getConfig().redAgentIA);
+        if (session.getConfig().redAgentIA) {
+            setRedAgentIA.setText("IA");
+        } else {
+            setRedAgentIA.setText("Humains");
+        }
     }
 
     private void initializePlayers() {
@@ -258,8 +278,9 @@ public class NewConfigController {
     @FXML
     private void onAddBlueAgent() {
         nbBlueAgents++;
-
-        blueAgentGrid.add(GeneratePlayerField.generateField("Blue Agent " + nbBlueAgents, this, 0), 0, nbBlueAgents-1);
+        var playerField = GeneratePlayerField.generateField("Blue Agent " + nbBlueAgents, this, 0);
+        blueAgentGrid.add(playerField, 0, nbBlueAgents-1);
+        GridPane.setColumnSpan(playerField, 2);
 
         GridPane.setRowIndex(addBlueAgent, nbBlueAgents);
         GridPane.setRowIndex(setBlueAgentIA, nbBlueAgents);
@@ -275,7 +296,9 @@ public class NewConfigController {
     private void onAddBlueSpy() {
         nbBlueSpy++;
 
-        blueSpyGrid.add(GeneratePlayerField.generateField("Blue Spy " + nbBlueSpy, this, 1), 0, nbBlueSpy-1);
+        var playerField = GeneratePlayerField.generateField("Blue Spy " + nbBlueSpy, this, 1);
+        blueSpyGrid.add(playerField, 0, nbBlueSpy-1);
+        GridPane.setColumnSpan(playerField, 2);
 
         GridPane.setRowIndex(addBlueSpy, nbBlueSpy);
         GridPane.setRowIndex(setBlueSpyIA, nbBlueSpy);
@@ -291,14 +314,15 @@ public class NewConfigController {
     private void onAddRedAgent() {
         nbRedAgents++;
 
-        redAgentGrid.add(GeneratePlayerField.generateField("Red Agent " + nbRedAgents, this, 2), 0, nbRedAgents-1);
+        var playerField = GeneratePlayerField.generateField("Red Agent " + nbRedAgents, this, 2);
+        redAgentGrid.add(playerField, 0, nbRedAgents-1);
+        GridPane.setColumnSpan(playerField, 2);
 
         GridPane.setRowIndex(addRedAgent, nbRedAgents);
         GridPane.setRowIndex(setRedAgentIA, nbRedAgents);
-        setRedAgentIA.setVisible(true);
+        setRedAgentIA.setVisible(false);
 
         if (nbRedAgents >= 2) {
-            addRedAgent.setVisible(false);
             addRedAgent.setVisible(false);
         }
     }
@@ -307,7 +331,9 @@ public class NewConfigController {
     private void onAddRedSpy() {
         nbRedSpy++;
 
-        redSpyGrid.add(GeneratePlayerField.generateField("Red Spy " + nbRedSpy, this, 3), 0, nbRedSpy-1);
+        var playerField = GeneratePlayerField.generateField("Red Spy " + nbRedSpy, this, 3);
+        redSpyGrid.add(playerField, 0, nbRedSpy-1);
+        GridPane.setColumnSpan(playerField, 2);
 
         GridPane.setRowIndex(addRedSpy, nbRedSpy);
         GridPane.setRowIndex(setRedSpyIA, nbRedSpy);
@@ -322,24 +348,44 @@ public class NewConfigController {
     private void onSetBlueSpyIA() {
         session.getConfig().blueSpyIA = !session.getConfig().blueSpyIA;
         addBlueSpy.setVisible(!session.getConfig().blueSpyIA);
+        if (session.getConfig().blueSpyIA) {
+            setBlueSpyIA.setText("IA");
+        } else {
+            setBlueSpyIA.setText("Humains");
+        }
     }
 
     @FXML
     private void onSetRedSpyIA() {
         session.getConfig().redSpyIA = !session.getConfig().redSpyIA;
         addRedSpy.setVisible(!session.getConfig().redSpyIA);
+        if (session.getConfig().redSpyIA) {
+            setRedSpyIA.setText("IA");
+        } else {
+            setRedSpyIA.setText("Humains");
+        }
     }
 
     @FXML
     private void onSetBlueAgentIA() {
         session.getConfig().blueAgentIA = !session.getConfig().blueAgentIA;
         addBlueAgent.setVisible(!session.getConfig().blueAgentIA);
+        if (session.getConfig().blueAgentIA) {
+            setBlueAgentIA.setText("IA");
+        } else {
+            setBlueAgentIA.setText("Humains");
+        }
     }
 
     @FXML
     private void onSetRedAgentIA() {
         session.getConfig().redAgentIA = !session.getConfig().redAgentIA;
         addRedAgent.setVisible(!session.getConfig().redAgentIA);
+        if (session.getConfig().redAgentIA) {
+            setRedAgentIA.setText("IA");
+        } else {
+            setRedAgentIA.setText("Humains");
+        }
     }
     
     public void removePlayerField(Node playerField, int playerType) {
@@ -358,7 +404,7 @@ public class NewConfigController {
                 addBlueSpy.setVisible(true);
                 if (nbBlueSpy == 1) setBlueSpyIA.setVisible(true);
                 if (blueSpyGrid.getChildren().size() > 2) {
-                    GridPane.setRowIndex(blueSpyGrid.getChildren().get(2), nbBlueSpy-1);
+                    GridPane.setRowIndex(blueSpyGrid.getChildren().get(3), nbBlueSpy-1);
                 }
                 GridPane.setRowIndex(addBlueSpy, nbBlueSpy);
                 GridPane.setRowIndex(setBlueSpyIA, nbBlueSpy);
@@ -377,7 +423,7 @@ public class NewConfigController {
                 addRedSpy.setVisible(true);
                 if (nbRedSpy == 1) setRedSpyIA.setVisible(true);
                 if (redSpyGrid.getChildren().size() > 2) {
-                    GridPane.setRowIndex(redSpyGrid.getChildren().get(2), nbRedSpy-1);
+                    GridPane.setRowIndex(redSpyGrid.getChildren().get(3), nbRedSpy-1);
                 }
                 GridPane.setRowIndex(addRedSpy, nbRedSpy);
                 GridPane.setRowIndex(setRedSpyIA, nbRedSpy);
@@ -394,7 +440,7 @@ public class NewConfigController {
         ArrayList<String> dico = Utility.getDicoTheme(words);
         wordsList = dico;
 
-        nbWordsLabel.setText("" + dico.size() + " mots, il en faut " + session.getConfig().heigth * session.getConfig().width);
+        nbWordsLabel.setText("" + dico.size() + " mots générés, il en faut " + session.getConfig().heigth * session.getConfig().width + " pour remplir la grille");
         if (dico.size() >= session.getConfig().heigth * session.getConfig().width) {
             enableStart();
         } else {
