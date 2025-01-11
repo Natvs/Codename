@@ -8,9 +8,9 @@
     fx:controller="eu.telecomnancy.codingweek.codenames.controller.EndController">
     
     <rowConstraints>
+        <RowConstraints percentHeight="15"/>
         <RowConstraints vgrow="ALWAYS" />
-        <RowConstraints vgrow="ALWAYS" />
-        <RowConstraints vgrow="ALWAYS" />
+        <RowConstraints percentHeight="10" />
     </rowConstraints>
 
     <columnConstraints>

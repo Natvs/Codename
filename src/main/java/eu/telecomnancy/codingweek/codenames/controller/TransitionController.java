@@ -22,7 +22,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
 
 public class TransitionController {
-    
+    @FXML
+    private Label turnLabel;
     @FXML 
     private GridPane transitionView;
     @FXML
@@ -37,6 +38,7 @@ public class TransitionController {
     }
 
     public void initialize() {
+        setTurn();
         setLabel();
         setEvents();
         setGamePreview();
@@ -44,6 +46,15 @@ public class TransitionController {
             showQRCode();
         }
     }
+
+    private void setTurn() {
+        if (session.isIA()) {
+            turnLabel.setText("Au tour de l'IA");
+        } else {
+            turnLabel.setText("A vous de jouer !");
+        }
+    }
+
     private void setEvents() {
         transitionView.setOnKeyPressed((keyevent) ->  {
             switch (keyevent.getCode()) {

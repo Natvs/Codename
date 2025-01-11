@@ -14,7 +14,7 @@ import javafx.stage.FileChooser;
 public class HomeController {
     private final Session session;
 
-    private boolean isMuted = false;
+    private boolean isMuted = true;
 
     @FXML
     private GridPane homeView;

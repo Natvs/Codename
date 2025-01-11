@@ -1,0 +1,28 @@
+Label {
+    -fx-background-color: #f0f0f0;
+    -fx-border-color: #d0d0d0;
+
+    -fx-border-width: 0.5;
+    -fx-border-radius: 4.5;
+    -fx-background-radius: 4.5;
+}
+
+#card-red {
+    -fx-background-color: #b50000;
+    -fx-border-color: #b70000;
+}
+
+#card-blue {
+    -fx-background-color: #0000FF;
+    -fx-border-color: #0e00a4;
+}
+
+#card-white {
+    -fx-background-color: #a7a7a7;
+    -fx-border-color: #5f5f5f;
+}
+
+#card-black {
+    -fx-background-color: #000000;
+    -fx-border-color: #2e2e2e;
+}

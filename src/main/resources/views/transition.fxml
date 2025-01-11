@@ -18,7 +18,7 @@
         <ColumnConstraints hgrow="ALWAYS" />
     </columnConstraints>
 
-    <Label text="Changement de joueur !" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="CENTER" />
+    <Label fx:id="turnLabel" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="CENTER" />
     <Label fx:id="roleLabel" text="Passer l'ordinateur" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.halignment="CENTER" />
     <GridPane fx:id="gamePreviewGrid" GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.halignment="CENTER" />
     <Button fx:id="nextButton" text="Continuer" GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.halignment="CENTER" onAction = "#onContinue" />

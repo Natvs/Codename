@@ -50,7 +50,7 @@
                     <ImageView fx:id="muteImage" fitHeight="30.0" fitWidth="30.0"
                         preserveRatio="true">
                         <image>
-                            <Image url="@../images/sound-high-svgrepo-com.png" />
+                            <Image url="@../images/sound-mute-svgrepo-com.png" />
                         </image>
                     </ImageView>
                 </graphic>

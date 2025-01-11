@@ -140,6 +140,11 @@ public class NewConfigController {
             addWord.setManaged(false);
             submitWord.setManaged(false);
         }
+
+        addBlueSpy.setVisible(!session.getConfig().blueSpyIA);
+        addRedSpy.setVisible(!session.getConfig().redSpyIA);
+        addBlueAgent.setVisible(!session.getConfig().blueAgentIA);
+        addRedAgent.setVisible(!session.getConfig().redAgentIA);
     }
 
     private void initializePlayers() {

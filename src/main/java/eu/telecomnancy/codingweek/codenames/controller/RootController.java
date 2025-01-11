@@ -25,6 +25,7 @@ public class RootController {
         // Tackle music
         music = new Music();
         music.NewMusic("/music/apt.mp3");
+        music.mute();
         session.setMusic(music);
     }
 
