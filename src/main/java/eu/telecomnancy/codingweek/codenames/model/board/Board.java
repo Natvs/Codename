@@ -73,6 +73,7 @@ public class Board {
         return this.wordsList;
     }
 
+    @JsonIgnore
     public ArrayList<String> getBoardWordList() {
         ArrayList<String> boardWordsList = new ArrayList<>();
         for (int j = 0; j < heigth; j++) {
