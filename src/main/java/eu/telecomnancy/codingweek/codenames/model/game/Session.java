@@ -165,6 +165,8 @@ public final class Session {
     public boolean isAgent() {
         return this.agent;
     }
+
+    @JsonIgnore
     public boolean isIA() {
         switch (getCurrentColor()) {
             case Color.BLUE -> {
