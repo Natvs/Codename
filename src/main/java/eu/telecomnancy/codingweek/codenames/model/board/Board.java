@@ -88,7 +88,7 @@ public class Board {
         int number = 0;
         for (int j = 0; j < heigth; j++) {
             for (int i = 0; i < width; i++) {
-                if (grid[i][j].getColor() == color && !grid[i][j].getRevealed()) {
+                if (grid[j][i].getColor() == color && !grid[j][i].getRevealed()) {
                     number ++;
                 }
             }
