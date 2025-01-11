@@ -4,6 +4,9 @@ import java.io.IOException;
 
 import com.google.zxing.WriterException;
 
+import eu.telecomnancy.codingweek.codenames.ia.algo.CardGuesser;
+import eu.telecomnancy.codingweek.codenames.ia.algo.ClueGuesser;
+import eu.telecomnancy.codingweek.codenames.model.clue.Clue;
 import eu.telecomnancy.codingweek.codenames.model.color.Color;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import eu.telecomnancy.codingweek.codenames.model.team.Team;
@@ -125,7 +128,32 @@ public class TransitionController {
 
     @FXML
     private void onContinue() {
-        RootController.getInstance().changeView("/views/game.fxml");
+        if (session.isAgent()) {
+            ClueGuesser clueGuesser = new ClueGuesser(session);
+            Clue clue = clueGuesser.getClue();
+            session.getExecuter().cancelCommands();
+            session.addClue(clue);
+        } else {
+            System.out.print("count = " + session.getCurrentColoredTeam().getCluesList().isEmpty());
+            if (!session.getCurrentColoredTeam().getCluesList().isEmpty()) {
+                var cardGuesser = new CardGuesser(session);
+                var result = cardGuesser.getResult();
+                var i = 0;
+                var error = false;
+                while (!error && i < result.length) {
+                    var card = result[i];
+                    var role = session.isAgent();
+                    System.out.println(String.valueOf(i));
+                    session.getExecuter().cancelCommands();
+                    session.guessCard(card);
+                    i++;
+                    if (role != session.isAgent()) {
+                        error = true;
+                    }
+                }
+            }
+        }
+        //RootController.getInstance().changeView("/views/game.fxml");
     }
 
     public void onQuit() {

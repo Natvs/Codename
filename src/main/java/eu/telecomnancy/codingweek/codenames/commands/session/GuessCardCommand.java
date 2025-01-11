@@ -26,7 +26,8 @@ public class GuessCardCommand extends SessionCommand {
             session.nextRole();
             RootController.getInstance().changeView("/views/transition.fxml");
             return;
-        } else if (session.getCurrentColor() == card.getColor()) {
+        }  
+        if (session.getCurrentColor() == card.getColor()) {
             session.getCurrentColoredTeam().getCluesList().getLast().countDown();
             if (session.getCurrentColoredTeam().getCluesList().getLast().getCount() == 0) {
                 session.nextRole();
