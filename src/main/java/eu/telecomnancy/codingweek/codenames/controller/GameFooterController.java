@@ -68,7 +68,7 @@ public class GameFooterController {
             if (!session.getBoard().getFullWordList().contains(word.getText())) {
                 indication.setText("Mon introuvable dans le dictionnaire");
             }
-            else if (session.getBoard().getWordList().contains(word.getText())) {
+            else if (session.getBoard().getBoardWordList().contains(word.getText())) {
                 indication.setText("Mot dans la grille");
             }
             else {

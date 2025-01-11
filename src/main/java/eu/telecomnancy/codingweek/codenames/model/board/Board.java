@@ -73,6 +73,16 @@ public class Board {
         return this.wordsList;
     }
 
+    public ArrayList<String> getBoardWordList() {
+        ArrayList<String> boardWordsList = new ArrayList<>();
+        for (int j = 0; j < heigth; j++) {
+            for (int i = 0; i < width; i++) {
+                boardWordsList.add(grid[i][j].getName());
+            }
+        }
+        return boardWordsList;
+    }
+
     public int getRemainingCards(Color color){
         int number = 0;
         for (int j = 0; j < heigth; j++) {
