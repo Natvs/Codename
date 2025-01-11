@@ -22,6 +22,12 @@ public class GuessCardCommand extends SessionCommand {
                 session.getTimerService().cancel();
             }
         } );
+        card.reveal();
+        switch (card.getColor()) {
+            case Color.BLUE -> session.getBlueTeam().addScore(1);
+            case Color.RED -> session.getRedTeam().addScore(1);
+            default -> {}
+        }
         if (card == null) {
             session.nextRole();
             RootController.getInstance().changeView("/views/transition.fxml");
@@ -37,12 +43,6 @@ public class GuessCardCommand extends SessionCommand {
             RootController.getInstance().changeView("/views/transition.fxml");
         }
 
-        card.reveal();
-        switch (card.getColor()) {
-            case Color.BLUE -> session.getBlueTeam().addScore(1);
-            case Color.RED -> session.getRedTeam().addScore(1);
-            default -> {}
-        }
         checkEnd();
     }
 

@@ -13,14 +13,17 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.RowConstraints;
 
 public class TransitionController {
     
     @FXML 
     private GridPane transitionView;
     @FXML
-    private Label teamLabel;
+    private GridPane gamePreviewGrid;
     @FXML
     private Label roleLabel;
 
@@ -33,6 +36,7 @@ public class TransitionController {
     public void initialize() {
         setLabel();
         setEvents();
+        setGamePreview();
         if (session.getConfig().discreetMode && session.isAgent()) {
             showQRCode();
         }
@@ -55,21 +59,55 @@ public class TransitionController {
             case Color.RED -> "rouge";
             default -> "undefined";
         });
-        teamLabel.setText(teamBuilder.toString());
-
-        var roleBuilder = new StringBuilder();
-        if (session.isAgent()) roleBuilder.append("Agents : ");
-        else roleBuilder.append("Espions : ");
+        teamBuilder.append(" -- ");
+        if (session.isAgent()) teamBuilder.append("Agents : ");
+        else teamBuilder.append("Espions : ");
         Team team = session.getCurrentTeam();
         if (team != null) {
             boolean first = true;
             for (var player : team.getPlayersList()) {
-                if (!first) roleBuilder.append(" - "); else first = false;
-                roleBuilder.append(player.getName());
+                if (!first) teamBuilder.append(" - "); else first = false;
+                teamBuilder.append(player.getName());
             }
         }
-        roleLabel.setText(roleBuilder.toString());
+        roleLabel.setText(teamBuilder.toString());
     }
+
+    private void setGamePreview() {
+        gamePreviewGrid.getChildren().clear();
+
+        gamePreviewGrid.setHgap(5);
+        gamePreviewGrid.setVgap(5);
+
+        int width = session.getBoard().getWidth();
+        int height = session.getBoard().getHeigth();
+
+        double percentWidth = 100.0 / width;
+        double percentHeigth = 100.0 / height;
+
+        for (int i = 0; i < width; i++) {
+            ColumnConstraints colConstraints = new ColumnConstraints();
+            colConstraints.setPercentWidth(percentWidth);
+            gamePreviewGrid.getColumnConstraints().add(colConstraints);
+        }
+        for (int j = 0; j < height; j++) {
+            RowConstraints rowConstraints = new RowConstraints();
+            rowConstraints.setPercentHeight(percentHeigth);
+            gamePreviewGrid.getRowConstraints().add(rowConstraints);
+        }
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                var card = session.getBoard().getCard(j, i);
+                Pane cardBox = new Pane();
+                if (card.getRevealed()) {
+                    cardBox.setId("card-" + card.getColor().toString().toLowerCase());
+                }
+                gamePreviewGrid.add(cardBox, i, j);
+            }
+        }
+    }
+
+        
 
     private void showQRCode() {
         int width = session.getBoard().getWidth();
@@ -113,11 +151,11 @@ public class TransitionController {
         try {
             Image image = QRCodeGenerator.generateQRCodeImage(urlToEncode);
             ImageView imageView = new ImageView(image);
-            imageView.setFitHeight(200);
-            imageView.setFitWidth(200);
+            imageView.setFitHeight(170);
+            imageView.setFitWidth(170);
             imageView.setPreserveRatio(true);
             GridPane.setHalignment(imageView, javafx.geometry.HPos.CENTER);
-            transitionView.add(imageView, 0, 2);
+            transitionView.add(imageView, 0, 3);
         } catch (WriterException | IOException e) {
             e.printStackTrace();
         }
