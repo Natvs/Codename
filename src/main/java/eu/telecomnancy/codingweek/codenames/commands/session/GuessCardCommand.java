@@ -22,17 +22,17 @@ public class GuessCardCommand extends SessionCommand {
                 session.getTimerService().cancel();
             }
         } );
-        card.reveal();
-        switch (card.getColor()) {
-            case Color.BLUE -> session.getBlueTeam().addScore(1);
-            case Color.RED -> session.getRedTeam().addScore(1);
-            default -> {}
-        }
         if (card == null) {
             session.nextRole();
             RootController.getInstance().changeView("/views/transition.fxml");
             return;
         }  
+        card.reveal();
+        switch (card.getColor()) {
+            case BLUE -> session.getBlueTeam().addScore(1);
+            case RED -> session.getRedTeam().addScore(1);
+            default -> {}
+        }
         if (session.getCurrentColor() == card.getColor()) {
             session.getCurrentColoredTeam().getCluesList().getLast().countDown();
             if (session.getCurrentColoredTeam().getCluesList().getLast().getCount() == 0) {
