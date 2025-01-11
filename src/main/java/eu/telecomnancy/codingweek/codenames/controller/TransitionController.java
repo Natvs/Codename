@@ -128,6 +128,7 @@ public class TransitionController {
         int height = session.getBoard().getHeigth();
 
         String builder ="";
+        String word_builder="";
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 switch (session.getBoard().getCard(i, j).getColor()) {
@@ -154,12 +155,16 @@ public class TransitionController {
                     default:
                         break;
                 }
+                word_builder += session.getBoard().getCardId(i, j);
+                if ((i + 1) * (j + 1) != width * height) {
+                    word_builder += ",";
+                }
             }
         }
 
 
 
-        String urlToEncode = "https://lmandrelli.github.io/AnthropicPotato" + "?width=" + width + "&height="+ height +"&colors=" + builder;
+        String urlToEncode = "https://lmandrelli.github.io/AnthropicPotato" + "?width=" + width + "&height="+ height +"&colors=" + builder + "&words=" + word_builder;
         System.out.println(urlToEncode);
         
         try {
