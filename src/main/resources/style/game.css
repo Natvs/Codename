@@ -4,3 +4,41 @@ GridPane {
 
     -fx-padding: 10;
 }
+
+AutoCompleteTextField {
+    -fx-background-color: #3d4143;
+}
+
+Spinner {
+    -fx-background-color: #2d3133;
+}
+
+/* Flèches du spinner */
+Spinner .increment-arrow-button,
+Spinner .decrement-arrow-button {
+    -fx-background-color: #3d4143;
+    -fx-border-color: #505355;
+}
+
+/* Flèches au survol */
+Spinner .increment-arrow-button:hover,
+Spinner .decrement-arrow-button:hover {
+    -fx-background-color: #4d5153;
+}
+
+/* Flèches */
+Spinner .increment-arrow,
+Spinner .decrement-arrow {
+    -fx-background-color: white;
+}
+
+/* Zone de texte du spinner */
+Spinner .text-field {
+    -fx-background-color: #2d3133;
+}
+
+/* Zone de texte au focus */
+Spinner:focused {
+    -fx-background-color: #3d4143;
+    -fx-border-color: #505355;
+}
