@@ -23,22 +23,26 @@ public class DicoManager {
         } else {
             throw new Exception("Unknown OS");
         }
-        try {
-            // Chemin vers l'exécutable
+        String word = args[0];
+        System.out.print("## word = " + word + "###");
+        if (!(word.equals("")) && word != null && word.length() > 0) {
+            try {
+                // Chemin vers l'exécutable
 
-            // Create a ProcessBuilder to run the Python script with arguments
-            ProcessBuilder processBuilder = new ProcessBuilder();
-            processBuilder.command(executablePath, args[0], args[1], args[2], args[3]);
+                // Create a ProcessBuilder to run the Python script with arguments
+                ProcessBuilder processBuilder = new ProcessBuilder();
+                processBuilder.command(executablePath, args[0], args[1], args[2], args[3]);
 
-            // Start the process
-            Process process = processBuilder.start();
+                // Start the process
+                Process process = processBuilder.start();
 
-            // Wait for the script to finish
-            int exitCode = process.waitFor();
-            System.out.println("Python script finished with exit code: " + exitCode);
+                // Wait for the script to finish
+                int exitCode = process.waitFor();
+                System.out.println("Python script finished with exit code: " + exitCode);
 
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
