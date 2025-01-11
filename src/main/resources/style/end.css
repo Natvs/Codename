@@ -1,4 +1,4 @@
-Label {
+GridPane {
     -fx-background-color: #f0f0f0;
     -fx-border-color: #d0d0d0;
 
@@ -12,9 +12,19 @@ Label {
     -fx-border-color: #b70000;
 }
 
+#card-light-red {
+    -fx-background-color: #ff0000;
+    -fx-border-color: #ff0000;
+}
+
 #card-blue {
     -fx-background-color: #0000FF;
     -fx-border-color: #0e00a4;
+}
+
+#card-light-blue {
+    -fx-background-color: #00FFFF;
+    -fx-border-color: #00FFFF;
 }
 
 #card-white {
@@ -22,7 +32,17 @@ Label {
     -fx-border-color: #5f5f5f;
 }
 
+#card-light-white {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #ffffff;
+}
+
 #card-black {
     -fx-background-color: #000000;
     -fx-border-color: #2e2e2e;
+}
+
+#card-light-black {
+    -fx-background-color: #4d4d4d;
+    -fx-border-color: #4d4d4d;
 }

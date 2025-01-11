@@ -77,12 +77,19 @@ public class EndController {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 var card = session.getBoard().getCard(j, i);
+                GridPane cardGrid = new GridPane();
                 Label cardBox = new Label();
                 if (card.getRevealed()) {
-                    cardBox.setId("card-" + card.getColor().toString().toLowerCase());
+                    cardGrid.setId("card-" + card.getColor().toString().toLowerCase());
+                } else {
+                    cardGrid.setId("card-light-" + card.getColor().toString().toLowerCase());
                 }
                 cardBox.setText(card.getName());
-                gamePreviewGrid.add(cardBox, i, j);
+                cardGrid.add(cardBox, 0, 0);
+                GridPane.setHalignment(cardBox, javafx.geometry.HPos.CENTER);
+                GridPane.setValignment(cardBox, javafx.geometry.VPos.CENTER);
+                cardGrid.setAlignment(javafx.geometry.Pos.CENTER);
+                gamePreviewGrid.add(cardGrid, i, j);
             }
         }
     }
