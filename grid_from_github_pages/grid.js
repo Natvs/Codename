@@ -10,7 +10,7 @@ function getUrlParameters() {
 function createGrid() {
     const { width, height, colors } = getUrlParameters();
     const container = document.getElementById('grid-container');
-    const cellSize = Math.min(window.innerWidth / width, window.innerHeight / height);
+    const cellSize = Math.min((window.innerWidth - 100) / width, (window.innerHeight - 200) / height);
 
     container.style.gridTemplateColumns = `repeat(${width}, ${cellSize}px)`;
     
