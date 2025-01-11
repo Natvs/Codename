@@ -1,6 +1,7 @@
 package eu.telecomnancy.codingweek.codenames.ia.algo;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import eu.telecomnancy.codingweek.codenames.model.color.Color;
 import eu.telecomnancy.codingweek.codenames.model.board.Board;
@@ -47,6 +48,20 @@ public class ClueGuesser {
                     word = wordDico;
                 }
             }
+        }
+
+        // En cas d'erreur
+        if (count <= 0) {
+            int r = -1;
+            while (r == -1) {
+                Random random = new Random();
+                r = random.nextInt(dico.size());
+                if (cardsNameList.contains(dico.get(r))) {
+                    r = -1;
+                }
+            }
+            count = 1;
+            word = dico.get(r);
         }
 
         // On convertie "result_withCardsName" pour la sortie de l'ia
