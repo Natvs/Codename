@@ -34,6 +34,17 @@ dist/Script_DictionaryManager.exe "abat-jour" "BdD" "codenames_words.txt" "lexic
                 - Implémentation de la structure "Utility"
 - [X] 09/01: Implémentation de la class "Search" dans la structure Thème pour la recherche de mot
 - [X] 09/09: Création de testes pour la structure "Thème"
+- [X] 10/01: Implémentaion de l'ajout d'un mot dans le dictionnaire sous Windows
+                - Création d'un script python qui :
+                        - ajoute le mot dans le dictionnaire en conservant l'ordre alphabétique
+                        - efféctue une recherche internet pour récupérer le champs lexical associé au mot
+                        - ajoute la liste des mots du champ lexical associé au mot dans la Base de Donné (BdD)
+                        - éffectue une recherche internet pour télécharger une image associé au mot dans la BdD
+- [X] 10/01: Création d'un systhèm de compilation de script python sous Windows
+- [X] 10/01: Implémentation d'une structure Java pouvant executer un script python compilé
+- [X] 10/01: Implémenation de l'IA pour les Espions
+- [X] 10/01: Implémenation de l'IA pour les Maitres-Espions
+- [X] 10/01: Création de tests pour les IA Espions et Maitres-Espions
 
 ### Luca Mandrelli :
 - [X] 06/01: Implémentation de la fenètre "Acceuil" :
