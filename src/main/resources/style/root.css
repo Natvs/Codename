@@ -1,9 +1,13 @@
-:root {
-    -fx-background-color: #eef8ff;
+* {
+    -fx-text-fill: white;
+}
+
+BorderPane {
+    -fx-background-color: #181a1b;
 }
 
 Button {
-    -fx-background-color: #4CAF50;
+    -fx-background-color: radial-gradient(center 100% 10%, radius 150%, #ff5858, #493cff);
     -fx-text-fill: black;
     -fx-font-size: 1.35em;
 
@@ -17,5 +21,5 @@ Button {
 }
 
 Button:hover {
-    -fx-background-color: #45a049;
+    -fx-background-color: radial-gradient(center 100% 10%, radius 150%, #ff2727, #2f20ff);
 }
