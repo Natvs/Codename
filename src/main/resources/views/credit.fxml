@@ -11,8 +11,9 @@
     fx:controller="eu.telecomnancy.codingweek.codenames.controller.CreditController">
     
     <rowConstraints>
-        <RowConstraints vgrow="ALWAYS" />
-        <RowConstraints vgrow="ALWAYS" />
+        <RowConstraints percentHeight="5" />
+        <RowConstraints percentHeight="5" />
+        <RowConstraints percentHeight="20" />
         <RowConstraints vgrow="ALWAYS" />
     </rowConstraints>
 
@@ -23,13 +24,13 @@
     </columnConstraints>
 
     <children>
-        <ImageView fx:id="imageView" fitWidth="900" fitHeight="760" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowSpan="3">
+        <ImageView fx:id="imageView" fitWidth="900" fitHeight="760" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowSpan="4">
         <image>
             <Image url="@../images/graphic_design_passion.jpg"/>
         </image>
         </ImageView>
-        <Label fx:id="word" text="Made with ❤ by Lucas Simonneau, Luca Mandrelli, Nathan Vernois and Arthur Jeanne for the CodingWeek Project" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.halignment="CENTER" />
-        <Button fx:id="Rose" GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.halignment="CENTER" onAction="#onRose">
+        <Label fx:id="word" text="Made with ❤ by Lucas Simonneau, Luca Mandrelli, Nathan Vernois and Arthur Jeanne for the CodingWeek Project" GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.halignment="CENTER" />
+        <Button fx:id="Rose" GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.halignment="CENTER" onAction="#onRose">
             <graphic>
                 <ImageView fx:id="imageView" fitWidth="200" fitHeight="200" preserveRatio="true">
                     <image>
@@ -38,7 +39,7 @@
                 </ImageView>
             </graphic>
         </Button>
-        <Button fx:id="Krokmou" GridPane.rowIndex="1" GridPane.columnIndex="1" GridPane.halignment="CENTER" onAction="#onKrokmou">
+        <Button fx:id="Krokmou" GridPane.rowIndex="2" GridPane.columnIndex="1" GridPane.halignment="CENTER" onAction="#onKrokmou">
             <graphic>
                 <ImageView fx:id="imageView" fitWidth="200" fitHeight="200" preserveRatio="true">
                     <image>
@@ -47,7 +48,7 @@
                 </ImageView>
             </graphic>
         </Button>
-        <Button fx:id="James" GridPane.rowIndex="1" GridPane.columnIndex="2" GridPane.halignment="CENTER" onAction="#onJames" >
+        <Button fx:id="James" GridPane.rowIndex="2" GridPane.columnIndex="2" GridPane.halignment="CENTER" onAction="#onJames" >
         <graphic>
                 <ImageView fx:id="imageView" fitWidth="200" fitHeight="200" preserveRatio="true">
                     <image>
@@ -56,7 +57,7 @@
                 </ImageView>
             </graphic>
         </Button>
-        <Button fx:id="Back" text="Retour au menu" GridPane.rowIndex="2" GridPane.halignment="CENTER" onAction="#onBack" />
+        <Button fx:id="Back" text="Retour au menu" GridPane.rowIndex="0" GridPane.halignment="CENTER" onAction="#onBack" />
     </children>
 
 </GridPane>
