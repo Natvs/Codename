@@ -46,29 +46,6 @@ public class GameController {
         setHeader();
         initCardsBoard();
         setFooter();
-
-        if (session.isAgent()) {
-            ClueGuesser clueGuesser = new ClueGuesser(session.getCurrentColor(), session);
-            Clue clue = clueGuesser.getClue();
-            session.addClue(clue);
-        } else {
-            if (!session.getCurrentColoredTeam().getCluesList().isEmpty()) {
-                var cardGuesser = new CardGuesser(session);
-                var result = cardGuesser.getResult();
-                var i = 0;
-                var error = false;
-                while (!error && i < result.length) {
-                    var card = result[i];
-                    var role = session.isAgent();
-                    session.guessCard(card);
-                    i++;
-                    if (role != session.isAgent()) {
-                        error = true;
-                    }
-                }
-            }
-        }
-
     }
 
     private void initializeEvents() {
