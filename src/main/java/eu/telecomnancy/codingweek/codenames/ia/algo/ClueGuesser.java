@@ -23,15 +23,23 @@ public class ClueGuesser {
 
         // On récupère la liste des noms des carte "cardsNameList" non encore révélées
         ArrayList<String> cardsNameList = new ArrayList<>();
+        ArrayList<String> blackCardsList = new ArrayList<>();
+        ArrayList<String> enemiesCardsList = new ArrayList<>();
         Board board = session.getBoard();
         int height = board.getHeigth();
         int width = board.getWidth();
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 Card card = board.getCard(i,j);
+                String cardName = card.getName();
                 if (!(card.getRevealed()) && card.getColor() == color) {
-                    String cardName = card.getName();
                     cardsNameList.add(cardName);
+                }
+                if (card.getColor() == Color.BLACK) {
+                    blackCardsList.add(cardName);
+                }
+                if ((!(card.getRevealed()) && card.getColor() != color)) {
+                    enemiesCardsList.add(cardName);
                 }
             }
         }
@@ -42,15 +50,40 @@ public class ClueGuesser {
         for (String wordDico : dico) {
             if (!(cardsNameList.contains(wordDico))) {
                 ArrayList<String> lexicalFieldList = UtilityIA.getLexicalFieldList(wordDico, dico, dico_lexicalField);
-                ArrayList<String>  intersection = UtilityIA.intersectStringList(lexicalFieldList, cardsNameList);
-                if (intersection.size() > count) {
-                    count = intersection.size();
-                    word = wordDico;
+                ArrayList<String>  BlackListIntersection = UtilityIA.intersectStringList(lexicalFieldList, blackCardsList);
+                if (BlackListIntersection.size() == 0) {
+                    ArrayList<String>  enemiesCardsListIntersection = UtilityIA.intersectStringList(lexicalFieldList, enemiesCardsList);
+                    if (enemiesCardsListIntersection.size() == 0) {
+                        ArrayList<String>  intersection = UtilityIA.intersectStringList(lexicalFieldList, cardsNameList);
+                        if (intersection.size() > count) {
+                            count = intersection.size();
+                            word = wordDico;
+                        }
+                    }
                 }
             }
         }
 
-        // En cas d'erreur
+        // En cas d'erreur, on cherche le meilleur indice "clue" avec carte enemies
+        if (count <= 0) {
+            count = -1;
+            word = null;
+            for (String wordDico : dico) {
+                if (!(cardsNameList.contains(wordDico))) {
+                    ArrayList<String> lexicalFieldList = UtilityIA.getLexicalFieldList(wordDico, dico, dico_lexicalField);
+                    ArrayList<String>  BlackListIntersection = UtilityIA.intersectStringList(lexicalFieldList, blackCardsList);
+                    if (BlackListIntersection.size() == 0) {
+                        ArrayList<String>  intersection = UtilityIA.intersectStringList(lexicalFieldList, cardsNameList);
+                        if (intersection.size() > count) {
+                            count = intersection.size();
+                            word = wordDico;
+                        }
+                    }
+                }
+            }
+        }
+
+        // En cas d'erreur, on cherche le meilleur indice "clue" au hazard
         if (count <= 0) {
             int r = -1;
             while (r == -1) {
