@@ -65,12 +65,6 @@ public class Board {
         return this.grid[i][j];
     }
 
-    @JsonIgnore
-    public int getCardId(int i, int j) {
-        String word = this.grid[i][j].getName();
-        return this.fullWordList.indexOf(word);
-    }
-
     public ArrayList<String> getFullWordList() {
         return this.fullWordList;
     }
