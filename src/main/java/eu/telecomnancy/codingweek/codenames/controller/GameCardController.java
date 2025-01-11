@@ -61,7 +61,10 @@ public class GameCardController {
             switch (card.getColor()) {
                 case RED -> gameCard.setId("gameCard-red");
                 case BLUE -> gameCard.setId("gameCard-blue");
-                case WHITE -> gameCard.setId("gameCard-white");
+                case WHITE -> {
+                    gameCard.setId("gameCard-white");
+                    word.setStyle("-fx-text-fill: black");
+                }
                 case BLACK -> gameCard.setId("gameCard-black");
                 default -> {}
             }
@@ -70,7 +73,10 @@ public class GameCardController {
             switch (card.getColor()) {
                 case RED -> gameCard.setId("gameCard-red-light");
                 case BLUE -> gameCard.setId("gameCard-blue-light");
-                case WHITE -> gameCard.setId("gameCard-white-light");
+                case WHITE -> {
+                    gameCard.setId("gameCard-white-light");
+                    word.setStyle("-fx-text-fill: black");
+                }
                 case BLACK -> gameCard.setId("gameCard-black-light");
                 default -> {}
             }

@@ -1,6 +1,6 @@
 Pane {
-    -fx-background-color: #f0f0f0;
-    -fx-border-color: #d0d0d0;
+    -fx-background-color: #555555;
+    -fx-border-color: #444444;
 
     -fx-border-width: 0.5;
     -fx-border-radius: 4.5;
@@ -8,22 +8,22 @@ Pane {
 }
 
 #card-red {
-    -fx-background-color: #b50000;
-    -fx-border-color: #b70000;
+    -fx-background-color: #e70000;
+    -fx-border-color: #d10000;
 }
 
 #card-blue {
-    -fx-background-color: #0000FF;
-    -fx-border-color: #0e00a4;
+    -fx-background-color: #0044ff;
+    -fx-border-color: #1500ff;
 }
 
 #card-white {
-    -fx-background-color: #a7a7a7;
-    -fx-border-color: #5f5f5f;
+    -fx-background-color: #eeeeee;
+    -fx-border-color: #cccccc;
 }
 
 #card-black {
     -fx-background-color: #000000;
-    -fx-border-color: #2e2e2e;
+    -fx-border-color: #333333;
 }
 

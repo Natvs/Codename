@@ -1,6 +1,6 @@
-GridPane {
-    -fx-background-color: #f0f0f0;
-    -fx-border-color: #d0d0d0;
+#card-red, #card-blue, #card-white, #card-black, #card-light-red, #card-light-blue, #card-light-white, #card-light-black {
+    -fx-background-color: #555555;
+    -fx-border-color: #444444;
 
     -fx-border-width: 0.5;
     -fx-border-radius: 4.5;
@@ -8,41 +8,41 @@ GridPane {
 }
 
 #card-red {
-    -fx-background-color: #b50000;
-    -fx-border-color: #b70000;
+    -fx-background-color: #e70000;
+    -fx-border-color: #d10000;
 }
 
 #card-light-red {
-    -fx-background-color: #ff0000;
-    -fx-border-color: #ff0000;
+    -fx-background-color: #800000;
+    -fx-border-color: #600000;
 }
 
 #card-blue {
-    -fx-background-color: #0000FF;
-    -fx-border-color: #0e00a4;
+    -fx-background-color: #0044ff;
+    -fx-border-color: #1500ff;
 }
 
 #card-light-blue {
-    -fx-background-color: #00FFFF;
-    -fx-border-color: #00FFFF;
+    -fx-background-color: #0f00b1;
+    -fx-border-color: #0c0092;
 }
 
 #card-white {
-    -fx-background-color: #a7a7a7;
-    -fx-border-color: #5f5f5f;
+    -fx-background-color: #eeeeee;
+    -fx-border-color: #cccccc;
 }
 
 #card-light-white {
-    -fx-background-color: #ffffff;
-    -fx-border-color: #ffffff;
+    -fx-background-color: #bbbbbb;
+    -fx-border-color: #999999;
 }
 
 #card-black {
     -fx-background-color: #000000;
-    -fx-border-color: #2e2e2e;
+    -fx-border-color: #333333;
 }
 
 #card-light-black {
-    -fx-background-color: #4d4d4d;
-    -fx-border-color: #4d4d4d;
+    -fx-background-color: #333333;
+    -fx-border-color: #444444;
 }

@@ -1,5 +1,6 @@
 package eu.telecomnancy.codingweek.codenames.controller;
 
+import eu.telecomnancy.codingweek.codenames.model.color.Color;
 import eu.telecomnancy.codingweek.codenames.model.game.Session;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -83,6 +84,9 @@ public class EndController {
                     cardGrid.setId("card-light-" + card.getColor().toString().toLowerCase());
                 }
                 cardBox.setText(card.getName());
+                if (card.getColor() == Color.WHITE) {
+                    cardBox.setStyle("-fx-text-fill: black;");
+                }
                 cardGrid.add(cardBox, 0, 0);
                 GridPane.setHalignment(cardBox, javafx.geometry.HPos.CENTER);
                 GridPane.setValignment(cardBox, javafx.geometry.VPos.CENTER);

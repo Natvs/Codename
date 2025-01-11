@@ -247,7 +247,7 @@ public final class Session {
     }
 
     public void guessCard(Card card) {
-        if (card != null && card.getColor() == Color.BLACK) getExecuter().addCommand(new ForbiddenCardCommand(this));
+        if (card != null && card.getColor() == Color.BLACK) getExecuter().addCommand(new ForbiddenCardCommand(this, card));
         else getExecuter().addCommand(new GuessCardCommand(card, this));
         getExecuter().executeAll();
     }
