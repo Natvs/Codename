@@ -2,7 +2,11 @@
 **TELECOM Nancy - 06/01 au 10/01**
 
 ## Comment Executer le projet :
-./gradlew clean run
+`./gradlew run`
+
+## Compiler le jar et le lancer :
+`./gradlew shadowJar`
+`./gradlew runShadow`
 
 
 ## Liste de tâches :
