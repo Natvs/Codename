@@ -165,6 +165,19 @@ public final class Session {
     public boolean isAgent() {
         return this.agent;
     }
+    public boolean isIA() {
+        switch (getCurrentColor()) {
+            case Color.BLUE -> {
+                if (isAgent()) return getConfig().blueAgentIA;
+                return getConfig().blueSpyIA;
+            }
+            case Color.RED -> {
+                if (isAgent()) return getConfig().redAgentIA;
+                return getConfig().redSpyIA;
+            }
+            default -> { return  true; }
+        }
+    }
 
     private void setCurrentColor() {
         if (this.currentColor == Color.RED){
