@@ -80,16 +80,20 @@
         - Faire tourner stable diffusion sur le mac, verifier les resultats
 - [X]  09/01 : Fix de la grille de jeu : 
         - La config de la grille n'est pas repectée
-- [ ]  09/01 : Gestion de la sauvegarde sur le front :
+- [X]  09/01 : Gestion de la sauvegarde sur le front :
         - Ajouter les boutons de sauvegarde et de chargement de sauvegarde
         - Gerer le path de sauvegarde et load par boite de dialogue
-- [ ]  09/01 : CSS -> rework du design pour que ce soit visuellement propre
-- [ ]  Ajout des themes dans le menu de configuration :
+- [X]  10/01 : CSS -> rework du design pour que ce soit visuellement propre
+- [X]  10/01  Ajout des themes dans le menu de configuration :
         - Propose des mots au fil des entrées clavier (si c'est possible sur JavaFX proprement)
         - Recuperer la liste de mots
         - La donner au generateur de theme d'Arthur
         - Remplacer le dictionnaire de jeu par celui des champs lexicaux choisis.
-
+- [X] 10/01 : ajout du QRCode
+        - creer la page HTML
+        - le JS
+        - deploy sur GitHub Pages
+        - backend Java
 ### Lucas Simonneau :
 - [X] 06/01: Implémentation de gestion de fichier :
         - Implémentation de la structure de donnée ouverture et modification d'un fichier texte
